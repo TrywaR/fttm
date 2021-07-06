@@ -1,0 +1,20 @@
+#CharsetDefault UTF-8
+#CharsetSourceEnc UTF-8
+Options -Indexes
+ErrorDocument 404 "/404.html"
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+
+	RewriteCond %{REQUEST_URI} !\?
+	RewriteCond %{REQUEST_URI} !\&
+	RewriteCond %{REQUEST_URI} !\=
+	RewriteCond %{REQUEST_URI} !\.
+	RewriteCond %{REQUEST_URI} !\/$
+	RewriteRule ^(.*[^\/])$ /$1/ [R=301,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ /index.php
+</IfModule>
