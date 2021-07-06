@@ -1,14 +1,19 @@
 <?
-include_once 'header.php';
- if ($_SERVER['REQUEST_URI']!='/') {
-   if (file_exists('page'.$_SERVER['REQUEST_URI'].'index.php')) {
-     include_once 'page'.$_SERVER['REQUEST_URI'].'index.php';
-     # code...
-   }
- }else{
-   if (file_exists('page/home.php')) {
-     include_once 'page/home.php';
-     # code...
-   }
+session_start();
+include_once 'core/core.php'; # Основные настройки
+
+include_once 'header.php'; # Шапка
+
+if ($_SERVER['REQUEST_URI']!='/') {
+ if (file_exists('page'.$_SERVER['REQUEST_URI'].'index.php')) {
+   include_once 'page'.$_SERVER['REQUEST_URI'].'index.php';
+   # code...
  }
-include_once 'footer.php';
+}else{
+ if (file_exists('page/home.php')) {
+   include_once 'page/home.php';
+   # code...
+ }
+}
+
+include_once 'footer.php'; # Подвал
