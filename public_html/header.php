@@ -58,10 +58,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/current/') echo 'active';?>" aria-current="page" href="/">Home</a>
           </li>
+					<li class="nav-item">
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/clients/') echo 'active';?>" href="/clients/">Clients</a>
+          </li>
+					<li class="nav-item">
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/projects/') echo 'active';?>" href="/projects/">Projects</a>
+          </li>
+					<li class="nav-item">
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'active';?>" href="/tasks/">Tasks</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/events/') echo 'active';?>" href="/events/">Events</a>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="/events/">Events</a>
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'active';?>" href="/moneys/">Moneys</a>
           </li>
         </ul>
         <form class="d-flex">

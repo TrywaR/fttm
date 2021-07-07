@@ -2,6 +2,11 @@
 session_start();
 include_once 'core/core.php'; # Основные настройки
 
+if ( $_REQUEST['app'] ) {
+  include_once 'app/app.php';
+  die();
+}
+
 include_once 'header.php'; # Шапка
 
 if ($_SERVER['REQUEST_URI']!='/') {
