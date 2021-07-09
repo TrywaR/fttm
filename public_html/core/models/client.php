@@ -10,6 +10,7 @@ class client extends model
   public static $description = '';
   public static $sort = '';
   public static $active = '';
+  public static $user_id = '';
 
   function __construct( $client_id = 0 )
   {
@@ -25,6 +26,7 @@ class client extends model
       $this->description = $arrClient['description'];
       $this->sort = $arrClient['sort'];
       $this->active = $arrClient['active'];
+      $this->user_id = $arrClient['user_id'];
     }
   }
 }
