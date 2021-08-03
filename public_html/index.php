@@ -13,6 +13,16 @@ include_once 'header.php'; # Шапка
 
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {
+  case '/': # Главная страница
+    include_once 'page/home.php';
+    break;
+  
+  case '/welcome/': # Приветственая страница пользователя
+    // Если пользователь авторизирован
+    if ( isset($_SESSION['session_key']) ) include_once 'page/welcome/index.php';
+    else exit("<meta http-equiv='refresh' content='0; url= /'>");
+    break;
+
   case '/authorizations/': # Авторизация
     include_once 'page/authorizations/index.php';
     break;
@@ -24,21 +34,11 @@ switch ($_SERVER['REQUEST_URI']) {
   case '/password_recovery/': # Восстановление пароля
     break;
 
-  case '/welcome/': # Приветственая страница пользователя
-    // Если пользователь авторизирован
-    if ( isset($_SESSION['session_key']) ) include_once 'page/welcome/index.php';
-    else exit("<meta http-equiv='refresh' content='0; url= /'>");
-    break;
-
-  case '/': # Главная страница
-    include_once 'page/home.php';
-    break;
-
   default: # Запрашиваемая страница
     // Если пользователь авторизирован
-    if ( isset($_SESSION['session_key']) ) {
+    if ( isset($_SESSION['user']) ) {
       if (file_exists('page'.$_SERVER['REQUEST_URI'].'index.php')) include_once 'page'.$_SERVER['REQUEST_URI'].'index.php';
-      else echo '<main><h1>error 404</h1></main>';
+      else echo '<main><h1>Error 404</h1></main>';
     }
     // Пользователь не авторизирован
     else {

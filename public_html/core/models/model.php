@@ -111,8 +111,9 @@ class model
 
     // Добавляем
     $iNewTableElemId = db::insert($mySqlAdd);
-    if ( $iNewTableElemId ) notification::success( 'Изменения сохранены!' );
-    else notification::error( 'Ошибка добавления!' );
+    return $iNewTableElemId;
+    // if ( $iNewTableElemId ) notification::success( 'Изменения сохранены!' );
+    // else notification::error( 'Ошибка добавления!' );
   }
 
   // Сохранение

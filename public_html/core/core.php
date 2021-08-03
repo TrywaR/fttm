@@ -12,3 +12,4 @@ include_once 'models/user.php'; # Пользователь
 include_once 'models/client.php'; # Клиент
 include_once 'models/project.php'; # Проект
 include_once 'models/money.php'; # Деньги
+include_once 'models/card.php'; # Карты для денег

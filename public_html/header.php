@@ -2,6 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">FTTM</a>
+      <?php if (isset($_SESSION['user'])): ?>
+        <?=$_SESSION['user']['login']?>
+      <?php endif; ?>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -10,7 +13,7 @@
           <li class="nav-item">
             <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/') echo 'active';?>" aria-current="page" href="/">Home</a>
           </li>
-          <?php if (isset($_SESSION['session_key'])): ?>
+          <?php if (isset($_SESSION['user'])): ?>
   					<li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/clients/') echo 'active';?>" href="/clients/">Clients</a>
             </li>
@@ -25,6 +28,9 @@
             </li> -->
             <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'active';?>" href="/moneys/">Moneys</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'active';?>" href="/authorizations/">Logout</a>
             </li>
           <?php else: ?>
             <li class="nav-item">

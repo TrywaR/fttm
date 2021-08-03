@@ -1,7 +1,7 @@
 <?
 switch ($_REQUEST['action']) {
   case 'authorizations': # Вход и регистрации
-    include_once 'clients/clients.php';
+    include_once 'authorizations/authorizations.php';
     break;
 
   case 'clients': # Обработка клиентов
