@@ -35,7 +35,7 @@ class model
     // Если список элементов
     else {
       // Сортировка mySql
-      if ( $iSort ) $mySqlSalt .= " ORDER BY  `' . $sSort . '` " . $sSortDir;
+      if ( $sSort ) $mySqlShowSalt .= ' ORDER BY  `' . $sSort . '` ' . $sSortDir;
 
       // Пагинация
       if ( $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;

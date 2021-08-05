@@ -4,7 +4,9 @@
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Moneys</h1>
-          <p class="lead">Финансы</p>
+          <p class="lead">
+            Финансы, <a href="/cards/">Карты</a>
+          </p>
         </div>
       </div>
     </div>
@@ -56,16 +58,19 @@
                             <label for="inputCardId" class="col-form-label">Card</label>
                           </div>
                           <div class="col-auto">
-                            <input name="card" type="number" id="inputCardId" class="form-control">
-                          </div>
-                        </div>
-
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputPriceId" class="col-form-label">Price</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="price" type="number" id="inputPriceId" class="form-control">
+                            <select name="card" class="form-select" size="3" aria-label="size 3 select example">
+                              <?
+                              $oCard = new card();
+                              $arrCards = $oCard->get();
+                              ?>
+                              <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+                                <?php if ( ! $iIndex ): ?>
+                                  <option selected value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                                <?php else: ?>
+                                  <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            </select>
                           </div>
                         </div>
 
@@ -75,6 +80,15 @@
                           </div>
                           <div class="col-auto">
                             <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDate" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="row g-3 align-items-center">
+                          <div class="col-auto">
+                            <label for="inputPriceId" class="col-form-label">Price</label>
+                          </div>
+                          <div class="col-auto">
+                            <input name="price" type="number" id="inputPriceId" class="form-control">
                           </div>
                         </div>
 
@@ -144,16 +158,19 @@
                           <label for="inputCardIdZero" class="col-form-label">Card</label>
                         </div>
                         <div class="col-auto">
-                          <input name="card" type="number" id="inputCardIdZero" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputPriceIdZero" class="col-form-label">Price</label>
-                        </div>
-                        <div class="col-auto">
-                          <input name="price" type="number" id="inputPriceIdZero" class="form-control">
+                          <select name="card" class="form-select" size="3" aria-label="size 3 select example">
+                            <?
+                            $oCard = new card();
+                            $arrCards = $oCard->get();
+                            ?>
+                            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+                              <?php if ( ! $iIndex ): ?>
+                                <option selected value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
                       </div>
 
@@ -163,6 +180,15 @@
                         </div>
                         <div class="col-auto">
                           <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDateZero" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                          <label for="inputPriceIdZero" class="col-form-label">Price</label>
+                        </div>
+                        <div class="col-auto">
+                          <input name="price" type="number" id="inputPriceIdZero" class="form-control">
                         </div>
                       </div>
 
@@ -188,7 +214,6 @@
   </div>
   <div class="row mt-4">
     <div class="col">
-      <ol class="list-group list-group-numbered">
       <?
       // $sQuery  = "SELECT * FROM `clients`";
       // $sQuery .= " WHERE `active` > 0";
@@ -198,8 +223,16 @@
       // $arrMoneys = $db->query_all($sQuery);
 
       $oMoney = new money();
+      // $oMoney->from = 2;
+      // $oMoney->usort = 'id';
+      $oMoney->sort = 'id';
+      $oMoney->sortDir = 'DESC';
       $arrMoneys = $oMoney->get();
 
+      if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
+      ?>
+      <ol class="list-group list-group-numbered">
+      <?
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
