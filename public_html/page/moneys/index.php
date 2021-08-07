@@ -230,11 +230,11 @@
 
       if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
       ?>
-      <div class="content_manager_action d-flex justify-content-end mb-4">
+      <!-- <div class="content_manager_action d-flex justify-content-end mb-4">
         <button type="button" name="button" class="btn delete">
           <i class="fas fa-folder-minus"></i>
         </button>
-      </div>
+      </div> -->
       <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to">
       <?
       // Прикручиваем рейтинги
