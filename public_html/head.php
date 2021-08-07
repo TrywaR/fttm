@@ -42,7 +42,7 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="/template/css/main.min.css">
 	<script src="/template/js/main.min.js"></script>
 	<!-- main x-->
 </head>

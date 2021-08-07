@@ -1,12 +1,28 @@
 // STYLE
 //***
 @import "config"
+@import "mixins"
 @import "reset"
 @import "desctop"
 @import "mobile"
+@import "bootstrap_fix"
 
 // Уведомления
-@import "fttm_alerts" 
+@import "fttm_alerts"
 
+// Прогресс
+@import "fttm_progress"
+
+// Шрифты
 @import "../fonts/fonts"
+
+// Основной текст
+@import "content"
 //___
+
+body
+  color: $color_text
+  background: $color_main_dark
+  font-family: $font_default
+  font-size: 14px
+  line-height: 16px

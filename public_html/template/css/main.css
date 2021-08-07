@@ -1,3 +1,4 @@
+@import url(../fonts/Geometria/stylesheet.css);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,9 +42,63 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.accordion-button,
+.accordion-button:not(.collapsed) {
+  color: white;
+  background: #202022; }
+
+.accordion-item {
+  color: white;
+  background: #202022; }
+
+.form-select,
+.form-select:focus,
+.form-control,
+.form-control:focus {
+  color: white;
+  background: #202022; }
+
+.card {
+  color: white;
+  background: #202022; }
+
+.list-group-item {
+  color: white;
+  background: #202022; }
+
 .fttm_alerts {
   position: fixed;
   bottom: 1rem;
   right: 1rem; }
+
+.fttm_progress {
+  height: 0rem;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out 0s; }
+  .fttm_progress._active_ {
+    height: 1rem; }
+
+p {
+  margin-bottom: 0.5rem; }
+
+strong,
+b {
+  font-weight: bold; }
+
+i {
+  font-style: italic; }
+
+ul li {
+  padding-left: 1rem; }
+
+ol li {
+  padding-left: 1rem; }
+
+body {
+  color: white;
+  background: #221a1a;
+  font-family: "Geometria";
+  font-size: 14px;
+  line-height: 16px; }
 
 /*# sourceMappingURL=main.css.map */

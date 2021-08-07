@@ -27,12 +27,42 @@ function content_download( oData, oReturnType, sAppStatus ) {
     url: site_url,
     dataType: oReturnType,
     data: $.extend( oData, oParam.ajax_salt ),
-    method: 'POST'
+    method: 'POST',
+		xhr: function() {
+			 var xhr = new window.XMLHttpRequest();
+
+			 // Upload progress
+			 xhr.upload.addEventListener("progress", function(evt){
+					 if (evt.lengthComputable) {
+							 var percentComplete = evt.loaded / evt.total;
+							 //Do something with upload progress
+							 console.log('percentComplete 1: ' + percentComplete);
+							 fttm_progress_bar( percentComplete )
+					 }
+			}, false);
+
+			// // Download progress
+			// xhr.addEventListener("progress", function(evt){
+			// 		if (evt.lengthComputable) {
+			// 				var percentComplete = evt.loaded / evt.total;
+			// 				// Do something with download progress
+			// 				console.log('percentComplete 2: ' + percentComplete);
+			// 		}
+			// }, false);
+
+			return xhr;
+	 },
   }).fail(function( oData ){
     if ( sAppStatus ) fttm_alerts( {'error': {'text': 'Ошибка соединения'}} )
   }).done(function( oData ){
     if ( sAppStatus ) fttm_alerts( oData )
   })
+
+	// xhr.upload.onprogress = function(evt){
+	//  percent = evt.loaded / evt.total;
+	//  width = Math.ceil(percent * 100);
+	//  bar.style.width = width + "%";
+ // };
 }
 // content_download x
 
@@ -71,8 +101,55 @@ function fttm_alerts_html( sText, sClass ){
 }
 // fttm_alerts x
 
+// fttm_progress_bar
+function fttm_progress_bar ( intProgress ) {
+	console.log('fttm_progress_bar: ' + intProgress)
+	var oProgressBar = $(document).find('.fttm_progress')
+
+	if ( intProgress < 1 ) oProgressBar.addClass('_active_')
+	else oProgressBar.removeClass('_active_')
+
+	oProgressBar.attr('aria-valuenow', intProgress * 100 )
+	oProgressBar.css('width', intProgress * 100 + '%' )
+}
+// fttm_progress_bar x
+
+// content_loader
+function content_loader( oButton, oElem, iFrom, iLimit ) {
+	// oButton - На что нажали
+	// oElem - Куда загружаем
+	// iFrom - Отчёт с
+	// iLimit - Отчёт до
+
+	// datas
+	// content_loader_table
+	// content_loader_to
+	// content_loader_from
+	// content_loader_limit
+
+	var
+		sAction = oButton.data().content_loader_action, // Класс
+		sFrom = oButton.data().content_loader_form, // Что с ним
+		sTo = oButton.data().content_loader_to,
+		iFrom = oButton.data().content_loader_from,
+		iLimit = oButton.data().content_loader_limit
+
+	// Загружаем
+	// content_download( asd 'ajax', false )
+
+	// Добавляем
+
+	// Заменяем данные в кнопке
+}
+// content_loader x
 
 $(function(){
+	// themes
+	var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+	if (prefersDarkScheme.matches) document.body.classList.add("dark-theme")
+	else document.body.classList.remove("dark-theme")
+	// themes x
+
 	$(document).on('click', '.content_download', function(){
 		var oData = {
 			'action' : $(this).data().action,

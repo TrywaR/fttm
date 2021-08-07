@@ -1,5 +1,5 @@
 <main class="container pt-4 pb-4">
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -223,15 +223,14 @@
       // $arrMoneys = $db->query_all($sQuery);
 
       $oMoney = new money();
-      // $oMoney->from = 2;
-      // $oMoney->usort = 'id';
+      $oMoney->limit = 5;
       $oMoney->sort = 'id';
       $oMoney->sortDir = 'DESC';
       $arrMoneys = $oMoney->get();
 
       if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
       ?>
-      <ol class="list-group list-group-numbered">
+      <ol class="list-group list-group-numbered" id="content_loader_to">
       <?
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
@@ -245,18 +244,21 @@
             <?=$arrMoney['date']?>
           </div>
           <span class="rounded-pill">
-            <a href="#" class="btn btn-light">
+            <a href="#" class="btn">
               <i class="far fa-square"></i>
               <!-- <i class="fas fa-square"></i> -->
             </a>
-            <a href="#" class="btn btn-light"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn btn-light content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
           </span>
         </li>
         <?
       }
       ?>
       </ol>
+      <div class="mt-4 text-center">
+        <button type="button" class="btn btn-primary btn-sm" data-content_loader_action="moneys" data-content_loader_form="show" data-content_loader_to="content_loader_to" data-content_loader_from="5" data-content_loader_limit="5">Load</button>
+      </div>
     </div>
   </div>
 </main>
