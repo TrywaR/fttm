@@ -19,8 +19,8 @@ class model
     // $mySqlSalt = " AND `active` > 0";
     // $mySqlSalt .= " ORDER BY  `sort` ASC";
     // Пагинация
-    $iLimit = $this->limit ? $this->limit : 0; // Пагинация, количество элементов
     $iFrom = $this->from ? $this->from : 0; // Пагинация, от
+    $iLimit = $this->limit ? $this->limit : 0; // Пагинация, количество элементов
     // Сортировка
     // Сортировка mySql
     $sSort = $this->sort ? $this->sort : '';
@@ -38,8 +38,9 @@ class model
       if ( $sSort ) $mySqlShowSalt .= ' ORDER BY  `' . $sSort . '` ' . $sSortDir;
 
       // Пагинация
-      if ( $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;
-      if ( $iLimit && $iFrom ) $mySqlShowSalt .= ', ' . $iFrom;
+      if ( $iFrom ) $mySqlShowSalt .= ' LIMIT ' . $iFrom;
+      if ( $iFrom && $iLimit ) $mySqlShowSalt .= ', ' . $iLimit;
+      if ( ! $iFrom && $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;
 
       // Получаем элементы
       $arrResult = db::query_all("SELECT * FROM `" . $this->table . "`" . $mySqlShowSalt);
@@ -111,7 +112,8 @@ class model
 
     // Добавляем
     $iNewTableElemId = db::insert($mySqlAdd);
-    return $iNewTableElemId;
+    $this->id = $iNewTableElemId;
+    return $this->get();
     // if ( $iNewTableElemId ) notification::success( 'Изменения сохранены!' );
     // else notification::error( 'Ошибка добавления!' );
   }
@@ -156,7 +158,7 @@ class model
     // die($mySqlSave);
 
     // Редактируем
-    if ( ! db::query($mySqlSave) ) notification::success( 'Изменения сохранены!' );
+    if ( ! db::query($mySqlSave) ) return $this->get();
     else notification::error( 'Ошибка редактирования!' );
   }
 

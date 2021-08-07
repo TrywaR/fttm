@@ -4,6 +4,27 @@ oParam.ajax_salt = {
 }
 oParam.site_url = '/'
 
+// Чистка классов по маске, для анимаций
+// $("div").removeClassWild("status_*");
+$.fn.removeClassWild = function(mask) {
+  return this.removeClass(function(index, cls) {
+      var re = mask.replace(/\*/g, '\\S+')
+      return (cls.match(new RegExp('\\b' + re + '', 'g')) || []).join(' ')
+  })
+}
+
+// content_manager
+// $.fn.content_manager_action = function() {
+// }
+// $.fn.content_manager_items = function() {
+// }
+// $(function(){
+// 	$(document).on('click', '.content_manager_switch', function(){
+// 		$(this).parents('.content_manager_item').addClass('content_manager_select')
+// 	})
+// })
+// content_manager x
+
 // $.when(
 //   content_download( oData )
 // ).then( function( resultData ){
@@ -36,7 +57,6 @@ function content_download( oData, oReturnType, sAppStatus ) {
 					 if (evt.lengthComputable) {
 							 var percentComplete = evt.loaded / evt.total;
 							 //Do something with upload progress
-							 console.log('percentComplete 1: ' + percentComplete);
 							 fttm_progress_bar( percentComplete )
 					 }
 			}, false);
@@ -103,7 +123,6 @@ function fttm_alerts_html( sText, sClass ){
 
 // fttm_progress_bar
 function fttm_progress_bar ( intProgress ) {
-	console.log('fttm_progress_bar: ' + intProgress)
 	var oProgressBar = $(document).find('.fttm_progress')
 
 	if ( intProgress < 1 ) oProgressBar.addClass('_active_')
@@ -115,31 +134,104 @@ function fttm_progress_bar ( intProgress ) {
 // fttm_progress_bar x
 
 // content_loader
-function content_loader( oButton, oElem, iFrom, iLimit ) {
+function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosition ) {
 	// oButton - На что нажали
+	// oData - Что загружаем
 	// oElem - Куда загружаем
 	// iFrom - Отчёт с
 	// iLimit - Отчёт до
+	// oTemplate - Обьект шаблона
+	// iPosition - Куда добавлять, в начало или конец, 0 начало
 
 	// datas
 	// content_loader_table
 	// content_loader_to
 	// content_loader_from
 	// content_loader_limit
+	// content_loader_template
+	// content_loader_position
+
+	// Собираем данные
+	var
+		sAction = oButton.attr('data-content_loader_action'), // Класс
+		sFrom = oButton.attr('data-content_loader_form'), // Что с ним
+		sTo = oElem ? oElem : oButton.attr('data-content_loader_to'),
+		iFrom = iFrom ? parseInt(iFrom) : parseInt(oButton.attr('data-content_loader_from')),
+		iLimit = iLimit ? parseInt(iLimit) : parseInt(oButton.attr('data-content_loader_limit')),
+		oTemplate = oTemplate ? oTemplate : $(document).find(oButton.data().content_loader_template),
+		iPosition = iPosition ? iPosition : parseInt(oButton.data().content_loader_position)
+
+	if ( oData ) {
+		if ( oTemplate ) {
+			// Выводим
+			setTimeout(function(){
+				if ( iPosition ) $(document).find( sTo ).append( content_loader_template( oTemplate, oData ) )
+				else $(document).find( sTo ).prepend( content_loader_template( oTemplate, oData ) )
+			}, 100)
+		}
+		else {
+			fttm_alerts('Шаблон не найден')
+		}
+	}
+	else {
+		var oData = {
+			'action': sAction,
+			'form': sFrom,
+			'from': iFrom,
+			'limit': iLimit
+		}
+
+		// Загружаем
+		$.when(
+		  content_download( oData, 'json', false )
+		).then( function( oData ){
+			// Если есть данные
+			if ( oData.length ) {
+				// Собираем шаблон
+				if ( oTemplate ) {
+					// Добавляем
+					$.each(oData, function(iIndex, oElem){
+						// Выводим
+						var oData = $(this)[0]
+						setTimeout(function(){
+							if ( iPosition ) $(document).find( sTo ).append( content_loader_template( oTemplate, oData ) )
+							else $(document).find( sTo ).prepend( content_loader_template( oTemplate, oData ) )
+						}, ( iIndex * 100 ))
+					})
+				}
+				else {
+					fttm_alerts('Шаблон не найден')
+				}
+
+				// Если элементы закончились
+				if ( iLimit > oData.length ) oButton.remove()
+				// Если нет, заменяем данные в кнопке
+				else oButton.attr('data-content_loader_from', iFrom + iLimit )
+			}
+			// нет, убираем кнопку
+			else {
+				oButton.remove()
+			}
+		})
+	}
+}
+function content_loader_template( oTemplate, oData ){
+	// oTemplate - объект шаблона
+	// oData - данные для шаблона
 
 	var
-		sAction = oButton.data().content_loader_action, // Класс
-		sFrom = oButton.data().content_loader_form, // Что с ним
-		sTo = oButton.data().content_loader_to,
-		iFrom = oButton.data().content_loader_from,
-		iLimit = oButton.data().content_loader_limit
+	oElemHtml = $(oTemplate),
+	replaceKeyArray = [],
+	replaceValueArray = [],
+	sElemHtml = oElemHtml[0].innerHTML
 
-	// Загружаем
-	// content_download( asd 'ajax', false )
+	for (var key in oData ) {
+		replaceKeyArray.push( key )
+		replaceValueArray.push( oData[key] )
+	}
+	for(var i = 0; i < replaceKeyArray.length; i++) sElemHtml = sElemHtml.split('{{' + replaceKeyArray[i] + '}}').join(replaceValueArray[i])
 
-	// Добавляем
-
-	// Заменяем данные в кнопке
+	return sElemHtml
 }
 // content_loader x
 
@@ -150,15 +242,31 @@ $(function(){
 	else document.body.classList.remove("dark-theme")
 	// themes x
 
+	// content
 	$(document).on('click', '.content_download', function(){
-		var oData = {
-			'action' : $(this).data().action,
-			'form' : $(this).data().form,
-			'id' : $(this).data().id
-		}
+		// Параметры
+		var
+			oElem = $(this),
+			sAnimateClass = oElem.data().animate_class ? oElem.data().animate_class : 'animate__zoomOut',
+			oData = {
+				'action' : $(this).data().action,
+				'form' : $(this).data().form,
+				'id' : $(this).data().id
+			}
 
-		if ( $(this).data().form == 'del' )
-			if ( confirm('Подтвердите удаление') ) $(this).parents('.col').remove()
+		// Если это удаление элемента
+		if ( oElem.data().form == 'del' )
+			if ( confirm('Подтвердите удаление') ) {
+				if ( oElem.data().elem ) {
+					oElem.parents( oElem.data().elem ).removeClassWild("animate_*").addClass('animate__animated ' + sAnimateClass)
+					// Играем анимацию
+					setTimeout(function(){
+						oElem.parents( oElem.data().elem ).remove()
+					}, 500)
+				}
+				else fttm_alerts('Нет класса для удаления :( аттрибут data-elem')
+				return false
+			}
 			else return false
 
 		$.when(
@@ -167,6 +275,11 @@ $(function(){
 			fttm_alerts( oData )
 		})
 	})
+
+	$(document).on('click', '.content_loader', function(){
+		content_loader( $(this) )
+	})
+	// content x
 
 	// $("[data-fancybox]").fancybox({
 	// 	// Options will go here
@@ -188,6 +301,9 @@ $(function(){
 				localStorage.setItem(oData.model, JSON.stringify(oData.data))
 				// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
 			}
+
+			// Добавляем в данные
+			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, oData )
 		})
 
 		return false

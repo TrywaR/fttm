@@ -15,37 +15,37 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/') echo 'active';?>" aria-current="page" href="/">Home</a>
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/') echo 'badge bg-success active';?>" aria-current="page" href="/">Home</a>
           </li>
           <?php if (isset($_SESSION['user'])): ?>
   					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/clients/') echo 'active';?>" href="/clients/">Clients</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/clients/') echo 'badge bg-success active';?>" href="/clients/">Clients</a>
             </li>
   					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/projects/') echo 'active';?>" href="/projects/">Projects</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/projects/') echo 'badge bg-success active';?>" href="/projects/">Projects</a>
             </li>
   					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'active';?>" href="/tasks/">Tasks</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'badge bg-success active';?>" href="/tasks/">Tasks</a>
             </li>
             <!-- <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/events/') echo 'active';?>" href="/events/">Events</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/events/') echo 'badge bg-success active';?>" href="/events/">Events</a>
             </li> -->
             <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'active';?>" href="/moneys/">Moneys</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'active';?>" href="/authorizations/">Logout</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">Logout</a>
             </li>
           <?php else: ?>
             <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'active';?>" href="/authorizations/">Login</a>
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">Login</a>
             </li>
           <?php endif; ?>
         </ul>
-        <form class="d-flex">
+        <!-- <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> -->
       </div>
     </div>
   </nav>

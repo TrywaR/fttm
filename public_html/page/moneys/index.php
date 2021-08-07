@@ -1,4 +1,4 @@
-<main class="container pt-4 pb-4">
+<main class="container pt-4 pb-4" id="container">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
@@ -15,7 +15,7 @@
     <div class="col col-12 col-md-6">
       <div class="col col-md-12 mb-12">
         <!-- Получение -->
-        <div class="card">
+        <div class="card animate__animated animate__pulse">
           <div class="card-body">
             <h5 class="card-title">Новый получ</h5>
             <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -115,7 +115,7 @@
 
     <div class="col col-12 col-md-6">
       <!-- Затраты -->
-      <div class="card">
+      <div class="card animate__animated animate__pulse animate__delay-1s">
         <div class="card-body">
           <h5 class="card-title">Новый затрат</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -130,7 +130,7 @@
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
                   <div class="accordion-body">
-                    <form class="" action="" method="post">
+                    <form class="content_loader_form" action="" method="post" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
                       <input type="hidden" name="form" value="save">
@@ -223,19 +223,24 @@
       // $arrMoneys = $db->query_all($sQuery);
 
       $oMoney = new money();
-      $oMoney->limit = 5;
+      $oMoney->limit = 10;
       $oMoney->sort = 'id';
       $oMoney->sortDir = 'DESC';
       $arrMoneys = $oMoney->get();
 
       if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
       ?>
-      <ol class="list-group list-group-numbered" id="content_loader_to">
+      <div class="content_manager_action d-flex justify-content-end mb-4">
+        <button type="button" name="button" class="btn delete">
+          <i class="fas fa-folder-minus"></i>
+        </button>
+      </div>
+      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to">
       <?
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item content_manager_item d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s" data-content_manager_id="<?=$arrMoney['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary ">
@@ -244,12 +249,20 @@
             <?=$arrMoney['date']?>
           </div>
           <span class="rounded-pill">
+            <!-- <a href="#" class="btn content_manager_switch">
+              <div class="switch_icons">
+                <div class="">
+                  <i class="far fa-square"></i>
+                </div>
+                <div class="">
+                  <i class="fas fa-square"></i>
+                </div>
+              </div>
+            </a> -->
             <a href="#" class="btn">
-              <i class="far fa-square"></i>
-              <!-- <i class="fas fa-square"></i> -->
+              <i class="fas fa-pen-square"></i>
             </a>
-            <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
           </span>
         </li>
         <?
@@ -257,8 +270,30 @@
       ?>
       </ol>
       <div class="mt-4 text-center">
-        <button type="button" class="btn btn-primary btn-sm" data-content_loader_action="moneys" data-content_loader_form="show" data-content_loader_to="content_loader_to" data-content_loader_from="5" data-content_loader_limit="5">Load</button>
+        <button type="button" class="btn btn-primary btn-sm content_loader" data-content_loader_action="moneys" data-content_loader_form="show" data-content_loader_to="#content_loader_to" data-content_loader_from="10" data-content_loader_limit="10" data-content_loader_template=".template_money" data-content_loader_position="1">Load</button>
       </div>
+    </div>
+  </div>
+
+  <div class="block_template">
+    <div class="template_money">
+      <li class="list-group-item d-flex justify-content-between align-items-start animate__animated animate__bounceInRight">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{title}}</div>
+          <div class="badge bg-primary">
+            <span>{{price}}</span>₽
+          </div>
+          <span>{{date}}</span>
+        </div>
+        <span class="rounded-pill">
+          <a href="#" class="btn">
+            <i class="far fa-square"></i>
+            <!-- <i class="fas fa-square"></i> -->
+          </a>
+          <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+        </span>
+      </li>
     </div>
   </div>
 </main>

@@ -5,6 +5,8 @@ switch ($_REQUEST['form']) {
 
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
+    $oMoney->sort = 'id';
+    $oMoney->sortDir = 'DESC';
 
     $arrMoneys = $oMoney->get();
     notification::send($arrMoneys);
@@ -14,8 +16,8 @@ switch ($_REQUEST['form']) {
     $oMoney = new money( $_REQUEST['id'] );
     $oMoney->arrAddFields = $_REQUEST;
     $oMoney->arrAddFields['user_id'] = $_SESSION['user']['id'];
-    if ( $_REQUEST['id'] ) $oMoney->save();
-    else $oMoney->add();
+    if ( $_REQUEST['id'] ) notification::send($oMoney->save());
+    else notification::send($oMoney->add());
     break;
 
   case 'del': # Удаление

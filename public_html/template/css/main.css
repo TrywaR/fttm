@@ -1,3 +1,4 @@
+@import url(../../lib/animate/animate.min.css);
 @import url(../fonts/Geometria/stylesheet.css);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -42,27 +43,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-.accordion-button,
-.accordion-button:not(.collapsed) {
+body .accordion-button,
+body .accordion-button:not(.collapsed) {
   color: white;
   background: #202022; }
-
-.accordion-item {
+body .accordion-item {
   color: white;
   background: #202022; }
-
-.form-select,
-.form-select:focus,
-.form-control,
-.form-control:focus {
+body .form-select,
+body .form-select:focus,
+body .form-control,
+body .form-control:focus {
   color: white;
   background: #202022; }
-
-.card {
+body .btn {
+  color: white; }
+body .card {
   color: white;
   background: #202022; }
-
-.list-group-item {
+body .list-group-item {
   color: white;
   background: #202022; }
 
@@ -100,5 +99,14 @@ body {
   font-family: "Geometria";
   font-size: 14px;
   line-height: 16px; }
+
+.block_template {
+  display: none; }
+
+.block_content_loader {
+  overflow: hidden;
+  transition: all 0.3s ease-in-out 0s; }
+  .block_content_loader li {
+    transition: all 0.3s ease-in-out 0s; }
 
 /*# sourceMappingURL=main.css.map */

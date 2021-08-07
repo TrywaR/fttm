@@ -5,6 +5,7 @@
 @import "reset"
 @import "desctop"
 @import "mobile"
+@import "../../lib/animate/animate.min.css"
 @import "bootstrap_fix"
 
 // Уведомления
@@ -26,3 +27,13 @@ body
   font-family: $font_default
   font-size: 14px
   line-height: 16px
+
+.block_template
+  display: none
+
+.block_content_loader
+  overflow: hidden
+  @include transition_default
+
+  li
+    @include transition_default
