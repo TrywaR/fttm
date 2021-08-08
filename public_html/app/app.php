@@ -20,6 +20,10 @@ switch ($_REQUEST['action']) {
     include_once 'cards/cards.php';
     break;
 
+  case 'moneys_types': # Типы затрат
+    include_once 'moneys_types/moneys_types.php';
+    break;
+
   default:
     // code...
     break;

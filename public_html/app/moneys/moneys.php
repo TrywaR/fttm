@@ -8,12 +8,14 @@ switch ($_REQUEST['form']) {
     $oMoney->sort = 'id';
     $oMoney->sortDir = 'DESC';
 
-    $arrMoneys = $oMoney->get();
+    $arrMoneys = $oMoney->get_money();
+
     notification::send($arrMoneys);
     break;
 
   case 'save': # Сохранение изменений
     $oMoney = new money( $_REQUEST['id'] );
+    if ( $_REQUEST['value'] == 'minus' ) $_REQUEST['price'] = '-' . $_REQUEST['price'];
     $oMoney->arrAddFields = $_REQUEST;
     $oMoney->arrAddFields['user_id'] = $_SESSION['user']['id'];
     if ( $_REQUEST['id'] ) notification::send($oMoney->save());

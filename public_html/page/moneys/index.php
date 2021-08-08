@@ -5,7 +5,7 @@
         <div class="container">
           <h1 class="display-4">Moneys</h1>
           <p class="lead">
-            Финансы, <a href="/cards/">Карты</a>
+            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_types/">Типы затрат</a>
           </p>
         </div>
       </div>
@@ -30,10 +30,11 @@
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                      <form class="" action="" method="post">
+                      <form class="content_loader_form" action="" method="post" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
                         <input type="hidden" name="app" value="app">
                         <input type="hidden" name="action" value="moneys">
                         <input type="hidden" name="form" value="save">
+                        <input type="hidden" name="value" value="plus">
 
                         <div class="row g-3 align-items-center">
                           <div class="col-auto">
@@ -88,7 +89,7 @@
                             <label for="inputPriceId" class="col-form-label">Price</label>
                           </div>
                           <div class="col-auto">
-                            <input name="price" type="number" id="inputPriceId" class="form-control">
+                            <input name="price" type="number" step="any" lang="en" id="inputPriceId" class="form-control">
                           </div>
                         </div>
 
@@ -134,6 +135,7 @@
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
                       <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="value" value="minus">
 
                       <!-- <div class="row g-3 align-items-center">
                         <div class="col-auto">
@@ -188,7 +190,7 @@
                           <label for="inputPriceIdZero" class="col-form-label">Price</label>
                         </div>
                         <div class="col-auto">
-                          <input name="price" type="number" id="inputPriceIdZero" class="form-control">
+                          <input name="price" type="number" step="any" lang="en" id="inputPriceIdZero" class="form-control">
                         </div>
                       </div>
 
@@ -226,39 +228,40 @@
       $oMoney->limit = 10;
       $oMoney->sort = 'id';
       $oMoney->sortDir = 'DESC';
-      $arrMoneys = $oMoney->get();
+      $arrMoneys = $oMoney->get_money();
 
       if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
       ?>
-      <!-- <div class="content_manager_action d-flex justify-content-end mb-4">
-        <button type="button" name="button" class="btn delete">
+      <div class="content_manager_buttons d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#content_loader_to" data-content_manager_item=".list-group-item">
+        <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
         </button>
-      </div> -->
+      </div>
       <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to">
       <?
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
-        <li class="list-group-item content_manager_item d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s" data-content_manager_id="<?=$arrMoney['id']?>">
+        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s <?=$arrMoney['value']?>" data-content_manager_item_id="<?=$arrMoney['id']?>">
           <div class="ms-2 me-auto">
-            <div class="fw-bold"><?=$arrMoney['title']?></div>
-            <div class="badge bg-primary ">
+            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
+            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
               <?=$arrMoney['price']?>₽
             </div>
-            <?=$arrMoney['date']?>
+            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+              <?=$arrMoney['date']?>
+            </span>
+            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
           </div>
           <span class="rounded-pill">
-            <!-- <a href="#" class="btn content_manager_switch">
-              <div class="switch_icons">
-                <div class="">
-                  <i class="far fa-square"></i>
-                </div>
-                <div class="">
-                  <i class="fas fa-square"></i>
-                </div>
+            <a href="#" class="btn content_manager_switch switch_icons">
+              <div class="">
+                <i class="far fa-square"></i>
               </div>
-            </a> -->
+              <div class="">
+                <i class="fas fa-square"></i>
+              </div>
+            </a>
             <a href="#" class="btn">
               <i class="fas fa-pen-square"></i>
             </a>
@@ -277,18 +280,25 @@
 
   <div class="block_template">
     <div class="template_money">
-      <li class="list-group-item d-flex justify-content-between align-items-start animate__animated animate__bounceInRight">
+      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight {{value}}" data-content_manager_item_id="<?=$arrMoney['id']?>">
         <div class="ms-2 me-auto">
-          <div class="fw-bold">{{title}}</div>
-          <div class="badge bg-primary">
-            <span>{{price}}</span>₽
+          <div class="fw-bold mb-1">{{title}}</div>
+          <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
+            {{price}}₽
           </div>
-          <span>{{date}}</span>
+          <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+            {{date}}
+          </span>
+          <i class="fas fa-credit-card"></i> {{card}}
         </div>
         <span class="rounded-pill">
-          <a href="#" class="btn">
-            <i class="far fa-square"></i>
-            <!-- <i class="fas fa-square"></i> -->
+          <a href="#" class="btn content_manager_switch switch_icons">
+            <div class="">
+              <i class="far fa-square"></i>
+            </div>
+            <div class="">
+              <i class="fas fa-square"></i>
+            </div>
           </a>
           <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
           <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>

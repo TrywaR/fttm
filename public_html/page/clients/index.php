@@ -1,6 +1,6 @@
 <main class="container pt-4 pb-4">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Clients</h1>
@@ -82,14 +82,14 @@
             <h5 class="card-title"><?=$arrClient['title']?></h5>
             <p class="card-text"><?=$arrClient['description']?></p>
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-            <a href="#" class="btn btn-light">
+            <a href="#" class="btn">
               <i class="far fa-square"></i>
               <!-- <i class="fas fa-square"></i> -->
             </a>
-            <a href="#" class="btn btn-light"><i class="fas fa-external-link-square-alt"></i></a>
-            <a href="#" class="btn btn-light"><i class="fas fa-chart-area"></i></a>
-            <a href="#" class="btn btn-light"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn btn-light content_download" data-id="<?=$arrClient['id']?>" data-action="clients" data-form="del"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn"><i class="fas fa-external-link-square-alt"></i></a>
+            <a href="#" class="btn"><i class="fas fa-chart-area"></i></a>
+            <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrClient['id']?>" data-action="clients" data-form="del"><i class="fas fa-minus-square"></i></a>
           </div>
         </div>
       </div>

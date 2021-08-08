@@ -22,7 +22,7 @@ class client extends model
       $arrClient = db::query($mySql);
 
       $this->id = $arrClient['id'];
-      $this->title = $arrClient['name'];
+      $this->title = $arrClient['title'];
       $this->description = $arrClient['description'];
       $this->sort = $arrClient['sort'];
       $this->active = $arrClient['active'];

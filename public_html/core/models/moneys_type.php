@@ -1,32 +1,30 @@
 <?
 /**
- * Card
+ * Moneys_type
  */
-class card extends model
+class moneys_type extends model
 {
   public static $table = ''; # Таблица в bd
   public static $id = '';
   public static $title = '';
-  public static $balance = '';
-  public static $limit = '';
   public static $sort = '';
+  public static $priority = '';
   public static $active = '';
   public static $user_id = '';
 
-  function __construct( $card_id = 0 )
+  function __construct( $moneys_type_id = 0 )
   {
-    $this->table = 'cards';
+    $this->table = 'moneys_types';
 
-    if ( $card_id ) {
+    if ( $moneys_type_id ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
-      $mySql .= " WHERE `id` = '" . $card_id . "'";
+      $mySql .= " WHERE `id` = '" . $moneys_type_id . "'";
       $arrCard = db::query($mySql);
 
       $this->id = $arrCard['id'];
       $this->title = $arrCard['title'];
-      $this->balance = $arrCard['balance'];
-      $this->limit = $arrCard['limit'];
       $this->sort = $arrCard['sort'];
+      $this->priority = $arrCard['priority'];
       $this->active = $arrCard['active'];
       $this->user_id = $arrCard['user_id'];
     }

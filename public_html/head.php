@@ -43,7 +43,7 @@
 
 	<!-- main -->
 	<link rel="stylesheet" href="/template/css/main.min.css">
-	<script src="/template/js/main.min.js"></script>
+	<script src="/template/js/main.js"></script>
 	<!-- main x-->
 </head>
 <body>

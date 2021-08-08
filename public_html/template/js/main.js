@@ -18,11 +18,6 @@ $.fn.removeClassWild = function(mask) {
 // }
 // $.fn.content_manager_items = function() {
 // }
-// $(function(){
-// 	$(document).on('click', '.content_manager_switch', function(){
-// 		$(this).parents('.content_manager_item').addClass('content_manager_select')
-// 	})
-// })
 // content_manager x
 
 // $.when(
@@ -89,7 +84,7 @@ function content_download( oData, oReturnType, sAppStatus ) {
 // fttm_alerts
 function fttm_alerts( oData, oForm ){
 	var oFttmAlertsBlock = $(document).find('.fttm_alerts')
-	if ( oForm.length ) oFttmAlertsBlock = oForm.find('._fttm_alerts')
+	if ( oForm && oForm.length ) oFttmAlertsBlock = oForm.find('._fttm_alerts')
 
 	if ( oData.success && oData.success.text )
 		return oFttmAlertsBlock.html( fttm_alerts_html( oData.success.text, 'alert-success' ) )
@@ -170,7 +165,7 @@ function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosit
 			}, 100)
 		}
 		else {
-			fttm_alerts('Шаблон не найден')
+			fttm_alerts({'alert':'Шаблон не найден'})
 		}
 	}
 	else {
@@ -200,7 +195,7 @@ function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosit
 					})
 				}
 				else {
-					fttm_alerts('Шаблон не найден')
+					fttm_alerts({'alert':'Шаблон не найден'})
 				}
 
 				// Если элементы закончились
@@ -264,8 +259,7 @@ $(function(){
 						oElem.parents( oElem.data().elem ).remove()
 					}, 500)
 				}
-				else fttm_alerts('Нет класса для удаления :( аттрибут data-elem')
-				return false
+				else return fttm_alerts({'error':'Нет класса для удаления :( аттрибут data-elem'})
 			}
 			else return false
 
@@ -275,11 +269,50 @@ $(function(){
 			fttm_alerts( oData )
 		})
 	})
+	// content x
 
+	// content_loader
 	$(document).on('click', '.content_loader', function(){
 		content_loader( $(this) )
 	})
-	// content x
+	// content_loader x
+
+	// content_manager
+	$(document).on('click', '.content_manager_switch', function(){
+		$(this).toggleClass('_active_')
+		$(this).parents('.list-group-item').toggleClass('content_manager_select')
+		return false
+	})
+	$(document).on('click', '.content_manager_buttons .del', function(){
+		if ( confirm('Вы действительно хотите удалить всё выбранное к херам?') ) {
+			var
+				oContentManagerButtons = $(this).parents('.content_manager_buttons'),
+				oContentManagerBlock = oContentManagerButtons.data().content_manager_block,
+				oContentManagerAction = oContentManagerButtons.data().content_manager_action,
+				oContentManagerItem = oContentManagerButtons.data().content_manager_item,
+				sAnimateClass = oContentManagerButtons.data().animate_class ? oContentManagerButtons.data().animate_class : 'animate__zoomOut',
+				oData = {
+					'action' : oContentManagerAction,
+					'form' : 'del'
+				}
+
+			$(document).find(oContentManagerBlock + ' ' + oContentManagerItem + '.content_manager_select').each(function(){
+				var oElem = $(this)
+				oData.id = oElem.data().content_manager_item_id
+
+				$.when(
+				  content_download( oData, 'json' )
+				).then( function( oData ){
+					oElem.removeClassWild("animate_*").addClass('animate__animated ' + sAnimateClass)
+					// Играем анимацию
+					setTimeout(function(){
+						oElem.remove()
+					}, 500)
+				})
+			})
+		}
+	})
+	// content_manager x
 
 	// $("[data-fancybox]").fancybox({
 	// 	// Options will go here

@@ -23,7 +23,7 @@ class project extends model
       $arrProject = db::query($mySql);
 
       $this->id = $arrProject['id'];
-      $this->title = $arrProject['name'];
+      $this->title = $arrProject['title'];
       $this->description = $arrProject['description'];
       $this->sort = $arrProject['sort'];
       $this->active = $arrProject['active'];
