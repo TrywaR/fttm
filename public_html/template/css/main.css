@@ -85,8 +85,20 @@ body .list-group-item {
   .fttm_progress._active_ {
     height: 1rem; }
 
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem; }
+
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem; }
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem; }
+
 p {
-  margin-bottom: 0.5rem; }
+  margin-bottom: 1rem; }
 
 strong,
 b {
@@ -95,11 +107,17 @@ b {
 i {
   font-style: italic; }
 
-ul li {
-  padding-left: 1rem; }
+ul {
+  padding: 1rem; }
+  ul li {
+    padding-left: 1rem;
+    padding-bottom: 1rem; }
 
-ol li {
-  padding-left: 1rem; }
+ol {
+  padding: 1rem; }
+  ol li {
+    padding-left: 1rem;
+    padding-bottom: 1rem; }
 
 body {
   color: white;

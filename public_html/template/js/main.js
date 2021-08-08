@@ -318,6 +318,12 @@ $(function(){
 	// 	// Options will go here
 	// })
 
+	// bootstrap
+	var scrollSpys = new bootstrap.ScrollSpy($('#block_version'), {
+	  target: '#list-example'
+	})
+	// bootstrap x
+
 	// post
 	$(document).find('form').on ('submit', function(){
 		var

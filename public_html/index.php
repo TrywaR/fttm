@@ -16,12 +16,6 @@ switch ($_SERVER['REQUEST_URI']) {
   case '/': # Главная страница
     include_once 'page/home.php';
     break;
-  
-  case '/welcome/': # Приветственая страница пользователя
-    // Если пользователь авторизирован
-    if ( isset($_SESSION['session_key']) ) include_once 'page/welcome/index.php';
-    else exit("<meta http-equiv='refresh' content='0; url= /'>");
-    break;
 
   case '/authorizations/': # Авторизация
     include_once 'page/authorizations/index.php';
