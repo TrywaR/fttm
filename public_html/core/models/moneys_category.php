@@ -1,8 +1,8 @@
 <?
 /**
- * Moneys_type
+ * Moneys_category
  */
-class moneys_type extends model
+class moneys_category extends model
 {
   public static $table = ''; # Таблица в bd
   public static $id = '';
@@ -12,13 +12,13 @@ class moneys_type extends model
   public static $active = '';
   public static $user_id = '';
 
-  function __construct( $moneys_type_id = 0 )
+  function __construct( $moneys_category_id = 0 )
   {
-    $this->table = 'moneys_types';
+    $this->table = 'moneys_categories';
 
-    if ( $moneys_type_id ) {
+    if ( $moneys_category_id ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
-      $mySql .= " WHERE `id` = '" . $moneys_type_id . "'";
+      $mySql .= " WHERE `id` = '" . $moneys_category_id . "'";
       $arrCard = db::query($mySql);
 
       $this->id = $arrCard['id'];

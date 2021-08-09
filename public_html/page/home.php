@@ -2,7 +2,7 @@
    <div class="row mb-4">
      <div class="col-12  animate__animated animate__bounceIn">
        <h1>Freelance Time TrywaR Manager</h1>
-       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i> <small>v 1.0.0 Alfa</small></a>
+       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i> <small>v 3.0.0 Moneys</small></a>
      </div>
      <!-- <div class="col-12 mt-4">
        <a href="/authorizations/" class="btn btn-primary">Войти</a>
@@ -63,6 +63,7 @@
           <a class="list-group-item list-group-item-action" href="#list-item-1">1.0.0 Alfa</a>
           <a class="list-group-item list-group-item-action" href="#list-item-2">2.0.0 Hello world</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-3.3">3.0.3 Moneys</a>
         </div>
      </div>
      <div class="col col-md-8">
@@ -80,6 +81,11 @@
           <li>Обновление опсвящено денежкам, добавление и удаление поступающих затрат и пополнение финансов.</li>
           <li>Частинно работающий функционал кредитных карт, чтобы выбирать с какой былы затрата или на какую поступления</li>
           <li>Частинно работающий функционал тип затрат, аля категории, чтобы удобнее было смотреть куда улетают денежки и смотреть им вслед.. пуская одинокую мужскую слезу..</li>
+        </ol>
+        <h2 id="list-item-3.3">3.0.3 Moneys</h4>
+        <ol>
+          <li>Money big update, and fix</li>
+          <li>Security update</li>
         </ol>
       </div>
      </div>

@@ -6,6 +6,7 @@ class model
 {
   public static $id = '';
   public static $table = '';
+  public static $where = '';
   public static $arrAddFields = [];
 
   // Вывод
@@ -13,7 +14,7 @@ class model
   {
     // Параметры
     $id = $id ? $id : $this->id; // id элемента
-    $arrResult = ''; // Результат
+    $arrResult = []; // Результат
     // Общие параметры для запросов
     $mySqlShowSalt = '';
     // $mySqlSalt = " AND `active` > 0";
@@ -30,10 +31,21 @@ class model
 
     // Если 1 элемент
     if ( $id ) {
+      // Видно только своё
+      $mySqlShowSalt .= ' AND `user_id` = ' . $_SESSION['user']['id'];
       $arrResult = db::query("SELECT * FROM `" . $this->table . "` WHERE `id` = " . $id . $mySqlShowSalt);
     }
     // Если список элементов
     else {
+      // Видно только своё
+      // Если есть условие вывода
+      if ( $this->where ) {
+        $mySqlShowSalt .= ' WHERE ' . $this->where . ' AND `user_id` = ' . $_SESSION['user']['id'];
+      }
+      else {
+        $mySqlShowSalt .= ' WHERE `user_id` = ' . $_SESSION['user']['id'];
+      }
+
       // Сортировка mySql
       if ( $sSort ) $mySqlShowSalt .= ' ORDER BY  `' . $sSort . '` ' . $sSortDir;
 
@@ -101,6 +113,9 @@ class model
     $mySqlAdd  .= ") VALUES ";
     $mySqlAdd  .= "(";
 
+    // Проверяем прикручен ли пользователь
+    if ( empty($this->arrAddFields['user_id']) ) $this->arrAddFields['user_id'] = $_SESSION['user']['id'];
+
     // Собираем значения в запрос на добавление из доп поля
     $mySqlAddSeporator = '';
     foreach ($arrFields as $arrField){
@@ -147,6 +162,9 @@ class model
     // [Key] => PRI
     // [Default] =>
     // [Extra] => auto_increment
+
+    // Проверяем прикручен ли пользователь
+    if ( empty($this->arrAddFields['user_id']) ) $this->arrAddFields['user_id'] = $_SESSION['user']['id'];
 
     // Собираем запрос на редактирование
     $mySqlSave .= "UPDATE `" . $this->table . "` SET ";

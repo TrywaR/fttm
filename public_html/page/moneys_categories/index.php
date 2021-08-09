@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Moneys types</h1>
+          <h1 class="display-4">Moneys categories</h1>
           <p class="lead">Типы затрат</p>
         </div>
       </div>
@@ -28,7 +28,7 @@
                   <div class="accordion-body">
                     <form class="" action="" method="post">
                       <input type="hidden" name="app" value="app">
-                      <input type="hidden" name="action" value="moneys_types">
+                      <input type="hidden" name="action" value="moneys_categories">
                       <input type="hidden" name="form" value="save">
 
                       <div class="row g-3 align-items-center">
@@ -88,22 +88,22 @@
 
         // $arrMoneys = $db->query_all($sQuery);
 
-        $oMoneysType = new moneys_type();
-        $oMoneysType->sort = 'sort';
-        $arrMoneysTypes = $oMoneysType->get();
+        $oMoneysCategory = new moneys_category();
+        $oMoneysCategory->sort = 'sort';
+        $arrMoneysCategories = $oMoneysCategory->get();
 
-        if ( ! count( $arrMoneysTypes ) ) echo 'Нет типов затрат';
+        if ( ! count( $arrMoneysCategories ) ) echo 'Нет типов затрат';
       ?>
       <ol class="list-group list-group-numbered">
       <?
       // Прикручиваем рейтинги
-      foreach ($arrMoneysTypes as &$arrMoneysType) {
+      foreach ($arrMoneysCategories as $arrMoneysCategory) {
         ?>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold"><?=$arrMoneysType['title']?></div>
+            <div class="fw-bold"><?=$arrMoneysCategory['title']?></div>
             <div class="badge bg-primary ">
-              <?=$arrMoneysType['priority']?>
+              <?=$arrMoneysCategory['priority']?>
             </div>
           </div>
           <span class="rounded-pill">
@@ -112,7 +112,7 @@
               <!-- <i class="fas fa-square"></i> -->
             </a>
             <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrMoneysType['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrMoneysCategory['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
           </span>
         </li>
         <?

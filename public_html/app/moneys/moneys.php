@@ -1,25 +1,28 @@
 <?
 switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
-    $oMoney = new money();
+    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
 
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
-    $oMoney->sort = 'id';
+    $oMoney->sort = 'date';
     $oMoney->sortDir = 'DESC';
-
+    // print_r($oMoney);
+    // die();
     $arrMoneys = $oMoney->get_money();
 
     notification::send($arrMoneys);
     break;
 
   case 'save': # Сохранение изменений
-    $oMoney = new money( $_REQUEST['id'] );
-    if ( $_REQUEST['value'] == 'minus' ) $_REQUEST['price'] = '-' . $_REQUEST['price'];
+    $arrElem = [];
+    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
     $oMoney->arrAddFields = $_REQUEST;
-    $oMoney->arrAddFields['user_id'] = $_SESSION['user']['id'];
-    if ( $_REQUEST['id'] ) notification::send($oMoney->save());
-    else notification::send($oMoney->add());
+    if ( $_REQUEST['id'] ) $arrElem = $oMoney->save();
+    else $arrElem = $oMoney->add();
+
+    $oMoney = new money( $arrElem['id'] );
+    notification::send($oMoney->get_money());
     break;
 
   case 'del': # Удаление

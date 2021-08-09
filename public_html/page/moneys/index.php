@@ -1,122 +1,94 @@
 <main class="container pt-4 pb-4" id="container">
-  <div class="row mb-4">
+  <section class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Moneys</h1>
           <p class="lead">
-            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_types/">Типы затрат</a>
+            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_categories/">Категории затрат</a>
           </p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col col-12 col-md-6">
-      <div class="col col-md-12 mb-12">
-        <!-- Получение -->
-        <div class="card animate__animated animate__pulse">
-          <div class="card-body">
-            <h5 class="card-title">Новый получ</h5>
-            <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
+  </section>
 
-            <div class="card-body">
-              <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Добавить получ
-                    </button>
-                  </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                      <form class="content_loader_form" action="" method="post" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
-                        <input type="hidden" name="app" value="app">
-                        <input type="hidden" name="action" value="moneys">
-                        <input type="hidden" name="form" value="save">
-                        <input type="hidden" name="value" value="plus">
+  <section class="row">
+    <div class="col-12 mt-4 mb-4">
+      <?
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputProjectId" class="col-form-label">Project id</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="project_id" type="number" id="inputProjectId" class="form-control">
-                          </div>
-                        </div>
+      // Потрачено
+      // За день
+      $oMoney = new money();
+      $oMoney->sort = 'date';
+      $dCurrentDate = date('Y-m-d');
+      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
+      $arrMoneys = $oMoney->get_money();
+      $iDaySumm = 0;
+      foreach ($arrMoneys as $arrMoney) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputTasksId" class="col-form-label">Client id</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="tasks_id" type="number" id="inputTasksId" class="form-control">
-                          </div>
-                        </div>
+      // За месяц
+      $oMoney = new money();
+      $oMoney->sort = 'date';
+      $dCurrentDate = date('Y-m');
+      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
+      $arrMoneys = $oMoney->get_money();
+      $iMonthSumm = 0;
+      foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputCardId" class="col-form-label">Card</label>
-                          </div>
-                          <div class="col-auto">
-                            <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                              <?
-                              $oCard = new card();
-                              $arrCards = $oCard->get();
-                              ?>
-                              <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                                <?php if ( ! $iIndex ): ?>
-                                  <option selected value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                                <?php else: ?>
-                                  <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
-                        </div>
+      // Заработанно
+      $oMoney = new money();
+      $oMoney->sort = 'date';
+      $dCurrentDate = date('Y-m');
+      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` > 0 ";
+      $arrMoneys = $oMoney->get_money();
+      $iMonthSummSalary = 0;
+      foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputDate" class="col-form-label">Date</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDate" class="form-control">
-                          </div>
-                        </div>
+      ?>
+      <div class="block_analitycs animate__animated animate__flipInY">
+        <div class="_circle">
+          <div class="_title">
+            Расходы сегодня
+          </div>
+          <div class="_value">
+            <?=number_format($iDaySumm, 2, '.', ' ')?>₽
+          </div>
+        </div>
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputPriceId" class="col-form-label">Price</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="price" type="number" step="any" lang="en" id="inputPriceId" class="form-control">
-                          </div>
-                        </div>
+        <div class="_circle">
+          <div class="_title">
+            Расходы (<?=date("F")?>)
+          </div>
+          <div class="_value">
+            <?=number_format($iMonthSumm, 2, '.', ' ')?>₽
+          </div>
+        </div>
 
-                        <div class="row g-3 align-items-center">
-                          <div class="col-auto">
-                            <label for="inputTitle" class="col-form-label">Title</label>
-                          </div>
-                          <div class="col-auto">
-                            <input name="title" type="text" id="inputTitle" class="form-control">
-                          </div>
-                        </div>
+        <div class="_circle">
+          <div class="_title">
+            Доходы (<?=date("F")?>)
+          </div>
+          <div class="_value">
+            <?=number_format($iMonthSummSalary, 2, '.', ' ')?>₽
+          </div>
+        </div>
 
-                        <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Добавить</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="_circle">
+          <div class="_title">
+            Баланс (<?=date("F")?>)
+          </div>
+          <div class="_value">
+            <?=number_format($iMonthSummSalary-$iMonthSumm, 2, '.', ' ')?>₽
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="col col-12 col-md-6">
+  <section class="row">
+    <div class="col col-12 col-md-5">
       <!-- Затраты -->
-      <div class="card animate__animated animate__pulse animate__delay-1s">
+      <div class="card animate__animated animate__pulse mb-4">
         <div class="card-body">
           <h5 class="card-title">Новый затрат</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -131,35 +103,167 @@
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
                   <div class="accordion-body">
-                    <form class="content_loader_form" action="" method="post" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
+                    <form class="content_loader_form" action="" method="post" data-content_download_edit_type="0" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
                       <input type="hidden" name="form" value="save">
-                      <input type="hidden" name="value" value="minus">
+                      <input type="hidden" name="type" value="0">
+                      <input type="hidden" name="id" value="">
 
-                      <!-- <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputProjectIdZero" class="col-form-label">Project id</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputCardIdZero" class="col-form-label">Card</label>
                         </div>
-                        <div class="col-auto">
-                          <input name="project_id" type="number" id="inputProjectIdZero" class="form-control">
+                        <div class="col-12 col-md-8">
+                          <select name="card" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected>Наличные</option>
+                            <?
+                            $oCard = new card();
+                            $arrCards = $oCard->get();
+                            ?>
+                            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+                              <?php if ( ! $iIndex ): ?>
+                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputTasksIdZero" class="col-form-label">Client id</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputTypeIdZero" class="col-form-label">Category</label>
                         </div>
-                        <div class="col-auto">
-                          <input name="tasks_id" type="number" id="inputTasksIdZero" class="form-control">
+                        <div class="col-12 col-md-8">
+                          <select name="category" class="form-select" size="3" aria-label="size 3 select example">
+                            <?
+                            $oMoneyCategory = new moneys_category();
+                            $arrMoneysCategorise = $oMoneyCategory->get();
+                            ?>
+                            <?php foreach ($arrMoneysCategorise as $iIndex => $arrMoneyCategory): ?>
+                              <?php if ( ! $iIndex ): ?>
+                                <option selected value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
-                      </div> -->
+                      </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputCardIdZero" class="col-form-label">Card</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputProjectId" class="col-form-label">Project id</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
+                          <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected>Не работа</option>
+                            <?
+                            $oProject = new project();
+                            $arrProjects = $oProject->get();
+                            ?>
+                            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+                              <?php if ( ! $iIndex ): ?>
+                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputDateZero" class="col-form-label">Date</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDateZero" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputPriceIdZero" class="col-form-label">Price</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <input name="price" type="number" step="any" lang="en" id="inputPriceIdZero" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputTitleZero" class="col-form-label">Title</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <input name="title" type="text" id="inputTitleZero" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Отменить</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Добавить</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Получение -->
+      <div class="card animate__animated animate__pulse animate__delay-1s">
+        <div class="card-body">
+          <h5 class="card-title">Новый получ</h5>
+          <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
+
+          <div class="card-body">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Добавить получ
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <form class="content_loader_form" action="" method="post"  data-content_download_edit_type="1" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
+                      <input type="hidden" name="app" value="app">
+                      <input type="hidden" name="action" value="moneys">
+                      <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="type" value="1">
+                      <input type="hidden" name="id" value="">
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputProjectId" class="col-form-label">Project id</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected>Левый приход</option>
+                            <?
+                            $oProject = new project();
+                            $arrProjects = $oProject->get();
+                            ?>
+                            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+                              <?php if ( ! $iIndex ): ?>
+                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputCardId" class="col-form-label">Card</label>
+                        </div>
+                        <div class="col-12 col-md-8">
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
                             <?
                             $oCard = new card();
@@ -176,34 +280,37 @@
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputDateZero" class="col-form-label">Date</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputDate" class="col-form-label">Date</label>
                         </div>
-                        <div class="col-auto">
-                          <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDateZero" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputPriceIdZero" class="col-form-label">Price</label>
-                        </div>
-                        <div class="col-auto">
-                          <input name="price" type="number" step="any" lang="en" id="inputPriceIdZero" class="form-control">
+                        <div class="col-12 col-md-8">
+                          <input name="date" type="date" value="<?=date('Y-m-d')?>" id="inputDate" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputTitleZero" class="col-form-label">Title</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputPriceId" class="col-form-label">Price</label>
                         </div>
-                        <div class="col-auto">
-                          <input name="title" type="text" id="inputTitleZero" class="form-control">
+                        <div class="col-12 col-md-8">
+                          <input name="price" type="number" step="any" lang="en" id="inputPriceId" class="form-control">
                         </div>
                       </div>
 
-                      <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Добавить</button>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputTitle" class="col-form-label">Title</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <input name="title" type="text" id="inputTitle" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Отменить</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Добавить</button>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -213,9 +320,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col">
+
+    <div class="col col-12 col-md-7">
       <?
       // $sQuery  = "SELECT * FROM `clients`";
       // $sQuery .= " WHERE `active` > 0";
@@ -226,13 +332,13 @@
 
       $oMoney = new money();
       $oMoney->limit = 10;
-      $oMoney->sort = 'id';
+      $oMoney->sort = 'date';
       $oMoney->sortDir = 'DESC';
       $arrMoneys = $oMoney->get_money();
 
       if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
       ?>
-      <div class="content_manager_buttons d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#content_loader_to" data-content_manager_item=".list-group-item">
+      <div class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#content_loader_to" data-content_manager_item=".list-group-item">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
         </button>
@@ -242,7 +348,7 @@
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
-        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s <?=$arrMoney['value']?>" data-content_manager_item_id="<?=$arrMoney['id']?>">
+        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
@@ -262,11 +368,14 @@
                 <i class="fas fa-square"></i>
               </div>
             </a>
-            <a href="#" class="btn">
+            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>
             </a>
             <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
           </span>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
         </li>
         <?
       }
@@ -276,11 +385,11 @@
         <button type="button" class="btn btn-primary btn-sm content_loader" data-content_loader_action="moneys" data-content_loader_form="show" data-content_loader_to="#content_loader_to" data-content_loader_from="10" data-content_loader_limit="10" data-content_loader_template=".template_money" data-content_loader_position="1">Load</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="block_template">
+  <section class="block_template">
     <div class="template_money">
-      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight {{value}}" data-content_manager_item_id="<?=$arrMoney['id']?>">
+      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-1">{{title}}</div>
           <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
@@ -300,10 +409,16 @@
               <i class="fas fa-square"></i>
             </div>
           </a>
-          <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="edit" data-elem=".list-group-item" data-animate_class="animate__flipInY">
+            <i class="fas fa-pen-square"></i>
+          </a>
           <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
         </span>
+
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
       </li>
     </div>
-  </div>
+  </section>
 </main>
