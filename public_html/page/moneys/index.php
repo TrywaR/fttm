@@ -20,7 +20,8 @@
       // За день
       $oMoney = new money();
       $oMoney->sort = 'date';
-      $dCurrentDate = date('Y-m-d');
+      // $dCurrentDate = date('Y-m-d');
+      $dCurrentDate = date("Y-m-d", strtotime("-1 DAY"));
       $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
       $arrMoneys = $oMoney->get_money();
       $iDaySumm = 0;
@@ -48,7 +49,7 @@
       <div class="block_analitycs animate__animated animate__flipInY">
         <div class="_circle">
           <div class="_title">
-            Расходы сегодня
+            Расходы вчера
           </div>
           <div class="_value">
             <?=number_format($iDaySumm, 2, '.', ' ')?>₽

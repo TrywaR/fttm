@@ -1,3 +1,23 @@
+<?
+// Получаем категории
+// $arrMoneys = $db->query_all($sQuery);
+
+$oMoneysCategory = new moneys_category();
+$oMoneysCategory->limit = 0;
+$oMoneysCategory->sort = 'sort';
+$arrMoneysCategories = $oMoneysCategory->get();
+
+foreach ($arrMoneysCategories as &$arrMoneysCategory) {
+  // Собираем данные по категории
+  $oMoney = new money();
+  $oMoney->where = "`category` = '" . $arrMoneysCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0'";
+  $arrMoneys = $oMoney->get();
+  $iCategorySum = 0;
+  foreach ($arrMoneys as &$arrMoney) $iCategorySum = $iCategorySum + (int)$arrMoney['price'];
+  $arrMoneysCategory['sum'] = $iCategorySum;
+}
+?>
+
 <main class="container pt-4 pb-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -9,6 +29,50 @@
       </div>
     </div>
   </div>
+
+  <!-- Analitycs -->
+  <div class="row">
+    <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
+      <h2>Затраты по категориям (<?=date("F")?>)</h2>
+      <canvas id="doughnut-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+
+    <script>
+      var myChart = new Chart(document.getElementById("doughnut-chart"), {
+        type: 'doughnut',
+        data: {
+          labels: [<?foreach ($arrMoneysCategories as $iIndex => &$arrMoneysCategory) {
+            if ( $iIndex) echo ", '";
+            else echo "'";
+            echo $arrMoneysCategory['title'] . "'";
+          }?>],
+          datasets: [
+            {
+              label: "Population (millions)",
+              data: [<?foreach ($arrMoneysCategories as $iIndex => &$arrMoneysCategory) {
+                if ( $iIndex) echo ", '";
+                else echo "'";
+                echo $arrMoneysCategory['sum'] . "'";
+              }?>],
+              backgroundColor: [<?foreach ($arrMoneysCategories as $iIndex => &$arrMoneysCategory) {
+                if ( $iIndex) echo ", '";
+                else echo "'";
+                echo $arrMoneysCategory['color'] ? $arrMoneysCategory['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+              }?>]
+            }
+          ]
+        }
+      })
+      window.addEventListener('beforeprint', () => {
+  myChart.resize(600, 600);
+});
+window.addEventListener('afterprint', () => {
+  myChart.resize();
+});
+    </script>
+  </div>
+
   <div class="row">
     <div class="col col-12 col-md-6">
       <!-- Карты -->
@@ -51,6 +115,15 @@
 
                       <div class="row g-3 align-items-center">
                         <div class="col-auto">
+                          <label for="inputColorZero" class="col-form-label">Цвет</label>
+                        </div>
+                        <div class="col-auto">
+                          <input type="color" id="inputColorZero" name="color" value="<?=sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) )?>">
+                        </div>
+                      </div>
+
+                      <div class="row g-3 align-items-center">
+                        <div class="col-auto">
                           <label for="inputTitleZero" class="col-form-label">sort</label>
                         </div>
                         <div class="col-auto">
@@ -80,20 +153,7 @@
   <!-- cards -->
   <div class="row mt-4">
     <div class="col">
-      <?
-        // $sQuery  = "SELECT * FROM `clients`";
-        // $sQuery .= " WHERE `active` > 0";
-        // $sQuery .= " ORDER BY `sort` ASC";
-        // $sQuery .= " LIMIT 20";
-
-        // $arrMoneys = $db->query_all($sQuery);
-
-        $oMoneysCategory = new moneys_category();
-        $oMoneysCategory->sort = 'sort';
-        $arrMoneysCategories = $oMoneysCategory->get();
-
-        if ( ! count( $arrMoneysCategories ) ) echo 'Нет типов затрат';
-      ?>
+      <?if ( ! count( $arrMoneysCategories ) ) echo 'Нет типов затрат';?>
       <ol class="list-group list-group-numbered">
       <?
       // Прикручиваем рейтинги
