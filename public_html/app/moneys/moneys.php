@@ -7,8 +7,6 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
     $oMoney->sort = 'date';
     $oMoney->sortDir = 'DESC';
-    // print_r($oMoney);
-    // die();
     $arrMoneys = $oMoney->get_money();
 
     notification::send($arrMoneys);

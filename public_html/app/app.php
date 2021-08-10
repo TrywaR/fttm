@@ -12,6 +12,10 @@ switch ($_REQUEST['action']) {
     include_once 'projects/projects.php';
     break;
 
+  case 'tasks': # Задачи по проектам
+    include_once 'tasks/tasks.php';
+    break;
+
   case 'moneys': # Обработка денежек
     include_once 'moneys/moneys.php';
     break;
