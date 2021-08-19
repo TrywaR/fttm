@@ -45,33 +45,33 @@ table {
 
 body .accordion-button,
 body .accordion-button:not(.collapsed) {
-  color: white;
-  background: #202022; }
+  color: black;
+  background: #fff; }
 body .accordion-item {
-  color: white;
-  background: #202022; }
+  color: black;
+  background: #fff; }
 body .form-select,
 body .form-select:focus,
 body .form-control,
 body .form-control:focus {
-  color: white;
-  background: #202022;
-  border-color: #221a1a; }
+  color: black;
+  background: #fff;
+  border-color: #fff; }
 body .picker__box .picker__header .picker__date-display .picker__weekday-display,
 body .datepicker table tr td.active:active,
 body .datepicker table tr td.active.highlighted:active,
 body .datepicker table tr td.active.active,
 body .datepicker table tr td.active.highlighted.active {
-  color: white;
-  background: #202022; }
+  color: black;
+  background: #fff; }
 body .btn {
-  color: white; }
+  color: black; }
 body .card {
-  color: white;
-  background: #202022; }
+  color: black;
+  background: #fff; }
 body .list-group-item {
-  color: white;
-  background: #202022; }
+  color: black;
+  background: #fff; }
 
 .fttm_alerts {
   position: fixed;
@@ -120,8 +120,8 @@ ol {
     padding-bottom: 1rem; }
 
 body {
-  color: white;
-  background: #221a1a;
+  color: black;
+  background: #fff;
   font-family: "Geometria";
   font-size: 14px;
   line-height: 16px; }

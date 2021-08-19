@@ -8,9 +8,9 @@ oParam.site_url = '/'
 // События
 $(function(){
 	// themes
-	// var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
-	// if (prefersDarkScheme.matches) document.body.classList.add("dark-theme")
-	// else document.body.classList.remove("dark-theme")
+	var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+	if (prefersDarkScheme.matches) document.body.classList.add("dark-theme")
+	else document.body.classList.remove("dark-theme")
 	// themes x
 
 	// content

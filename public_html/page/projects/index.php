@@ -106,8 +106,9 @@
             </a>
             <a href="#" class="btn"><i class="fas fa-external-link-square-alt"></i></a>
             <a href="#" class="btn"><i class="fas fa-chart-area"></i></a>
-            <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del" data-elem=".col">
+              <i class="fas fa-minus-square"></i>
+            </a>
           </div>
         </div>
       </div>
