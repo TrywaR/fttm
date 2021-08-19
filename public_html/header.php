@@ -31,6 +31,9 @@
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/events/') echo 'badge bg-success active';?>" href="/events/">Events</a>
             </li> -->
             <li class="nav-item">
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
             </li>
             <li class="nav-item">
