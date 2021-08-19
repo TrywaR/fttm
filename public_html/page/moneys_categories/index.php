@@ -7,6 +7,8 @@ $oMoneysCategory->limit = 0;
 $oMoneysCategory->sort = 'sort';
 $arrMoneysCategories = $oMoneysCategory->get();
 
+$dCurrentDate = date('Y-m');
+
 foreach ($arrMoneysCategories as &$arrMoneysCategory) {
   // Собираем данные по категории
   $oMoney = new money();
