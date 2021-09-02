@@ -9,17 +9,46 @@ $arrMoneysCategories = $oMoneysCategory->get();
 
 $dCurrentDate = date('Y-m');
 
+$arrMoneysCategoriesName = [];
+
 foreach ($arrMoneysCategories as &$arrMoneysCategory) {
   // Собираем данные по категории
   $oMoney = new money();
   $oMoney->where = "`category` = '" . $arrMoneysCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
   $iCategorySum = 0;
-  foreach ($arrMoneys as &$arrMoney) $iCategorySum = $iCategorySum + (int)$arrMoney['price'];
+  foreach ($arrMoneys as &$arrMoney) {
+    $arrMoneysCategory['items'][] = $arrMoney;
+    $iCategorySum = $iCategorySum + (int)$arrMoney['price'];
+  }
   $arrMoneysCategory['sum'] = $iCategorySum;
+  $arrMoneysCategoriesName[$arrMoneysCategory] = $arrMoneysCategory['title'];
 }
-?>
 
+// Суммы по месяцам
+$arrMounths = [];
+for ($i=0; $i < 12; $i++) {
+  $oMoney = new money();
+  $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0'";
+  $arrMoneys = $oMoney->get();
+  $iMounthSum = 0;
+  foreach ($arrMoneys as &$arrMoney) {
+    $arrMounths[$i]['categories'][$arrMoney['category']] = (int)$arrMounths[$i]['categories'][$arrMoney['category']] + (int)$arrMoney['price'];
+    // $arrMoneysCategory['items'][] = $arrMoney;
+    // $arrMounths[$i+1]['items'][] = $arrMoney;
+    $iMounthSum = $iMounthSum + (int)$arrMoney['price'];
+  }
+  $arrMounths[$i]['sum'] = $iMounthSum;
+  $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
+  // $arrMounths[$i+1] = $iMounthSum;
+  // $arrMounths[$i]['categories'] = [];
+
+  // foreach ($arrMoneysCategories as &$arrMoneysCategory) {
+  //   // code...
+  // }
+}
+
+?>
 <main class="container pt-4 pb-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -73,6 +102,80 @@ window.addEventListener('afterprint', () => {
   myChart.resize();
 });
     </script>
+  </div>
+
+  <!-- Год -->
+  <div class="row mb-5">
+    <div class="col mt-5 mb-4 d-flex flex-column justify-content-center align-items-center">
+      <h2>Затраты за год (<?=date("Y")?>)</h2>
+      <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+      <script>
+        var myBar = new Chart(document.getElementById("bar-chart"), {
+          type: 'line',
+          data: {
+            labels: [<?foreach ($arrMounths as $key => $arrMounth) {
+              if ( $key ) echo ", '";
+              else echo "'";
+              echo $arrMounth['name'] . " (" . $arrMounth['sum'] . ")'";
+            }?>],
+            datasets:
+              [
+                <?foreach ($arrMoneysCategories as $iIndex => &$arrMoneysCategory) {?>
+                {
+                  label: "<?=$arrMoneysCategory['title']?>",
+                  data: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                    if ( $iIndex ) echo ", ";
+                    else echo "";
+
+                    if ( count($arrMounth['categories']) ) echo $arrMounth['categories'][$arrMoneysCategory['id']] . "";
+                    else echo $arrMounth['sum'] . "";
+                  }?>],
+                  borderColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                    if ( $iIndex ) echo ", '";
+                    else echo "'";
+                    echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                  }?>],
+                  backgroundColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                    if ( $iIndex ) echo ", '";
+                    else echo "'";
+                    echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                  }?>]
+                },
+                <?}?>
+              ],
+          },
+          options: {
+            plugins: {
+              filler: {
+                propagate: false
+              },
+              'samples-filler-analyser': {
+                target: 'chart-analyser'
+              }
+            },
+            interaction: {
+              intersect: false,
+            },
+            responsive: true,
+            scales: {
+              x: {
+                stacked: true,
+              },
+              y: {
+                stacked: true
+              }
+            }
+          }
+        })
+
+        window.addEventListener('beforeprint', () => {
+          myBar.resize(600, 600);
+        });
+        window.addEventListener('afterprint', () => {
+          myBar.resize();
+        });
+      </script>
+    </div>
   </div>
 
   <div class="row">
@@ -181,6 +284,39 @@ window.addEventListener('afterprint', () => {
       }
       ?>
       </ol>
+    </div>
+  </div>
+
+  <!-- Items -->
+  <div class="row">
+    <div class="col">
+      <?
+      foreach ($arrMoneysCategories as &$arrMoneysCategory) {
+      ?>
+      <ol class="list-group list-group-numbered block_content_loader">
+      <?
+      // Прикручиваем рейтинги
+      foreach ($arrMoneysCategory['items'] as &$arrMoney) {
+        ?>
+        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
+            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
+              <?=$arrMoney['price']?>₽
+            </div>
+            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+              <?=$arrMoney['date']?>
+            </span>
+            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
+          </div>
+        </li>
+        <?
+      }
+      ?>
+      </ol>
+      <?
+      }
+      ?>
     </div>
   </div>
 </main>

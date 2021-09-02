@@ -5,7 +5,7 @@
         <div class="container">
           <h1 class="display-4">Moneys</h1>
           <p class="lead">
-            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_categories/">Категории затрат</a>
+            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_categories/">Категории затрат</a>,  <a href="/moneys_analytics/">Категории приходов.</a>
           </p>
         </div>
       </div>

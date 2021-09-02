@@ -14,7 +14,10 @@ foreach ($arrProjects as &$arrProject) {
     $oMoney->where = "`project_id` = '" . $arrProject['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` > '0'";
     $arrMoneys = $oMoney->get();
     $iProjectSum = 0;
-    foreach ($arrMoneys as &$arrMoney) $iProjectSum = $iProjectSum + (int)$arrMoney['price'];
+    foreach ($arrMoneys as &$arrMoney) {
+      $arrProject['items'][] = $arrMoney;
+      $iProjectSum = $iProjectSum + (int)$arrMoney['price'];
+    }
     $arrProject['sum'] = $iProjectSum;
 }
 ?>
@@ -72,3 +75,38 @@ foreach ($arrProjects as &$arrProject) {
       })
     </script>
   </div>
+
+  <!-- Items -->
+  <div class="row">
+    <div class="col">
+      <?
+      foreach ($arrProjects as &$arrProject) {
+      ?>
+      <h2 class="pt-2 pb-2 mt-3 mb-1 animate__animated animate__bounceInRight animate__delay-1s"><?=$arrProject['title']?></h2>
+      <ol class="list-group list-group-numbered block_content_loader">
+      <?
+      // Прикручиваем рейтинги
+      foreach ($arrProject['items'] as &$arrMoney) {
+        ?>
+        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
+            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
+              <?=$arrMoney['price']?>₽
+            </div>
+            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+              <?=$arrMoney['date']?>
+            </span>
+            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
+          </div>
+        </li>
+        <?
+      }
+      ?>
+      </ol>
+      <?
+      }
+      ?>
+    </div>
+  </div>
+</main>
