@@ -11,6 +11,7 @@ class money extends model
   public static $tasks_id = '';
   public static $price = '';
   public static $card = '';
+  public static $category = '';
   public static $date = '';
   public static $type = ''; # хз пока что
   public static $value = ''; # minus - затраты
@@ -46,6 +47,7 @@ class money extends model
       $this->tasks_id = $arrMoney['tasks_id'];
       $this->price = $arrMoney['price'];
       $this->card = $arrMoney['card'];
+      $this->category = $arrMoney['category'];
       $this->date = $arrMoney['date'];
       $this->type = $arrMoney['type'];
       $this->value = $arrMoney['value'];
