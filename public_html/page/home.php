@@ -18,7 +18,7 @@
    $arrUsers = $db->query_all($sQuery);
    ?>
 
-   <div class="row  animate__animated animate__bounceIn animate__delay-1s">
+   <div class="row  animate__animated animate__bounceIn">
      <div class="col">
        <div class="card">
          <div class="card-body">
@@ -40,7 +40,7 @@
      </div>
    </div>
 
-   <div class="row animate__animated animate__shakeX animate__delay-2s">
+   <div class="row animate__animated animate__shakeX">
      <div class="col col-12 mt-4">
        <figure>
          <blockquote cite="https://yandex.ru/lab/yalm/share?id=4aa38ace1b050d268f565046b553df54996280f0ea5b1a6355d4c4a7ed744556">
@@ -57,35 +57,38 @@
      </div>
    </div>
 
-   <div class="row mt-4 animate__animated animate__backInUp animate__delay-3s" id="block_version">
+   <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action" href="#list-item-1">1.0.0 Alfa</a>
-          <a class="list-group-item list-group-item-action" href="#list-item-2">2.0.0 Hello world</a>
-          <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3-3">3.0.3 Moneys</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-2">2.0.0 Hello world</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-1">1.0.0 Alfa</a>
         </div>
      </div>
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
-        <h2 id="list-item-1">1.0.0 Alfa</h4>
+        <h2 id="list-item-3-3">3.0.3 Moneys</h4>
         <ol>
-          <li>Start</li>
+          <li>Money big update, and fix</li>
+          <li>Security update</li>
         </ol>
-        <h2 id="list-item-2">2.0.0 Hello world</h4>
-        <ol>
-          <li>Hello world - или большой скачок начальной разработки, которую мне лень было описывать</li>
-        </ol>
+
         <h2 id="list-item-3">3.0.0 Moneys</h4>
         <ol>
           <li>Обновление опсвящено денежкам, добавление и удаление поступающих затрат и пополнение финансов.</li>
           <li>Частинно работающий функционал кредитных карт, чтобы выбирать с какой былы затрата или на какую поступления</li>
           <li>Частинно работающий функционал тип затрат, аля категории, чтобы удобнее было смотреть куда улетают денежки и смотреть им вслед.. пуская одинокую мужскую слезу..</li>
         </ol>
-        <h2 id="list-item-3-3">3.0.3 Moneys</h4>
+
+        <h2 id="list-item-2">2.0.0 Hello world</h4>
         <ol>
-          <li>Money big update, and fix</li>
-          <li>Security update</li>
+          <li>Hello world - или большой скачок начальной разработки, которую мне лень было описывать</li>
+        </ol>
+
+        <h2 id="list-item-1">1.0.0 Alfa</h4>
+        <ol>
+          <li>Start</li>
         </ol>
       </div>
      </div>
