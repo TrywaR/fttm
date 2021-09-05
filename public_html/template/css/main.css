@@ -124,7 +124,9 @@ body {
   background: #221a1a;
   font-family: "Geometria";
   font-size: 14px;
-  line-height: 16px; }
+  line-height: 16px;
+  overflow-x: hidden;
+  max-width: 100%; }
 
 .block_template {
   display: none; }

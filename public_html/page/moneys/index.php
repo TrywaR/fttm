@@ -216,7 +216,7 @@
         </div>
       </div>
       <!-- Получение -->
-      <div class="card animate__animated animate__pulse animate__delay-1s">
+      <div class="card animate__animated animate__pulse mb-4 animate__delay-1s">
         <div class="card-body">
           <h5 class="card-title">Новый получ</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -322,7 +322,7 @@
       </div>
     </div>
 
-    <div class="col col-12 col-md-7">
+    <div class="col col-12 col-md-7" style="max-height: 80vh; overflow: auto;">
       <?
       // $sQuery  = "SELECT * FROM `clients`";
       // $sQuery .= " WHERE `active` > 0";
