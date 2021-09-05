@@ -69,33 +69,35 @@
      </div>
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
-        <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h4>
-        <ol>
-          <li>Графики затрат по категориям за месяц и за год</li>
-          <li>Ajax переходы по страницам</li>
-        </ol>
-        <h2 id="list-item-3-3">3.0.3 Moneys</h4>
-        <ol>
-          <li>Money big update, and fix</li>
-          <li>Security update</li>
-        </ol>
+        <div class="pt-2 pb-2">
+          <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h4>
+          <ol>
+            <li>Графики затрат по категориям за месяц и за год</li>
+            <li>Ajax переходы по страницам</li>
+          </ol>
+          <h2 id="list-item-3-3">3.0.3 Moneys</h4>
+          <ol>
+            <li>Money big update, and fix</li>
+            <li>Security update</li>
+          </ol>
 
-        <h2 id="list-item-3">3.0.0 Moneys</h4>
-        <ol>
-          <li>Обновление опсвящено денежкам, добавление и удаление поступающих затрат и пополнение финансов.</li>
-          <li>Частинно работающий функционал кредитных карт, чтобы выбирать с какой былы затрата или на какую поступления</li>
-          <li>Частинно работающий функционал тип затрат, аля категории, чтобы удобнее было смотреть куда улетают денежки и смотреть им вслед.. пуская одинокую мужскую слезу..</li>
-        </ol>
+          <h2 id="list-item-3">3.0.0 Moneys</h4>
+          <ol>
+            <li>Обновление опсвящено денежкам, добавление и удаление поступающих затрат и пополнение финансов.</li>
+            <li>Частинно работающий функционал кредитных карт, чтобы выбирать с какой былы затрата или на какую поступления</li>
+            <li>Частинно работающий функционал тип затрат, аля категории, чтобы удобнее было смотреть куда улетают денежки и смотреть им вслед.. пуская одинокую мужскую слезу..</li>
+          </ol>
 
-        <h2 id="list-item-2">2.0.0 Hello world</h4>
-        <ol>
-          <li>Hello world - или большой скачок начальной разработки, которую мне лень было описывать</li>
-        </ol>
+          <h2 id="list-item-2">2.0.0 Hello world</h4>
+          <ol>
+            <li>Hello world - или большой скачок начальной разработки, которую мне лень было описывать</li>
+          </ol>
 
-        <h2 id="list-item-1">1.0.0 Alfa</h4>
-        <ol>
-          <li>Start</li>
-        </ol>
+          <h2 id="list-item-1">1.0.0 Alfa</h4>
+          <ol>
+            <li>Start</li>
+          </ol>
+        </div>
       </div>
      </div>
    </div>
