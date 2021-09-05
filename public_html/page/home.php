@@ -2,7 +2,7 @@
    <div class="row mb-4">
      <div class="col-12  animate__animated animate__bounceIn">
        <h1>Freelance Time TrywaR Manager</h1>
-       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i> <small>v 3.0.0 Moneys</small></a>
+       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i> <small>v 3.0.4 Moneys</small></a>
      </div>
      <!-- <div class="col-12 mt-4">
        <a href="/authorizations/" class="btn btn-primary">Войти</a>
@@ -60,6 +60,7 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
+          <a class="list-group-item list-group-item-action" href="#list-item-3-5">3.0.5 Moneys categoryes grath</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3-3">3.0.3 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-2">2.0.0 Hello world</a>
@@ -68,6 +69,11 @@
      </div>
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
+        <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h4>
+        <ol>
+          <li>Графики затрат по категориям за месяц и за год</li>
+          <li>Ajax переходы по страницам</li>
+        </ol>
         <h2 id="list-item-3-3">3.0.3 Moneys</h4>
         <ol>
           <li>Money big update, and fix</li>

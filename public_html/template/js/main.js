@@ -202,10 +202,16 @@ $(function(){
 			fttm_alerts( oData, oForm )
 
 			// Если модель, то сохраняем в локали
-			if ( oData.model ) {
+			if ( oData.success.model ) {
 				localStorage.setItem(oData.model, JSON.stringify(oData.data))
 				// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
 			}
+
+			// Если редирект
+			if ( oData.success.location )
+				setTimeout(function(){
+				  window.location.replace( oData.success.location )
+				}, 500)
 
 			// Добавляем в данные
 			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, oData )

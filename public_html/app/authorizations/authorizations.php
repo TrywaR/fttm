@@ -14,16 +14,20 @@ switch ($_REQUEST['form']) {
       $arrResult['model'] = 'user';
       $arrResult['data'] = $_SESSION['user'] = $arrUser;
       $arrResult['text'] = 'Успешный вход!';
+      $arrResult['location'] = '/';
+
       notification::success( $arrResult );
     }
     else notification::error( $arrResult );
     break;
-  
+
   case 'logout': # Выход
     unset($_SESSION['user']);
     $arrResult['model'] = 'user';
     $arrResult['data'] = '';
     $arrResult['text'] = 'Успешный выход!';
+    $arrResult['location'] = '/';
+    
     notification::success( $arrResult );
     break;
 
@@ -50,7 +54,7 @@ switch ($_REQUEST['form']) {
 
     $oUser = new user();
     $oUser->arrAddFields = $arrData;
-    
+
     if ( $oUser->add() ) notification::success('Регистрация прошла успешно! (:');
     else notification::error('Что то пошло не так, ох, вызывайте тыжпрограммистов!');
 

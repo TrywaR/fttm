@@ -32,7 +32,7 @@ switch ($_SERVER['REQUEST_URI']) {
     // Если пользователь авторизирован
     if ( isset($_SESSION['user']) ) {
       if (file_exists('page'.$_SERVER['REQUEST_URI'].'index.php')) include_once 'page'.$_SERVER['REQUEST_URI'].'index.php';
-      else echo '<main><h1>Error 404</h1></main>';
+      else echo '<main class="container pt-4 pb-4 text-center"><h1>Error 404</h1></main>';
     }
     // Пользователь не авторизирован
     else {
