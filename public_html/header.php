@@ -19,18 +19,6 @@
             <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/') echo 'badge bg-success active';?>" aria-current="page" href="/">Home</a>
           </li>
           <?php if (isset($_SESSION['user'])): ?>
-  					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/clients/') echo 'badge bg-success active';?>" href="/clients/">Clients</a>
-            </li>
-  					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/projects/') echo 'badge bg-success active';?>" href="/projects/">Projects</a>
-            </li>
-  					<li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'badge bg-success active';?>" href="/tasks/">Tasks</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/events/') echo 'badge bg-success active';?>" href="/events/">Events</a>
-            </li> -->
             <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
             </li>

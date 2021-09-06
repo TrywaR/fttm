@@ -22,6 +22,8 @@
 //___
 
 body
+  position: relative
+  z-index: 1
   color: $color_text
   background: $color_main_dark
   font-family: $font_default
@@ -29,6 +31,25 @@ body
   line-height: 16px
   overflow-x: hidden
   max-width: 100%
+
+  &:before,
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+  &:before
+    background: linear-gradient(0deg,#000 0,#020202 100%)
+    opacity: .8
+    z-index: -1
+
+  &:after
+    filter: blur(.1rem)
+    background: radial-gradient(circle,#ffdaa7 7%,#d7f8ff 100%)
+    z-index: -2
 
 .block_template
   display: none

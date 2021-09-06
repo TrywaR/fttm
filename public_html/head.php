@@ -44,6 +44,7 @@
 	<!-- main -->
 	<link rel="stylesheet" href="/template/css/main.min.css">
 	<script src="/template/js/main.js"></script>
+	<script src="/template/js/content.js"></script>
 	<!-- main x-->
 </head>
 <body>

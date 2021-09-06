@@ -23,7 +23,7 @@
        <div class="card">
          <div class="card-body">
            <h5 class="card-title"> <i class="fas fa-users"></i> Users <strong><?=count($arrUsers)?></strong></h5>
-           <?php if (empty($_SESSION['session_key'])): ?>
+           <?php if (empty($_SESSION['user'])): ?>
              <a href="/registration/" class="btn btn-primary">ADD</a>
            <?php endif; ?>
            <!-- <button class="btn btn-primary" type="button" name="button">

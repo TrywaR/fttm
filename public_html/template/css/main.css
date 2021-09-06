@@ -66,6 +66,8 @@ body .datepicker table tr td.active.highlighted.active {
   background: #202022; }
 body .btn {
   color: white; }
+  body .btn:hover {
+    color: #3282c8; }
 body .card {
   color: white;
   background: #202022; }
@@ -119,7 +121,14 @@ ol {
     padding-left: 1rem;
     padding-bottom: 1rem; }
 
+a {
+  color: #3282c8; }
+  a:hover {
+    color: #202022; }
+
 body {
+  position: relative;
+  z-index: 1;
   color: white;
   background: #221a1a;
   font-family: "Geometria";
@@ -127,6 +136,21 @@ body {
   line-height: 16px;
   overflow-x: hidden;
   max-width: 100%; }
+  body:before, body:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
+  body:before {
+    background: linear-gradient(0deg, #000 0, #020202 100%);
+    opacity: 0.8;
+    z-index: -1; }
+  body:after {
+    filter: blur(0.1rem);
+    background: radial-gradient(circle, #ffdaa7 7%, #d7f8ff 100%);
+    z-index: -2; }
 
 .block_template {
   display: none; }

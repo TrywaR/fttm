@@ -322,7 +322,7 @@
       </div>
     </div>
 
-    <div class="col col-12 col-md-7" style="max-height: 80vh; overflow: auto;">
+    <div class="col col-12 col-md-7">
       <?
       // $sQuery  = "SELECT * FROM `clients`";
       // $sQuery .= " WHERE `active` > 0";
@@ -344,7 +344,7 @@
           <i class="fas fa-folder-minus"></i>
         </button>
       </div>
-      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to">
+      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to" style="max-height: 80vh; overflow: auto;">
       <?
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
