@@ -60,7 +60,7 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action" href="#list-item-3-5">3.0.5 Moneys categoryes grath</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-3-5">3.0.5 Moneys categoryes grath</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3-3">3.0.3 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-2">2.0.0 Hello world</a>
@@ -70,31 +70,31 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
-          <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h4>
+          <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h2>
           <ol>
             <li>Графики затрат по категориям за месяц и за год</li>
             <li>Ajax переходы по страницам</li>
             <li>Маленькие стиливые фиксы</li>
           </ol>
-          <h2 id="list-item-3-3">3.0.3 Moneys</h4>
+          <h2 id="list-item-3-3">3.0.3 Moneys</h2>
           <ol>
             <li>Money big update, and fix</li>
             <li>Security update</li>
           </ol>
 
-          <h2 id="list-item-3">3.0.0 Moneys</h4>
+          <h2 id="list-item-3">3.0.0 Moneys</h2>
           <ol>
             <li>Обновление опсвящено денежкам, добавление и удаление поступающих затрат и пополнение финансов.</li>
             <li>Частинно работающий функционал кредитных карт, чтобы выбирать с какой былы затрата или на какую поступления</li>
             <li>Частинно работающий функционал тип затрат, аля категории, чтобы удобнее было смотреть куда улетают денежки и смотреть им вслед.. пуская одинокую мужскую слезу..</li>
           </ol>
 
-          <h2 id="list-item-2">2.0.0 Hello world</h4>
+          <h2 id="list-item-2">2.0.0 Hello world</h2>
           <ol>
             <li>Hello world - или большой скачок начальной разработки, которую мне лень было описывать</li>
           </ol>
 
-          <h2 id="list-item-1">1.0.0 Alfa</h4>
+          <h2 id="list-item-1">1.0.0 Alfa</h2>
           <ol>
             <li>Start</li>
           </ol>
