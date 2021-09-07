@@ -31,7 +31,7 @@ switch ($_SERVER['REQUEST_URI']) {
   default: # Запрашиваемая страница
     // Если пользователь авторизирован
     if ( isset($_SESSION['user']) ) {
-      if (file_exists('page'.$_SERVER['REQUEST_URI'].'index.php')) include_once 'page'.$_SERVER['REQUEST_URI'].'index.php';
+      if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) include_once 'page'.$_SERVER['REDIRECT_URL'].'index.php';
       else echo '<main class="container pt-4 pb-4 text-center"><h1>Error 404</h1></main>';
     }
     // Пользователь не авторизирован
