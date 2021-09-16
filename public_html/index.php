@@ -8,8 +8,8 @@ if ( $_REQUEST['app'] ) {
   die();
 }
 
-include_once 'head.php'; # Подключаемые необходимые данныу
-include_once 'header.php'; # Шапка
+include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
+include_once 'core/templates/pages/header.php'; # Шапка
 
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {
@@ -41,4 +41,4 @@ switch ($_SERVER['REQUEST_URI']) {
     break;
 }
 
-include_once 'footer.php'; # Подвал
+include_once 'core/templates/pages/footer.php'; # Подвал

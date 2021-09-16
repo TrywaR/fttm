@@ -16,6 +16,10 @@ switch ($_REQUEST['action']) {
     include_once 'tasks/tasks.php';
     break;
 
+  case 'times': # Время
+    include_once 'times/times.php';
+    break;
+
   case 'moneys': # Обработка денежек
     include_once 'moneys/moneys.php';
     break;

@@ -74,6 +74,8 @@ body .card {
 body .list-group-item {
   color: white;
   background: #202022; }
+body .container {
+  flex-grow: 1; }
 
 .fttm_alerts {
   position: fixed;
@@ -128,6 +130,9 @@ a {
 
 body {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   z-index: 1;
   color: white;
   background: #221a1a;
@@ -135,7 +140,8 @@ body {
   font-size: 14px;
   line-height: 16px;
   overflow-x: hidden;
-  max-width: 100%; }
+  max-width: 100%;
+  min-height: 100vh; }
   body:before, body:after {
     content: "";
     position: absolute;

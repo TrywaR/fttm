@@ -23,6 +23,9 @@
 
 body
   position: relative
+  display: flex
+  flex-direction: column
+  justify-content: space-between
   z-index: 1
   color: $color_text
   background: $color_main_dark
@@ -31,6 +34,7 @@ body
   line-height: 16px
   overflow-x: hidden
   max-width: 100%
+  min-height: 100vh
 
   &:before,
   &:after

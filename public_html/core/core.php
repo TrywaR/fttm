@@ -1,10 +1,9 @@
 <?
-// Общие настройки
-include_once 'config.php';
-// Работа с базой
-include_once 'db.php';
-// Уведомления
-include_once 'notification.php';
+// Hearts
+include_once 'heart/config.php'; # Общие настройки
+include_once 'heart/db.php'; # Работа с базой
+include_once 'heart/notification.php'; # Уведомления
+include_once 'heart/form.php'; # Формы
 
 // Модели
 include_once 'models/model.php'; # Основной класс

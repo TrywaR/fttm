@@ -9,27 +9,24 @@ $(function(){
 		$.when(
 			content_download( oData, 'json', false )
 		).then( function( oData ){
-			fttm_alerts( oData, oForm )
-
 			// Если модель, то сохраняем в локали
-			if ( oData.success.model ) {
-				localStorage.setItem(oData.model, JSON.stringify(oData.data))
+			if ( oData.success && oData.success.model ) {
+				localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
 				// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
 			}
 
 			// Если редирект
-			if ( oData.success.location )
+			if ( oData.success && oData.success.location )
 				setTimeout(function(){
 				  window.location.replace( oData.success.location )
 				}, 500)
 
 			// Добавляем в данные
-			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, oData )
+			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, {}, oData )
 		})
 
 		return false
 	})
-
   // Сброс формы редактирования контента
   $(document).on('click', '.form_reset', function(){
 		var oForm = $(this).parents('form')
@@ -49,7 +46,6 @@ $(function(){
 			oForm.addClass('animate__animated animate__rubberBand')
 		}, 100)
 	})
-
   // Загрузка контента
   $(document).on('click', '.content_download', function(){
 		// Параметры
@@ -124,12 +120,10 @@ $(function(){
 			fttm_alerts( oData )
 		})
 	})
-
   // Догрузка элементов
   $(document).on('click', '.content_loader', function(){
     content_loader( $(this) )
   })
-
   // content_manager | Работа с несколькими элементами
 	$(document).on('click', '.content_manager_switch', function(){
 		var oContentManagerButtons = $(document).find('.content_manager_buttons')
@@ -256,7 +250,12 @@ function content_download( oData, oReturnType, sAppStatus ) {
 // content_download x
 
 // content_loader
-function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosition ) {
+function content_loader_init(){
+	// content_loader()
+}
+function content_loader( oBlockElems, oOptions, oData ) {
+	if ( typeof oOptions === "undefined" ) oOptions = {}
+	if ( typeof oData === "undefined" ) oData = {}
 	// oButton - На что нажали
 	// oData - Что загружаем
 	// oElem - Куда загружаем
@@ -273,18 +272,29 @@ function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosit
 	// content_loader_template
 	// content_loader_position
 
+	// oBlockElems - Блок с элементами
+	// oOptions - Общие параметры
+	oOptions.action = oBlockElems.attr('data-content_loader_action') ? oBlockElems.attr('data-content_loader_action') : oOptions.action
+	oOptions.form = oBlockElems.attr('data-content_loader_form') ? oBlockElems.attr('data-content_loader_form') : oOptions.table
+	oOptions.to = oBlockElems.attr('data-content_loader_to') ? oBlockElems.attr('data-content_loader_to') : oOptions.to
+	oOptions.from = oBlockElems.attr('data-content_loader_from') ? oBlockElems.attr('data-content_loader_from') : oOptions.from
+	oOptions.limit = oBlockElems.attr('data-content_loader_limit') ? oBlockElems.attr('data-content_loader_limit') : oOptions.limit
+	oOptions.template = oBlockElems.attr('data-content_loader_template') ? oBlockElems.attr('data-content_loader_template') : oOptions.template
+	oOptions.position = oBlockElems.attr('data-content_loader_position') ? oBlockElems.attr('data-content_loader_position') : oOptions.position
+
+
 	// Собираем данные
 	var
-		sAction = oButton.attr('data-content_loader_action'), // Класс
-		sFrom = oButton.attr('data-content_loader_form'), // Что с ним
-		sTo = oElem ? oElem : oButton.attr('data-content_loader_to'),
-		iFrom = iFrom ? parseInt(iFrom) : parseInt(oButton.attr('data-content_loader_from')),
-		iLimit = iLimit ? parseInt(iLimit) : parseInt(oButton.attr('data-content_loader_limit')),
-		oTemplate = oTemplate ? oTemplate : $(document).find(oButton.data().content_loader_template),
-		iPosition = iPosition ? iPosition : parseInt(oButton.data().content_loader_position)
+		sAction = oOptions.action, // Класс
+		sForm = oOptions.form, // Что с ним
+		sTo = oOptions.to,
+		iFrom = oOptions.from,
+		iLimit = oOptions.limit,
+		oTemplate = $(document).find(oOptions.template),
+		iPosition = oOptions.position
 
 	// Если уже есть данные, 1 элемент
-	if ( oData ) {
+	if ( oData.id ) {
 		if ( oTemplate ) {
 			var oActiveElem = $(document).find( sTo ).find('[data-content_loader_item_id="' + oData.id + '"]')
 			// Элемент уже есть, заменяем
@@ -320,7 +330,7 @@ function content_loader( oButton, oData, oElem, iFrom, iLimit, oTemplate, iPosit
 	else {
 		var oData = {
 			'action': sAction,
-			'form': sFrom,
+			'form': sForm,
 			'from': iFrom,
 			'limit': iLimit
 		}

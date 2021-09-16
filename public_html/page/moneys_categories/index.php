@@ -287,6 +287,25 @@ window.addEventListener('afterprint', () => {
     </div>
   </div>
 
+  <?/*
+  <!-- unic -->
+  <div class="row">
+    <h2>Unic</h2>
+    <?
+    $oMoney = new money();
+    $oMoney->where = "`category` = '5' AND `project_id` = 3 AND `type` = '0'";
+    $arrMoneys = $oMoney->get();
+    foreach ($arrMoneys as $arrMoney) {
+      ?>
+      <div class="">
+        <?=$arrMoney['price'] . ' - ' . $arrMoney['title'] . ' : ' . $arrMoney['date']?>
+      </div>
+      <?
+    }
+    ?>
+  </div>
+  */?>
+
   <!-- Items -->
   <div class="row">
     <div class="col">
