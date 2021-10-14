@@ -33,22 +33,56 @@ $.fn.removeClassWild = function(mask) {
 
 // fttm_alerts
 function fttm_alerts( oData, oForm ){
-	var oFttmAlertsBlock = $(document).find('.fttm_alerts')
+	var oFttmAlertsBlock = false
 	if ( oForm && oForm.length ) oFttmAlertsBlock = oForm.find('._fttm_alerts')
 
-	if ( oData.success && oData.success.text )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.success.text, 'alert-success' ) )
-	if ( oData.error && oData.error.text )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.error.text, 'alert-danger' ) )
-	if ( oData.alert && oData.alert.text )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.alert.text, 'alert-alert' ) )
+	if ( ! oFttmAlertsBlock ) {
+    // - Ошибка входа
+    if ( oData.error && oData.error.text ) return $.jGrowl(oData.error.text, {position: 'top-right',theme: 'sc_error'})
+    // - Уведомление
+    if ( oData.alert && oData.alert.text ) return $.jGrowl(oData.alert.text, {position: 'top-right',theme: 'sc_alert'})
+    // - Успех
+    if ( oData.success && oData.success.text ) return $.jGrowl(oData.success.text, {position: 'top-right',theme: 'sc_success'})
 
-	if ( oData.success )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.success, 'alert-success' ) )
-	if ( oData.error )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.error, 'alert-danger' ) )
-	if ( oData.alert )
-		return oFttmAlertsBlock.html( fttm_alerts_html( oData.alert, 'alert-alert' ) )
+    // - Ошибка входа
+    if ( oData.error ) return $.jGrowl(oData.error, {position: 'top-right',theme: 'sc_error'})
+    // - Уведомление
+    if ( oData.alert ) return $.jGrowl(oData.alert, {position: 'top-right',theme: 'sc_alert'})
+    // - Успех
+    if ( oData.success ) return $.jGrowl(oData.success, {position: 'top-right',theme: 'sc_success'})
+    // По умолчанию
+    if ( oData != 'undefined' ) return $.jGrowl(oData, {position: 'top-right',theme: 'sc_default'})
+  }
+  else {
+    // - Ошибка входа
+    if ( oData.error && oData.error.text ) oFttmAlertsBlock.html( '<div class="error">' + oData.error.text + '</div>' )
+    // - Уведомление
+    if ( oData.alert && oData.alert.text ) oFttmAlertsBlock.html( '<div class="success">' + oData.alert.text + '</div>' )
+    // - Успех
+    if ( oData.success && oData.success.text ) oFttmAlertsBlock.html( '<div class="success">' + oData.success.text + '</div>' )
+
+    // - Ошибка входа
+    if ( oData.error ) oFttmAlertsBlock.html( '<div class="error">' + oData.error + '</div>' )
+    // - Уведомление
+    if ( oData.alert ) oFttmAlertsBlock.html( '<div class="success">' + oData.alert + '</div>' )
+    // - Успех
+    if ( oData.success ) oFttmAlertsBlock.html( '<div class="success">' + oData.success + '</div>' )
+  }
+
+	// if ( oData.success && oData.success.text )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.success.text, 'alert-success' ) )
+	// if ( oData.error && oData.error.text )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.error.text, 'alert-danger' ) )
+	// if ( oData.alert && oData.alert.text )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.alert.text, 'alert-alert' ) )
+	//
+	// if ( oData.success )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.success, 'alert-success' ) )
+	// if ( oData.error )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.error, 'alert-danger' ) )
+	// if ( oData.alert )
+	// 	return oFttmAlertsBlock.html( fttm_alerts_html( oData.alert, 'alert-alert' ) )
+
 
 	console.log( oData )
 }

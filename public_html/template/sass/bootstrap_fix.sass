@@ -13,8 +13,8 @@ body
   .form-control,
   .form-control:focus
     color: $color_text
-    background: $color_main_light
-    border-color: $color_main_dark
+    background: $color_main_dark
+    border-color: $color_main_dark_ultra
 
   .picker__box .picker__header .picker__date-display .picker__weekday-display,
   .datepicker table tr td.active:active,
@@ -34,9 +34,22 @@ body
     color: $color_text
     background: $color_main_light
 
+  .list-group
+    padding: 0
+    border-radius: $border_radius
+
   .list-group-item
     color: $color_text
     background: $color_main_light
+    z-index: 1
 
   .container
     flex-grow: 1
+
+  .jumbotron
+    .lead
+      font-size: 1rem
+      line-height: 1.2
+
+  .badge
+    border-radius: $border_radius

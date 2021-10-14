@@ -10,15 +10,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="col col-12 col-md-6">
-      <!-- Карты -->
+    <div class="col col-12 col-md-6 mb-4">
+      <!-- Добавление карты -->
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Новый карт</h5>
+          <!-- <h5 class="card-title">Новый карт</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <div class="card-body">
-            <div class="accordion accordion-flush" id="accordionFlushExampleZero">
+          <!-- <div class="card-body"> -->
+          <div class="accordion accordion-flush" id="accordionFlushExampleZero">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingZero">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
@@ -27,7 +27,7 @@
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
                   <div class="accordion-body">
-                    <form class="" action="" method="post">
+                    <form class="reload_page" action="" method="post">
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="cards">
                       <input type="hidden" name="form" value="save">
@@ -99,15 +99,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- cards -->
-  <div class="row mt-4">
-    <div class="col">
+    <div class="col col-12 col-md-6">
+      <!-- Карты -->
       <?
         // $sQuery  = "SELECT * FROM `clients`";
         // $sQuery .= " WHERE `active` > 0";
@@ -135,12 +133,14 @@
             <?=$arrCard['limit']?>
           </div>
           <span class="rounded-pill">
+            <?/*
             <a href="#" class="btn">
               <i class="far fa-square"></i>
               <!-- <i class="fas fa-square"></i> -->
             </a>
             <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrCard['id']?>" data-action="moneys" data-form="del"><i class="fas fa-minus-square"></i></a>
+            */?>
+            <a href="#" class="btn content_download" data-id="<?=$arrCard['id']?>" data-action="cards" data-form="del" data-elem=".list-group-item"><i class="fas fa-minus-square"></i></a>
           </span>
         </li>
         <?

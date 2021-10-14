@@ -13,20 +13,20 @@
     <div class="col col-md-4 mb-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Новый проект</h5>
+          <!-- <h5 class="card-title">Новый проект</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <div class="card-body">
+          <!-- <div class="card-body"> -->
             <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Новый проект
+                    Добавить проект
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <form class="" action="" method="post">
+                    <form class="reload_page" action="" method="post">
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="projects">
                       <input type="hidden" name="form" value="save">
@@ -73,7 +73,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -92,13 +92,14 @@
     // Прикручиваем рейтинги
     foreach ($arrProjects as &$arrProject) {
       ?>
-      <div class="col col-md-4 mb-4">
+      <div class="col col-12 col-md-4 mb-4 project">
         <div class="card">
           <div class="card-body">
             <small>№<?=$arrProject['sort']?></small>
             <small>#<?=$arrProject['id']?></small>
             <h5 class="card-title"><?=$arrProject['title']?></h5>
             <p class="card-text"><?=$arrProject['description']?></p>
+            <?/*
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             <a href="#" class="btn">
               <i class="far fa-square"></i>
@@ -106,9 +107,10 @@
             </a>
             <a href="#" class="btn"><i class="fas fa-external-link-square-alt"></i></a>
             <a href="#" class="btn"><i class="fas fa-chart-area"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del" data-elem=".col">
+            */?>
+            <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del" data-elem=".project">
               <i class="fas fa-minus-square"></i>
-            </a>
+            </a>s
           </div>
         </div>
       </div>

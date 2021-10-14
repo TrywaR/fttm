@@ -60,6 +60,7 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
+          <a class="list-group-item list-group-item-action active" href="#list-item-4">4.0.0 First Relizz</a>
           <a class="list-group-item list-group-item-action active" href="#list-item-3-5">3.0.5 Moneys categoryes grath</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3-3">3.0.3 Moneys</a>
           <a class="list-group-item list-group-item-action" href="#list-item-3">3.0.0 Moneys</a>
@@ -70,6 +71,13 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-4">4.0.0 First Relizz</h2>
+          <ol>
+            <li>Скрыт весь нерабочий и тестовый функционал</li>
+            <li>Более разборчивая структура содержимого</li>
+            <li>Исправленны баги аналитик</li>
+            <li>Обогащена аналитика, разделение категорий по цветам, разделения на месяцы и годы</li>
+          </ol>
           <h2 id="list-item-3-5">3.0.5 Moneys categoryes grath</h2>
           <ol>
             <li>Графики затрат по категориям за месяц и за год</li>

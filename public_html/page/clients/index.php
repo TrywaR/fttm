@@ -4,7 +4,7 @@
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Clients</h1>
-          <p class="lead">Информация про клиентов</p>
+          <p class="lead">Клиенты и информация про них</p>
         </div>
       </div>
     </div>
@@ -13,20 +13,20 @@
     <div class="col col-md-4 mb-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Новая клиент</h5>
+          <!-- <h5 class="card-title">Новая клиент</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <div class="card-body">
+          <!-- <div class="card-body"> -->
             <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Новый клиент
+                    Добавить клиента
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <form class="" action="" method="post">
+                    <form class="reload_page" action="" method="post">
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="clients">
                       <input type="hidden" name="form" value="save">
@@ -55,7 +55,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -74,13 +74,14 @@
     // Прикручиваем рейтинги
     foreach ($arrClients as &$arrClient) {
       ?>
-      <div class="col col-md-4 mb-4">
+      <div class="col-12 col-md-4 mb-4 client">
         <div class="card">
           <div class="card-body">
             <small>№<?=$arrClient['sort']?></small>
             <small>#<?=$arrClient['id']?></small>
             <h5 class="card-title"><?=$arrClient['title']?></h5>
             <p class="card-text"><?=$arrClient['description']?></p>
+            <?/*
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             <a href="#" class="btn">
               <i class="far fa-square"></i>
@@ -89,7 +90,8 @@
             <a href="#" class="btn"><i class="fas fa-external-link-square-alt"></i></a>
             <a href="#" class="btn"><i class="fas fa-chart-area"></i></a>
             <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
-            <a href="#" class="btn content_download" data-id="<?=$arrClient['id']?>" data-action="clients" data-form="del"><i class="fas fa-minus-square"></i></a>
+            */?>
+            <a href="#" class="btn content_download" data-id="<?=$arrClient['id']?>" data-elem=".client" data-action="clients" data-form="del"><i class="fas fa-minus-square"></i></a>
           </div>
         </div>
       </div>

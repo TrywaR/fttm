@@ -55,8 +55,8 @@ body .form-select:focus,
 body .form-control,
 body .form-control:focus {
   color: white;
-  background: #202022;
-  border-color: #221a1a; }
+  background: #221a1a;
+  border-color: #101010; }
 body .picker__box .picker__header .picker__date-display .picker__weekday-display,
 body .datepicker table tr td.active:active,
 body .datepicker table tr td.active.highlighted:active,
@@ -71,16 +71,49 @@ body .btn {
 body .card {
   color: white;
   background: #202022; }
+body .list-group {
+  padding: 0;
+  border-radius: 0.5rem; }
 body .list-group-item {
   color: white;
-  background: #202022; }
+  background: #202022;
+  z-index: 1; }
 body .container {
   flex-grow: 1; }
+body .jumbotron .lead {
+  font-size: 1rem;
+  line-height: 1.2; }
+body .badge {
+  border-radius: 0.5rem; }
 
 .fttm_alerts {
   position: fixed;
   bottom: 1rem;
   right: 1rem; }
+
+.jGrowl .jGrowl-notification {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem; }
+  .jGrowl .jGrowl-notification .jGrowl-close {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: normal; }
+  .jGrowl .jGrowl-notification .jGrowl-message {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: normal; }
+.jGrowl .sc_error {
+  color: white;
+  background: #ff7b7b; }
+.jGrowl .sc_alert {
+  color: white;
+  background: #221a1a; }
+.jGrowl .sc_success {
+  color: white;
+  background: #2cb544; }
+.jGrowl .sc_default {
+  color: white;
+  background: #221a1a; }
 
 .fttm_progress {
   height: 0rem;
@@ -128,6 +161,11 @@ a {
   a:hover {
     color: #202022; }
 
+small {
+  font-size: 0.8rem;
+  line-height: 1;
+  opacity: 0.3; }
+
 body {
   position: relative;
   display: flex;
@@ -138,7 +176,7 @@ body {
   background: #221a1a;
   font-family: "Geometria";
   font-size: 14px;
-  line-height: 16px;
+  line-height: 18px;
   overflow-x: hidden;
   max-width: 100%;
   min-height: 100vh; }
@@ -201,6 +239,21 @@ body {
 .money._edit_ .progress {
   opacity: 1; }
 
+.moneys_category .moneys_category-data {
+  position: relative;
+  z-index: 1; }
+  .moneys_category .moneys_category-data .list-group-item {
+    background: none; }
+  .moneys_category .moneys_category-data .moneys_category-data_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+    border-radius: 0.5rem; }
+
 .content_manager_buttons._hide_ {
   display: none !important; }
 
@@ -212,15 +265,15 @@ body {
   flex-direction: row;
   justify-content: space-between;
   padding: 2rem 0 4rem; }
-  .block_analitycs ._circle:nth-child(even):after {
-    animation: circle linear 15s;
-    animation-iteration-count: infinite;
-    animation-duration: 15s; }
   .block_analitycs ._circle {
     position: relative;
     z-index: 1;
     padding: 1rem;
     text-align: center; }
+    .block_analitycs ._circle:nth-child(even):after {
+      animation: circle linear 15s;
+      animation-iteration-count: infinite;
+      animation-duration: 15s; }
     .block_analitycs ._circle:after {
       content: "";
       position: absolute;
@@ -248,6 +301,26 @@ body {
       font-weight: bold;
       line-height: 1; }
 
+@media screen and (max-width: 1000px) {
+  .money {
+    flex-direction: column; }
+    .money .rounded-pill {
+      margin-left: auto;
+      margin-top: 0.5rem; }
+    .money:before {
+      position: absolute;
+      top: 0.3rem;
+      left: 0.3rem;
+      opacity: 0.3; }
+
+  .block_analitycs {
+    flex-wrap: wrap; }
+    .block_analitycs ._circle {
+      display: flex;
+      flex-direction: column;
+      min-height: 10rem;
+      max-width: 50%;
+      justify-content: center; } }
 @keyframes circle {
   0% {
     transform: rotate(0deg); }

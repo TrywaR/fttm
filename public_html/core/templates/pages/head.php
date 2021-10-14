@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>FTTM</title>
 	<meta name="format-detection" content="telephone=no">
-	<meta name="description" content="">
+	<meta name="description" content="Free Time TrywaR Manager">
 	<!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,6 +28,11 @@
 	<script defer src="https://pro.fontawesome.com/releases/v5.10.0/js/all.js" integrity="sha384-G/ZR3ntz68JZrH4pfPJyRbjW+c0+ojii5f+GYiYwldYU69A+Ejat6yIfLSxljXxD" crossorigin="anonymous"></script>
 	<!-- font-awesome  x-->
 
+	<!-- jGrowl -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.8/jquery.jgrowl.min.css" integrity="sha512-bHAmDko6dIkQXQGO56+bsFtl7FJEuzQ0qKsB+cpdzmOV0D7ONYYwfV8ub+7yevWSCZgP10lIy7aTW8eKv5IgTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.8/jquery.jgrowl.min.js" integrity="sha512-h77yzL/LvCeAE601Z5RzkoG7dJdiv4KsNkZ9Urf1gokYxOqtt2RVKb8sNQEKqllZbced82QB7+qiDAmRwxVWLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- jGrowl x-->
+
 	<!-- fancybox_galery -->
 	<!-- <script src="js/fancybox-master/jquery.fancybox.min.js" charset="utf-8"></script> -->
 	<!-- <link rel="stylesheet" href="js/fancybox-master/jquery.fancybox.min.css"> -->
@@ -42,7 +47,7 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<link rel="stylesheet" href="/template/css/main.min.css">
+	<link rel="stylesheet" href="/template/css/main.css">
 	<script src="/template/js/main.js"></script>
 	<script src="/template/js/content.js"></script>
 	<!-- main x-->

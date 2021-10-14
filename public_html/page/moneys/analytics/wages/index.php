@@ -27,7 +27,7 @@ foreach ($arrProjects as &$arrProject) {
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Moneys trip</h1>
-          <p class="lead">Мои приходы</p>
+          <p class="lead">Мои приходы за месяц</p>
         </div>
       </div>
     </div>
@@ -92,10 +92,13 @@ foreach ($arrProjects as &$arrProject) {
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
-              <?=$arrMoney['price']?>₽
+              <?=round($arrMoney['price'])?>₽
             </div>
             <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?=$arrMoney['date']?>
+              <?
+                $date = new \DateTime($arrMoney['date']);
+                echo $date->format('Y-m-d');
+              ?>
             </span>
             <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
           </div>

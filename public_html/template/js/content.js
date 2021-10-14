@@ -7,8 +7,8 @@ $(function(){
 		oData = oForm.serializeArray()
 
 		$.when(
-			content_download( oData, 'json', false )
-		).then( function( oData ){
+			content_download( oData, 'json', true )
+		).done( function( oData ){
 			// Если модель, то сохраняем в локали
 			if ( oData.success && oData.success.model ) {
 				localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
@@ -20,6 +20,9 @@ $(function(){
 				setTimeout(function(){
 				  window.location.replace( oData.success.location )
 				}, 500)
+
+			// Перезагружаем страницу если надо
+			if( oForm.hasClass('reload_page') ) location.reload()
 
 			// Добавляем в данные
 			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, {}, oData )
@@ -229,7 +232,6 @@ function content_download( oData, oReturnType, sAppStatus ) {
       // 		if (evt.lengthComputable) {
       // 				var percentComplete = evt.loaded / evt.total;
       // 				// Do something with download progress
-      // 				console.log('percentComplete 2: ' + percentComplete);
       // 		}
       // }, false);
 

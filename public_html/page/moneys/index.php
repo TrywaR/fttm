@@ -5,82 +5,15 @@
         <div class="container">
           <h1 class="display-4">Moneys</h1>
           <p class="lead">
-            Финансы, <a href="/cards/">Карты</a>, <a href="/moneys_categories/">Категории затрат</a>,  <a href="/moneys_analytics/">Категории приходов.</a>
+            Данные:
+            <a href="/moneys/data/cards/">Карты</a>
+            , <a href="/moneys/data/categories/">Категории</a>
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="row">
-    <div class="col-12 mt-4 mb-4">
-      <?
-
-      // Потрачено
-      // За день
-      $oMoney = new money();
-      $oMoney->sort = 'date';
-      // $dCurrentDate = date('Y-m-d');
-      $dCurrentDate = date("Y-m-d", strtotime("-1 DAY"));
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
-      $arrMoneys = $oMoney->get_money();
-      $iDaySumm = 0;
-      foreach ($arrMoneys as $arrMoney) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
-
-      // За месяц
-      $oMoney = new money();
-      $oMoney->sort = 'date';
-      $dCurrentDate = date('Y-m');
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
-      $arrMoneys = $oMoney->get_money();
-      $iMonthSumm = 0;
-      foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
-
-      // Заработанно
-      $oMoney = new money();
-      $oMoney->sort = 'date';
-      $dCurrentDate = date('Y-m');
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` > 0 ";
-      $arrMoneys = $oMoney->get_money();
-      $iMonthSummSalary = 0;
-      foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;
-
-      ?>
-      <div class="block_analitycs animate__animated animate__flipInY">
-        <div class="_circle">
-          <div class="_title">
-            Расходы вчера
-          </div>
-          <div class="_value">
-            <?=number_format($iDaySumm, 2, '.', ' ')?>₽
-          </div>
-        </div>
-
-        <div class="_circle">
-          <div class="_title">
-            Расходы (<?=date("F")?>)
-          </div>
-          <div class="_value">
-            <?=number_format($iMonthSumm, 2, '.', ' ')?>₽
-          </div>
-        </div>
-
-        <div class="_circle">
-          <div class="_title">
-            Доходы (<?=date("F")?>)
-          </div>
-          <div class="_value">
-            <?=number_format($iMonthSummSalary, 2, '.', ' ')?>₽
-          </div>
-        </div>
-
-        <div class="_circle">
-          <div class="_title">
-            Баланс (<?=date("F")?>)
-          </div>
-          <div class="_value">
-            <?=number_format($iMonthSummSalary-$iMonthSumm, 2, '.', ' ')?>₽
-          </div>
+          <p class="lead">
+            <a href="/moneys/analytics/">Статистика</a> :
+            <a href="/moneys/analytics/costs/">Расходы</a>
+            , <a href="/moneys/analytics/wages/">Приходы</a>
+          </p>
         </div>
       </div>
     </div>
@@ -91,11 +24,11 @@
       <!-- Затраты -->
       <div class="card animate__animated animate__pulse mb-4">
         <div class="card-body">
-          <h5 class="card-title">Новый затрат</h5>
+          <!-- <h5 class="card-title">Новый затрат</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <div class="card-body">
-            <div class="accordion accordion-flush" id="accordionFlushExampleZero">
+          <!-- <div class="card-body"> -->
+          <div class="accordion accordion-flush" id="accordionFlushExampleZero">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingZero">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
@@ -212,21 +145,21 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
       <!-- Получение -->
       <div class="card animate__animated animate__pulse mb-4 animate__delay-1s">
         <div class="card-body">
-          <h5 class="card-title">Новый получ</h5>
+          <!-- <h5 class="card-title">Новый приход</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <div class="card-body">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
+          <!-- <div class="card-body"> -->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Добавить получ
+                    Добавить приход
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -317,12 +250,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
 
-    <div class="col col-12 col-md-7">
+    <div class="col col-12 col-md-7 animate__animated animate__bounceInRight animate__delay-2s">
       <?
       // $sQuery  = "SELECT * FROM `clients`";
       // $sQuery .= " WHERE `active` > 0";
@@ -349,7 +282,7 @@
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
-        <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight animate__delay-2s _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
+        <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">

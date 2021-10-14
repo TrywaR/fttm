@@ -31,7 +31,7 @@ body
   background: $color_main_dark
   font-family: $font_default
   font-size: 14px
-  line-height: 16px
+  line-height: 18px
   overflow-x: hidden
   max-width: 100%
   min-height: 100vh
@@ -80,6 +80,7 @@ body
   &._type_1_
     position: relative
     z-index: 1
+
     &:after
       content: ''
       position: absolute
@@ -107,6 +108,26 @@ body
     .progress
       opacity: 1
 
+.moneys_category
+  .moneys_category-name
+  .moneys_category-data
+    position: relative
+    z-index: 1
+
+    .list-group-item
+      background: none
+
+    .moneys_category-data_bg
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      z-index: -1
+      opacity: .1
+      border-radius: $border_radius
+
+
 .content_manager_buttons
   &._hide_
     display: none ! important
@@ -121,17 +142,16 @@ body
   padding: 2rem 0 4rem
 
   ._circle
+    position: relative
+    z-index: 1
+    padding: 1rem
+    text-align: center
+
     &:nth-child(even)
       &:after
         animation: circle linear 15s
         animation-iteration-count: infinite
         animation-duration: 15s
-
-  ._circle
-    position: relative
-    z-index: 1
-    padding: 1rem
-    text-align: center
 
     &:after
       content: ''
@@ -164,6 +184,35 @@ body
       font-size: 1.3rem
       font-weight: bold
       line-height: 1
+
+@media screen and (max-width:1000px)
+  .money
+    flex-direction: column
+
+    .rounded-pill
+      margin-left: auto
+      margin-top: .5rem
+
+    &:before
+      position: absolute
+      top: .3rem
+      left: .3rem
+      opacity: .3
+
+  .moneys_category
+    .moneys_category-name
+    .moneys_category-data
+      .moneys_category-data_bg
+
+  .block_analitycs
+    flex-wrap: wrap
+
+    ._circle
+      display: flex
+      flex-direction: column
+      min-height: 10rem
+      max-width: 50%
+      justify-content: center
 
 @keyframes circle
   0%
