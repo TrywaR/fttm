@@ -13,6 +13,7 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'save': # Сохранение изменений
+    $arrResult = [];
     $arrElem = [];
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
     $oMoney->arrAddFields = $_REQUEST;
@@ -20,7 +21,9 @@ switch ($_REQUEST['form']) {
     else $arrElem = $oMoney->add();
 
     $oMoney = new money( $arrElem['id'] );
-    notification::send($oMoney->get_money());
+    $arrResult['elems'] = $oMoney->get_money();
+    $arrResult['text'] = 'Изменения сохранены';
+    notification::success($arrResult);
     break;
 
   case 'del': # Удаление

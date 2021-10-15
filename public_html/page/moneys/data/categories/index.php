@@ -138,7 +138,7 @@ foreach ($arrMoneysCategories as &$arrMoneysCategory) {
             </a>
             <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
             */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrMoneysCategory['id']?>" data-action="moneys_category" data-form="del" data-elem="list-group-item"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrMoneysCategory['id']?>" data-action="moneys_categories" data-form="del" data-elem=".list-group-item"><i class="fas fa-minus-square"></i></a>
           </span>
         </li>
         <?

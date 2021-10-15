@@ -3,8 +3,8 @@ switch ($_REQUEST['form']) {
   case 'save': # Сохранение изменений
     $oClient = new client( $_REQUEST['id'] );
     $oClient->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $oClient->save();
-    else $oClient->add();
+    if ( $_REQUEST['id'] ) notification::success( $oClient->save() );
+    else notification::success( $oClient->add() );
     break;
 
   case 'del': # Удаление

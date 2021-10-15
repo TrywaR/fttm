@@ -110,7 +110,7 @@
             */?>
             <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del" data-elem=".project">
               <i class="fas fa-minus-square"></i>
-            </a>s
+            </a>
           </div>
         </div>
       </div>

@@ -9,14 +9,16 @@ $(function(){
 		$.when(
 			content_download( oData, 'json', true )
 		).done( function( oData ){
+			if ( ! oData.success ) return false
+
 			// Если модель, то сохраняем в локали
-			if ( oData.success && oData.success.model ) {
+			if ( oData.success.model ) {
 				localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
 				// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
 			}
 
 			// Если редирект
-			if ( oData.success && oData.success.location )
+			if ( oData.success.location )
 				setTimeout(function(){
 				  window.location.replace( oData.success.location )
 				}, 500)
@@ -25,7 +27,7 @@ $(function(){
 			if( oForm.hasClass('reload_page') ) location.reload()
 
 			// Добавляем в данные
-			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, {}, oData )
+			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, {}, oData.success.elems )
 		})
 
 		return false
@@ -120,7 +122,7 @@ $(function(){
 		$.when(
 		  content_download( oData, 'json' )
 		).then( function( oData ){
-			fttm_alerts( oData )
+			// fttm_alerts( oData )
 		})
 	})
   // Догрузка элементов
