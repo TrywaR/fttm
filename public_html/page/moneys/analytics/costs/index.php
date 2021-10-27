@@ -31,7 +31,7 @@ foreach ($arrMoneysCategories as &$arrMoneysCategory) {
     $iCategorySum = $iCategorySum + (int)$arrMoney['price'];
   }
   $arrMoneysCategory['sum'] = $iCategorySum;
-  $arrMoneysCategoriesName[$arrMoneysCategory] = $arrMoneysCategory['title'];
+  $arrMoneysCategoriesName[$arrMoneysCategory['id']] = $arrMoneysCategory['title'];
   $arrMoneysCategoriesIds[$arrMoneysCategory['id']] = $arrMoneysCategory;
 }
 

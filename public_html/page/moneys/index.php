@@ -8,6 +8,7 @@
             Данные:
             <a href="/moneys/data/cards/">Карты</a>
             , <a href="/moneys/data/categories/">Категории</a>
+            , <a href="/projects/">Проекты</a>
           </p>
           <p class="lead">
             <a href="/moneys/analytics/">Статистика</a> :

@@ -106,8 +106,8 @@
               <!-- <i class="fas fa-square"></i> -->
             </a>
             <a href="#" class="btn"><i class="fas fa-external-link-square-alt"></i></a>
-            <a href="#" class="btn"><i class="fas fa-chart-area"></i></a>
             */?>
+            <a href="/projects/analytics?project_id=<?=$arrProject['id']?>" class="btn"><i class="fas fa-chart-area"></i></a>
             <a href="#" class="btn content_download" data-id="<?=$arrProject['id']?>" data-action="projects" data-form="del" data-elem=".project">
               <i class="fas fa-minus-square"></i>
             </a>
