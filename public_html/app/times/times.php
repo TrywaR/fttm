@@ -13,14 +13,13 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'save': # Сохранение изменений
+    $arrResult = [];
     $arrElem = [];
     $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
     $oTime->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $arrElem = $oTime->save();
-    else $arrElem = $oTime->add();
 
-    $oTime = new money( $arrElem['id'] );
-    notification::send($oTime->get_money());
+    if ( $_REQUEST['id'] ) notification::success( $oTime->save() );
+    else notification::success( $oTime->add() );
     break;
 
   case 'del': # Удаление

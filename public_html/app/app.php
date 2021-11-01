@@ -20,6 +20,10 @@ switch ($_REQUEST['action']) {
     include_once 'times/times.php';
     break;
 
+  case 'times': # Категории временных затрат
+    include_once 'times_categories/times_categories.php';
+    break;
+
   case 'moneys': # Обработка денежек
     include_once 'moneys/moneys.php';
     break;

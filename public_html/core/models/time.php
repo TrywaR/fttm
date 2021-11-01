@@ -15,6 +15,8 @@ class time extends model
   public static $user_id = '';
   public static $time_planned = '';
   public static $time_really = '';
+  public static $date = '';
+  public static $category_id = '';
   public static $status = '';
 
   function __construct( $time_id = 0 )
@@ -36,6 +38,8 @@ class time extends model
       $this->user_id = $arrTime['user_id'];
       $this->time_planned = $arrTime['time_planned'];
       $this->time_really = $arrTime['time_really'];
+      $this->date = $arrTime['date'];
+      $this->category_id = $arrTime['category_id'];
       $this->status = $arrTime['status'];
     }
   }
