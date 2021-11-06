@@ -23,7 +23,7 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'del': # Удаление
-    $oTime = new money( $_REQUEST['id'] );
+    $oTime = new time( $_REQUEST['id'] );
     $oTime->del();
     break;
 }

@@ -254,6 +254,21 @@ body {
     opacity: 0.1;
     border-radius: 0.5rem; }
 
+.times_category .times_category-data {
+  position: relative;
+  z-index: 1; }
+  .times_category .times_category-data .list-group-item {
+    background: none; }
+  .times_category .times_category-data .times_category-data_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+    border-radius: 0.5rem; }
+
 .content_manager_buttons._hide_ {
   display: none !important; }
 

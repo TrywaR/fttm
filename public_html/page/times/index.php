@@ -18,10 +18,16 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
           <h1 class="display-4">Times</h1>
           <p class="lead">Ну и чем ты занимаешься?)</p>
           <p class="lead">
+            Данные:
             <a href="/clients/">Клиенты</a>
             , <a href="/projects/">проекты</a>
-            , <a href="/times/data/categories">Категории времени</a>
+            , <a href="/times/data/categories/">Категории времени</a>
             <!--, <a href="/tasks/">задачи</a>. -->
+          </p>
+          <p class="lead">
+            Статисфекшен:
+            <a href="/times/analytics/costs/">Траты времени по категориям</a>
+            , <a href="/times/analytics/wages/">Приходы времени по категориям</a>
           </p>
         </div>
       </div>
@@ -92,18 +98,18 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
+                      <!-- <div class="row g-3 align-items-center">
                         <div class="col-auto">
                           <label for="inputTimePlanned" class="col-form-label">Time planned</label>
                         </div>
                         <div class="col-auto">
                           <input name="time_planned" type="time" lang="en" id="inputTimePlanned" class="form-control">
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="row g-3 align-items-center">
                         <div class="col-auto">
-                          <label for="inputTimeReally" class="col-form-label">Price really</label>
+                          <label for="inputTimeReally" class="col-form-label">Time really</label>
                         </div>
                         <div class="col-auto">
                           <input name="time_really" type="time" lang="en" id="inputTimeReally" class="form-control">
