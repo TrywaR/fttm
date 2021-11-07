@@ -8,6 +8,7 @@ $arrTimesCategories = $oTimesCategory->get();
 $dCurrentDate = date('Y-m');
 $iCurrentMonth = date('m');
 $iCurrentYear = date('Y');
+$iCurrentDay = date('d');
 
 $arrTimesCategoriesName = [];
 $arrTimesCategoriesIds = [];
@@ -34,9 +35,48 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
     $iCategorySum = (int)$iCategorySum + (int)$arrTime['time'];
   }
   $arrTimesCategory['sum'] = $iCategorySum;
+  $arrTimesCategory['color'] = $arrTimesCategory['color'] ? $arrTimesCategory['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
   $arrTimesCategoriesName[$arrTimesCategory['id']] = $arrTimesCategory['title'];
   $arrTimesCategoriesIds[$arrTimesCategory['id']] = $arrTimesCategory;
 }
+
+// Неделя
+$arrWeeks = [];
+$dDate1 = date('Y-m-d', strtotime('monday this week'));
+$dDate2 = date('Y-m-d', strtotime('sunday this week'));
+$dDateCurrent = $dDate1;
+
+for ($i=0; $i < 1; $i++) {
+  $arrDays = [];
+  $iIndex = 0;
+  while (strtotime($dDateCurrent) < strtotime($dDate2)) {
+    $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
+    $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
+
+    $oTime = new time();
+    $oTime->where = "`date` = '" . $dDateCurrent . "'";
+    $arrTimes = $oTime->get();
+    $iDaySum = 0;
+
+    foreach ($arrTimesCategoriesIds as $key => $arrTimesCategory) {
+      $arrWeeks[$i]['days'][$iIndex]['categories'][$key]['title'] = $arrTimesCategory['title'];
+      $arrWeeks[$i]['days'][$iIndex]['categories'][$key]['value'] = 0;
+      $arrWeeks[$i]['days'][$iIndex]['categories'][$key]['color'] = $arrTimesCategory['color'];
+    }
+
+    foreach ($arrTimes as &$arrTime) {
+      $dDateReally = new DateTime($arrTime['time_really']);
+      $arrTime['time'] = $dDateReally->format('H.i');
+      $arrWeeks[$i]['days'][$iIndex]['categories'][$arrTime['category_id']]['value'] = (float)$arrWeeks[$i]['days'][$iIndex]['categories'][$arrTime['category_id']]['value'] + (float)$arrTime['time'];
+      $iDaySum = $iDaySum + (float)$arrTime['time'];
+    }
+    $arrWeeks[$i]['days'][$iIndex]['sum'] = $iDaySum;
+    $arrWeeks[$i]['sum'] = (float)$arrWeeks[$i]['sum'] + (float)$iDaySum;
+    $iIndex++;
+  }
+}
+// print_r($arrWeeks);
+// die();
 
 // Суммы по месяцам
 $arrMounths = [];
@@ -47,10 +87,10 @@ for ($i=0; $i < 12; $i++) {
   $iMounthSum = 0;
   foreach ($arrTimes as &$arrTime) {
     $dDateReally = new DateTime($arrTime['time_really']);
-    $arrTime['time'] = round($dDateReally->format('H.i'));
+    $arrTime['time'] = $dDateReally->format('H.i');
 
-    $arrMounths[$i]['categories'][$arrTime['category_id']] = (int)$arrMounths[$i]['categories'][$arrTime['category_id']] + (int)$arrTime['time'];
-    $iMounthSum = $iMounthSum + (int)$arrTime['time'];
+    $arrMounths[$i]['categories'][$arrTime['category_id']] = (float)$arrMounths[$i]['categories'][$arrTime['category_id']] + (float)$arrTime['time'];
+    $iMounthSum = $iMounthSum + (float)$arrTime['time'];
   }
   $arrMounths[$i]['sum'] = $iMounthSum;
   $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
@@ -65,16 +105,19 @@ for ($i=0; $i < 2; $i++) {
   $iYearSum = 0;
   foreach ($arrTimes as &$arrTime) {
     $dDateReally = new DateTime($arrTime['time_really']);
-    $arrTime['time'] = round($dDateReally->format('H.i'));
+    $arrTime['time'] = $dDateReally->format('H.i');
 
-    $arrYears[$iCurrentYear - $i]['categories'][$arrTime['category_id']] = (int)$arrYears[$iCurrentYear - $i]['categories'][$arrTime['category_id']] + (int)$arrTime['time'];
-    $iYearSum = $iYearSum + (int)$arrTime['time'];
+    $arrYears[$iCurrentYear - $i]['categories'][$arrTime['category_id']] = (float)$arrYears[$iCurrentYear - $i]['categories'][$arrTime['category_id']] + (float)$arrTime['time'];
+    $iYearSum = $iYearSum + (float)$arrTime['time'];
   }
   $arrYears[$iCurrentYear - $i]['sum'] = $iYearSum;
   $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
 }
 
 ?>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+
 <main class="container pt-4 pb-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -91,21 +134,168 @@ for ($i=0; $i < 2; $i++) {
 
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true">Mounth</button>
+      <button class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="true">Week</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false">Mounth</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false">Year</button>
     </li>
   </ul>
   <div class="tab-content" id="pills-tabContent">
+    <!-- Week -->
+    <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
+      <div class="row mb-4 animate__animated animate__bounceInRight">
+        <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
+          <h2>Затраты по категориям за неделю</h2>
+          <small><?=$dDate1?>, <?=$dDate2?></small>
+          <canvas id="week-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+        </div>
+
+        <script>
+          var myLineWeek = new Chart(document.getElementById("week-chart"), {
+            type: 'line',
+            data: {
+              labels: [<?foreach ($arrWeeks as $arrWeek) {
+                foreach ($arrWeek['days'] as $iIndex => $arrDay) {
+                  if ( $iIndex ) echo ", '";
+                  else echo "'";
+                  echo $arrDay['title'];
+                  echo "'";
+                }
+              }?>],
+              datasets: [
+                <?foreach ($arrTimesCategoriesIds as $iIndexCategory => &$arrTimesCategory) {?>
+                  {
+                    label: "<?=$arrTimesCategory['title']?>",
+                    data: [<?foreach ($arrWeeks as $arrWeek) {
+                      foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
+                        if ( $iIndexDay ) echo ", '";
+                        else echo "'";
+                        echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['value'];
+                        echo "'";
+                      }
+                    }?>],
+                    borderColor: [<?foreach ($arrWeeks as $arrWeek) {
+                      foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
+                        if ( $iIndexDay ) echo ", '";
+                        else echo "'";
+                        echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['color'];
+                        echo "'";
+                      }
+                    }?>],
+                    backgroundColor: [<?foreach ($arrWeeks as $arrWeek) {
+                      foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
+                        if ( $iIndexDay ) echo ", '";
+                        else echo "'";
+                        echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['color'];
+                        echo "'";
+                      }
+                    }?>],
+                  },
+                <?}?>
+              ]
+            }
+          })
+          window.addEventListener('beforeprint', () => {
+            myLineWeek.resize(600, 600);
+          });
+          window.addEventListener('afterprint', () => {
+            myLineWeek.resize();
+          });
+        </script>
+      </div>
+      <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
+        <div class="col-12">
+          <h2 class="text-center">
+            <?=$arrWeeks[0]['sum']?>ч
+          </h2>
+        </div>
+      </div>
+
+      <div class="row mb-4 animate__animated animate__bounceInRight">
+        <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
+          <h2>Эффективность</h2>
+          <small><?=$dDate1?>, <?=$dDate2?></small>
+          <canvas id="week-ef-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+        </div>
+
+        <script>
+          var myLineWeekEf = new Chart(document.getElementById("week-ef-chart"), {
+            type: 'line',
+            data: {
+              labels: [<?foreach ($arrWeeks as $arrWeek) {
+                foreach ($arrWeek['days'] as $iIndex => $arrDay) {
+                  if ( $iIndex ) echo ", '";
+                  else echo "'";
+                  echo $arrDay['title'];
+                  echo "'";
+                }
+              }?>],
+              datasets: [
+                {
+                  label: 'Засчитано',
+                  data: [<?foreach ($arrWeeks as $arrWeek) {
+                    foreach ($arrWeek['days'] as $iIndex => $arrDay) {
+                      if ( $iIndex ) echo ", '";
+                      else echo "'";
+                      echo $arrDay['sum'];
+                      echo "'";
+                    }
+                  }?>],
+                  borderColor: [<?foreach ($arrWeeks as $arrWeek) {
+                    foreach ($arrWeek['days'] as $iIndex => $arrDay) {
+                      if ( $iIndex ) echo ", '";
+                      else echo "'";
+                      echo '#00ff00';
+                      echo "'";
+                    }
+                  }?>],
+                  backgroundColor: [<?foreach ($arrWeeks as $arrWeek) {
+                    foreach ($arrWeek['days'] as $iIndex => $arrDay) {
+                      if ( $iIndex ) echo ", '";
+                      else echo "'";
+                      echo '#00ff00';
+                      echo "'";
+                    }
+                  }?>]
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: false,
+                title: {
+                  display: false
+                }
+              },
+              scales: {
+                y: {
+                  min: 0,
+                  max: 24,
+                }
+              }
+            },
+          })
+          window.addEventListener('beforeprint', () => {
+            myLineWeekEf.resize(600, 600);
+          });
+          window.addEventListener('afterprint', () => {
+            myLineWeekEf.resize();
+          });
+        </script>
+      </div>
+    </div>
+
     <!-- Month -->
-    <div class="tab-pane fade show active" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+    <div class="tab-pane fade show" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
           <h2>Затраты по категориям (<?=date("F")?>)</h2>
           <canvas id="doughnut-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
 
         <script>
           var myChart = new Chart(document.getElementById("doughnut-chart"), {

@@ -60,7 +60,8 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_2">5.0.2 TAA</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_3">5.0.3 TAAF</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_2">5.0.2 TAA</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_1">5.0.1 TileLight</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5">5.0.0 BagaFix</a>
           <a class="list-group-item list-group-item-action" href="#list-item-4">4.0.0 First Relizz</a>
@@ -74,6 +75,10 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-5_0_3">5.0.3 TAAF</h2>
+          <ol>
+            <li>Статистика за неделю по затратам времени</li>
+          </ol>
           <h2 id="list-item-5_0_2">5.0.2 TAA</h2>
           <ol>
             <li>Вывод аналитики по затратам времени</li>
