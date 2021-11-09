@@ -50,7 +50,7 @@ for ($i=0; $i < 1; $i++) {
   $arrDays = [];
   $iIndex = 0;
   while (strtotime($dDateCurrent) < strtotime($dDate2)) {
-    $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
+    if ( $iIndex > 0 ) $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
     $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
 
     $oTime = new time();
