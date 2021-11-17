@@ -33,10 +33,19 @@
 
                       <div class="row g-3 align-items-center">
                         <div class="col-auto">
-                          <label for="inputClientId" class="col-form-label">Client id</label>
+                          <label for="inputClientId" class="col-form-label">Client</label>
                         </div>
                         <div class="col-auto">
-                          <input name="client_id" type="number" id="inputClientId" class="form-control">
+                          <select class="form-select" aria-label="Default select example" name="client_id">
+                            <option value="0" selected>...</option>
+                            <?
+                            $oClient = new client();
+                            $arrClients = $oClient->get();
+
+                            foreach ($arrClients as &$arrClient) {?>
+                              <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+                            <?}?>
+                          </select>
                         </div>
                       </div>
 
