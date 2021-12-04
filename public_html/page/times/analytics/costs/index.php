@@ -46,9 +46,9 @@ $dDate1 = date('Y-m-d', strtotime('monday this week'));
 $dDate2 = date('Y-m-d', strtotime('sunday this week'));
 $dDateCurrent = $dDate1;
 
-for ($i=0; $i < 1; $i++) {
+for ($i=1; $i < 3; $i++) {
   $arrDays = [];
-  $iIndex = 0;
+  $iIndex = 1;
   while (strtotime($dDateCurrent) < strtotime($dDate2)) {
     if ( $iIndex > 0 ) $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
     $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
@@ -80,7 +80,7 @@ for ($i=0; $i < 1; $i++) {
 
 // Суммы по месяцам
 $arrMounths = [];
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oTime = new time();
   $oTime->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%'";
   $arrTimes = $oTime->get();
@@ -98,7 +98,7 @@ for ($i=0; $i < 12; $i++) {
 
 // Суммы по годам
 $arrYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oTime = new time();
   $oTime->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%'";
   $arrTimes = $oTime->get();
@@ -159,7 +159,7 @@ for ($i=0; $i < 2; $i++) {
             data: {
               labels: [<?foreach ($arrWeeks as $arrWeek) {
                 foreach ($arrWeek['days'] as $iIndex => $arrDay) {
-                  if ( $iIndex ) echo ", '";
+                  if ( $iIndex > 1 ) echo ", '";
                   else echo "'";
                   echo $arrDay['title'];
                   echo "'";
@@ -171,7 +171,7 @@ for ($i=0; $i < 2; $i++) {
                     label: "<?=$arrTimesCategory['title']?>",
                     data: [<?foreach ($arrWeeks as $arrWeek) {
                       foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
-                        if ( $iIndexDay ) echo ", '";
+                        if ( $iIndexDay > 1 ) echo ", '";
                         else echo "'";
                         echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['value'];
                         echo "'";
@@ -179,7 +179,7 @@ for ($i=0; $i < 2; $i++) {
                     }?>],
                     borderColor: [<?foreach ($arrWeeks as $arrWeek) {
                       foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
-                        if ( $iIndexDay ) echo ", '";
+                        if ( $iIndexDay > 1 ) echo ", '";
                         else echo "'";
                         echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['color'];
                         echo "'";
@@ -187,7 +187,7 @@ for ($i=0; $i < 2; $i++) {
                     }?>],
                     backgroundColor: [<?foreach ($arrWeeks as $arrWeek) {
                       foreach ($arrWeek['days'] as $iIndexDay => $arrDay) {
-                        if ( $iIndexDay ) echo ", '";
+                        if ( $iIndexDay > 1 ) echo ", '";
                         else echo "'";
                         echo $arrWeek['days'][$iIndexDay]['categories'][$iIndexCategory]['color'];
                         echo "'";
@@ -209,7 +209,7 @@ for ($i=0; $i < 2; $i++) {
       <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
         <div class="col-12">
           <h2 class="text-center">
-            <?=$arrWeeks[0]['sum']?>ч
+            <?=$arrWeeks[1]['sum']?>ч
           </h2>
         </div>
       </div>
@@ -227,7 +227,7 @@ for ($i=0; $i < 2; $i++) {
             data: {
               labels: [<?foreach ($arrWeeks as $arrWeek) {
                 foreach ($arrWeek['days'] as $iIndex => $arrDay) {
-                  if ( $iIndex ) echo ", '";
+                  if ( $iIndex > 1 ) echo ", '";
                   else echo "'";
                   echo $arrDay['title'];
                   echo "'";
@@ -238,7 +238,7 @@ for ($i=0; $i < 2; $i++) {
                   label: 'Засчитано',
                   data: [<?foreach ($arrWeeks as $arrWeek) {
                     foreach ($arrWeek['days'] as $iIndex => $arrDay) {
-                      if ( $iIndex ) echo ", '";
+                      if ( $iIndex > 1 ) echo ", '";
                       else echo "'";
                       echo $arrDay['sum'];
                       echo "'";
@@ -246,7 +246,7 @@ for ($i=0; $i < 2; $i++) {
                   }?>],
                   borderColor: [<?foreach ($arrWeeks as $arrWeek) {
                     foreach ($arrWeek['days'] as $iIndex => $arrDay) {
-                      if ( $iIndex ) echo ", '";
+                      if ( $iIndex > 1 ) echo ", '";
                       else echo "'";
                       echo '#00ff00';
                       echo "'";
@@ -254,7 +254,7 @@ for ($i=0; $i < 2; $i++) {
                   }?>],
                   backgroundColor: [<?foreach ($arrWeeks as $arrWeek) {
                     foreach ($arrWeek['days'] as $iIndex => $arrDay) {
-                      if ( $iIndex ) echo ", '";
+                      if ( $iIndex > 1 ) echo ", '";
                       else echo "'";
                       echo '#00ff00';
                       echo "'";
@@ -301,8 +301,8 @@ for ($i=0; $i < 2; $i++) {
           var myChart = new Chart(document.getElementById("doughnut-chart"), {
             type: 'doughnut',
             data: {
-              labels: [<?foreach ($arrTimesCategories as $iIndex => &$arrTimesCategory) {
-                if ( $iIndex) echo ", '";
+              labels: [<?foreach ($arrTimesCategories as $iIndex => & $arrTimesCategory) {
+                if ( $iIndex ) echo ", '";
                 else echo "'";
                 echo $arrTimesCategory['title'] . "'";
               }?>],
@@ -310,12 +310,12 @@ for ($i=0; $i < 2; $i++) {
                 {
                   label: "Population (millions)",
                   data: [<?foreach ($arrTimesCategories as $iIndex => &$arrTimesCategory) {
-                    if ( $iIndex) echo ", '";
+                    if ( $iIndex ) echo ", '";
                     else echo "'";
                     echo $arrTimesCategory['sum'] . "'";
                   }?>],
                   backgroundColor: [<?foreach ($arrTimesCategories as $iIndex => &$arrTimesCategory) {
-                    if ( $iIndex) echo ", '";
+                    if ( $iIndex ) echo ", '";
                     else echo "'";
                     echo $arrTimesCategory['color'] ? $arrTimesCategory['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                   }?>]
@@ -396,7 +396,7 @@ for ($i=0; $i < 2; $i++) {
               type: 'line',
               data: {
                 labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-                  if ( $key ) echo ", '";
+                  if ( $key > 1 ) echo ", '";
                   else echo "'";
                   echo $arrMounth['name'] . " (" . $arrMounth['sum'] . ")'";
                 }?>],
@@ -414,13 +414,13 @@ for ($i=0; $i < 2; $i++) {
                         // else echo $arrMounth['sum'] . "";
                       }?>],
                       borderColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrTimesCategory['color'] ? $arrTimesCategory['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                       }?>],
                       backgroundColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrTimesCategory['color'] ? $arrTimesCategory['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";

@@ -37,7 +37,7 @@ foreach ($arrMoneysCategories as &$arrMoneysCategory) {
 
 // Суммы по месяцам
 $arrMounths = [];
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
@@ -60,7 +60,7 @@ for ($i=0; $i < 12; $i++) {
 
 // Суммы по годам
 $arrYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
@@ -217,7 +217,7 @@ for ($i=0; $i < 2; $i++) {
               type: 'line',
               data: {
                 labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-                  if ( $key ) echo ", '";
+                  if ( $key > 1 ) echo ", '";
                   else echo "'";
                   echo $arrMounth['name'] . " (" . $arrMounth['sum'] . ")'";
                 }?>],
@@ -227,7 +227,7 @@ for ($i=0; $i < 2; $i++) {
                     {
                       label: "<?=$arrMoneysCategory['title']?>",
                       data: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", ";
+                        if ( $iIndex > 1 ) echo ", ";
                         else echo "";
 
                         echo $arrMounth['categories'][$arrMoneysCategory['id']] ? $arrMounth['categories'][$arrMoneysCategory['id']] : '0';
@@ -235,13 +235,13 @@ for ($i=0; $i < 2; $i++) {
                         // else echo $arrMounth['sum'] . "";
                       }?>],
                       borderColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrMoneysCategory['color'] ? $arrMoneysCategory['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                       }?>],
                       backgroundColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrMoneysCategory['color'] ? $arrMoneysCategory['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";

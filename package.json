@@ -1,0 +1,22 @@
+{
+  "name": "fttm",
+  "version": "5.0.4",
+  "description": "FrelanceTrywaRTimeManager",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrywaR/fttm.git"
+  },
+  "author": "TrywaR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrywaR/fttm/issues"
+  },
+  "homepage": "https://github.com/TrywaR/fttm#readme"
+}

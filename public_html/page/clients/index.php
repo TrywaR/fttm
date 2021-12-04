@@ -4,11 +4,40 @@
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Clients</h1>
-          <p class="lead">Клиенты и информация про них</p>
+          <p class="lead">
+            <a href="/projects/">Projects</a>
+          </p>
         </div>
       </div>
     </div>
   <div>
+  <div class="row">
+    <div class="col col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">
+            React form
+          </h4>
+
+          <div id="FTTMForm"></div>
+
+          <!-- https://ru.reactjs.org/docs/faq-ajax.html -->
+
+          <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+          <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+          <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+          <script type="text/babel" src="/template/js/react_form.js"></script>
+          <script type="text/babel">
+            ReactDOM.render(
+              <FTTMsForm />,
+              document.querySelector('#FTTMForm')
+            );
+            // console.log($(FTTMForm).html())
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col col-md-4 mb-4">
       <div class="card">

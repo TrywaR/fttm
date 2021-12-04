@@ -19,13 +19,13 @@ $arrProject = $oProject->get();
 $arrProject['color'] = $arrProject['color'] ? $arrProject['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
 
 $arrMounths = [];
-for ($i=0; $i < 12; $i++) $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
+for ($i=1; $i < 13; $i++) $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
 $arrYears = [];
-for ($i=0; $i < 2; $i++) $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
+for ($i=1; $i < 3; $i++) $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
 
 // Доходы (Уэйдейсы)
 // Суммы по месяцам
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
@@ -38,7 +38,7 @@ for ($i=0; $i < 12; $i++) {
 }
 // Суммы по годам
 $arrWagesYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=1; $i < 3; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
@@ -55,7 +55,7 @@ for ($i=0; $i < 2; $i++) {
 // Расходы (Косты)
 // Суммы по месяцам
 $arrCostsMounths = [];
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
@@ -69,7 +69,7 @@ for ($i=0; $i < 12; $i++) {
 }
 // Суммы по годам
 $arrCostsYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
@@ -85,7 +85,7 @@ for ($i=0; $i < 2; $i++) {
 // Время на проект
 // Суммы по месяцам
 $arrTimesMounths = [];
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oTime = new time();
   $oTime->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `project_id` = " . $_REQUEST['project_id'];
   $arrTimes = $oTime->get();
@@ -102,7 +102,7 @@ for ($i=0; $i < 12; $i++) {
 }
 // Время по годам
 $arrTimesYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oTime = new time();
   $oTime->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oTime->get();
@@ -136,7 +136,7 @@ for ($i=0; $i < 2; $i++) {
           type: 'line',
           data: {
             labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-              if ( $key ) echo ", '";
+              if ( $key > 1 ) echo ", '";
               else echo "'";
               echo $arrMounth['name'] . "'";
             }?>],
@@ -145,18 +145,18 @@ for ($i=0; $i < 2; $i++) {
                 {
                   label: 'Приходы (Уэйджейсы)',
                   data: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", ";
+                    if ( $iIndex > 1 ) echo ", ";
                     else echo "";
                     echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
                   }?>],
                   borderColor: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#00ffff';
                     echo "'";
                   }?>],
                   backgroundColor: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#00ffff';
                     echo "'";
@@ -165,18 +165,18 @@ for ($i=0; $i < 2; $i++) {
                 {
                   label: 'Расходы (Косты)',
                   data: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", ";
+                    if ( $iIndex > 1 ) echo ", ";
                     else echo "";
                     echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
                   }?>],
                   borderColor: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#00ff00';
                     echo "'";
                   }?>],
                   backgroundColor: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#00ff00';
                     echo "'";
@@ -214,7 +214,7 @@ for ($i=0; $i < 2; $i++) {
           type: 'line',
           data: {
             labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-              if ( $key ) echo ", '";
+              if ( $key > 1 ) echo ", '";
               else echo "'";
 
               $fPrice = (float)$arrWagesMounths[$key]['projects'][$_REQUEST['project_id']] - (float)$arrCostsMounths[$key]['projects'][$_REQUEST['project_id']];
@@ -230,18 +230,18 @@ for ($i=0; $i < 2; $i++) {
                 {
                   label: 'Время (Тиме)',
                   data: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", ";
+                    if ( $iIndex > 1 ) echo ", ";
                     else echo "";
                     echo $arrMounth['value'] ? $arrMounth['value'] : '0';
                   }?>],
                   borderColor: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#ff0000';
                     echo "'";
                   }?>],
                   backgroundColor: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex ) echo ", '";
+                    if ( $iIndex > 1 ) echo ", '";
                     else echo "'";
                     echo '#ff0000';
                     echo "'";

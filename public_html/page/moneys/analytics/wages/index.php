@@ -26,52 +26,38 @@ foreach ($arrProjects as &$arrProject) {
     $arrProject['sum'] = $iProjectSum;
     $arrProjectsName[$arrProject['id']] = $arrProject['title'];
     $arrProjectsIds[$arrProject['id']] = $arrProject;
+
+    $arrProject['color'] = $arrProject['color'] ? $arrProject['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
 }
 
 // Суммы по месяцам
 $arrMounths = [];
-for ($i=0; $i < 12; $i++) {
+for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1'";
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
     $arrMounths[$i]['projects'][$arrMoney['project_id']] = (int)$arrMounths[$i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    // $arrProject['items'][] = $arrMoney;
-    // $arrMounths[$i+1]['items'][] = $arrMoney;
     $iMounthSum = $iMounthSum + (int)$arrMoney['price'];
   }
   $arrMounths[$i]['sum'] = $iMounthSum;
   $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
-  // $arrMounths[$i+1] = $iMounthSum;
-  // $arrMounths[$i]['categories'] = [];
-
-  // foreach ($arrProjects as &$arrProject) {
-  //   // code...
-  // }
 }
 
 // Суммы по годам
 $arrYears = [];
-for ($i=0; $i < 2; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1'";
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
     $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (int)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    // $arrProject['items'][] = $arrMoney;
-    // $arrYears[$i+1]['items'][] = $arrMoney;
     $iYearSum = $iYearSum + (int)$arrMoney['price'];
   }
   $arrYears[$iCurrentYear - $i]['sum'] = $iYearSum;
   $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
-  // $arrYears[$i+1] = $iMounthSum;
-  // $arrYears[$i]['categories'] = [];
-
-  // foreach ($arrProjects as &$arrProject) {
-  //   // code...
-  // }
 }
 ?>
 <main class="container pt-4 pb-4">
@@ -109,7 +95,7 @@ for ($i=0; $i < 2; $i++) {
               type: 'doughnut',
               data: {
                 labels: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
-                  if ( $iIndex) echo ", '";
+                  if ( $iIndex ) echo ", '";
                   else echo "'";
                   echo $arrProject['title'] . "'";
                 }?>],
@@ -117,12 +103,12 @@ for ($i=0; $i < 2; $i++) {
                   {
                     label: "Population (millions)",
                     data: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
-                      if ( $iIndex) echo ", '";
+                      if ( $iIndex ) echo ", '";
                       else echo "'";
                       echo $arrProject['sum'] . "'";
                     }?>],
                     backgroundColor: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
-                      if ( $iIndex) echo ", '";
+                      if ( $iIndex ) echo ", '";
                       else echo "'";
                       echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                     }?>]
@@ -175,7 +161,7 @@ for ($i=0; $i < 2; $i++) {
                     </div>
                     <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
                       <?
-                      $date = new \DateTime($arrMoney['date']);
+                      $date = new DateTime($arrMoney['date']);
                       echo $date->format('Y-m-d');
                       ?>
                     </span>
@@ -207,7 +193,7 @@ for ($i=0; $i < 2; $i++) {
               type: 'line',
               data: {
                 labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-                  if ( $key ) echo ", '";
+                  if ( $key > 1 ) echo ", '";
                   else echo "'";
                   echo $arrMounth['name'] . " (" . $arrMounth['sum'] . ")'";
                 }?>],
@@ -217,7 +203,7 @@ for ($i=0; $i < 2; $i++) {
                     {
                       label: "<?=$arrProject['title']?>",
                       data: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", ";
+                        if ( $iIndex > 1 ) echo ", ";
                         else echo "";
 
                         echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
@@ -225,13 +211,13 @@ for ($i=0; $i < 2; $i++) {
                         // else echo $arrMounth['sum'] . "";
                       }?>],
                       borderColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                       }?>],
                       backgroundColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
-                        if ( $iIndex ) echo ", '";
+                        if ( $iIndex > 1 ) echo ", '";
                         else echo "'";
                         // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
                         echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
