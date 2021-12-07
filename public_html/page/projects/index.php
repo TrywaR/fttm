@@ -5,6 +5,9 @@
         <div class="container">
           <h1 class="display-4">Projects</h1>
           <p class="lead">
+            <span class="icon">
+              <i class="fas fa-arrow-left"></i>
+            </span>
             <a href="/clients/">Clients</a>
           </p>
         </div>
@@ -23,7 +26,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Добавить проект
+                    Add project
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -33,11 +36,11 @@
                       <input type="hidden" name="action" value="projects">
                       <input type="hidden" name="form" value="save">
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputClientId" class="col-form-label">Client</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <select class="form-select" aria-label="Default select example" name="client_id">
                             <option value="0" selected>...</option>
                             <?
@@ -51,34 +54,37 @@
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputSort" class="col-form-label">Sort</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="sort" type="number" id="inputSort" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputTitle" class="col-form-label">Title</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="title" type="text" id="inputTitle" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDescription" class="col-form-label">Description</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
                         </div>
                       </div>
 
-                      <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Добавить</button>
+                      <div class="d-flex justify-content-between mt-3">
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                      </div>
                     </form>
                   </div>
                 </div>

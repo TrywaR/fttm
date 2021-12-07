@@ -1,7 +1,7 @@
 // События
 $(function(){
   // Отправка данных с формы
-	$(document).find('form').on ('submit', function(){
+	$(document).find('form:not(.__no_ajax)').on ('submit', function(){
 		var
 		oForm = $(this)
 		oData = oForm.serializeArray()

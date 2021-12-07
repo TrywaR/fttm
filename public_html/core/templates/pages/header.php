@@ -7,7 +7,9 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="/">FTTM</a>
       <?php if (isset($_SESSION['user'])): ?>
-        <?=$_SESSION['user']['login']?>
+        <a href="/home/" class="home_link">
+          <?=$_SESSION['user']['login']?>
+        </a>
       <?php endif; ?>
       <a class="navbar-toggler" href="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <!-- <span class="navbar-toggler-icon"></span> -->
@@ -16,8 +18,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/') echo 'badge bg-success active';?>" aria-current="page" href="/">Home</a>
+            <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/home/') echo 'badge bg-success active';?>" aria-current="page" href="/home/">Home</a>
           </li>
+
           <?php if (isset($_SESSION['user'])): ?>
             <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times <small class="badge badge-danger">alfa</small></a>

@@ -31,7 +31,6 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Times categories</h1>
-          <p class="lead">Категории затрат времени</p>
         </div>
       </div>
     </div>
@@ -49,7 +48,7 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingZero">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
-                    Добавить тип
+                    Add type
                   </button>
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
@@ -59,50 +58,53 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
                       <input type="hidden" name="action" value="times_categories">
                       <input type="hidden" name="form" value="save">
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputCardIdZero" class="col-form-label">Тип</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputCardIdZero" class="col-form-label">Type</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="title" type="text" id="inputCardIdZero" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputPriceIdZero" class="col-form-label">Приоритет</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputPriceIdZero" class="col-form-label">Priority</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="priority" type="number" id="inputPriceIdZero" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputColorZero" class="col-form-label">Цвет</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputColorZero" class="col-form-label">Color</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input type="color" id="inputColorZero" name="color" value="<?=sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) )?>">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                          <label for="inputTitleZero" class="col-form-label">sort</label>
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputTitleZero" class="col-form-label">Sort</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="sort" type="number" id="inputTitleZero" class="form-control">
                         </div>
                       </div>
 
-                      <div class="form-check">
+                      <div class="form-check mt-2">
                         <input class="form-check-input" name="active" type="checkbox" value="" id="flexCheckChecked" checked>
                         <label class="form-check-label" for="flexCheckChecked">
-                          Активность
+                          Active
                         </label>
                       </div>
 
-                      <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Добавить</button>
+                      <div class="d-flex justify-content-between mt-3">
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                      </div>
                     </form>
                   </div>
                 </div>

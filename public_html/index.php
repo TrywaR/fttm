@@ -14,7 +14,7 @@ include_once 'core/templates/pages/header.php'; # Шапка
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {
   case '/': # Главная страница
-    include_once 'page/home.php';
+    include_once 'page/welcome/index.php';
     break;
 
   case '/authorizations/': # Авторизация

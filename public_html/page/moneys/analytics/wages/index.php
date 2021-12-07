@@ -66,7 +66,6 @@ for ($i=0; $i < 3; $i++) {
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Moneys trip</h1>
-          <p class="lead">Мои приходы за месяц</p>
         </div>
       </div>
     </div>
@@ -85,7 +84,7 @@ for ($i=0; $i < 3; $i++) {
     <div class="tab-pane fade show active" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
-          <h2>Приходы по проектам (<?=date("F")?>)</h2>
+          <h2>Weges for month (<?=date("F")?>)</h2>
           <canvas id="doughnut-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
 
           <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
@@ -186,7 +185,7 @@ for ($i=0; $i < 3; $i++) {
     <div class="tab-pane fade" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col d-flex flex-column justify-content-center align-items-center">
-          <h2>Приходы за год (<?=date("Y")?>)</h2>
+          <h2>Weges for year (<?=date("Y")?>)</h2>
           <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
           <script>
             var myBar = new Chart(document.getElementById("bar-chart"), {

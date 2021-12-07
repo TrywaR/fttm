@@ -85,6 +85,9 @@ body .jumbotron .lead {
   line-height: 1.2; }
 body .badge {
   border-radius: 0.5rem; }
+body .navbar .home_link {
+  color: white;
+  text-decoration: none; }
 
 .fttm_alerts {
   position: fixed;
@@ -203,6 +206,24 @@ body {
   overflow: hidden;
   transition: all 0.3s ease-in-out 0s; }
 
+.jumbotron a {
+  color: #3282c8; }
+  .jumbotron a:hover {
+    color: white !important; }
+.jumbotron .lead {
+  display: flex; }
+  .jumbotron .lead .icon {
+    margin-right: 0.5rem; }
+
+.text_seporator {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem; }
+
+.icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: #3282c8; }
+
 .switch_icons > *:nth-child(1) {
   display: block; }
 .switch_icons > *:nth-child(2) {
@@ -279,17 +300,19 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  justify-content: center;
   padding: 2rem 0 4rem; }
-  .block_analitycs ._circle {
+  .block_analitycs > ._circle {
     position: relative;
     z-index: 1;
     padding: 1rem;
-    text-align: center; }
-    .block_analitycs ._circle:nth-child(even):after {
+    text-align: center;
+    flex-grow: 1; }
+    .block_analitycs > ._circle:nth-child(even):after {
       animation: circle linear 15s;
       animation-iteration-count: infinite;
       animation-duration: 15s; }
-    .block_analitycs ._circle:after {
+    .block_analitycs > ._circle:after {
       content: "";
       position: absolute;
       top: 0;
@@ -307,14 +330,18 @@ body {
       animation-duration: 20s;
       transform-origin: 50% 50%;
       box-shadow: 0 0 1rem 0 #101010; }
-    .block_analitycs ._circle ._title {
+    .block_analitycs > ._circle ._title {
       font-size: 1.1rem;
       line-height: 1;
       margin-bottom: 0.5rem; }
-    .block_analitycs ._circle ._value {
+    .block_analitycs > ._circle ._value {
       font-size: 1.3rem;
       font-weight: bold;
       line-height: 1; }
+    .block_analitycs > ._circle.__success:after {
+      background: #2cb544 !important; }
+    .block_analitycs > ._circle.__error:after {
+      background: #ff7b7b !important; }
 
 @media screen and (max-width: 1000px) {
   .money {

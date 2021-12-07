@@ -16,18 +16,23 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Times</h1>
-          <p class="lead">Ну и чем ты занимаешься?)</p>
+
           <p class="lead">
-            Данные:
-            <a href="/clients/">Клиенты</a>
-            , <a href="/projects/">проекты</a>
-            , <a href="/times/data/categories/">Категории времени</a>
+            <span class="icon">
+              <i class="far fa-folder"></i>
+            </span>
+            <a href="/clients/">Clients</a>
+            <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
+            <span class="text_seporator">,</span> <a href="/times/data/categories/">Times spend categories</a>
             <!--, <a href="/tasks/">задачи</a>. -->
           </p>
+
           <p class="lead">
-            Статисфекшен:
-            <a href="/times/analytics/costs/">Траты времени по категориям</a>
-            , <a href="/times/analytics/wages/">Приходы времени по категориям</a>
+            <span class="icon">
+              <i class="far fa-chart-bar"></i>
+            </span>
+            <a href="/times/analytics/costs/">Time spent</a>
+            <!-- , <a href="/times/analytics/wages/">Приходы времени по категориям</a> -->
           </p>
         </div>
       </div>
@@ -38,7 +43,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     <div class="col-12 col-md-5 mb-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Время</h5>
+          <h5 class="card-title">Time</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
           <div class="card-body">
@@ -46,7 +51,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Потратить время
+                    Spend
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -56,29 +61,29 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                       <input type="hidden" name="action" value="times">
                       <input type="hidden" name="form" value="save">
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputTitle" class="col-form-label">Title</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="title" type="text" id="inputTitle" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDescription" class="col-form-label">Description</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputProjectId" class="col-form-label">Category id</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <select name="category_id" class="form-select" size="3" aria-label="size 3 select example">
                             <option value="0" selected>No category</option>
                             <?
@@ -98,38 +103,38 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                       </div>
 
-                      <!-- <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <!-- <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputTimePlanned" class="col-form-label">Time planned</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-4">
                           <input name="time_planned" type="time" lang="en" id="inputTimePlanned" class="form-control">
                         </div>
                       </div> -->
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputTimeReally" class="col-form-label">Time really</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="time_really" type="time" lang="en" id="inputTimeReally" class="form-control">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDate" class="col-form-label">Date</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="date" type="date" lang="en" id="inputDate" class="form-control" value="<?=date('Y-m-d')?>">
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputProjectId" class="col-form-label">Project id</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
                             <option value="0" selected>No project</option>
                             <?
@@ -147,16 +152,19 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                       </div>
 
-                      <div class="row g-3 align-items-center">
-                        <div class="col-auto">
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputSort" class="col-form-label">Sort</label>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-12 col-md-8">
                           <input name="sort" type="number" id="inputSort" class="form-control">
                         </div>
                       </div>
 
-                      <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Добавить</button>
+                      <div class="d-flex justify-content-between mt-3">
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                      </div>
                     </form>
                   </div>
                 </div>

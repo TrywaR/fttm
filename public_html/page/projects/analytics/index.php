@@ -38,7 +38,7 @@ for ($i=1; $i < 13; $i++) {
 }
 // Суммы по годам
 $arrWagesYears = [];
-for ($i=1; $i < 3; $i++) {
+for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
   $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
@@ -105,11 +105,11 @@ $arrTimesYears = [];
 for ($i=0; $i < 3; $i++) {
   $oTime = new time();
   $oTime->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `project_id` = " . $arrProject['id'];
-  $arrMoneys = $oTime->get();
+  $arrTimes = $oTime->get();
   $iYearSum = 0;
-  foreach ($arrMoneys as &$arrTime) {
-    $arrYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] = (float)$arrYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] + (float)$arrTime['time'];
-    $iYearSum = $iYearSum + (float)$arrTime['time'];
+  foreach ($arrTimes as &$arrTime) {
+    $arrTimesYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] = (float)$arrTimesYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] + (float)$arrTime['time_really'];
+    $iYearSum = $iYearSum + (float)$arrTime['time_really'];
   }
   $arrTimesYears[$iCurrentYear - $i]['sum'] = $iYearSum;
   $arrTimesYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
@@ -128,7 +128,7 @@ for ($i=0; $i < 3; $i++) {
 
   <div class="row mb-4 animate__animated animate__bounceInRight">
     <div class="col d-flex flex-column justify-content-center align-items-center">
-      <h2>Движ денежег за год (<?=date("Y")?>)</h2>
+      <h2>Money for yaer (<?=date("Y")?>)</h2>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
       <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
       <script>
@@ -143,7 +143,7 @@ for ($i=0; $i < 3; $i++) {
             datasets:
               [
                 {
-                  label: 'Приходы (Уэйджейсы)',
+                  label: 'Wages',
                   data: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
                     if ( $iIndex > 1 ) echo ", ";
                     else echo "";
@@ -163,7 +163,7 @@ for ($i=0; $i < 3; $i++) {
                   }?>]
                 },
                 {
-                  label: 'Расходы (Косты)',
+                  label: 'Costs',
                   data: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
                     if ( $iIndex > 1 ) echo ", ";
                     else echo "";
@@ -206,7 +206,7 @@ for ($i=0; $i < 3; $i++) {
 
   <div class="row mb-4 animate__animated animate__bounceInRight">
     <div class="col d-flex flex-column justify-content-center align-items-center">
-      <h2>Время за год (<?=date("Y")?>)</h2>
+      <h2>Time for year (<?=date("Y")?>)</h2>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
       <canvas id="bar-chart-time" width="100" height="400px" style="max-height: 400px;"></canvas>
       <script>
@@ -228,7 +228,7 @@ for ($i=0; $i < 3; $i++) {
             datasets:
               [
                 {
-                  label: 'Время (Тиме)',
+                  label: 'Time',
                   data: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
                     if ( $iIndex > 1 ) echo ", ";
                     else echo "";
@@ -272,8 +272,9 @@ for ($i=0; $i < 3; $i++) {
   <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
     <div class="col-12">
       <p class="text-center">
-        Пришло <?=number_format($arrWagesYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
-        Ушло <?=number_format($arrCostsYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
+        Wages <?=number_format($arrWagesYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
+        Costs <?=number_format($arrCostsYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
+        Time <?=(float)$arrTimesYears[$iCurrentYear]['sum']?>ч <br/>
 
         <?
         $fPrice = (float)$arrWagesYears[$iCurrentYear]['sum'] - (float)$arrCostsYears[$iCurrentYear]['sum'];
@@ -281,7 +282,7 @@ for ($i=0; $i < 3; $i++) {
         $fPriceForHour = $fTime > 0 ? $fPrice / $fTime : 0;
         $fPriceForHour = (float)$fPriceForHour > 0 ? $fPriceForHour : 0;
         ?>
-        <small>За час <?=number_format($fPriceForHour, 2, '.', ' ')?>₽</small>
+        <small>for hour <?=number_format($fPriceForHour, 2, '.', ' ')?>₽</small>
       </p>
       <h2 class="text-center">
         <?
@@ -294,7 +295,7 @@ for ($i=0; $i < 3; $i++) {
 
   <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
     <div class="col">
-      <h2>Расходы</h2>
+      <h2>Costs</h2>
     </div>
     <div class="list-group mb-4">
       <?
@@ -337,7 +338,7 @@ for ($i=0; $i < 3; $i++) {
     </div>
 
     <div class="col">
-      <h2>Приходы</h2>
+      <h2>Wages</h2>
     </div>
     <div class="list-group">
       <?

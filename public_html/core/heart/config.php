@@ -11,6 +11,7 @@ class config
   static $site_url = 'fttm.trywar.ru';
   static $site_root = '/home/t/trywar4y/fttm.trywar.ru/public_html/';
   static $arrConfig = [];
+  static $arrLeng = [];
   static $arrUsersGroups = [];
 }
 $config = new config();

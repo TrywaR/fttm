@@ -44,13 +44,21 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
 $arrWeeks = [];
 $dDate1 = date('Y-m-d', strtotime('monday this week'));
 $dDate2 = date('Y-m-d', strtotime('sunday this week'));
+// prev
+if ( $_REQUEST['date_start'] != '' && $_REQUEST['date_stop'] != '' ) {
+  $dDate1 = date('Y-m-d', strtotime($_REQUEST['date_start']));
+  $dDate2 = date('Y-m-d', strtotime($_REQUEST['date_stop']));
+}
+// $dDate1 = date('Y-m-d', strtotime('-8 day', strtotime('monday this week')));
+// $dDate2 = date('Y-m-d', strtotime('-1 day', strtotime('monday this week')));
+// $dDate2 = date('Y-m-d', strtotime('sunday this week'));
 $dDateCurrent = $dDate1;
 
 for ($i=1; $i < 3; $i++) {
   $arrDays = [];
   $iIndex = 1;
   while (strtotime($dDateCurrent) < strtotime($dDate2)) {
-    if ( $iIndex > 0 ) $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
+    if ( $iIndex > 1 ) $dDateCurrent = date('Y-m-d', strtotime('+1 day', strtotime($dDateCurrent)));
     $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
 
     $oTime = new time();
@@ -123,8 +131,11 @@ for ($i=0; $i < 3; $i++) {
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Times categories</h1>
+          <h1 class="display-4">Times trip</h1>
           <p class="lead">
+            <span class="icon">
+              <i class="fas fa-arrow-left"></i>
+            </span>
             <a href="/times/">Times</a>
           </p>
         </div>
@@ -147,8 +158,21 @@ for ($i=0; $i < 3; $i++) {
     <!-- Week -->
     <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
+        <div class="col mb-4">
+          <h3 class="text-center">Time interval</h3>
+          <form class="__no_ajax" action="" method="get">
+            <div class="row text-center">
+              <div class="col-12">
+                <input type="date" name="date_start" value="<?=$_REQUEST['date_start']?>">
+                <input type="date" name="date_stop" value="<?=$_REQUEST['date_stop']?>">
+                <button type="submit" name="button" class="btn"><i class="far fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
-          <h2>Затраты по категориям за неделю</h2>
+          <h2>Time spent for week</h2>
           <small><?=$dDate1?>, <?=$dDate2?></small>
           <canvas id="week-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
         </div>
@@ -216,7 +240,7 @@ for ($i=0; $i < 3; $i++) {
 
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
-          <h2>Эффективность</h2>
+          <h2>Effeciency</h2>
           <small><?=$dDate1?>, <?=$dDate2?></small>
           <canvas id="week-ef-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
         </div>
@@ -293,7 +317,7 @@ for ($i=0; $i < 3; $i++) {
     <div class="tab-pane fade show" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
-          <h2>Затраты по категориям (<?=date("F")?>)</h2>
+          <h2>Spent for month (<?=date("F")?>)</h2>
           <canvas id="doughnut-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
         </div>
 
@@ -389,7 +413,7 @@ for ($i=0; $i < 3; $i++) {
     <div class="tab-pane fade" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
       <div class="row mb-4 animate__animated animate__bounceInRight">
         <div class="col d-flex flex-column justify-content-center align-items-center">
-          <h2>Затраты за год (<?=date("Y")?>)</h2>
+          <h2>Spent for year (<?=date("Y")?>)</h2>
           <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
           <script>
             var myBar = new Chart(document.getElementById("bar-chart"), {

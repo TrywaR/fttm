@@ -5,15 +5,21 @@
         <div class="container">
           <h1 class="display-4">Moneys</h1>
           <p class="lead">
-            Данные:
-            <a href="/moneys/data/cards/">Карты</a>
-            , <a href="/moneys/data/categories/">Категории</a>
-            , <a href="/projects/">Проекты</a>
+            <span class="icon">
+              <i class="far fa-folder"></i>
+            </span>
+            <a href="/moneys/data/cards/">Cards</a>
+            <span class="text_seporator">,</span> <a href="/moneys/data/categories/">Moneys spend categories</a>
+            <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
           </p>
           <p class="lead">
-            <a href="/moneys/analytics/">Статистика</a> :
-            <a href="/moneys/analytics/costs/">Расходы</a>
-            , <a href="/moneys/analytics/wages/">Приходы</a>
+            <span class="icon">
+              <i class="far fa-chart-bar"></i>
+            </span>
+            <a href="/moneys/analytics/">Analytics</a>
+            <span class="text_seporator">:</span>
+            <a href="/moneys/analytics/costs/">Costs</a>
+            <span class="text_seporator">,</span> <a href="/moneys/analytics/wages/">Wages</a>
           </p>
         </div>
       </div>
@@ -33,7 +39,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingZero">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
-                    Добавить затрат
+                    Spend
                   </button>
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
@@ -138,8 +144,8 @@
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Отменить</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Добавить</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
                       </div>
                     </form>
                   </div>
@@ -160,7 +166,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Добавить приход
+                    Replenish
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -243,8 +249,8 @@
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Отменить</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Добавить</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
                       </div>
                     </form>
                   </div>
