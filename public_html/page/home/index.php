@@ -22,6 +22,15 @@
                <h2 class="text-center"><i class="fas fa-clock"></i></h2>
                <p class="lead">
                  <span class="icon">
+                   <i class="far fa-edit"></i>
+                 </span>
+                 <a href="/times">
+                   Update
+                 </a>
+               </p>
+
+               <p class="lead">
+                 <span class="icon">
                    <i class="far fa-folder"></i>
                  </span>
                  <a href="/times/data/categories/">Times spend categories</a>
@@ -39,6 +48,15 @@
 
              <div class="col-12 col-md-4">
                <h2 class="text-center"><i class="fas fa-wallet"></i></h2>
+               <p class="lead">
+                 <span class="icon">
+                   <i class="far fa-edit"></i>
+                 </span>
+                 <a href="/moneys">
+                   Update
+                 </a>
+               </p>
+
                <p class="lead">
                  <span class="icon">
                    <i class="far fa-folder"></i>
