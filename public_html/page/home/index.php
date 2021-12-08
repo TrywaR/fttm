@@ -90,7 +90,8 @@
          <li>Edit elems (all)</li>
          <li>Info (description this service)</li>
          <li>Design (Icon, color)</li>
-         <li>tickets</li>
+         <li>Sessions</li>
+         <li>Tickets</li>
        </ul>
      </div>
    </div>
