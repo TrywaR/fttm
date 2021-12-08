@@ -222,7 +222,7 @@ body {
 .icon {
   font-size: 1.2rem;
   line-height: 1;
-  color: #3282c8; }
+  color: white; }
 
 .switch_icons > *:nth-child(1) {
   display: block; }

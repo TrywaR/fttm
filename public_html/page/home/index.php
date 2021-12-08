@@ -81,4 +81,17 @@
        </div>
      </div>
    </div>
+
+   <div class="row">
+     <div class="col-12">
+       <h2>Futures update</h2>
+       <ul>
+         <li>Credits cards</li>
+         <li>Edit elems (all)</li>
+         <li>Info (description this service)</li>
+         <li>Design (Icon, color)</li>
+         <li>tickets</li>
+       </ul>
+     </div>
+   </div>
 </main>
