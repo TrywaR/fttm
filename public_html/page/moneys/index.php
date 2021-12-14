@@ -330,7 +330,7 @@
 
   <section class="block_template">
     <div class="template_money list-group">
-      <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-1">{{title}}</div>
           <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
@@ -359,7 +359,7 @@
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
-      </div>
+      </li>
     </div>
   </section>
 </main>
