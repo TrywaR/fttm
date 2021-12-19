@@ -9,6 +9,7 @@ class times_category extends model
   public static $title = '';
   public static $sort = '';
   public static $active = '';
+  public static $color = '';
   public static $user_id = '';
 
   function __construct( $times_category_id = 0 )
@@ -24,6 +25,7 @@ class times_category extends model
       $this->title = $arrCard['title'];
       $this->sort = $arrCard['sort'];
       $this->active = $arrCard['active'];
+      $this->color = $arrCard['color'];
       $this->user_id = $arrCard['user_id'];
     }
   }

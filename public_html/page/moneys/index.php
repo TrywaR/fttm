@@ -44,7 +44,14 @@
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
                   <div class="accordion-body">
-                    <form class="content_loader_form" action="" method="post" data-content_download_edit_type="0" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
+                    <form
+                      class="content_loader_form"
+                      action=""
+                      method="post"
+                      data-content_download_edit_type="0"
+                      data-content_loader_to="#content_loader_to"
+                      data-content_loader_template=".template_money"
+                    >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
                       <input type="hidden" name="form" value="save">
@@ -171,7 +178,14 @@
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <form class="content_loader_form" action="" method="post"  data-content_download_edit_type="1" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
+                    <form
+                      class="content_loader_form"
+                      action=""
+                      method="post"
+                      data-content_download_edit_type="1"
+                      data-content_loader_to="#content_loader_to"
+                      data-content_loader_template=".template_money"
+                    >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
                       <input type="hidden" name="form" value="save">

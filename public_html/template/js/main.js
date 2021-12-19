@@ -7,6 +7,13 @@ oParam.site_url = '/'
 
 // События
 $(function(){
+	// loader
+	user = {}
+	if ( localStorage.getItem('user') )  user = $.parseJSON(localStorage.getItem('user'))
+	console.log(user)
+	// oData.success.model, JSON.stringify(oData.success.data)
+	// loader x
+
 	// themes
 	var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
 	if (prefersDarkScheme.matches) document.body.classList.add("dark-theme")

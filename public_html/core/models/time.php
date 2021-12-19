@@ -18,6 +18,39 @@ class time extends model
   public static $date = '';
   public static $category_id = '';
   public static $status = '';
+  public static $category = '';
+
+  function get_time(){
+    $arrTimes = [];
+    if ( $this->id ) {
+      $arrTimes = $this->get();
+      $oCategory = new times_category( $this->category_id );
+      $arrTimes['category_title'] = $oCategory->title;
+      $arrTimes['category_color'] = $oCategory->color;
+      $oProject = new project( $arrTimes['project_id'] );
+      $arrTimes['project_title'] = $oProject->title;
+      $arrTimes['project_color'] = $oProject->color;
+
+      $dDateReally = new DateTime($arrTimes['time_really']);
+      $arrTimes['time_really'] = $dDateReally->format('H:i');
+    }
+    else {
+      $arrTimes = $this->get();
+      foreach ($arrTimes as &$arrTime) {
+        $oCategory = new times_category( $arrTime['category_id'] );
+        $arrTime['category_title'] = $oCategory->title;
+        $arrTime['category_color'] = $oCategory->color;
+        $oProject = new project( $arrTime['project_id'] );
+        $arrTime['project_title'] = $oProject->title;
+        $arrTime['project_color'] = $oProject->color;
+
+        $dDateReally = new DateTime($arrTime['time_really']);
+        $arrTime['time_really'] = $dDateReally->format('H:i');
+      }
+    }
+
+    return $arrTimes;
+  }
 
   function __construct( $time_id = 0 )
   {

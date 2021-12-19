@@ -69,8 +69,25 @@ body .btn {
   body .btn:hover {
     color: #3282c8; }
 body .card {
+  position: relative;
+  z-index: 1;
   color: white;
   background: #202022; }
+  body .card .card-text {
+    opacity: 0.5; }
+  body .card .progress {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0s; }
+  body .card._edit_ .progress {
+    opacity: 0.4; }
 body .list-group {
   padding: 0;
   border-radius: 0.5rem; }

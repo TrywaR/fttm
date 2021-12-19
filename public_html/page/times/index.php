@@ -56,10 +56,18 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <form class="" action="" method="post" data-content_download_edit_type="0" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_time">
+                    <form
+                      class="content_loader_form"
+                      action=""
+                      method="post"
+                      data-content_download_edit_type="0"
+                      data-content_loader_to="#content_loader_to"
+                      data-content_loader_template=".template_time"
+                    >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="times">
                       <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="id" value="">
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
@@ -184,6 +192,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         <small><?=$dDateReally->format('l')?></small>
       </h2>
 
+
       <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to" style="max-height: 80vh; overflow: auto;">
       <?
       $oTime = new time();
@@ -215,10 +224,10 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                 <i class="fas fa-square"></i>
               </div>
             </a>
+            */?>
             <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="moneys" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>
             </a>
-            */?>
             <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
           </span>
           <div class="progress">
@@ -237,7 +246,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         <small><?=$dDateReally->format('l')?></small>
       </h2>
 
-      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to" style="max-height: 80vh; overflow: auto;">
+      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to_2" style="max-height: 80vh; overflow: auto;">
       <?
       $oTime = new time();
       $oTime->where = "`date` LIKE '" . date('Y') . '-' . date('m') . '-' . date('d', strtotime("-1 days")) . "%'";
@@ -268,10 +277,10 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                 <i class="fas fa-square"></i>
               </div>
             </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="moneys" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+            */?>
+            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>
             </a>
-            */?>
             <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
           </span>
           <div class="progress">
@@ -280,6 +289,31 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         </li>
       <?}?>
       </ol>
+    </div>
+  </div>
+
+  <div class="block_template">
+    <div class="template_time list-group">
+      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-1">{{title}}</div>
+          <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: {{category_color}} ! important;">
+            {{time_really}}
+          </div>
+          <small>{{category_title}} | {{project_title}}</small>
+        </div>
+
+        <span class="rounded-pill">
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+            <i class="fas fa-pen-square"></i>
+          </a>
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+        </span>
+
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+      </li>
     </div>
   </div>
 

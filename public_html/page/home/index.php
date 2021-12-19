@@ -82,7 +82,7 @@
      </div>
    </div>
 
-   <div class="row">
+   <div class="row animate__animated animate__bounceIn">
      <div class="col-12">
        <h2>Futures update</h2>
        <ul>

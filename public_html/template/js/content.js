@@ -89,10 +89,11 @@ $(function(){
 
 			// Получаем объект элемента
 			$.when(
-			  content_download( oData, 'json' )
+			  content_download( oData, 'json', false )
 			).then( function( oData ){
 				// Определяем форму редактирования
-				oEditForm = $(document).find('[data-content_download_edit_type="' + oData.type + '"]')
+				if ( oData.type ) oEditForm = $(document).find('[data-content_download_edit_type="' + oData.type + '"]')
+				else oEditForm = $(document).find('[data-content_download_edit_type="0"]')
 
 				// Добавляем данные в форму редактирования
 				for (var key in oData ) {
