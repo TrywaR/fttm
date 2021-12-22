@@ -6,12 +6,39 @@
 - Проигрываемая анимация в `data-animate_class`
 - Атрибут родительского блока элемента в `data-elem` который будет удален при удалении элемента, или получит класс `._edit_` при редактировании
 
+Таким образом кнопка редактирования элемента может выглядить так
+```
+<a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+  <i class="fas fa-pen-square"></i>
+</a>
+```
+Форма редактирования должна иметь например такие атрибуты
+```
+<form
+  class="content_loader_form"
+  action=""
+  method="post"
+  data-content_download_edit_type="0"
+  data-content_loader_to="#content_loader_to"
+  data-content_loader_template=".template_projects"
+>
+```
+и поле с id элемента соответственно
+
+Для успешного редактирования сервер должен вернуть `success - elems` с отредактированным элементом
+
 ## Настройки формы редактирования
 - Форма должна иметь атрибут `data-content_download_edit_type` где указан тип редактируемых данных (У элемента в базе значение `type` )
 - `.form_reset` Кнопка очистки данных в форме, так же убирает классы у редактируемых элементов `._edit_`
 
 ## Блок с элементами
 - `#content_loader_to`
+- Чтобы элементы в списке, при редактировании отображали анимацию, блоку с атрибутом `data-elem` надо добавить класс `progress_block` а вконце встраимого блока, `.card` или `.list-group-item` добавить анимацию, например
+```
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>
+```
 
 ___
 

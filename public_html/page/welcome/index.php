@@ -60,8 +60,9 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_6">5.0.6 Edits forms</a>
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_5">5.0.5 Full update</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_7">5.0.7 Edits forms mega</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_6">5.0.6 Edits forms</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_5">5.0.5 Full update</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_4">5.0.4 Time stat</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_3">5.0.3 TAAF</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_2">5.0.2 TAA</a>
@@ -78,6 +79,19 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-5_0_7">5.0.7 Edits forms mega</h2>
+          <ol>
+            <li>
+              Clients edits forms
+            </li>
+            <li>
+              Times categoryes edits forms
+            </li>
+            <li>
+              Edition animations fix
+            </li>
+          </ol>
+
           <h2 id="list-item-5_0_6">5.0.6 Edits forms</h2>
           <ol>
             <li>

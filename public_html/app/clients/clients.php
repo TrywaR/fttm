@@ -24,11 +24,6 @@ switch ($_REQUEST['form']) {
     $arrResult['elems'] = $oClient->get();
     $arrResult['text'] = 'Изменения сохранены';
     notification::success($arrResult);
-
-    // $oClient = new client( $_REQUEST['id'] );
-    // $oClient->arrAddFields = $_REQUEST;
-    // if ( $_REQUEST['id'] ) notification::success( $oClient->save() );
-    // else notification::success( $oClient->add() );
     break;
 
   case 'del': # Удаление

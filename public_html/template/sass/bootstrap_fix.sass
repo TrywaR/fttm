@@ -39,23 +39,6 @@ body
     .card-text
       opacity: .5
 
-    .progress
-      opacity: 0
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      height: 100%
-      width: 100%
-      z-index: -1
-      @include transition_default
-
-    &._edit_
-      .progress
-        opacity: .4
-
-
   .list-group
     padding: 0
     border-radius: $border_radius
@@ -69,9 +52,19 @@ body
     flex-grow: 1
 
   .jumbotron
+    a
+      color: $color_main
+
+      &:hover
+        color: $color_text ! important
+
     .lead
+      display: flex
       font-size: 1rem
       line-height: 1.2
+
+      .icon
+        margin-right: .5rem
 
   .badge
     border-radius: $border_radius

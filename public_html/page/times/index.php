@@ -203,7 +203,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       if ( ! count($arrTimes) ) echo 'Пусто!';
       else foreach ($arrTimes as &$arrTime) {
         ?>
-        <li class="list-group-item money d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
+        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrTime['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: <?=$arrCategoriesIds[$arrTime['category_id']]['color']?> ! important;">
@@ -256,7 +256,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       if ( ! count($arrTimesУesterday) ) echo 'Пусто!';
       else foreach ($arrTimesУesterday as &$arrTime) {
         ?>
-        <li class="list-group-item money d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
+        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrTime['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: <?=$arrCategoriesIds[$arrTime['category_id']]['color']?> ! important;">
@@ -294,7 +294,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
   <div class="block_template">
     <div class="template_time list-group">
-      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+      <li class="list-group-item money progress_block d-flex justify-content-between align-items-start animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-1">{{title}}</div>
           <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: {{category_color}} ! important;">

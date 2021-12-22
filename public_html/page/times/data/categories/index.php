@@ -26,18 +26,24 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
 }
 ?>
 <main class="container pt-4 pb-4">
-  <div class="row mb-4">
-    <div class="col-12">
+  <div class="row">
+    <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Times categories</h1>
+          <p class="lead">
+            <span class="icon">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <a href="/times/">Times</a>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col col-12 col-md-6 mb-4">
+    <div class="col-12 col-md-6 mb-4 animate__animated animate__bounceInLeft">
       <!-- Карты -->
       <div class="card">
         <div class="card-body">
@@ -53,10 +59,18 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
                   <div class="accordion-body">
-                    <form class="reload_page" action="" method="post">
+                    <form
+                      class="content_loader_form"
+                      action=""
+                      method="post"
+                      data-content_download_edit_type="0"
+                      data-content_loader_to="#content_loader_to"
+                      data-content_loader_template=".template_times_categories"
+                    >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="times_categories">
                       <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="id" value="">
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
@@ -115,14 +129,14 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
       </div>
     </div>
 
-    <div class="col col-12 col-md-6">
+    <div class="col-12 col-md-6 animate__animated animate__bounceInRight animate__delay-1s">
       <?if ( ! count( $arrTimesCategories ) ) echo 'Нет типов затрат';?>
-      <ol class="list-group list-group-numbered">
+      <ol class="list-group list-group-numbered" id="content_loader_to">
       <?
       // Прикручиваем рейтинги
       foreach ($arrTimesCategories as & $arrTimesCategory) {
         ?>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item d-flex justify-content-between align-items-start progress_block" data-content_manager_item_id="<?=$arrTimesCategory['id']?>"  data-content_loader_item_id="<?=$arrTimesCategory['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold"><?=$arrTimesCategory['title']?></div>
           </div>
@@ -135,15 +149,54 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
               <i class="far fa-square"></i>
               <!-- <i class="fas fa-square"></i> -->
             </a>
-            <a href="#" class="btn"><i class="fas fa-pen-square"></i></a>
             */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrTimesCategory['id']?>" data-action="times_categories" data-form="del" data-elem=".list-group-item"><i class="fas fa-minus-square"></i></a>
+            <a href="#" class="btn content_download" data-id="<?=$arrTimesCategory['id']?>" data-action="times_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+              <i class="fas fa-pen-square"></i>
+            </a>
+            <a href="#" class="btn content_download" data-id="<?=$arrTimesCategory['id']?>" data-action="times_categories" data-form="del" data-elem=".list-group-item">
+              <i class="fas fa-minus-square"></i>
+            </a>
           </span>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
         </li>
         <?
       }
       ?>
       </ol>
+    </div>
+  </div>
+
+  <div class="block_template">
+    <div class="template_times_categories list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{title}}</div>
+        </div>
+        <div class="badge bg-primary" style="background: {{color}}!important">
+          {{color}}
+        </div>
+        <span class="rounded-pill">
+          <?/*
+          <a href="#" class="btn">
+            <i class="far fa-square"></i>
+            <!-- <i class="fas fa-square"></i> -->
+          </a>
+          */?>
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+            <i class="fas fa-pen-square"></i>
+          </a>
+          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-form="del" data-elem=".list-group-item">
+            <i class="fas fa-minus-square"></i>
+          </a>
+        </span>
+
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+      </li>
     </div>
   </div>
 </main>

@@ -303,7 +303,7 @@
       // Прикручиваем рейтинги
       foreach ($arrMoneys as &$arrMoney) {
         ?>
-        <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
+        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
@@ -344,7 +344,7 @@
 
   <section class="block_template">
     <div class="template_money list-group">
-      <li class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+      <li class="list-group-item money progress_block d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-1">{{title}}</div>
           <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">

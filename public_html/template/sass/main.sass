@@ -62,19 +62,6 @@ body
   overflow: hidden
   @include transition_default
 
-.jumbotron
-  a
-    color: $color_main
-
-    &:hover
-      color: $color_text ! important
-
-  .lead
-    display: flex
-
-    .icon
-      margin-right: .5rem
-
 .text_seporator
   margin-left: .2rem
   margin-right: .2rem
@@ -113,22 +100,6 @@ body
       background: $color_success
       opacity: .4
       z-index: -1
-
-  .progress
-    opacity: 0
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    height: 100%
-    width: 100%
-    z-index: -1
-    @include transition_default
-
-  &._edit_
-    .progress
-      opacity: 1
 
 .moneys_category
   .moneys_category-name
@@ -234,6 +205,23 @@ body
     &.__error
       &:after
         background: $color_error ! important
+
+.progress_block
+  .progress
+    opacity: 0
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    height: 100%
+    width: 100%
+    z-index: -1
+    @include transition_default
+
+  &._edit_
+    .progress
+      opacity: .4
 
 @media screen and (max-width:1000px)
   .money

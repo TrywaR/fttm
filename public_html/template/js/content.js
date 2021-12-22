@@ -41,7 +41,7 @@ $(function(){
 		oForm.find('[type=submit]').html('<i class="fas fa-plus-square"></i> Добавить')
 
 		// Снимаем выделение если выбран какой то элемент
-		$(document).find('#content_loader_to .list-group-item').removeClass('_edit_')
+		$(document).find('#content_loader_to ._edit_').removeClass('_edit_')
 
 		// Убираем старую анимацию
 		oForm.removeClassWild("animate_*")
