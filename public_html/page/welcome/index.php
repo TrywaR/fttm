@@ -60,7 +60,8 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_7">5.0.7 Edits forms mega</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_8">5.0.8 Edits form</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_7">5.0.7 Edits forms mega</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_6">5.0.6 Edits forms</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_5">5.0.5 Full update</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_4">5.0.4 Time stat</a>
