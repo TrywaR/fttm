@@ -19,6 +19,15 @@
     <div class="col-12 mt-4 mb-4">
       <?
 
+      // Категории которые не отнимать
+      $oMoneysCategory = new moneys_category();
+      $oMoneysCategory->limit = 0;
+      $oMoneysCategory->sort = 'sort';
+      $oMoneysCategory->where = "`type` = 0";
+      $arrMoneysCategories = $oMoneysCategory->get();
+      $arrMoneysCategoriesIds = [];
+      foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesIds[$arrMoneysCategory['id']] = $arrMoneysCategory;
+
       // Потрачено
       // За день
       $oMoney = new money();
@@ -28,7 +37,7 @@
       $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
       $arrMoneys = $oMoney->get_money();
       $iDaySumm = 0;
-      foreach ($arrMoneys as $arrMoney) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
+      foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
 
       // За месяц
       $oMoney = new money();
@@ -37,13 +46,13 @@
       $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
       $arrMoneys = $oMoney->get_money();
       $iMonthSumm = 0;
-      foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
+      foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
 
       // Заработанно
       $oMoney = new money();
       $oMoney->sort = 'date';
       $dCurrentDate = date('Y-m');
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` > 0 ";
+      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '1' ";
       $arrMoneys = $oMoney->get_money();
       $iMonthSummSalary = 0;
       foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;

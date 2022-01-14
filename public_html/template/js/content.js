@@ -92,8 +92,13 @@ $(function(){
 			  content_download( oData, 'json', false )
 			).then( function( oData ){
 				// Определяем форму редактирования
-				if ( oData.type ) oEditForm = $(document).find('[data-content_download_edit_type="' + oData.type + '"]')
-				else oEditForm = $(document).find('[data-content_download_edit_type="0"]')
+				// if ( oData.type ) oEditForm = $(document).find('[data-content_download_edit_type="' + oData.type + '"]')
+				// else oEditForm = $(document).find('[data-content_download_edit_type="0"]')
+				$(document).find('form').each(function(){
+					if ( ('.' + $(this).data().content_download_edit_type).indexOf( oData.type ) > 0 ) {
+						return oEditForm = $(this)
+					}
+				})
 
 				// Добавляем данные в форму редактирования
 				for (var key in oData ) {

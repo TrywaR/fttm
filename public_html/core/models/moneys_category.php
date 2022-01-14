@@ -10,6 +10,7 @@ class moneys_category extends model
   public static $sort = '';
   public static $priority = '';
   public static $active = '';
+  public static $type = '';
   public static $user_id = '';
 
   function __construct( $moneys_category_id = 0 )
@@ -26,6 +27,7 @@ class moneys_category extends model
       $this->sort = $arrCard['sort'];
       $this->priority = $arrCard['priority'];
       $this->active = $arrCard['active'];
+      $this->type = $arrCard['type'];
       $this->user_id = $arrCard['user_id'];
     }
   }

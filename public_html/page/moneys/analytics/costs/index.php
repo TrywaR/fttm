@@ -5,6 +5,8 @@
 $oMoneysCategory = new moneys_category();
 $oMoneysCategory->limit = 0;
 $oMoneysCategory->sort = 'sort';
+// $oMoneysCategory->type = 0;
+// $oMoneysCategory->where = "`type` = 0";
 $arrMoneysCategories = $oMoneysCategory->get();
 
 $oCards = new card();

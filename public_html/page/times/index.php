@@ -225,7 +225,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
               </div>
             </a>
             */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="moneys" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>
             </a>
             <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>

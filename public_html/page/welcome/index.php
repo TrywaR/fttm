@@ -79,6 +79,19 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-5_0_8">5.0.8 Edits form</h2>
+          <ol>
+            <li>
+              Times today edit form fix
+            </li>
+            <li>
+              Edit money categories
+            </li>
+            <li>
+              Money categories add types for not plus result in money analytics
+            </li>
+          </ol>
+
           <h2 id="list-item-5_0_7">5.0.7 Edits forms mega</h2>
           <ol>
             <li>
