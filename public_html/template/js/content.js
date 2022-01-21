@@ -95,7 +95,8 @@ $(function(){
 				// if ( oData.type ) oEditForm = $(document).find('[data-content_download_edit_type="' + oData.type + '"]')
 				// else oEditForm = $(document).find('[data-content_download_edit_type="0"]')
 				$(document).find('form').each(function(){
-					if ( ('.' + $(this).data().content_download_edit_type).indexOf( oData.type ) > 0 ) {
+					var sType = oData.type ? oData.type : 0
+					if ( ('.' + $(this).data().content_download_edit_type).indexOf( sType ) > 0 ) {
 						return oEditForm = $(this)
 					}
 				})

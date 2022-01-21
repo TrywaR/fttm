@@ -47,10 +47,10 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<link rel="stylesheet" href="/template/css/main.css">
-	<script src="/template/js/main.js"></script>
-	<script src="/template/js/content_loader.js"></script>
-	<script src="/template/js/content.js"></script>
+	<link rel="stylesheet" href="/template/css/main.css?v=5.0.8">
+	<script src="/template/js/main.js?v=5.0.8"></script>
+	<script src="/template/js/content_loader.js?v=5.0.8"></script>
+	<script src="/template/js/content.js?v=5.0.8"></script>
 	<!-- main x-->
 </head>
 <body>
