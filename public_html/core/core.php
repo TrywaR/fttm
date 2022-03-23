@@ -8,6 +8,7 @@ include_once 'heart/lang.php'; # Переводы
 
 // Модели
 include_once 'models/model.php'; # Основной класс
+include_once 'models/session.php'; # Сессии
 include_once 'models/user.php'; # Пользователь
 include_once 'models/client.php'; # Клиент
 include_once 'models/project.php'; # Проект

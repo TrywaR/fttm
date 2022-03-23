@@ -8,6 +8,10 @@ switch ($_REQUEST['action']) {
     include_once 'clients/clients.php';
     break;
 
+  case 'sessions': # Обработка сессий
+    include_once 'sessions/sessions.php';
+    break;
+
   case 'projects': # Обработка проектов
     include_once 'projects/projects.php';
     break;
@@ -34,9 +38,5 @@ switch ($_REQUEST['action']) {
 
   case 'moneys_categories': # Типы затрат
     include_once 'moneys_categories/moneys_categories.php';
-    break;
-
-  default:
-    // code...
     break;
 }

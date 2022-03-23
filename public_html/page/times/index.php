@@ -12,6 +12,12 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
 <main class="container pt-4 pb-4">
   <div class="row">
+    <?
+    // $oSession = new session();
+    // // print_r($oSession);
+    // // $oSession->set();
+    // $arrSes = $oSession->get('226bd87432ceeb480216294e896890a5');
+    ?>
     <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">

@@ -12,6 +12,11 @@ class user extends model
   public static $password = '';
   public static $date_registration = '';
 
+  public function get_user() {
+    $arrUser = db::query("SELECT * FROM `users` WHERE `id` = '". $this->id . "'");
+    return $arrUser;
+  }
+
   function __construct( $user_id = 0 )
   {
     $this->table = 'users';

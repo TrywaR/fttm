@@ -1,7 +1,6 @@
 <div class="fttm_progress progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
 </div>
-
 <header class="container">
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">

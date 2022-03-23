@@ -1,12 +1,11 @@
 <main class="container">
   <div class="form_block mt-4 col-12 col-md-5">
     <?php if (isset($_SESSION['user'])) : ?>
-      <form class="form_authorization" id="form_authorization" action="index.html" method="post">
+      <form class="form_authorization_logout __no_ajax" id="form_authorization_logout" method="post">
         <h2 class="_form_title">Пользователь</h2>
         <input type="hidden" name="app" value="app">
         <input type="hidden" name="action" value="authorizations">
         <input type="hidden" name="form" value="logout">
-
         <div class="mb-2">
           <label class="form-label" for="form_login">
             Логин
@@ -21,7 +20,7 @@
         </div>
       </form>
     <?php else : ?>
-      <form class="form_authorization" id="form_authorization" action="index.html" method="post">
+      <form class="form_authorization_login __no_ajax" id="form_authorization_login" method="post">
         <h2 class="_form_title">Авторизация</h2>
         <input type="hidden" name="app" value="app">
         <input type="hidden" name="action" value="authorizations">
