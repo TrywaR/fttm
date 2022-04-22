@@ -27,7 +27,20 @@ $(function(){
 			if( oForm.hasClass('reload_page') ) location.reload()
 
 			// Добавляем в данные
-			if ( oForm.hasClass('content_loader_form') ) content_loader( oForm, {}, oData.success.elems )
+			if ( oForm.hasClass('content_loader_form') )
+				switch (oData.success.event) {
+					case 'save':
+						oForm.find('.form_reset').click()
+						content_loader_update( oData.success.elems )
+						break;
+					case 'add':
+						oForm.find('.form_reset').click()
+						content_loader_add( oData.success.elems )
+						break;
+					case 'del':
+						content_loader_del( oData.success.elems )
+						break;
+				}
 		})
 
 		return false

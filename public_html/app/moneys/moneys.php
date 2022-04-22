@@ -22,6 +22,8 @@ switch ($_REQUEST['form']) {
 
     $oMoney = new money( $arrElem['id'] );
     $arrResult['elems'] = $oMoney->get_money();
+    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
+    else $arrResult['event'] = 'add';
     $arrResult['text'] = 'Изменения сохранены';
     notification::success($arrResult);
     break;
@@ -29,5 +31,9 @@ switch ($_REQUEST['form']) {
   case 'del': # Удаление
     $oMoney = new money( $_REQUEST['id'] );
     $oMoney->del();
+    $arrResult = [];
+    $arrResult['event'] = 'del';
+    $arrResult['text'] = 'Данные удалены';
+    notification::success($arrResult);
     break;
 }

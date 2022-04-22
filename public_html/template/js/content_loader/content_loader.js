@@ -1,146 +1,325 @@
-// content_loader
-function content_loader_init(){
-	// content_loader()
+// Отличие от того что в админке, загружается при скролле
+// Последовательная загрузка
+$.fn.content_loader = function() {
+  arrPageParams.table = this.data().content_loader_table// Таблица для загрузки данных
+  arrPageParams.form = this.data().content_loader_form // Запрос для вывода данных
+  arrPageParams.from = this.data().content_loader_from // Запрос для вывода данных
+  arrPageParams.limit = this.data().content_loader_limit // Лимит
+  arrPageParams.sort = this.data().content_loader_sort // Сортировка
+  arrPageParams.sortdir = this.data().content_loader_sortdir // Направление сортировки
+  arrPageParams.scroll_block = this.data().content_loader_scroll_block // Лимит
+  arrPageParams.scroll_nav = this.data().content_loader_scroll_nav // Куда добавлять данные, 0 - начало 1 - конец
+  arrPageParams.parents = this.data().content_loader_parents // Родитель
+  arrPageParams.content_selector = '#' + this.attr('id') // Куда загружать данные при скролле
+  arrPageParams.elem_show_class = this.data().content_loader_show_class // Класс показа
+  arrPageParams.elem_template_path = this.data().content_loader_template // Путь до шаблона, как должны выглядеть элементы
+  arrPageParams.elem_template_selector = this.data().content_loader_template_selector // Селектор шаблона, как должны выглядеть элементы
 
-  // Догрузка элементов
-  $(document).on('click', '.content_loader', function(){
-    content_loader( $(this) )
+  arrPageContent.arrayObjects = [] // Вложенные лементы для дальшей обработки
+  content_loader_init()
+}
+
+// Запуск функции
+function content_loader_init() {
+  arrPageContent.scroll_block_height = $(document).find(arrPageContent.scroll_block).prop('scrollHeight')
+  arrPageContent.from = 0
+  if ( parseInt(arrPageParams.from) ) arrPageContent.from = arrPageParams.from
+  if ( arrPageParams.scroll_block ) arrPageContent.scroll_block = arrPageParams.scroll_block
+  // if ( ! arrPageContent.scroll_block ) arrPageContent.scroll_block = $(window).width() >= 920 ? '#main_block_content' : 'html, body'
+  if ( parseInt(arrPageParams.parents) ) arrPageContent.parents = arrPageParams.parents
+  if ( parseInt(arrPageParams.id) ) arrPageContent.id = arrPageParams.id
+  arrPageContent.scroll_nav = arrPageParams.scroll_nav ? arrPageParams.scroll_nav : 0
+  arrPageContent.full = false
+  arrPageContent.table = arrPageParams.table // Таблица для загрузки данных
+  arrPageContent.sort = arrPageParams.sort // Сортировка
+  arrPageContent.sortdir = arrPageParams.sortdir // Направление соритровки
+  arrPageContent.form = arrPageParams.form // Запрос для вывода данных
+  arrPageContent.limit = arrPageParams.limit ? arrPageParams.limit : 10 // Запрос для вывода данных
+  arrPageContent.elem_show_class = arrPageParams.elem_show_class // Путь до шаблона, как должны выглядеть элементы
+  arrPageContent.content_selector = arrPageParams.content_selector // Куда загружать данные при скролле
+  arrPageContent.elem_template_path = arrPageParams.elem_template_path // Путь до шаблона, как должны выглядеть элементы
+  arrPageContent.elem_template_selector = arrPageParams.elem_template_selector // Класс шаблона, как должны выглядеть элементы
+  arrPageContent.oTemplate = {} // Объект шаблона
+  // '#chronology'
+
+  // Загружаем шаблон
+  if ( arrPageContent.elem_template_path ) {
+    $.get('templates/' + arrPageContent.elem_template_path)
+    .fail(function(data){
+      app_status({'error': 'Шаблон не найден: ' + sTemplatePath})
+    })
+    .done(function(data){
+      if ( data ) arrPageContent.oTemplate = $('<div/>').html(data)
+    })
+  }
+  if ( arrPageContent.elem_template_selector ) {
+    arrPageContent.oTemplate = $(document).find(arrPageContent.elem_template_selector)
+  }
+
+  // Возможность прокрутки, визуально
+  $(document).find(arrPageContent.scroll_block).addClass('_scroll_').addClass('_top_')
+  content_loader_load( 'start' )
+  content_loader_scroll_init()
+}
+
+// Инициализация поля загрузки
+function content_loader_scroll_init() {
+  if ( arrPageContent.scroll_block ) $( document ).find(arrPageContent.scroll_block).on('scroll', content_loader_scroll_load)
+  else {
+    if ( ! arrPageContent.scroll_block ) arrPageContent.scroll_block = $(window).width() >= 920 ? '#main_block_content' : 'html, body'
+    if ( $(window).width() >= 920  ) $( document ).find('#main_block_content').on('scroll', content_loader_scroll_load)
+    else $( window ).bind('scroll', content_loader_scroll_load)
+  }
+}
+
+// Догрузка элементов при скроле, определение позиции
+function content_loader_scroll_load() {
+  if ( arrPageContent.scroll_block_disabled ) return false
+  if ( arrPageContent.full ) return false
+
+  if ( arrPageContent.scroll_nav ) {
+    if ( $(document).find(arrPageContent.scroll_block).scrollTop() == 0 ) {
+      // - Прибавляем шаг
+      arrPageContent.from = parseInt(arrPageContent.from) + parseInt(arrPageContent.limit)
+      // - Загружаем сообщения
+      content_loader_load( 'continue' )
+    }
+  }
+  else {
+    if ( ( parseInt($(document).find(arrPageContent.scroll_block).height()) + parseInt($(document).find(arrPageContent.scroll_block).scrollTop()) ) >= ( $(document).find(arrPageContent.scroll_block).prop('scrollHeight') - 100 ) ) {
+      // - Прибавляем шаг
+      arrPageContent.from = parseInt(arrPageContent.from) + parseInt(arrPageContent.limit)
+      // - Загружаем сообщения
+      content_loader_load( 'continue' )
+    }
+  }
+}
+
+// Загрузка элементов хронологии
+function content_loader_load( sEvent ){
+  arrPageContent.scroll_block_disabled = true
+  $(document).find(arrPageContent.scroll_block).addClass('_no_scroll_')
+  // Получаем данные
+  $.when(
+    content_download( {
+      'action': arrPageContent.table,
+      'form': arrPageContent.form,
+      'parents': arrPageContent.parents,
+      'from': arrPageContent.from,
+      'sort': arrPageContent.sort,
+      'sortdir': arrPageContent.sortdir,
+      'limit': arrPageContent.limit
+    }, 'text', false )
+  ).then( function( resultData ){
+    if ( ! resultData ) return false
+    var oContentLoadElems = $.parseJSON( resultData )
+    var sResultHtml = ''
+
+    // Есть элементы хронологии
+    if ( oContentLoadElems.length ) {
+      // Парсим и вставляем данные
+      if ( arrPageParams.scroll_nav ) oContentLoadElems = oContentLoadElems.reverse()
+
+      $.each(oContentLoadElems, function( iIndex, oContentLoadElem ){
+        sResultHtml += content_loader_elem_html(oContentLoadElem)
+      })
+
+      if ( arrPageParams.scroll_nav ) {
+        $(document).find( arrPageContent.content_selector ).prepend( sResultHtml )
+        oContentLoadElems = oContentLoadElems.reverse()
+      }
+      else {
+        $(document).find( arrPageContent.content_selector ).append( sResultHtml )
+      }
+
+      var iIndexTimerShow = 0
+      $.each(oContentLoadElems, function( iIndex, oContentLoadElem ){
+        setTimeout(function(){
+          if ( arrPageContent.elem_show_class ) $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass(arrPageContent.elem_show_class)
+          else $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass('_show_')
+        }, 150 * iIndexTimerShow / 2)
+        // Если последний элемент, обработка размеров, для плавности скролла
+        if ( oContentLoadElems.length == iIndexTimerShow + 1 ) content_loader_scroll_to( sEvent )
+        iIndexTimerShow++
+      })
+      if ( oContentLoadElems.length < 10 ) {
+        arrPageContent.full = true
+        $(document).find(arrPageContent.scroll_block).removeClass('_no_scroll_')
+        $(document).find(arrPageContent.scroll_block).removeClass('_scroll_')
+      }
+    }
+    // Хронология польностью загруженна
+    else {
+      arrPageContent.full = true
+      $(document).find(arrPageContent.scroll_block).removeClass('_no_scroll_')
+      $(document).find(arrPageContent.scroll_block).removeClass('_scroll_')
+    }
   })
 }
-function content_loader( oBlockElems, oOptions, oData ) {
-	if ( typeof oOptions === "undefined" ) oOptions = {}
-	if ( typeof oData === "undefined" ) oData = {}
-	// oButton - На что нажали
-	oButton = oBlockElems
-	// oData - Что загружаем
-	// oElem - Куда загружаем
-	// iFrom - Отчёт с
-	// iLimit - Отчёт до
-	// oTemplate - Обьект шаблона
-	// iPosition - Куда добавлять, в начало или конец, 0 начало
 
-	// datas
-	// content_loader_table
-	// content_loader_to
-	// content_loader_from
-	// content_loader_limit
-	// content_loader_template
-	// content_loader_position
-
-	// oBlockElems - Блок с элементами
-	// oOptions - Общие параметры
-	oOptions.action = oBlockElems.attr('data-content_loader_action') ? oBlockElems.attr('data-content_loader_action') : oOptions.action
-	oOptions.form = oBlockElems.attr('data-content_loader_form') ? oBlockElems.attr('data-content_loader_form') : oOptions.table
-	oOptions.to = oBlockElems.attr('data-content_loader_to') ? oBlockElems.attr('data-content_loader_to') : oOptions.to
-	oOptions.from = oBlockElems.attr('data-content_loader_from') ? oBlockElems.attr('data-content_loader_from') : oOptions.from
-	oOptions.limit = oBlockElems.attr('data-content_loader_limit') ? oBlockElems.attr('data-content_loader_limit') : oOptions.limit
-	oOptions.template = oBlockElems.attr('data-content_loader_template') ? oBlockElems.attr('data-content_loader_template') : oOptions.template
-	oOptions.position = oBlockElems.attr('data-content_loader_position') ? oBlockElems.attr('data-content_loader_position') : oOptions.position
-
-
-	// Собираем данные
-	var
-		sAction = oOptions.action, // Класс
-		sForm = oOptions.form, // Что с ним
-		sTo = oOptions.to,
-		iFrom = parseInt(oOptions.from),
-		iLimit = parseInt(oOptions.limit),
-		oTemplate = $(document).find(oOptions.template),
-		iPosition = oOptions.position
-
-	// Если уже есть данные, 1 элемент
-	if ( oData.id ) {
-		if ( oTemplate ) {
-			var oActiveElem = $(document).find( sTo ).find('[data-content_loader_item_id="' + oData.id + '"]')
-			// Элемент уже есть, заменяем
-			if ( oActiveElem.length ) {
-				oActiveElem.after( content_loader_template( oTemplate, oData ) )
-				oActiveElem.remove()
-				// Чистим форму, чтобы не затереть случайно данные
-
-				oButton.find('[name=id]').val('')
-				oButton.find('[type=submit]').html('<i class="fas fa-plus-square"></i> Добавить')
-
-				// Анимация Отчистки
-				oButton.removeClassWild("animate_*")
-
-				// Играем анимацию
-				setTimeout(function(){
-					oButton.addClass('animate__animated animate__rubberBand')
-				}, 100)
-			}
-			// Элемента нет, добавялем
-			else {
-				// Добавляем новый
-				setTimeout(function(){
-					if ( iPosition ) $(document).find( sTo ).append( content_loader_template( oTemplate, oData ) )
-					else $(document).find( sTo ).prepend( content_loader_template( oTemplate, oData ) )
-				}, 100)
-			}
-		}
-		else {
-			fttm_alerts({'alert':'Шаблон не найден'})
-		}
-	}
-	else {
-		var oData = {
-			'action': sAction,
-			'form': sForm,
-			'from': iFrom,
-			'limit': iLimit
-		}
-
-		// Загружаем
-		$.when(
-		  content_download( oData, 'json', false )
-		).then( function( oData ){
-			// Если есть данные
-			if ( oData.length ) {
-				// Собираем шаблон
-				if ( oTemplate ) {
-					// Добавляем
-					$.each(oData, function(iIndex, oElem){
-						// Выводим
-						var oData = $(this)[0]
-						setTimeout(function(){
-							if ( iPosition ) $(document).find( sTo ).append( content_loader_template( oTemplate, oData ) )
-							else $(document).find( sTo ).prepend( content_loader_template( oTemplate, oData ) )
-						}, ( iIndex * 100 ))
-					})
-				}
-				else {
-					fttm_alerts({'alert':'Шаблон не найден'})
-				}
-
-				// Если элементы закончились
-				if ( iLimit > oData.length ) oButton.remove()
-				// Если нет, заменяем данные в кнопке
-				else oButton.attr('data-content_loader_from', iFrom + iLimit )
-			}
-			// нет, убираем кнопку
-			else {
-				oButton.remove()
-			}
-		})
-	}
+// Добавление элемента
+function content_loader_add ( oContentLoadElem ){
+  var sResultHtml = content_loader_elem_html(oContentLoadElem)
+  if ( arrPageParams.scroll_nav ) $(document).find( arrPageContent.content_selector ).append( sResultHtml )
+  else $(document).find( arrPageContent.content_selector ).prepend( sResultHtml )
+  setTimeout(function(){
+    if ( arrPageContent.elem_show_class ) $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass(arrPageContent.elem_show_class)
+    else $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass('_show_')
+  }, 150 )
 }
-function content_loader_template( oTemplate, oData ){
-	// oTemplate - объект шаблона
-	// oData - данные для шаблона
 
-	var
-	oElemHtml = $(oTemplate),
-	replaceKeyArray = [],
-	replaceValueArray = [],
-	sElemHtml = oElemHtml[0].innerHTML
-
-	for (var key in oData ) {
-		replaceKeyArray.push( key )
-		replaceValueArray.push( oData[key] )
-	}
-	for(var i = 0; i < replaceKeyArray.length; i++) sElemHtml = sElemHtml.split('{{' + replaceKeyArray[i] + '}}').join(replaceValueArray[i])
-
-	return sElemHtml
+// Обновление элемента
+function content_loader_update ( oContentLoadElem ){
+  var sResultHtml = content_loader_elem_html(oContentLoadElem)
+  $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass('_update_').after(sResultHtml)
+  $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]._update_').remove()
+  setTimeout(function(){
+    if ( arrPageContent.elem_show_class ) $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass(arrPageContent.elem_show_class)
+    else $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').addClass('_show_')
+  }, 150 )
 }
-content_loader_init()
-// content_loader x
+
+// Удаление
+function content_loader_del ( oContentLoadElem ){
+  $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').hide('slow')
+  setTimeout(function(){
+    $(document).find( arrPageContent.content_selector ).find('._elem[data-id="' + oContentLoadElem.id + '"]').remove()
+  }, 150 )
+}
+
+// Прокручивание страницы до нужного места
+function content_loader_scroll_to( sEvent ) {
+  // Определяем на сколько увеличилось пространство для сролла
+  var
+  // arrPageContent.scroll_block_height - Столько было
+  sScrollBlockHeightNew = $(document).find(arrPageContent.scroll_block).prop('scrollHeight'), // - Столько стало
+  sScrollBlockHeightValue = sScrollBlockHeightNew - arrPageContent.scroll_block_height // - Новый контент занял столько места
+  // Сохраняем новый размер
+  arrPageContent.scroll_block_height = sScrollBlockHeightNew
+  // Передвигаем скролл
+  $(document).find(arrPageContent.scroll_block).removeClass('_no_scroll_')
+  arrPageContent.scroll_block_disabled = false
+  // Если первая загрузка, то в самый конец, чтобы увидеть все записи
+  if ( sEvent == 'start' )
+    if ( arrPageContent.scroll_nav )
+      $(document).find( arrPageContent.content_selector ).on('load', scroll_to(0, sScrollBlockHeightNew, 180, $(document).find(arrPageContent.scroll_block)))
+    else
+      $(document).find( arrPageContent.content_selector ).on('load', scroll_to(0, 0, 180, $(document).find(arrPageContent.scroll_block)))
+  // Если подгрузка элементов, то скролим к последнему показанному перез догрузкой
+  if ( sEvent == 'continue' ) scroll_to(0, sScrollBlockHeightValue, 0, $(document).find(arrPageContent.scroll_block))
+}
+
+// Шаблон элемента
+function content_loader_elem_html( oContentLoadElem, oTemplate ){
+  // arrPageContent.oTemplate - объект шаблона
+	// oContentLoadElem - данные для шаблона
+
+  oTemplate = oTemplate ? oTemplate : arrPageContent.oTemplate
+
+  var
+  oElemHtml = $(oTemplate),
+  replaceKeyArray = [],
+  replaceValueArray = [],
+  sElemHtml = oElemHtml[0].innerHTML
+
+  // Подставляем значения
+  for (var key in oContentLoadElem ) {
+    replaceKeyArray.push( key )
+    replaceValueArray.push( oContentLoadElem[key] )
+    // Вложенные элементы
+    if ( typeof oContentLoadElem[key] === 'object' ) {
+      // Сохраняем для дальнейшей обработки
+      if ( ! arrPageContent.arrayObjects[oContentLoadElem.id] ) arrPageContent.arrayObjects[oContentLoadElem.id] = []
+      arrPageContent.arrayObjects[oContentLoadElem.id][key] = oContentLoadElem[key]
+
+      for (var keySub in oContentLoadElem[key] ) {
+        replaceKeyArray.push( key + '.' + keySub )
+        replaceValueArray.push( oContentLoadElem[key][keySub] )
+      }
+    }
+  }
+  for(var i = 0; i < replaceKeyArray.length; i++) {
+    sElemHtml = sElemHtml.split('{{' + replaceKeyArray[i] + '}}').join(replaceValueArray[i])
+  }
+
+  // Убираем пустые поля
+  sElemHtml = sElemHtml.replace(/{{(.*?)}}/g, '')
+
+
+  return sElemHtml
+}
+
+
+$(function(){
+  // Кнопка показа формы
+  $(document).on('click', '.content_loader_show', function(){
+    $.when(
+      content_download(  {
+        'action': $(this).data().action,
+        'form': $(this).data().form,
+        'parents': $(this).data().parents,
+        'id': $(this).data().id,
+      }, 'json' )
+    ).then( function( oData ) {
+      if ( oData.form ) $.fancybox.open( oData.form )
+    })
+
+    return false
+  })
+
+  // Кнопка редактирования
+  $(document).on( 'submit', 'form#content_loader_save', function() {
+    var oData = $(this).serializeArray()
+
+    $.when(
+      content_download( oData, 'json' )
+    ).then( function( oData ) {
+      if ( oData.success ) {
+        // Отображаем результат
+        if ( oData.success.text ) status(oData.success.text)
+        else status(oData.success)
+
+        switch ( oData.success.event ) {
+          case 'add':
+          case 'edit':
+          case 'save':
+            // if ( oData.success.selector_to ) {
+            //   // $(document).find(oData.success.selector_to).
+            // }
+            break
+        }
+
+        if ( oData.success.location ) $(location).attr('href',oData.success.location)
+      }
+
+      if ( oData.error ) status(oData)
+    })
+
+    return false
+  })
+
+  // Кнопка удаления
+  $(document).on('click', '.content_loader_del', function(){
+    if ( ! $(this).data().elem ) {
+      status({'error':'Не указан селектор элемента для удаления'})
+      return false
+    }
+    var oElem = $(this).parents( $(this).data().elem )
+
+    // Подтверждение
+    if  ( ! confirm('Вы действительно хотите удалить этот элемент?') ) return false
+
+    $.when(
+      content_download( {
+        'action': $(this).data().action,
+        'form': $(this).data().form,
+        'id': $(this).data().id,
+      }, 'json' )
+    ).then( function( oData ){
+      if ( oData.success ) oElem.remove()
+      else $.fancybox.open( '<p class="error">' + oData.error + '</p>' )
+    })
+
+    return false
+  })
+})

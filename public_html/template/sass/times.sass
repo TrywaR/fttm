@@ -1,0 +1,42 @@
+.block_times
+.times
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  opacity: 0
+
+  ._date
+    opacity: .5
+    font-size: .8rem
+    font-weight: lighter
+    margin-right: .5rem
+
+  ._category
+    opacity: .5
+    font-size: .8rem
+    font-weight: lighter
+    margin-right: .5rem
+    
+  ._title
+
+  &._show_
+    opacity: 1
+
+.times_category
+  .times_category-name
+  .times_category-data
+    position: relative
+    z-index: 1
+
+    .list-group-item
+      background: none
+
+    .times_category-data_bg
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      z-index: -1
+      opacity: .1
+      border-radius: $border_radius

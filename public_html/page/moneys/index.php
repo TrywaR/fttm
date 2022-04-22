@@ -1,4 +1,4 @@
-<main class="container pt-4 pb-4" id="container">
+<main class="container" id="container">
   <section class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
@@ -49,8 +49,6 @@
                       action=""
                       method="post"
                       data-content_download_edit_type="0"
-                      data-content_loader_to="#content_loader_to"
-                      data-content_loader_template=".template_money"
                     >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
@@ -183,8 +181,6 @@
                       action=""
                       method="post"
                       data-content_download_edit_type="1"
-                      data-content_loader_to="#content_loader_to"
-                      data-content_loader_template=".template_money"
                     >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys">
@@ -276,104 +272,77 @@
       </div>
     </div>
 
-    <div class="col col-12 col-md-7 animate__animated animate__bounceInRight animate__delay-2s">
-      <?
-      // $sQuery  = "SELECT * FROM `clients`";
-      // $sQuery .= " WHERE `active` > 0";
-      // $sQuery .= " ORDER BY `sort` ASC";
-      // $sQuery .= " LIMIT 20";
-
-      // $arrMoneys = $db->query_all($sQuery);
-
-      $oMoney = new money();
-      $oMoney->limit = 10;
-      $oMoney->sort = 'date';
-      $oMoney->sortDir = 'DESC';
-      $arrMoneys = $oMoney->get_money();
-
-      if ( ! count( $arrMoneys ) ) echo 'Нет затрат или поступлений';
-      ?>
-      <div class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#content_loader_to" data-content_manager_item=".list-group-item">
+    <div class="col col-12 col-md-7 animate__animated animate__bounceInRight">
+      <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
         </button>
       </div>
-      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to" style="max-height: 80vh; overflow: auto;">
-      <?
-      // Прикручиваем рейтинги
-      foreach ($arrMoneys as &$arrMoney) {
-        ?>
-        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
-            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
-              <?=$arrMoney['price']?>₽
-            </div>
-            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?=$arrMoney['date']?>
-            </span>
-            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
-          </div>
-          <span class="rounded-pill">
-            <a href="#" class="btn content_manager_switch switch_icons">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrMoney['id']?>" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
-          </span>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </li>
-        <?
-      }
-      ?>
-      </ol>
-      <div class="mt-4 text-center">
-        <button type="button" class="btn btn-primary btn-sm content_loader" data-content_loader_action="moneys" data-content_loader_form="show" data-content_loader_to="#content_loader_to" data-content_loader_from="10" data-content_loader_limit="10" data-content_loader_template=".template_money" data-content_loader_position="1">Load</button>
-      </div>
+      <ol
+        id="moneys"
+        class="block_moneys block_elems list-group list-group-numbered block_content_loader"
+        data-content_loader_table="moneys"
+        data-content_loader_form="show"
+        data-content_loader_limit="15"
+        data-content_loader_scroll_nav="0"
+        <?php if ($_REQUEST['sort']): ?>
+          data-content_loader_sort="<?=$_REQUEST['sort']?>"
+          data-content_loader_sortdir="<?=$_REQUEST['sortdir']?>"
+        <?php endif; ?>
+        <?php if ($_REQUEST['filter']): ?>
+          data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
+        <?php endif; ?>
+        data-content_loader_template_selector=".block_template"
+        data-content_loader_scroll_block="#moneys"
+        data-content_loader_show_class="animate__bounceInRight _show_"
+        style="max-height: 50vh; overflow: auto; overflow-x: hidden;"
+      ></ol>
+      <script>
+        $(function(){
+          $(document).find('#moneys').content_loader()
+          $(document).find('#content_manager_buttons').content_manager()
+        })
+      </script>
     </div>
   </section>
 
   <section class="block_template">
-    <div class="template_money list-group">
-      <li class="list-group-item money progress_block d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold mb-1">{{title}}</div>
-          <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
-            {{price}}₽
-          </div>
-          <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold mb-1">
+          <span class="_date">
             {{date}}
           </span>
-          <i class="fas fa-credit-card"></i> {{card}}
+          <span class="_card">
+            <i class="fas fa-credit-card"></i> {{card_val.title}}
+          </span>
         </div>
-        <span class="rounded-pill">
-          <a href="#" class="btn content_manager_switch switch_icons">
-            <div class="">
-              <i class="far fa-square"></i>
-            </div>
-            <div class="">
-              <i class="fas fa-square"></i>
-            </div>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="edit" data-elem=".list-group-item" data-animate_class="animate__flipInY">
-            <i class="fas fa-pen-square"></i>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+        <div class="badge bg-primary _price">
+          {{price}}₽
+        </div>
+        <span class="_title">
+          {{title}}
         </span>
+        <small>{{categroy_val.title}}{{project_val.title}}</small>
+      </div>
+      <span class="rounded-pill">
+        <a href="#" class="btn content_manager_switch switch_icons">
+          <div class="">
+            <i class="far fa-square"></i>
+          </div>
+          <div class="">
+            <i class="fas fa-square"></i>
+          </div>
+        </a>
+        <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="edit" data-elem=".list-group-item" data-animate_class="animate__flipInY">
+          <i class="fas fa-pen-square"></i>
+        </a>
+        <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+      </span>
 
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-      </li>
-    </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+    </li>
   </section>
 </main>

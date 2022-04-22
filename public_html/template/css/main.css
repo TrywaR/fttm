@@ -100,6 +100,99 @@ body .navbar .home_link {
   color: white;
   text-decoration: none; }
 
+.times {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0; }
+  .times ._date {
+    opacity: 0.5;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    margin-right: 0.5rem; }
+  .times ._category {
+    opacity: 0.5;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    margin-right: 0.5rem; }
+  .times._show_ {
+    opacity: 1; }
+
+.times_category .times_category-data {
+  position: relative;
+  z-index: 1; }
+  .times_category .times_category-data .list-group-item {
+    background: none; }
+  .times_category .times_category-data .times_category-data_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+    border-radius: 0.5rem; }
+
+.money {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0; }
+  .money._show_ {
+    opacity: 1; }
+  .money ._date {
+    opacity: 0.5;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    margin-right: 0.5rem; }
+  .money ._card {
+    opacity: 0.5;
+    font-size: 0.8rem;
+    font-weight: lighter; }
+  .money ._price {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-right: 0.5rem; }
+  .money._type_1_ {
+    position: relative;
+    z-index: 1; }
+    .money._type_1_:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #2cb544;
+      opacity: 0.4;
+      z-index: -1; }
+
+.moneys_category .moneys_category-data {
+  position: relative;
+  z-index: 1; }
+  .moneys_category .moneys_category-data .list-group-item {
+    background: none; }
+  .moneys_category .moneys_category-data .moneys_category-data_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+    border-radius: 0.5rem; }
+
+@media screen and (max-width: 1000px) {
+  .money {
+    flex-direction: column; }
+    .money .rounded-pill {
+      margin-left: auto;
+      margin-top: 0.5rem; }
+    .money:before {
+      position: absolute;
+      top: 0.3rem;
+      left: 0.3rem;
+      opacity: 0.3; } }
 .fttm_alerts {
   position: fixed;
   bottom: 1rem;
@@ -235,50 +328,6 @@ body {
 .switch_icons._active_ > *:nth-child(2) {
   display: block; }
 
-.money._type_1_ {
-  position: relative;
-  z-index: 1; }
-  .money._type_1_:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #2cb544;
-    opacity: 0.4;
-    z-index: -1; }
-
-.moneys_category .moneys_category-data {
-  position: relative;
-  z-index: 1; }
-  .moneys_category .moneys_category-data .list-group-item {
-    background: none; }
-  .moneys_category .moneys_category-data .moneys_category-data_bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.1;
-    border-radius: 0.5rem; }
-
-.times_category .times_category-data {
-  position: relative;
-  z-index: 1; }
-  .times_category .times_category-data .list-group-item {
-    background: none; }
-  .times_category .times_category-data .times_category-data_bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.1;
-    border-radius: 0.5rem; }
-
 .content_manager_buttons._hide_ {
   display: none !important; }
 
@@ -347,17 +396,6 @@ body {
   opacity: 0.4; }
 
 @media screen and (max-width: 1000px) {
-  .money {
-    flex-direction: column; }
-    .money .rounded-pill {
-      margin-left: auto;
-      margin-top: 0.5rem; }
-    .money:before {
-      position: absolute;
-      top: 0.3rem;
-      left: 0.3rem;
-      opacity: 0.3; }
-
   .block_analitycs {
     flex-wrap: wrap; }
     .block_analitycs ._circle {

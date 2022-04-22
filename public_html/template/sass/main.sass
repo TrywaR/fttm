@@ -8,6 +8,12 @@
 @import "../../lib/animate/animate.min.css"
 @import "bootstrap_fix"
 
+// Время
+@import "times"
+
+// Деньги
+@import "moneys"
+
 // Уведомления
 @import "fttm_alerts"
 
@@ -85,59 +91,7 @@ body
       &:nth-child(2)
         display: block
 
-.money
-  &._type_1_
-    position: relative
-    z-index: 1
 
-    &:after
-      content: ''
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      background: $color_success
-      opacity: .4
-      z-index: -1
-
-.moneys_category
-  .moneys_category-name
-  .moneys_category-data
-    position: relative
-    z-index: 1
-
-    .list-group-item
-      background: none
-
-    .moneys_category-data_bg
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      z-index: -1
-      opacity: .1
-      border-radius: $border_radius
-
-.times_category
-  .times_category-name
-  .times_category-data
-    position: relative
-    z-index: 1
-
-    .list-group-item
-      background: none
-
-    .times_category-data_bg
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      z-index: -1
-      opacity: .1
-      border-radius: $border_radius
 
 .content_manager_buttons
   &._hide_
@@ -224,23 +178,6 @@ body
       opacity: .4
 
 @media screen and (max-width:1000px)
-  .money
-    flex-direction: column
-
-    .rounded-pill
-      margin-left: auto
-      margin-top: .5rem
-
-    &:before
-      position: absolute
-      top: .3rem
-      left: .3rem
-      opacity: .3
-
-  .moneys_category
-    .moneys_category-name
-    .moneys_category-data
-      .moneys_category-data_bg
 
   .block_analitycs
     flex-wrap: wrap

@@ -10,7 +10,7 @@ $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
 
-<main class="container pt-4 pb-4">
+<main class="container">
   <div class="row">
     <?
     // $oSession = new session();
@@ -19,11 +19,18 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     // $arrSes = $oSession->get('226bd87432ceeb480216294e896890a5');
     ?>
     <div class="col-12 mb-4">
-      <div class="jumbotron jumbotron-fluid">
+      <div class="jumbotron jumbotron-fluid animate__animated animate__pulse">
         <div class="container">
           <h1 class="display-4">Times</h1>
 
           <p class="lead">
+            <h2>
+              <?
+              $dDateReally = new \DateTime();
+              echo $dDateReally->format('F j');
+              ?>
+              <small><?=$dDateReally->format('l')?></small>
+            </h2>
             <span class="icon">
               <i class="far fa-folder"></i>
             </span>
@@ -47,7 +54,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
   <div class="row">
     <div class="col-12 col-md-5 mb-4">
-      <div class="card">
+      <div class="card animate__animated animate__pulse animate__delay-1s">
         <div class="card-body">
           <h5 class="card-title">Time</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -190,161 +197,71 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     </div>
 
     <div class="col-12 col-md-7">
-      <h2>
-        <?
-        $dDateReally = new \DateTime();
-        echo $dDateReally->format('F j');
-        ?>
-        <small><?=$dDateReally->format('l')?></small>
-      </h2>
-
-
-      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to" style="max-height: 80vh; overflow: auto;">
-      <?
-      $oTime = new time();
-      $oTime->where = "`date` LIKE '" . date('Y') . '-' . date('m') . '-' . date('d') . "%'";
-      $arrTimes = $oTime->get();
-
-      // Прикручиваем рейтинги
-      if ( ! count($arrTimes) ) echo 'Пусто!';
-      else foreach ($arrTimes as &$arrTime) {
-        ?>
-        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1"><?=$arrTime['title']?></div>
-            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: <?=$arrCategoriesIds[$arrTime['category_id']]['color']?> ! important;">
-              <?
-              $dDateReally = new DateTime($arrTime['time_really']);
-              echo $dDateReally->format('H:i');
-              ?>
-            </div>
-            <small><?=$arrCategoriesIds[$arrTime['category_id']]['title']?> | <?=$arrProjectsIds[$arrTime['project_id']]['title']?></small>
-          </div>
-          <span class="rounded-pill">
-            <?/*
-            <a href="#" class="btn content_manager_switch switch_icons">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
-            */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
-          </span>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </li>
-      <?}?>
-      </ol>
-
-
-      <h2 class="mt-4">
-        <?
-        $dDateReally = new \DateTime( date('d.m.Y',strtotime("-1 days")) );
-        echo $dDateReally->format('F j');
-        ?>
-        <small><?=$dDateReally->format('l')?></small>
-      </h2>
-
-      <ol class="list-group list-group-numbered block_content_loader" id="content_loader_to_2" style="max-height: 80vh; overflow: auto;">
-      <?
-      $oTime = new time();
-      $oTime->where = "`date` LIKE '" . date('Y') . '-' . date('m') . '-' . date('d', strtotime("-1 days")) . "%'";
-      $arrTimesУesterday = $oTime->get();
-
-      // Прикручиваем рейтинги
-      if ( ! count($arrTimesУesterday) ) echo 'Пусто!';
-      else foreach ($arrTimesУesterday as &$arrTime) {
-        ?>
-        <li class="list-group-item money progress_block d-flex justify-content-between align-items-start" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1"><?=$arrTime['title']?></div>
-            <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: <?=$arrCategoriesIds[$arrTime['category_id']]['color']?> ! important;">
-              <?
-              $dDateУesterdayReally = new DateTime($arrTime['time_really']);
-              echo $dDateУesterdayReally->format('H:i');
-              ?>
-            </div>
-            <small><?=$arrCategoriesIds[$arrTime['category_id']]['title']?> | <?=$arrProjectsIds[$arrTime['project_id']]['title']?></small>
-          </div>
-          <span class="rounded-pill">
-            <?/*
-            <a href="#" class="btn content_manager_switch switch_icons">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
-            */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrTime['id']?>" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
-          </span>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </li>
-      <?}?>
-      </ol>
-    </div>
-  </div>
-
-  <div class="block_template">
-    <div class="template_time list-group">
-      <li class="list-group-item money progress_block d-flex justify-content-between align-items-start animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold mb-1">{{title}}</div>
-          <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; background: {{category_color}} ! important;">
-            {{time_really}}
-          </div>
-          <small>{{category_title}} | {{project_title}}</small>
-        </div>
-
-        <span class="rounded-pill">
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-            <i class="fas fa-pen-square"></i>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
-        </span>
-
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-      </li>
-    </div>
-  </div>
-
-  <?/*
-  <div class="row">
-    <div class="col-12 col-md-5">
-      <h2>Добавление</h2>
-      <div class="_data">
-
-
+      <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
+        <button type="button" name="button" class="btn del">
+          <i class="fas fa-folder-minus"></i>
+        </button>
       </div>
-    </div>
 
-    <div id="times_list" class="col-12 col-md-7">
-      <h2>Список</h2>
-      <div class="_data">
-        <!-- Список элементов -->
-      </div>
-      <div class="_template">
-        <!-- Пример элемента -->
-      </div>
+      <ol
+        id="times"
+        class="block_times block_elems list-group list-group-numbered block_content_loader"
+        data-content_loader_table="times"
+        data-content_loader_form="show"
+        data-content_loader_limit="15"
+        data-content_loader_scroll_nav="0"
+        <?php if ($_REQUEST['sort']): ?>
+          data-content_loader_sort="<?=$_REQUEST['sort']?>"
+          data-content_loader_sortdir="<?=$_REQUEST['sortdir']?>"
+        <?php endif; ?>
+        <?php if ($_REQUEST['filter']): ?>
+          data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
+        <?php endif; ?>
+        data-content_loader_template_selector=".block_template"
+        data-content_loader_scroll_block="#times"
+        data-content_loader_show_class="animate__bounceInRight _show_"
+        style="max-height: 50vh; overflow: auto; overflow-x: hidden;"
+      ></ol>
       <script>
-        $(content_loader_init())
+        $(function(){
+          $(document).find('#times').content_loader()
+          $(document).find('#content_manager_buttons').content_manager()
+        })
       </script>
+
+      <div class="block_template">
+        <li class="list-group-item _elem times progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold mb-1">
+              <small class="_date">{{date}}</small>
+              <small class="_category">{{category_title}} | {{project_title}}</small>
+            </div>
+            <div class="badge bg-primary _time" style="font-size: 1rem; font-weight: normal; background: {{category_color}} ! important; margin-right:.5rem;">
+              {{time_really}}
+            </div>
+            <span class="_title">{{title}}</span>
+          </div>
+
+          <span class="rounded-pill">
+            <a href="#" class="btn content_manager_switch switch_icons">
+              <div class="">
+                <i class="far fa-square"></i>
+              </div>
+              <div class="">
+                <i class="fas fa-square"></i>
+              </div>
+            </a>
+            <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+              <i class="fas fa-pen-square"></i>
+            </a>
+            <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+          </span>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
+        </li>
+      </div>
     </div>
   </div>
-  */?>
 </main>

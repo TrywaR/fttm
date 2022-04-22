@@ -17,10 +17,24 @@ class money extends model
   public static $value = ''; # minus - затраты
   public static $user_id = '';
 
-  function prep_money( $arrMoney ){
+  function prep_money( $arrMoney = [] ){
     $arrDate = explode(' ', $arrMoney['date']);
     $arrMoney['date'] = $arrDate[0];
     $arrMoney['price'] = substr($arrMoney['price'], 0, -2);
+
+    if ( $arrMoney['card'] ) {
+      $oCard = new card( $arrMoney['card'] );
+      $arrMoney['card_val'] = (array)$oCard;
+    }
+    if ( $arrMoney['category'] ) {
+      $oMoneyCategory = new moneys_category( $arrMoney['category'] );
+      $arrMoney['categroy_val'] = (array)$oMoneyCategory;
+    }
+    if ( $arrMoney['project_id'] ) {
+      $oProject = new project( $arrMoney['project_id'] );
+      $arrMoney['project_val'] = (array)$oProject;
+    }
+
     return $arrMoney;
   }
 

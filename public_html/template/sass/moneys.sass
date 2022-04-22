@@ -1,0 +1,79 @@
+.block_moneys
+.money
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  opacity: 0
+
+  &._show_
+    opacity: 1
+
+  ._date
+    opacity: .5
+    font-size: .8rem
+    font-weight: lighter
+    margin-right: .5rem
+    
+  ._card
+    opacity: .5
+    font-size: .8rem
+    font-weight: lighter
+
+  ._price
+    font-size: 1rem
+    font-weight: normal
+    margin-right: .5rem
+
+
+  &._type_1_
+    position: relative
+    z-index: 1
+
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: $color_success
+      opacity: .4
+      z-index: -1
+
+.moneys_category
+  .moneys_category-name
+  .moneys_category-data
+    position: relative
+    z-index: 1
+
+    .list-group-item
+      background: none
+
+    .moneys_category-data_bg
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      z-index: -1
+      opacity: .1
+      border-radius: $border_radius
+
+@media screen and (max-width:1000px)
+  .money
+    flex-direction: column
+
+    .rounded-pill
+      margin-left: auto
+      margin-top: .5rem
+
+    &:before
+      position: absolute
+      top: .3rem
+      left: .3rem
+      opacity: .3
+
+  .moneys_category
+    .moneys_category-name
+    .moneys_category-data
+      .moneys_category-data_bg

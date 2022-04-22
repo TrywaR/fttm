@@ -2,7 +2,7 @@
    <div class="row mb-4">
      <div class="col-12  animate__animated animate__bounceIn">
        <h1>Freelance Time TrywaR Manager</h1>
-       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i> <small>v 3.0.4 Moneys</small></a>
+       <a href="https://github.com/TrywaR/fttm"><i class="fab fa-github"></i></a>
      </div>
      <!-- <div class="col-12 mt-4">
        <a href="/authorizations/" class="btn btn-primary">Войти</a>
@@ -44,15 +44,9 @@
      <div class="col col-12 mt-4">
        <figure>
          <blockquote cite="https://yandex.ru/lab/yalm/share?id=4aa38ace1b050d268f565046b553df54996280f0ea5b1a6355d4c4a7ed744556">
-           <p>frelance time trywar manager, на который я работаю, имеет два экземпляра с двумя различными проектами.</p>
-           <p>Когда мы говорим о времени ожидания между ними, мы имеем в виду время, которое требуется для выполнения задачи менеджером, чтобы выполнить задачу.
-             Это можно увидеть в журнале (не для всех задач):</p>
-             <ul>
-               <li>Как вы можете видеть, это связано с тайм-аут-менеджером.</li>
-               <li>Я не знаю, что я могу сделать по этому поводу, поскольку время ожидания - это то, когда выполняется задача, а не когда выполняются процессы.</li>
-             </ul>
+           Хеллоу %USER_NAME%, ты наткнулся на очередное приложение для тайм менеджмента.
          </blockquote>
-        <figcaption>—Балабоба</figcaption>
+        <figcaption>—TrywaR</figcaption>
       </figure>
      </div>
    </div>
@@ -60,7 +54,8 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_8">5.0.8 Edits form</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_9">5.0.9 Edits content manager</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_8">5.0.8 Edits form</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_7">5.0.7 Edits forms mega</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_6">5.0.6 Edits forms</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_5">5.0.5 Full update</a>
@@ -80,6 +75,16 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-5_0_9">5.0.9 Edits form</h2>
+          <ol>
+            <li>
+              Time content manager worker full
+            </li>
+            <li>
+              Money full info write on card
+            </li>
+          </ol>
+
           <h2 id="list-item-5_0_8">5.0.8 Edits form</h2>
           <ol>
             <li>

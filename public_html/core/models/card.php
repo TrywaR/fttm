@@ -13,6 +13,10 @@ class card extends model
   public static $active = '';
   public static $user_id = '';
 
+  // function get_card(){
+  //
+  // }
+
   function __construct( $card_id = 0 )
   {
     $this->table = 'cards';
