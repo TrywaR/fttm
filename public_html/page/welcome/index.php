@@ -75,7 +75,8 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_9">5.0.9 Edits content manager</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_1_0">5.1.0 Beta form for time</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_9">5.0.9 Edits content manager</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_8">5.0.8 Edits form</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_7">5.0.7 Edits forms mega</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_6">5.0.6 Edits forms</a>
@@ -96,7 +97,17 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
-          <h2 id="list-item-5_0_9">5.0.9 Edits form</h2>
+          <h2 id="list-item-5_1_0">5.1.0 Beta form for time</h2>
+          <ol>
+            <li>
+              Beta form for time
+            </li>
+            <li>
+              Micro fix
+            </li>
+          </ol>
+
+          <h2 id="list-item-5_0_9">5.0.9 Edits content manager</h2>
           <ol>
             <li>
               Time content manager worker full

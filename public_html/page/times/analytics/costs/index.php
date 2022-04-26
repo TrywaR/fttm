@@ -3,6 +3,7 @@
 $oTimesCategory = new times_category();
 $oTimesCategory->limit = 0;
 $oTimesCategory->sort = 'sort';
+$oTimesCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrTimesCategories = $oTimesCategory->get();
 
 $dCurrentDate = date('Y-m');
@@ -16,6 +17,7 @@ $arrTimesProjectsIds = [];
 
 // Проекты
 $oProject = new project();
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 foreach ($arrProjects as &$arrProject) $arrTimesProjectsIds[$arrProject['id']] = $arrProject;
 
@@ -23,7 +25,8 @@ foreach ($arrProjects as &$arrProject) $arrTimesProjectsIds[$arrProject['id']] =
 foreach ($arrTimesCategories as &$arrTimesCategory) {
   // Собираем данные по категории
   $oTime = new time();
-  $oTime->where = "`category_id` = '" . $arrTimesCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%'";
+  $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oTime->query = " AND `category_id` = '" . $arrTimesCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%'";
   $arrTimes = $oTime->get();
   $iCategorySum = 0;
 
@@ -62,7 +65,8 @@ for ($i=1; $i < 3; $i++) {
     $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
 
     $oTime = new time();
-    $oTime->where = "`date` = '" . $dDateCurrent . "'";
+    $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oTime->query .= " AND `date` = '" . $dDateCurrent . "'";
     $arrTimes = $oTime->get();
     $iDaySum = 0;
 
@@ -90,7 +94,8 @@ for ($i=1; $i < 3; $i++) {
 $arrMounths = [];
 for ($i=1; $i < 13; $i++) {
   $oTime = new time();
-  $oTime->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%'";
+  $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oTime->query .= " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%'";
   $arrTimes = $oTime->get();
   $iMounthSum = 0;
   foreach ($arrTimes as &$arrTime) {
@@ -108,7 +113,8 @@ for ($i=1; $i < 13; $i++) {
 $arrYears = [];
 for ($i=0; $i < 3; $i++) {
   $oTime = new time();
-  $oTime->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%'";
+  $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oTime->query .= " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%'";
   $arrTimes = $oTime->get();
   $iYearSum = 0;
   foreach ($arrTimes as &$arrTime) {

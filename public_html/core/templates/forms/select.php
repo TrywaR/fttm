@@ -12,7 +12,7 @@
     <p class="label">
       <?=$arrTemplateParams['title']?>
     </p>
-    <select class="input" name="<?=$arrTemplateParams['name']?>">
+    <select class="input form-control" name="<?=$arrTemplateParams['name']?>" <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>>
       <?php foreach ($arrTemplateParams['options'] as $arrOption): ?>
         <option value="<?=$arrOption['id']?>" <?if($arrTemplateParams['value'] == $arrOption['id']) {echo 'selected';}?>><?=$arrOption['name']?></option>
       <?php endforeach; ?>

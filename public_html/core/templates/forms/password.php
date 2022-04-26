@@ -3,7 +3,6 @@
 // $arrTemplateParams['title'] = '';
 // $arrTemplateParams['name'] = '';
 // $arrTemplateParams['value'] = '';
-// $arrTemplateParams['disabled'] = '';
 // $arrTemplateParams['required'] = '';
 // $arrTemplateParams['class'] = '';
 ?>
@@ -12,13 +11,13 @@
     <p class="label">
       <?=$arrTemplateParams['title']?>
     </p>
-    <textarea
-      class="textarea form-control"
-      name="<?=$arrTemplateParams['name']?>"
+    <input
+      type="password"
+      class="input form-control"
       <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
+      name="<?=$arrTemplateParams['name']?>"
+      value="<?=$arrTemplateParams['value']?>"
       <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
     >
-      <?if ( $arrTemplateParams['value'] ) echo base64_decode($arrTemplateParams['value'])?>
-    </textarea>
   </label>
 </div>

@@ -7,6 +7,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oProject->limit = $_REQUEST['limit'];
     $oProject->sort = 'date';
     $oProject->sortDir = 'DESC';
+    $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrProjects = $oProject->get();
 
     notification::send($arrProjects);

@@ -5,8 +5,9 @@
 $oMoneysCategory = new moneys_category();
 $oMoneysCategory->limit = 0;
 $oMoneysCategory->sort = 'sort';
+$oMoneysCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 // $oMoneysCategory->type = 0;
-// $oMoneysCategory->where = "`type` = 0";
+// $oMoneysCategory->query = " AND `type` = 0";
 $arrMoneysCategories = $oMoneysCategory->get();
 
 $oCards = new card();
@@ -16,7 +17,7 @@ $arrCards = $oCards->get();
 foreach ($arrCards as $arrCard) $arrCardsIds[$arrCard['id']] = $arrCard;
 
 $dCurrentDate = date('Y-m');
-$iCurrentMonth = date('m');
+$iCurrentMonth = date('n');
 $iCurrentYear = date('Y');
 
 $arrMoneysCategoriesName = [];
@@ -25,7 +26,8 @@ $arrMoneysCategoriesIds = [];
 foreach ($arrMoneysCategories as &$arrMoneysCategory) {
   // Собираем данные по категории
   $oMoney = new money();
-  $oMoney->where = "`category` = '" . $arrMoneysCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0'";
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `category` = '" . $arrMoneysCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
   $iCategorySum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -59,7 +61,8 @@ for ($i=1; $i < 3; $i++) {
     $arrWeeks[$i]['days'][$iIndex]['title'] = $dDateCurrent;
 
     $oMoney = new money();
-    $oMoney->where = "`date` = '" . $dDateCurrent . "'";
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` = '" . $dDateCurrent . "'";
     $arrMoneys = $oMoney->get();
     $iDaySum = 0;
 
@@ -90,7 +93,8 @@ for ($i=1; $i < 3; $i++) {
 $arrMounths = [];
 for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0'";
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -113,7 +117,8 @@ for ($i=1; $i < 13; $i++) {
 $arrYears = [];
 for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0'";
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0'";
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -485,7 +490,8 @@ for ($i=0; $i < 3; $i++) {
     <h2>Unic</h2>
     <?
     $oMoney = new money();
-    $oMoney->where = "`category` = '5' AND `project_id` = 3 AND `type` = '0'";
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `category` = '5' AND `project_id` = 3 AND `type` = '0'";
     $arrMoneys = $oMoney->get();
     foreach ($arrMoneys as $arrMoney) {
       ?>

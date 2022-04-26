@@ -11,7 +11,7 @@
     <p class="label"><?=$arrTemplateParams['title']?></p>
     <input
       type="time"
-      class="input"
+      class="input form-control"
       name="<?=$arrTemplateParams['name']?>"
       value="<?=$arrTemplateParams['value']?>"
       <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>

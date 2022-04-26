@@ -60,6 +60,10 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
           <div class="card-body">
+            <a data-action="times" data-animate_class="animate__flipInY" data-elem=".table_row" data-form="form" href="javascript:;" class="button _icon content_loader_show" title="Потратить время">
+              <i class="fas fa-plus-circle"></i>
+              <span class="badge badge-warning">Beta</span>
+            </a>
             <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">

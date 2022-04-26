@@ -43,6 +43,52 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+body .block_modal {
+  background: #101010; }
+body .modal_form {
+  background: #221a1a; }
+  body .modal_form .block_header {
+    padding: 1rem; }
+  body .modal_form .block_sections {
+    display: flex;
+    flex-wrap: wrap; }
+    body .modal_form .block_sections .block_section {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      padding: 1rem;
+      box-sizing: border-box; }
+      body .modal_form .block_sections .block_section._40 {
+        flex-basis: 40%;
+        min-width: 40%;
+        max-width: 100%; }
+      body .modal_form .block_sections .block_section._60 {
+        flex-basis: 60%;
+        min-width: 60%;
+        max-width: 100%; }
+      body .modal_form .block_sections .block_section._100 {
+        flex-basis: 100%;
+        min-width: 100%;
+        max-width: 100%; }
+  body .modal_form .block_footer {
+    padding: 1rem; }
+
+.input_checkbox,
+.block_input {
+  margin: 0 0 1rem; }
+  .input_checkbox label,
+  .block_input label {
+    font-size: 1em;
+    line-height: 1;
+    margin-bottom: 0.2rem; }
+
+.block_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .block_buttons .button:not(:last-child) {
+    margin-right: 0.5rem; }
+
 body .accordion-button,
 body .accordion-button:not(.collapsed) {
   color: white;
@@ -53,10 +99,13 @@ body .accordion-item {
 body .form-select,
 body .form-select:focus,
 body .form-control,
-body .form-control:focus {
+body .form-control:focus,
+body .form-control:disabled {
   color: white;
   background: #221a1a;
   border-color: #101010; }
+body .form-control:disabled {
+  opacity: 0.6; }
 body .picker__box .picker__header .picker__date-display .picker__weekday-display,
 body .datepicker table tr td.active:active,
 body .datepicker table tr td.active.highlighted:active,

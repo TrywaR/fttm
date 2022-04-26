@@ -7,6 +7,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
     $oCategory->sort = 'date';
     $oCategory->sortDir = 'DESC';
+    $oCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrCategory = $oCategory->get();
 
     notification::send($arrCategory);

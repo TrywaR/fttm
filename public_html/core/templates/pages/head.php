@@ -34,11 +34,11 @@
 	<!-- jGrowl x-->
 
 	<!-- fancybox_galery -->
-	<!-- <script src="js/fancybox-master/jquery.fancybox.min.js" charset="utf-8"></script> -->
-	<!-- <link rel="stylesheet" href="js/fancybox-master/jquery.fancybox.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" /> -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> -->
-	<!-- fancybox_galery x-->
+	<!-- <script src="/js/fancybox-master/jquery.fancybox.min.js" charset="utf-8"></script> -->
+	<!-- <link rel="stylesheet" href="/js/fancybox-master/jquery.fancybox.min.css"> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
+	<!-- fancybox_galery x -->
 
 	<!-- slick_slide -->
 	<!-- <link rel="stylesheet" type="text/css" href="lib/slick-1.8.0/slick/slick.css"/> -->

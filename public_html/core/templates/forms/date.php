@@ -3,22 +3,19 @@
 // $arrTemplateParams['title'] = '';
 // $arrTemplateParams['name'] = '';
 // $arrTemplateParams['value'] = '';
-// $arrTemplateParams['disabled'] = '';
 // $arrTemplateParams['required'] = '';
 // $arrTemplateParams['class'] = '';
 ?>
 <div class="block_input <?=$arrTemplateParams['class']?>">
   <label>
-    <p class="label">
-      <?=$arrTemplateParams['title']?>
-    </p>
-    <textarea
-      class="textarea form-control"
+    <p class="label"><?=$arrTemplateParams['title']?></p>
+    <input
+      type="date"
+      class="input form-control"
       name="<?=$arrTemplateParams['name']?>"
-      <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
+      value="<?=$arrTemplateParams['value']?>"
       <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
+      <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
     >
-      <?if ( $arrTemplateParams['value'] ) echo base64_decode($arrTemplateParams['value'])?>
-    </textarea>
   </label>
 </div>

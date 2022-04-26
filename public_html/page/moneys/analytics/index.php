@@ -23,7 +23,8 @@
       $oMoneysCategory = new moneys_category();
       $oMoneysCategory->limit = 0;
       $oMoneysCategory->sort = 'sort';
-      $oMoneysCategory->where = "`type` = 0";
+      $oMoneysCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoneysCategory->query .= " AND `type` = 0";
       $arrMoneysCategories = $oMoneysCategory->get();
       $arrMoneysCategoriesIds = [];
       foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesIds[$arrMoneysCategory['id']] = $arrMoneysCategory;
@@ -34,7 +35,8 @@
       $oMoney->sort = 'date';
       // $dCurrentDate = date('Y-m-d');
       $dCurrentDate = date("Y-m-d", strtotime("-1 DAY"));
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
+      $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
       $arrMoneys = $oMoney->get_money();
       $iDaySumm = 0;
       foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
@@ -43,7 +45,8 @@
       $oMoney = new money();
       $oMoney->sort = 'date';
       $dCurrentDate = date('Y-m');
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
+      $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0' ";
       $arrMoneys = $oMoney->get_money();
       $iMonthSumm = 0;
       foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
@@ -52,7 +55,8 @@
       $oMoney = new money();
       $oMoney->sort = 'date';
       $dCurrentDate = date('Y-m');
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '1' ";
+      $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '1' ";
       $arrMoneys = $oMoney->get_money();
       $iMonthSummSalary = 0;
       foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;
@@ -63,7 +67,8 @@
       $oMoney->sort = 'date';
       // $dCurrentDate = date('Y-m-d');
       $dCurrentDate = date("Y-m-d", strtotime("-1 DAY"));
-      $oMoney->where = "`date` LIKE '" . $dCurrentDate . "%' AND `type` = '1' ";
+      $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '1' ";
       $arrMoneys = $oMoney->get_money();
       $iDaySummPlus = 0;
       foreach ($arrMoneys as $arrMoney) $iDaySummPlus = (int)$arrMoney['price'] + (int)$iDaySummPlus;

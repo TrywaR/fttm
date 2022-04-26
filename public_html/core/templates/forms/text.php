@@ -13,9 +13,10 @@
     </p>
     <input
       type="text"
-      class="input"
+      class="input form-control"
       name="<?=$arrTemplateParams['name']?>"
       value="<?=$arrTemplateParams['value']?>"
+      <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
       <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
     >
   </label>

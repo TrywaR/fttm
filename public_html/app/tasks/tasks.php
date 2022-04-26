@@ -7,6 +7,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oTask->limit = $_REQUEST['limit'];
     $oTask->sort = 'date';
     $oTask->sortDir = 'DESC';
+    $oTask->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrTasks = $oTask->get();
 
     notification::send($arrTasks);

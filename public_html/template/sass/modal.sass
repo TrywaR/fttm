@@ -1,0 +1,39 @@
+body
+  .block_modal
+    background: $color_main_dark_ultra
+
+  .modal_form
+    background: $color_main_dark
+
+    .block_header
+      padding: 1rem
+      
+    .block_sections
+      display: flex
+      flex-wrap: wrap
+
+      .block_section
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        padding: 1rem
+        box-sizing: border-box
+
+        &._40
+          flex-basis: 40%
+          min-width: 40%
+          max-width: 100%
+
+        &._60
+          flex-basis: 60%
+          min-width: 60%
+          max-width: 100%
+
+        &._100
+          flex-basis: 100%
+          min-width: 100%
+          max-width: 100%
+
+
+    .block_footer
+      padding: 1rem

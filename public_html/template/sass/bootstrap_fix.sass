@@ -11,10 +11,14 @@ body
   .form-select,
   .form-select:focus,
   .form-control,
-  .form-control:focus
+  .form-control:focus,
+  .form-control:disabled
     color: $color_text
     background: $color_main_dark
     border-color: $color_main_dark_ultra
+
+  .form-control:disabled
+    opacity: .6
 
   .picker__box .picker__header .picker__date-display .picker__weekday-display,
   .datepicker table tr td.active:active,

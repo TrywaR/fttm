@@ -5,10 +5,11 @@
 $oProject = new project();
 $oProject->limit = 0;
 $oProject->sort = 'sort';
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 
 $dCurrentDate = date('Y-m');
-$iCurrentMonth = date('m');
+$iCurrentMonth = date('n');
 $iCurrentYear = date('Y');
 
 $arrProjectsName = [];
@@ -16,7 +17,8 @@ $arrProjectsIds = [];
 
 foreach ($arrProjects as &$arrProject) {
     $oMoney = new money();
-    $oMoney->where = "`project_id` = '" . $arrProject['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` > '0'";
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `project_id` = '" . $arrProject['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` > '0'";
     $arrMoneys = $oMoney->get();
     $iProjectSum = 0;
     foreach ($arrMoneys as &$arrMoney) {
@@ -34,7 +36,8 @@ foreach ($arrProjects as &$arrProject) {
 $arrMounths = [];
 for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1'";
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1'";
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -49,7 +52,8 @@ for ($i=1; $i < 13; $i++) {
 $arrYears = [];
 for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1'";
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1'";
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {

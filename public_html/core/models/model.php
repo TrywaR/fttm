@@ -6,7 +6,10 @@ class model
 {
   public static $id = '';
   public static $table = '';
-  public static $where = '';
+  public static $sort = '';
+  public static $active = 0;
+  public static $creator_id = 0;
+  public static $parents = 0; # Для вычисления родителя
   public static $arrAddFields = [];
 
   // Вывод
@@ -14,14 +17,16 @@ class model
   {
     // Параметры
     $id = $id ? $id : $this->id; // id элемента
-    $arrResult = []; // Результат
+    $arrResult = ''; // Результат
     // Общие параметры для запросов
+    $mySqlSalt = '';
     $mySqlShowSalt = '';
-    // $mySqlSalt = " AND `active` > 0";
     // $mySqlSalt .= " ORDER BY  `sort` ASC";
     // Пагинация
-    $iFrom = $this->from ? $this->from : 0; // Пагинация, от
     $iLimit = $this->limit ? $this->limit : 0; // Пагинация, количество элементов
+    $iFrom = $this->from ? $this->from : 0; // Пагинация, от
+    // Уникальаня выборка
+    $sQuery = $this->query ? $this->query : '';
     // Сортировка
     // Сортировка mySql
     $sSort = $this->sort ? $this->sort : '';
@@ -31,52 +36,91 @@ class model
 
     // Если 1 элемент
     if ( $id ) {
-      // Видно только своё
-      $mySqlShowSalt .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-      $arrResult = db::query("SELECT * FROM `" . $this->table . "` WHERE `id` = " . $id . $mySqlShowSalt);
+      // Ограничение по активности
+      if ( $this->active ) $mySqlSalt = " AND `active` > 0";
+      // Ограничение по родителю
+      if ( $this->parents ) $mySqlSalt .= ' AND `parents` = ' . $this->parents;
+      // Уникальаня выборка
+      if ( $sQuery ) $mySqlShowSalt .= $sQuery;
+
+      if ( $this->show_query ) return "SELECT * FROM `" . $this->table . "` WHERE `id` = " . $id . $mySqlSalt;
+
+      $arrResult = db::query("SELECT * FROM `" . $this->table . "` WHERE `id` = " . $id . $mySqlSalt);
     }
     // Если список элементов
     else {
-      // Видно только своё
-      // Если есть условие вывода
-      if ( $this->where ) {
-        $mySqlShowSalt .= ' WHERE ' . $this->where . ' AND `user_id` = ' . $_SESSION['user']['id'];
-      }
-      else {
-        $mySqlShowSalt .= ' WHERE `user_id` = ' . $_SESSION['user']['id'];
-      }
+      // Ограничение по родителю
+      if ( $this->parents ) $mySqlShowSalt .= ' AND `parents` = ' . $this->parents;
+      if ( $this->active ) $mySqlShowSalt .= " AND `active` > 0";
+
+      // Уникальаня выборка
+      if ( $sQuery ) $mySqlShowSalt .= $sQuery;
 
       // Сортировка mySql
-      if ( $sSort ) $mySqlShowSalt .= ' ORDER BY  `' . $sSort . '` ' . $sSortDir;
+      if ( $sSort ) $mySqlShowSalt .= " ORDER BY  `" . $sSort . "` " . $sSortDir;
 
       // Пагинация
-      if ( $iFrom ) $mySqlShowSalt .= ' LIMIT ' . $iFrom;
-      if ( $iFrom && $iLimit ) $mySqlShowSalt .= ', ' . $iLimit;
-      if ( ! $iFrom && $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;
+      if ( $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;
+      if ( $iLimit && $iFrom ) $mySqlShowSalt .= ' OFFSET ' . $iFrom;
+
+      if ( $this->show_query ) return "SELECT * FROM `" . $this->table . "` WHERE `id` != 0 " . $mySqlShowSalt;
 
       // Получаем элементы
-      $arrResult = db::query_all("SELECT * FROM `" . $this->table . "`" . $mySqlShowSalt);
+      // die("SELECT * FROM `" . $this->table . "` WHERE `id` != 0 " . $mySqlShowSalt);
+      $arrResult = db::query_all("SELECT * FROM `" . $this->table . "` WHERE `id` != 0 " . $mySqlShowSalt);
 
       // Сортировка php
       if ( $sUSort )
-      usort($arrResult, function($a, $b){
-        return -($a[$sUSort] - $b[$sUSort]);
-      });
+        usort($arrResult, function($a, $b){
+          return -($a[$sUSort] - $b[$sUSort]);
+        });
 
       // Переворачиваем выдачу для пагинации
       if ( $iLimit && $iFrom ) array_reverse($arrResultPag);
     }
 
+    // Обрабатываем данные в зависимости от типа данных
+    // Собираем поля которые можно редактировать
+    $arrFields = db::query_all("SHOW COLUMNS FROM " . $this->table);
+    $arrFieldsTypes = [];
+    if ( ! $arrFields ) notification::error( 'Ошибка при выполнении запроса: ' . mysql_error() );
+    foreach ($arrFields as $arrField) $arrFieldsTypes[$arrField['Field']] = $arrField['Type'];
+    if ( $id ) {
+      foreach ( $arrResult as $key => &$value ) {
+        switch ( $arrFieldsTypes[$key] ) {
+          case 'longtext':
+            $value = base64_decode($value);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    else {
+      foreach ( $arrResult as &$arrRestultitem ) {
+        foreach ( $arrRestultitem as $key => &$value ) {
+          switch ( $arrFieldsTypes[$key] ) {
+            case 'longtext':
+              $value = base64_decode($value);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+
     // Выводим результат
-    // if ( is_array($arrResult) ) notification::send( $arrResult );
-    // else notification::error('Ничего не найдено');
     return $arrResult;
+    // if ( is_array($arrResult) ) notification::send( , false );
+    // else notification::error('Ничего не найдено');
   }
 
   // Добавление
   public function add()
   {
     // Параметры
+    $arrResult = []; // Результат
     $mySql = ''; // Запрос для вывода ячеек в таблице
     $arrFields = []; // Столбцы таблицы в базе
     // $this->arrAddFields = []; // Значения для столбцов
@@ -85,13 +129,12 @@ class model
 
     // Проверяем наличие парамтеров
     if ( ! count($this->arrAddFields) ) {
-      if ( $this->name ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
+      if ( $this->name || $this->title || $this->user_id ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
       else notification::error( 'Нет данных для заполнения, добавьте параметр name или массив arrAddFields с параметрами!' );
     }
 
     // Собираем поля которые можно редактировать
     $arrFields = db::query_all("SHOW COLUMNS FROM " . $this->table);
-
     if ( ! $arrFields ) notification::error( 'Ошибка при выполнении запроса: ' . mysql_error() );
 
     // foreach ($arrFields as $arrField) $arrFields[$arrField['Field']] = $arrField;
@@ -106,48 +149,67 @@ class model
     // Собираем заголовки запрос на добавление
     $mySqlAdd  .= "INSERT INTO `" . $this->table . "` (";
     foreach ($arrFields as $arrField) {
-      if ($arrField['Field'] == 'id') continue;
       $mySqlAdd .= $mySqlAddSeporator . '`' . $arrField['Field'] . '`';
       $mySqlAddSeporator = ", ";
     }
     $mySqlAdd  .= ") VALUES ";
     $mySqlAdd  .= "(";
 
-    // Проверяем прикручен ли пользователь
-    if ( empty($this->arrAddFields['user_id']) ) $this->arrAddFields['user_id'] = $_SESSION['user']['id'];
-
     // Собираем значения в запрос на добавление из доп поля
     $mySqlAddSeporator = '';
     foreach ($arrFields as $arrField){
-      if ($arrField['Field'] == 'id') continue;
-      $mySqlAdd .= $mySqlAddSeporator . "'" . $this->arrAddFields[$arrField['Field']] . "'";
+      $mySqlAdd .= $mySqlAddSeporator;
+      switch ( $arrField['Type'] ) {
+        case 'mediumtext':
+          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        case 'longtext':
+          $mySqlAdd .= "'" . base64_encode($this->arrAddFields[$arrField['Field']]) . "'";
+          break;
+        case 'init':
+          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        case 'datetime':
+          if ( $this->arrAddFields[$arrField['Field'] . '_date'] )
+          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field'] . '_date'] . ' ' . $this->arrAddFields[$arrField['Field'] . '_time'] . "'";
+          else $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        default:
+          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+      }
       $mySqlAddSeporator = ", ";
     }
     $mySqlAdd .= ")";
 
     // Добавляем
-    $iNewTableElemId = db::insert($mySqlAdd);
-    $this->id = $iNewTableElemId;
-    return $this->get();
-    // if ( $iNewTableElemId ) notification::success( 'Изменения сохранены!' );
-    // else notification::error( 'Ошибка добавления!' );
+    // die($mySqlAdd);
+    $this->id = db::insert($mySqlAdd);
+    // if ( $iNewTableElemId ) notification::success( 'Успешное добавление!' );
+    if ( $this->id ) return $this->id;
+    else notification::error( 'Ошибка добавления!' );
   }
 
   // Сохранение
   public function save($id='')
   {
     // Параметры
+    $arrResult = []; // Результат
     $mySql = ''; // Запрос для вывода ячеек в таблице
     $arrFields = ''; // Столбцы таблицы в базе
-    $arrEditFields = ''; // Новые значения для столбцов
+    // $arrEditFields = ''; // Новые значения для столбцов
     $mySqlSave = ''; // Запрос на редактирование
     $mySqlSaveSeporator = ''; // Разделитель для запроса
     $id = $id ? $id : $this->id; // id элемента
 
     // Проверяем наличие парамтеров
     if ( ! count($this->arrAddFields) ) {
-      if ( $this->name ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
+      if ( $this->name || $this->title ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
       else notification::error( 'Нет данных для заполнения, добавьте параметр name или массив arrAddFields с параметрами!' );
+    }
+    else {
+      foreach ($this as $key => &$value)
+        if ( $this->arrAddFields[$key] ) $value = $this->arrAddFields[$key];
     }
 
     // Собираем поля которые можно редактировать
@@ -163,21 +225,40 @@ class model
     // [Default] =>
     // [Extra] => auto_increment
 
-    // Проверяем прикручен ли пользователь
-    if ( empty($this->arrAddFields['user_id']) ) $this->arrAddFields['user_id'] = $_SESSION['user']['id'];
-
     // Собираем запрос на редактирование
     $mySqlSave .= "UPDATE `" . $this->table . "` SET ";
     foreach ($arrFields as $arrField) {
-      $mySqlSave .= $mySqlSaveSeporator . "`" . $arrField['Field'] . "` = '" . $this->arrAddFields[$arrField['Field']] . "'";
+      $mySqlSave .= $mySqlSaveSeporator . "`" . $arrField['Field'] . "` = ";
+      switch ( trim(preg_replace('/\s*\([^)]*\)/', '', $arrField['Type'])) ) {
+        case 'mediumtext':
+          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        case 'longtext':
+          $mySqlSave .= "'" . base64_encode($this->arrAddFields[$arrField['Field']]) . "'";
+          break;
+        case 'tinyint':
+          $mySqlSave .= isset($this->arrAddFields[$arrField['Field']]) ? 1 : 0;
+          break;
+        case 'init':
+          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        case 'datetime':
+          if ( $this->arrAddFields[$arrField['Field'] . '_date'] )
+          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field'] . '_date'] . ' ' . $this->arrAddFields[$arrField['Field'] . '_time'] . "'";
+          else $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+        default:
+          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          break;
+      }
       $mySqlSaveSeporator = ", ";
     }
     $mySqlSave .= " WHERE `id` = " . $id;
-    // die($mySqlSave);
-
+    if ( $this->show_query ) die($mySqlSave);
     // Редактируем
-    if ( ! db::query($mySqlSave) ) return $this->get();
-    else notification::error( 'Ошибка редактирования!' );
+    if ( db::query($mySqlSave) ) notification::error( 'Ошибка редактирования!' );
+    // if ( ! db::query($mySqlSave) ) notification::success( 'Изменения сохранены!' );
+    // else notification::error( 'Ошибка редактирования!' );
   }
 
   // Удаление

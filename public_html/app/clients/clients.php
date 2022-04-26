@@ -7,6 +7,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oClient->limit = $_REQUEST['limit'];
     $oClient->sort = 'date';
     $oClient->sortDir = 'DESC';
+    $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrClients = $oClient->get();
 
     notification::send($arrClients);
