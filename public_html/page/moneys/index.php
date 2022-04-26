@@ -55,6 +55,7 @@
                       <input type="hidden" name="form" value="save">
                       <input type="hidden" name="type" value="0">
                       <input type="hidden" name="id" value="">
+                      <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
@@ -187,6 +188,7 @@
                       <input type="hidden" name="form" value="save">
                       <input type="hidden" name="type" value="1">
                       <input type="hidden" name="id" value="">
+                      <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">

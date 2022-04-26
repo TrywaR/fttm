@@ -30,6 +30,7 @@
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="moneys_types">
                       <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
 
                       <div class="row g-3 align-items-center">
                         <div class="col-auto">

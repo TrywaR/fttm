@@ -84,6 +84,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="times">
                       <input type="hidden" name="form" value="save">
+                      <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
                       <input type="hidden" name="id" value="">
 
                       <div class="row align-items-center mb-1">

@@ -41,7 +41,8 @@ switch ($_REQUEST['form']) {
     $sFormHtml = $oForm->show();
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oTime->get();
+    $arrResults['data'] = (array)$oTime;
+
     $arrResults['action'] = 'times';
     notification::send($arrResults);
     break;
@@ -59,15 +60,14 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $arrElem = [];
     $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
     $oTime->arrAddFields = $_REQUEST;
 
-    if ( $_REQUEST['id'] ) $arrElem = $oTime->save();
-    else $arrElem = $oTime->add();
+    if ( $_REQUEST['id'] ) $oTime->save();
+    else $oTime->add();
 
-    $oTime = new time( $arrElem['id'] );
     $arrResult['elems'] = $oTime->get_time();
+
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
     $arrResult['text'] = 'Изменения сохранены';

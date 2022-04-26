@@ -66,6 +66,7 @@ foreach ($arrMoneysCategories as &$arrMoneysCategory) {
                     <input type="hidden" name="action" value="moneys_categories">
                     <input type="hidden" name="form" value="save">
                     <input type="hidden" name="id" value="">
+                    <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">

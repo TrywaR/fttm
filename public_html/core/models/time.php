@@ -24,7 +24,7 @@ class time extends model
     $arrTimes = [];
     if ( $this->id ) {
       $arrTimes = $this->get();
-      $oCategory = new times_category( $this->category_id );
+      $oCategory = new times_category( $arrTimes['category_id'] );
       $arrTimes['category_title'] = $oCategory->title;
       $arrTimes['category_color'] = $oCategory->color;
       $oProject = new project( $arrTimes['project_id'] );

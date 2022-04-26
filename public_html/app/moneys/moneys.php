@@ -15,14 +15,13 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $arrElem = [];
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
     $oMoney->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $arrElem = $oMoney->save();
-    else $arrElem = $oMoney->add();
+    if ( $_REQUEST['id'] ) $oMoney->save();
+    else $oMoney->add();
 
-    $oMoney = new money( $arrElem['id'] );
     $arrResult['elems'] = $oMoney->get_money();
+    
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
     $arrResult['text'] = 'Изменения сохранены';
