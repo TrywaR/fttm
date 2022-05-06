@@ -269,7 +269,9 @@ $(function(){
 
   // Кнопка редактирования
   $(document).on( 'submit', 'form#content_loader_save', function() {
-    var oData = $(this).serializeArray()
+    var
+    oForm = $(this),
+    oData = $(this).serializeArray()
 
     $.when(
       content_download( oData, 'json' )
@@ -279,14 +281,18 @@ $(function(){
         if ( oData.success.text ) status(oData.success.text)
         else status(oData.success)
 
-        switch ( oData.success.event ) {
-          case 'add':
-          case 'edit':
-          case 'save':
-            // if ( oData.success.selector_to ) {
-            //   // $(document).find(oData.success.selector_to).
-            // }
-            break
+        if ( oData.success.data ) {
+          switch (oData.success.event) {
+            case 'save':
+              content_loader_update( oData.success.data )
+              break;
+            case 'add':
+              content_loader_add( oData.success.data )
+              break;
+            case 'del':
+              content_loader_del( oData.success.data )
+              break;
+          }
         }
 
         if ( oData.success.location ) $(location).attr('href',oData.success.location)
