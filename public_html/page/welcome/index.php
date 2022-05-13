@@ -74,7 +74,7 @@
 
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
-       <div id="list-example" class="list-group">
+       <div id="list-example" class="list-group" style="max-height: 20rem; overflow: auto;">
           <a class="list-group-item list-group-item-action active" href="#list-item-5_1_1">5.1.1 All users fix</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_1_0">5.1.0 Beta form for time</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_9">5.0.9 Edits content manager</a>

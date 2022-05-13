@@ -46,7 +46,7 @@ table {
 body .block_modal {
   background: #101010; }
 body .modal_form {
-  background: #221a1a; }
+  background: #202022; }
   body .modal_form .block_header {
     padding: 1rem; }
   body .modal_form .block_sections {
@@ -102,7 +102,7 @@ body .form-control,
 body .form-control:focus,
 body .form-control:disabled {
   color: white;
-  background: #221a1a;
+  background: #202022;
   border-color: #101010; }
 body .form-control:disabled {
   opacity: 0.6; }
@@ -262,13 +262,13 @@ body .navbar .home_link {
   background: #ff7b7b; }
 .jGrowl .sc_alert {
   color: white;
-  background: #221a1a; }
+  background: #202022; }
 .jGrowl .sc_success {
   color: white;
   background: #2cb544; }
 .jGrowl .sc_default {
   color: white;
-  background: #221a1a; }
+  background: #202022; }
 
 .fttm_progress {
   height: 0rem;
@@ -328,7 +328,7 @@ body {
   justify-content: space-between;
   z-index: 1;
   color: white;
-  background: #221a1a;
+  background: #202022;
   font-family: "Geometria";
   font-size: 14px;
   line-height: 18px;
@@ -348,7 +348,7 @@ body {
     z-index: -1; }
   body:after {
     filter: blur(0.1rem);
-    background: radial-gradient(circle, #ffdaa7 7%, #d7f8ff 100%);
+    background: radial-gradient(circle, #403535 7%, #4a4a4a 100%);
     z-index: -2; }
 
 footer {
