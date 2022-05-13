@@ -390,7 +390,7 @@ for ($i=0; $i < 3; $i++) {
             // Прикручиваем рейтинги
             foreach ($arrTimesCategory['items'] as &$arrTime) {
               ?>
-              <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrTime['type']?>_" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
+              <li class="list-group-item time d-flex justify-content-between align-items-start _type_<?=$arrTime['type']?>_" data-content_manager_item_id="<?=$arrTime['id']?>"  data-content_loader_item_id="<?=$arrTime['id']?>">
                 <div class="ms-2 me-auto">
                   <div class="fw-bold mb-1"><?=$arrTime['title']?></div>
                   <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal; margin-right: 1rem">
