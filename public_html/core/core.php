@@ -16,5 +16,6 @@ include_once 'models/task.php'; # Задачи
 include_once 'models/money.php'; # Деньги
 include_once 'models/card.php'; # Карты для денег
 include_once 'models/moneys_category.php'; # Категории затрат
+include_once 'models/moneys_subscriptions.php'; # Подписки
 include_once 'models/time.php'; # Время
 include_once 'models/times_category.php'; # Категории затрат времени

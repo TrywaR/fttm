@@ -26,7 +26,7 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
   // Собираем данные по категории
   $oTime = new time();
   $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-  $oTime->query = " AND `category_id` = '" . $arrTimesCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%'";
+  $oTime->query .= " AND `category_id` = '" . $arrTimesCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%'";
   $arrTimes = $oTime->get();
   $iCategorySum = 0;
 

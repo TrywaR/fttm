@@ -3,7 +3,7 @@
      <div class="col-12  animate__animated animate__bounceIn">
        <div class="jumbotron jumbotron-fluid">
          <div class="container">
-           <h1 class="display-4 text-center">FT<?=$_SESSION['user']['login']{0}?>M</h1>
+           <h1 class="display-4 text-center">FT [<?=$_SESSION['user']['login']{0}?>] M</h1>
 
            <div class="row mt-4">
              <div class="col-12 col-md-4">
@@ -63,6 +63,7 @@
                  </span>
                  <a href="/moneys/data/cards/">Cards</a>
                  <span class="text_seporator">,</span> <a href="/moneys/data/categories/">Moneys spend categories</a>
+                 <span class="text_seporator">,</span> <a href="/moneys/data/subscriptions/">Subscriptions</a>
                </p>
 
                <p class="lead">
@@ -79,20 +80,6 @@
            </div>
          </div>
        </div>
-     </div>
-   </div>
-
-   <div class="row animate__animated animate__bounceIn">
-     <div class="col-12">
-       <h2>Futures update</h2>
-       <ul>
-         <li>Credits cards</li>
-         <li>Edit elems (all)</li>
-         <li>Info (description this service)</li>
-         <li>Design (Icon, color)</li>
-         <li>Sessions</li>
-         <li>Tickets</li>
-       </ul>
      </div>
    </div>
 </main>

@@ -20,8 +20,8 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['id'] ) $oMoney->save();
     else $oMoney->add();
 
-    $arrResult['elems'] = $oMoney->get_money();
-    
+    $arrResult['data'] = $oMoney->get_money();
+
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
     $arrResult['text'] = 'Изменения сохранены';

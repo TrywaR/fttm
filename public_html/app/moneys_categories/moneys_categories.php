@@ -5,7 +5,7 @@ switch ($_REQUEST['form']) {
 
     if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
-    $oCategory->sort = 'date';
+    $oCategory->sort = 'sort';
     $oCategory->sortDir = 'DESC';
     $oCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrCategory = $oCategory->get();
@@ -15,14 +15,16 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $arrElem = [];
     $oCategory = $_REQUEST['id'] ? new moneys_category( $_REQUEST['id'] ) : new moneys_category();
     $oCategory->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $arrElem = $oCategory->save();
-    else $arrElem = $oCategory->add();
+    if ( $_REQUEST['id'] ) $oCategory->save();
+    else $oCategory->add();
 
-    $oCategory = new moneys_category( $arrElem['id'] );
-    $arrResult['elems'] = $oCategory->get();
+    $arrResult['data'] = $oCategory->get();
+
+    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
+    else $arrResult['event'] = 'add';
+
     $arrResult['text'] = 'Изменения сохранены';
     notification::success($arrResult);
     break;

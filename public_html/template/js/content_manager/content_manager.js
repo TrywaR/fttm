@@ -11,7 +11,8 @@ function content_manager_init( oContentManagerButtonsId ) {
 	$(document).on('click', arrPageParams.content_manager_block + ' ' + arrPageParams.content_manager_button, function(){
   		var oContentManagerButtons = $(document).find('#' + oContentManagerButtonsId)
   		$(this).toggleClass('_active_')
-  		$(this).parents('.list-group-item').toggleClass('content_manager_select')
+  		// $(this).parents('.list-group-item').toggleClass('content_manager_select')
+  		$(this).parents('._elem').toggleClass('content_manager_select')
 
   		if ( $(document).find(arrPageParams.content_manager_block).find('.content_manager_select').length ) {
   			// Анимация показа активных кнопок

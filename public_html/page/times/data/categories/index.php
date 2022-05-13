@@ -1,30 +1,3 @@
-<?
-// Получаем категории
-// $arrTimes = $db->query_all($sQuery);
-
-$oTimesCategory = new times_category();
-$oTimesCategory->limit = 0;
-$oTimesCategory->sort = 'sort';
-$arrTimesCategories = $oTimesCategory->get();
-
-$dCurrentDate = date('Y-m');
-
-$arrTimesCategoriesName = [];
-
-foreach ($arrTimesCategories as &$arrTimesCategory) {
-  // Собираем данные по категории
-  // $oMoney = new time();
-  // $oMoney->where = "`category` = '" . $arrTimesCategory['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` = '0'";
-  // $arrTimes = $oMoney->get();
-  // $iCategorySum = 0;
-  // foreach ($arrTimes as &$arrMoney) {
-  //   $arrTimesCategory['items'][] = $arrMoney;
-  //   $iCategorySum = $iCategorySum + (int)$arrMoney['price'];
-  // }
-  // $arrTimesCategory['sum'] = $iCategorySum;
-  // $arrTimesCategoriesName[$arrTimesCategory] = $arrTimesCategory['title'];
-}
-?>
 <main class="container pt-4 pb-4">
   <div class="row">
     <div class="col-12 mb-4">
@@ -131,73 +104,69 @@ foreach ($arrTimesCategories as &$arrTimesCategory) {
     </div>
 
     <div class="col-12 col-md-6 animate__animated animate__bounceInRight animate__delay-1s">
-      <?if ( ! count( $arrTimesCategories ) ) echo 'Нет типов затрат';?>
-      <ol class="list-group list-group-numbered" id="content_loader_to">
-      <?
-      // Прикручиваем рейтинги
-      foreach ($arrTimesCategories as & $arrTimesCategory) {
-        ?>
-        <li class="list-group-item d-flex justify-content-between align-items-start progress_block" data-content_manager_item_id="<?=$arrTimesCategory['id']?>"  data-content_loader_item_id="<?=$arrTimesCategory['id']?>">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold"><?=$arrTimesCategory['title']?></div>
-          </div>
-          <div class="badge bg-primary" style="background: <?=$arrTimesCategory['color']?>!important">
-            <?=$arrTimesCategory['color'] ? $arrTimesCategory['color'] : 'random'?>
-          </div>
-          <span class="rounded-pill">
-            <?/*
-            <a href="#" class="btn">
-              <i class="far fa-square"></i>
-              <!-- <i class="fas fa-square"></i> -->
-            </a>
-            */?>
-            <a href="#" class="btn content_download" data-id="<?=$arrTimesCategory['id']?>" data-action="times_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="<?=$arrTimesCategory['id']?>" data-action="times_categories" data-form="del" data-elem=".list-group-item">
-              <i class="fas fa-minus-square"></i>
-            </a>
-          </span>
+      <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="times_categories" data-content_manager_block="#times_categories" data-content_manager_item=".times_categoriy" data-content_manager_button=".content_manager_switch">
+        <button type="button" name="button" class="btn del">
+          <i class="fas fa-folder-minus"></i>
+        </button>
+      </div>
 
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </li>
-        <?
-      }
-      ?>
+        <ol
+          id="times_categories"
+          class="block_times_categories block_elems block_content_loader list-group list-group-numbered"
+          data-content_loader_table="times_categories"
+          data-content_loader_form="show"
+          data-content_loader_limit="15"
+          data-content_loader_scroll_nav="0"
+          <?php if ($_REQUEST['sort']): ?>
+            data-content_loader_sort="<?=$_REQUEST['sort']?>"
+            data-content_loader_sortdir="<?=$_REQUEST['sortdir']?>"
+          <?php endif; ?>
+          <?php if ($_REQUEST['filter']): ?>
+            data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
+          <?php endif; ?>
+          data-content_loader_template_selector=".block_template"
+          data-content_loader_scroll_block="#times_categories"
+          data-content_loader_show_class="animate__bounceInRight _show_"
+          style="max-height: 50vh; overflow: auto; overflow-x: hidden;"
+        >
       </ol>
+      <script>
+        $(function(){
+          $(document).find('#times_categories').content_loader()
+          $(document).find('#content_manager_buttons').content_manager()
+        })
+      </script>
     </div>
   </div>
 
   <div class="block_template">
-    <div class="template_times_categories list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">{{title}}</div>
-        </div>
-        <div class="badge bg-primary" style="background: {{color}}!important">
-          {{color}}
-        </div>
-        <span class="rounded-pill">
-          <?/*
-          <a href="#" class="btn">
+    <li class="list-group-item d-flex _elem times_categoriy justify-content-between align-items-start progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{title}}</div>
+      </div>
+      <div class="badge bg-primary" style="background: {{color}}!important">
+        {{color}}
+      </div>
+      <div class="rounded-pill">
+        <a href="#" class="btn content_manager_switch switch_icons">
+          <div class="">
             <i class="far fa-square"></i>
-            <!-- <i class="fas fa-square"></i> -->
-          </a>
-          */?>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
-            <i class="fas fa-pen-square"></i>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-form="del" data-elem=".list-group-item">
-            <i class="fas fa-minus-square"></i>
-          </a>
-        </span>
+          </div>
+          <div class="">
+            <i class="fas fa-square"></i>
+          </div>
+        </a>
+        <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+          <i class="fas fa-pen-square"></i>
+        </a>
+        <a href="#" class="btn content_download" data-id="{{id}}" data-action="times_categories" data-form="del" data-elem=".list-group-item">
+          <i class="fas fa-minus-square"></i>
+        </a>
+      </div>
 
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-      </li>
-    </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+    </li>
   </div>
 </main>

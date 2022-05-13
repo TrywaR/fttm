@@ -138,8 +138,7 @@ body .jumbotron a {
   body .jumbotron a:hover {
     color: white !important; }
 body .jumbotron .lead {
-  display: flex;
-  font-size: 1rem;
+  font-size: 1em;
   line-height: 1.2; }
   body .jumbotron .lead .icon {
     margin-right: 0.5rem; }
@@ -351,6 +350,18 @@ body {
     filter: blur(0.1rem);
     background: radial-gradient(circle, #ffdaa7 7%, #d7f8ff 100%);
     z-index: -2; }
+
+footer {
+  padding: 1rem; }
+  footer ._copy {
+    font-size: 0.8em;
+    line-height: 1;
+    text-align: center;
+    opacity: 0.6; }
+    footer ._copy a {
+      color: white; }
+      footer ._copy a:hover {
+        opacity: 0.5; }
 
 .block_template {
   display: none; }

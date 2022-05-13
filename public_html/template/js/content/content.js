@@ -31,14 +31,14 @@ $(function(){
 				switch (oData.success.event) {
 					case 'save':
 						oForm.find('.form_reset').click()
-						content_loader_update( oData.success.elems )
+						content_loader_update( oData.success.data )
 						break;
 					case 'add':
 						oForm.find('.form_reset').click()
-						content_loader_add( oData.success.elems )
+						content_loader_add( oData.success.data )
 						break;
 					case 'del':
-						content_loader_del( oData.success.elems )
+						content_loader_del( oData.success.data )
 						break;
 				}
 		})

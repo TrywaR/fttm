@@ -66,7 +66,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['id'] ) $oTime->save();
     else $oTime->add();
 
-    $arrResult['elems'] = $oTime->get_time();
+    $arrResult['data'] = $oTime->get_time();
 
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';

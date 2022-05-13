@@ -39,4 +39,8 @@ switch ($_REQUEST['action']) {
   case 'moneys_categories': # Типы затрат
     include_once 'moneys_categories/moneys_categories.php';
     break;
+
+  case 'moneys_subscriptions': # Подписки
+    include_once 'moneys_subscriptions/moneys_subscriptions.php';
+    break;
 }

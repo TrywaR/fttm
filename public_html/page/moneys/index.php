@@ -11,6 +11,7 @@
             <a href="/moneys/data/cards/">Cards</a>
             <span class="text_seporator">,</span> <a href="/moneys/data/categories/">Moneys spend categories</a>
             <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
+            <span class="text_seporator">,</span> <a href="/moneys/data/subscriptions/">Subscriptions</a>
           </p>
           <p class="lead">
             <span class="icon">
@@ -66,6 +67,7 @@
                             <option value="0" selected>Наличные</option>
                             <?
                             $oCard = new card();
+                            $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
                             $arrCards = $oCard->get();
                             ?>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
@@ -87,6 +89,7 @@
                           <select name="category" class="form-select" size="3" aria-label="size 3 select example">
                             <?
                             $oMoneyCategory = new moneys_category();
+                            $oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
                             $arrMoneysCategorise = $oMoneyCategory->get();
                             ?>
                             <?php foreach ($arrMoneysCategorise as $iIndex => $arrMoneyCategory): ?>
@@ -109,6 +112,7 @@
                             <option value="0" selected>Не работа</option>
                             <?
                             $oProject = new project();
+                            $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
                             $arrProjects = $oProject->get();
                             ?>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
@@ -199,6 +203,7 @@
                             <option value="0" selected>Левый приход</option>
                             <?
                             $oProject = new project();
+                            $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
                             $arrProjects = $oProject->get();
                             ?>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
@@ -220,6 +225,7 @@
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
                             <?
                             $oCard = new card();
+                            $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
                             $arrCards = $oCard->get();
                             ?>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
@@ -320,7 +326,7 @@
           </span>
         </div>
         <div class="badge bg-primary _price">
-          {{price}}₽
+          {{price}}
         </div>
         <span class="_title">
           {{title}}
