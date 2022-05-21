@@ -337,13 +337,13 @@ body {
   min-height: 100vh; }
   body:before, body:after {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0; }
   body:before {
-    background: linear-gradient(0deg, #000 0, #020202 100%);
+    background: linear-gradient(0deg, rgba(15, 15, 15, 0.8) 0, rgba(40, 40, 40, 0.8) 100%);
     opacity: 0.8;
     z-index: -1; }
   body:after {

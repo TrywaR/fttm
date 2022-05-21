@@ -8,6 +8,12 @@ $oProject->sort = 'sort';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 
+$arrProjects[] = array(
+  'title'=>'Без проекта',
+  'id'=> 0,
+  'color'=>sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ),
+);
+
 $dCurrentDate = date('Y-m');
 $iCurrentMonth = date('n');
 $iCurrentYear = date('Y');
@@ -41,8 +47,8 @@ for ($i=1; $i < 13; $i++) {
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
-    $arrMounths[$i]['projects'][$arrMoney['project_id']] = (int)$arrMounths[$i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iMounthSum = $iMounthSum + (int)$arrMoney['price'];
+    $arrMounths[$i]['projects'][$arrMoney['project_id']] = (float)$arrMounths[$i]['projects'][$arrMoney['project_id']] + (float)$arrMoney['price'];
+    $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
   }
   $arrMounths[$i]['sum'] = $iMounthSum;
   $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
@@ -57,8 +63,8 @@ for ($i=0; $i < 3; $i++) {
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
-    $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (int)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iYearSum = $iYearSum + (int)$arrMoney['price'];
+    $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (float)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (float)$arrMoney['price'];
+    $iYearSum = $iYearSum + (float)$arrMoney['price'];
   }
   $arrYears[$iCurrentYear - $i]['sum'] = $iYearSum;
   $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
@@ -156,7 +162,7 @@ for ($i=0; $i < 3; $i++) {
               // Прикручиваем рейтинги
               foreach ($arrProject['items'] as &$arrMoney) {
                 ?>
-                <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>">
+                <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity: 1;">
                   <div class="ms-2 me-auto">
                     <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
                     <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">

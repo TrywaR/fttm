@@ -75,7 +75,8 @@
    <div class="row mt-4 animate__animated animate__backInUp" id="block_version">
      <div class="col col-md-4">
        <div id="list-example" class="list-group" style="max-height: 20rem; overflow: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_1_1">5.1.1 All users fix</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_1_2">5.1.2 Micro fix</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_1_1">5.1.1 All users fix</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_1_0">5.1.0 Beta form for time</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_9">5.0.9 Edits content manager</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_0_8">5.0.8 Edits form</a>
@@ -98,6 +99,19 @@
      <div class="col col-md-8">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 20rem; overflow: auto;">
         <div class="pt-2 pb-2">
+          <h2 id="list-item-5_1_2">5.1.2 Micro fix</h2>
+          <ol>
+            <li>
+              Style
+            </li>
+            <li>
+              Date projects analytics
+            </li>
+            <li>
+              Money analytics sub items views
+            </li>
+          </ol>
+
           <h2 id="list-item-5_1_1">5.1.1 All users fix</h2>
           <ol>
             <li>

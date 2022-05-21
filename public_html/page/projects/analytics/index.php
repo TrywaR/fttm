@@ -5,6 +5,7 @@
 $oProject = new project();
 $oProject->limit = 0;
 $oProject->sort = 'sort';
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 
 $dCurrentDate = date('Y-m');
@@ -15,6 +16,7 @@ $arrProjectsName = [];
 $arrProjectsIds = [];
 
 $oProject = new project( $_REQUEST['project_id'] );
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProject = $oProject->get();
 $arrProject['color'] = $arrProject['color'] ? $arrProject['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
 
@@ -27,7 +29,7 @@ for ($i=1; $i < 3; $i++) $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear -
 // Суммы по месяцам
 for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
+  $oMoney->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -40,7 +42,7 @@ for ($i=1; $i < 13; $i++) {
 $arrWagesYears = [];
 for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
+  $oMoney->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -57,7 +59,7 @@ for ($i=0; $i < 3; $i++) {
 $arrCostsMounths = [];
 for ($i=1; $i < 13; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
+  $oMoney->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
   $iMounthSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -71,7 +73,7 @@ for ($i=1; $i < 13; $i++) {
 $arrCostsYears = [];
 for ($i=0; $i < 3; $i++) {
   $oMoney = new money();
-  $oMoney->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
+  $oMoney->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
   $arrMoneys = $oMoney->get();
   $iYearSum = 0;
   foreach ($arrMoneys as &$arrMoney) {
@@ -87,7 +89,7 @@ for ($i=0; $i < 3; $i++) {
 $arrTimesMounths = [];
 for ($i=1; $i < 13; $i++) {
   $oTime = new time();
-  $oTime->where = "`date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `project_id` = " . $_REQUEST['project_id'];
+  $oTime->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `project_id` = " . $_REQUEST['project_id'];
   $arrTimes = $oTime->get();
   $iMounthSum = 0;
   foreach ($arrTimes as &$arrTime) {
@@ -104,7 +106,7 @@ for ($i=1; $i < 13; $i++) {
 $arrTimesYears = [];
 for ($i=0; $i < 3; $i++) {
   $oTime = new time();
-  $oTime->where = "`date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `project_id` = " . $arrProject['id'];
+  $oTime->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `project_id` = " . $arrProject['id'];
   $arrTimes = $oTime->get();
   $iYearSum = 0;
   foreach ($arrTimes as &$arrTime) {
@@ -306,18 +308,21 @@ for ($i=0; $i < 3; $i++) {
     <div class="list-group mb-4">
       <?
       $oMoney = new money();
-      $oMoney->where = "`date` LIKE '" . date('Y-') . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
+      $oMoney->query = " AND `date` LIKE '" . date('Y-') . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
       $arrMoneys = $oMoney->get();
       ?>
       <?php foreach ($arrMoneys as $arrMoney): ?>
-        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity:1;">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
               <?=number_format($arrMoney['price'], 2, '.', ' ')?>₽
             </div>
             <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?=$arrMoney['date']?>
+              <?
+              $arrMoneyDate = explode(' ', $arrMoney['date']);
+              ?>
+              <?=$arrMoneyDate[0]?>
             </span>
             <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
           </div>
@@ -349,18 +354,21 @@ for ($i=0; $i < 3; $i++) {
     <div class="list-group">
       <?
       $oMoney = new money();
-      $oMoney->where = "`date` LIKE '" . date('Y-') . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
+      $oMoney->query = " AND `date` LIKE '" . date('Y-') . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
       $arrMoneys = $oMoney->get();
       ?>
       <?php foreach ($arrMoneys as $arrMoney): ?>
-        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-content_loader_item_id="{{id}}">
+        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity:1;">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
             <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
-              <?=number_format($arrMoney['price'], 2, '.', ' ')?>₽
+              <?=number_format($arrMoney['price'], 2, '.', ' ')?>
             </div>
             <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?=$arrMoney['date']?>
+              <?
+              $arrMoneyDate = explode(' ', $arrMoney['date']);
+              ?>
+              <?=$arrMoneyDate[0]?>
             </span>
             <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
           </div>
