@@ -8,7 +8,7 @@
         FTTM
       </a>
       <?php if (isset($_SESSION['user'])): ?>
-        <a href="/home/" class="home_link">
+        <a href="/users/" class="home_link">
           <?=$_SESSION['user']['login']?>
         </a>
       <?php endif; ?>
@@ -28,9 +28,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">Logout</a>
               </li>
             <?php else: ?>
               <li class="nav-item">

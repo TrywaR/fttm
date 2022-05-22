@@ -10,7 +10,7 @@ $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
 
-<main class="container">
+<main class="container animate__animated animate__fadeIn">
   <div class="row">
     <?
     // $oSession = new session();
@@ -19,7 +19,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     // $arrSes = $oSession->get('226bd87432ceeb480216294e896890a5');
     ?>
     <div class="col-12 mb-4">
-      <div class="jumbotron jumbotron-fluid animate__animated animate__pulse">
+      <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Times</h1>
 
@@ -54,7 +54,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
   <div class="row">
     <div class="col-12 col-md-5 mb-4">
-      <div class="card animate__animated animate__pulse animate__delay-1s">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title">Time</h5>
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->

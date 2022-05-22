@@ -5,6 +5,7 @@ include_once 'heart/db.php'; # Работа с базой
 include_once 'heart/notification.php'; # Уведомления
 include_once 'heart/form.php'; # Формы
 include_once 'heart/lang.php'; # Переводы
+include_once 'heart/mail.php'; # Работа почты
 
 // Модели
 include_once 'models/model.php'; # Основной класс

@@ -15,9 +15,9 @@ switch ($_REQUEST['form']) {
       $oTime = new time();
       // Случайное имя для корректной работы
       $arrDefaultsNames = array(
-        'Время для размышлений',
-        'Лучший вариант',
-        'Хорошее название, пол дела',
+        'Time for reflection',
+        'The best way',
+        'Good name, good job',
       );
       // Создаем элемент
       $oTime->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
@@ -36,8 +36,8 @@ switch ($_REQUEST['form']) {
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
     // Настройки шаблона
     $oForm->arrTemplateParams['id'] = 'content_loader_save';
-    $oForm->arrTemplateParams['title'] = 'Время';
-    $oForm->arrTemplateParams['button'] = 'Сохранить';
+    $oForm->arrTemplateParams['title'] = 'Time';
+    $oForm->arrTemplateParams['button'] = 'Save';
     $sFormHtml = $oForm->show();
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
@@ -70,7 +70,7 @@ switch ($_REQUEST['form']) {
 
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
-    $arrResult['text'] = 'Изменения сохранены';
+    $arrResult['text'] = 'Changes saved';
 
     notification::success($arrResult);
     break;
@@ -80,7 +80,7 @@ switch ($_REQUEST['form']) {
     $oTime->del();
     $arrResult = [];
     $arrResult['event'] = 'del';
-    $arrResult['text'] = 'Данные удалены';
+    $arrResult['text'] = 'Delete success';
     notification::success($arrResult);
     break;
 }

@@ -30,7 +30,6 @@
                       method="post"
                       data-content_download_edit_type="0"
                       data-content_loader_to="#content_loader_to"
-                      data-content_loader_template=".template_clients"
                     >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="clients">

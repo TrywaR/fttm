@@ -19,11 +19,11 @@ switch ($_REQUEST['form']) {
     else $oProject->add();
 
     $arrResult['data'] = $oProject->get();
-    
+
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
 
-    $arrResult['text'] = 'Изменения сохранены';
+    $arrResult['text'] = 'Changes saved';
     notification::success($arrResult);
     break;
 

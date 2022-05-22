@@ -1,6 +1,6 @@
 <main class="container pt-4 pb-4">
    <div class="row mb-4">
-     <div class="col-12  animate__animated animate__bounceIn">
+     <div class="col-12  animate__animated animate__fadeIn">
        <div class="jumbotron jumbotron-fluid">
          <div class="container">
            <h1 class="display-4 text-center">FT [<?=$_SESSION['user']['login']{0}?>] M</h1>

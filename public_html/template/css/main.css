@@ -131,12 +131,21 @@ body .list-group-item {
   color: white;
   background: #202022;
   z-index: 1; }
-body .container {
-  flex-grow: 1; }
+  body .list-group-item .icon {
+    font-size: 1em;
+    margin-right: 0.5rem; }
+body .list-group-item.disabled,
+body .list-group-item:disabled {
+  background: #202022; }
+body .list-group-item-action:focus,
+body .list-group-item-action:hover {
+  color: #3282c8;
+  background: #101010; }
 body .jumbotron a {
   color: #3282c8; }
   body .jumbotron a:hover {
-    color: white !important; }
+    color: #3282c8 !important;
+    opacity: 0.8; }
 body .jumbotron .lead {
   font-size: 1em;
   line-height: 1.2; }
@@ -277,46 +286,38 @@ body .navbar .home_link {
   .fttm_progress._active_ {
     height: 1rem; }
 
-h1 {
+main h1 {
   font-size: 1.5rem;
   margin-bottom: 1rem; }
-
-h2 {
+main h2 {
   font-size: 1.3rem;
   margin-bottom: 1rem; }
-
-h3 {
+main h3 {
   font-size: 1.4rem;
   margin-bottom: 1rem; }
-
-p {
+main p {
   margin-bottom: 1rem; }
-
-strong,
-b {
+main strong,
+main b {
   font-weight: bold; }
-
-i {
+main i {
   font-style: italic; }
-
-ul {
-  padding: 1rem; }
-  ul li {
-    padding-left: 1rem;
-    padding-bottom: 1rem; }
-
-ol {
-  padding: 1rem; }
-  ol li {
-    padding-left: 1rem;
-    padding-bottom: 1rem; }
-
-a {
+main ul {
+  padding: 1rem 0; }
+  main ul li {
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem; }
+main ol {
+  padding: 1rem 0; }
+  main ol li {
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem; }
+main a {
   color: #3282c8; }
-  a:hover {
-    color: #202022; }
-
-small {
+  main a:hover {
+    color: #3282c8;
+    opacity: 0.7; }
+main small {
   font-size: 0.8rem;
   line-height: 1;
   opacity: 0.3; }
@@ -351,7 +352,22 @@ body {
     background: radial-gradient(circle, #403535 7%, #4a4a4a 100%);
     z-index: -2; }
 
+header {
+  flex-grow: 1; }
+  header ul li {
+    margin-left: 1rem; }
+  header .container-fluid {
+    padding: 0; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex-grow: 100; }
+
 footer {
+  flex-grow: 1;
   padding: 1rem; }
   footer ._copy {
     font-size: 0.8em;

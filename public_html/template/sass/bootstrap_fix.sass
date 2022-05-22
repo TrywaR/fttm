@@ -52,15 +52,26 @@ body
     background: $color_main_light
     z-index: 1
 
-  .container
-    flex-grow: 1
+    .icon
+      font-size: 1em
+      margin-right: .5rem
+
+  .list-group-item.disabled,
+  .list-group-item:disabled
+    background: $color_main_light
+
+  .list-group-item-action:focus,
+  .list-group-item-action:hover
+    color: $color_main
+    background: $color_main_dark_ultra
 
   .jumbotron
     a
       color: $color_main
 
       &:hover
-        color: $color_text ! important
+        color: $color_main ! important
+        opacity: .8
 
     .lead
       // display: flex

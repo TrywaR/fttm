@@ -18,10 +18,18 @@ $(function(){
 			}
 
 			// Если редирект
+			var iLocationTime = 500
+			if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
 			if ( oData.success.location )
 				setTimeout(function(){
 				  window.location.replace( oData.success.location )
-				}, 500)
+				}, iLocationTime)
+
+			// Если нужно перезагрузить страницу
+			if ( oData.location_reload )
+				setTimeout(function(){
+					location.reload()
+				}, iLocationTime)
 
 			// Перезагружаем страницу если надо
 			if( oForm.hasClass('reload_page') ) location.reload()
@@ -51,7 +59,7 @@ $(function(){
     // Сбрасываем
 		oForm[0].reset()
 		oForm.find('[name=id]').val('')
-		oForm.find('[type=submit]').html('<i class="fas fa-plus-square"></i> Добавить')
+		oForm.find('[type=submit]').html('<i class="fas fa-plus-square"></i> Add')
 
 		// Снимаем выделение если выбран какой то элемент
 		$(document).find('#content_loader_to ._edit_').removeClass('_edit_')
@@ -79,7 +87,7 @@ $(function(){
 		// Если это удаление элемента
 		if ( oElem.data().form == 'del' ) {
       // Запрашиваем подтверждение
-			if ( confirm('Подтвердите удаление') ) {
+			if ( confirm('Confirm delete') ) {
 				if ( oElem.data().elem ) {
 					// Анимация удаления
 					oElem.parents( oElem.data().elem ).removeClassWild("animate_*").addClass('animate__animated ' + sAnimateClass)
@@ -88,7 +96,7 @@ $(function(){
 						oElem.parents( oElem.data().elem ).remove()
 					}, 500)
 				}
-				else return fttm_alerts({'error':'Нет класса для удаления :( аттрибут data-elem'})
+				else return fttm_alerts({'error':'Not have class delete :( attr data-elem'})
 			}
 			else return false
 		}
@@ -121,7 +129,7 @@ $(function(){
 					oInput.val( oData[key] )
 				}
 				// Обнавляем данные формы, инфа про сохранение
-				oEditForm.find('[type=submit]').html('<i class="fas fa-pen-square"></i> Сохранить')
+				oEditForm.find('[type=submit]').html('<i class="fas fa-pen-square"></i> Save')
 
 				// Анимация добавление данных в форму
 				oEditForm.removeClassWild("animate_*")
@@ -188,12 +196,33 @@ function content_download( oData, oReturnType, sAppStatus ) {
       return xhr;
 	 },
   }).fail(function( oData ){
-    if ( sAppStatus ) fttm_alerts( {'error': {'text': 'Ошибка соединения'}} )
+    if ( sAppStatus ) fttm_alerts( {'error': {'text': 'Connect error'}} )
   }).done(function( oData ){
     if ( sAppStatus ) fttm_alerts( oData )
-		if ( oData.location ) window.location.replace(oData.location)
-		if ( oData.success && oData.success.location ) window.location.replace(oData.success.location)
-		if ( oData.error && oData.error.location ) window.location.replace(oData.error.location)
+
+		var iLocationTime = 500
+		if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
+		if ( oData.location_time ) iLocationTime = oData.location_time
+
+		if ( oData.location )
+			setTimeout(function(){
+				window.location.replace(oData.location)
+			}, iLocationTime)
+
+		if ( oData.location_reload )
+			setTimeout(function(){
+				location.reload()
+			}, iLocationTime)
+
+		if ( oData.success && oData.success.location )
+			setTimeout(function(){
+				window.location.replace(oData.success.location)
+			}, iLocationTime)
+
+		if ( oData.error && oData.error.location )
+			setTimeout(function(){
+				window.location.replace(oData.error.location)
+			}, iLocationTime)
   })
 
 	// xhr.upload.onprogress = function(evt){

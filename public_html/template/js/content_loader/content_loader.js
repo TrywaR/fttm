@@ -296,6 +296,7 @@ $(function(){
         }
 
         if ( oData.success.location ) $(location).attr('href',oData.success.location)
+        if ( oData.location_reload ) location.reload()
       }
 
       if ( oData.error ) status(oData)
@@ -307,13 +308,13 @@ $(function(){
   // Кнопка удаления
   $(document).on('click', '.content_loader_del', function(){
     if ( ! $(this).data().elem ) {
-      status({'error':'Не указан селектор элемента для удаления'})
+      status({'error':'No element selector to remove'})
       return false
     }
     var oElem = $(this).parents( $(this).data().elem )
 
     // Подтверждение
-    if  ( ! confirm('Вы действительно хотите удалить этот элемент?') ) return false
+    if  ( ! confirm('Are you sure you want to delete this item?') ) return false
 
     $.when(
       content_download( {

@@ -26,10 +26,12 @@ class money extends model
       $oCard = new card( $arrMoney['card'] );
       $arrMoney['card_val'] = (array)$oCard;
     }
+
     if ( $arrMoney['category'] ) {
       $oMoneyCategory = new moneys_category( $arrMoney['category'] );
       $arrMoney['categroy_val'] = (array)$oMoneyCategory;
     }
+
     if ( $arrMoney['project_id'] ) {
       $oProject = new project( $arrMoney['project_id'] );
       $arrMoney['project_val'] = (array)$oProject;
@@ -42,7 +44,6 @@ class money extends model
     $arrMoneys = $this->get();
     if ( $arrMoneys['id'] ) $arrMoneys = $this->prep_money( $arrMoneys );
     else foreach ($arrMoneys as &$arrMoney) $arrMoney = $this->prep_money($arrMoney);
-
     return $arrMoneys;
   }
 

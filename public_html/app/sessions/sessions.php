@@ -33,6 +33,6 @@ switch ($_REQUEST['form']) {
       if ( $bReload ) $arrResult['location'] = '/';
       notification::success($arrResult);
     }
-    else notification::error('Мужчина, вы что не видите, что у нас обед.');
+    else notification::error("Man, can't you see we're having lunch.");
     break;
 }

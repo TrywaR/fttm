@@ -1,4 +1,4 @@
-<main class="container pt-4 pb-4">
+<main class="container pt-4 pb-4 animate__animated animate__fadeIn">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
@@ -56,7 +56,8 @@
                       <div class="col-12 col-md-8">
                         <select name="type" class="form-select" size="3" aria-label="size 3 select example">
                           <option value="0" selected>No category</option>
-                          <option value="1" selected>Not minus</option>
+                          <option value="1">Not minus</option>
+                          <option value="2">Card up</option>
                         </select>
                         <!-- <input name="title" type="text" id="inputCardIdZero" class="form-control"> -->
                       </div>

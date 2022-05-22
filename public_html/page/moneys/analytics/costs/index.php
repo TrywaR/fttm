@@ -138,7 +138,7 @@ for ($i=0; $i < 3; $i++) {
 }
 
 ?>
-<main class="container pt-4 pb-4">
+<main class="container pt-4 pb-4 animate__animated animate__fadeIn">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">

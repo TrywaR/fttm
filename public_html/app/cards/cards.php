@@ -1,14 +1,17 @@
 <?
 switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
-    $oCard = $_REQUEST['id'] ? new card( $_REQUEST['id'] ) : new card();
+    $oCard = new card( $_REQUEST['id'] );
 
     if ( $_REQUEST['from'] ) $oCard->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCard->limit = $_REQUEST['limit'];
+
     $oCard->sort = 'sort';
     $oCard->sortDir = 'DESC';
-    $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrCard = $oCard->get();
+    $oCard->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+
+    if ( $_REQUEST['id'] ) $arrCard = $oCard->get_card();
+    else $arrCard = $oCard->get_cards();
 
     notification::send($arrCard);
     break;
@@ -25,7 +28,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
 
-    $arrResult['text'] = 'Изменения сохранены';
+    $arrResult['text'] = 'Changes saved';
     notification::success($arrResult);
     break;
 

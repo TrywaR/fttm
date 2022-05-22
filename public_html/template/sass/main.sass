@@ -63,7 +63,25 @@ body
     background: radial-gradient(circle,#403535 7%,#4a4a4a 100%)
     z-index: -2
 
+header
+  flex-grow: 1
+
+  ul
+    li
+      margin-left: 1rem
+
+  .container-fluid
+    padding: 0
+
+main
+  display: flex
+  flex-direction: column
+  padding: 1rem
+  box-sizing: border-box
+  flex-grow: 100
+
 footer
+  flex-grow: 1
   padding: 1rem
 
   ._copy
@@ -193,6 +211,26 @@ footer
   &._edit_
     .progress
       opacity: .4
+
+.block_user
+  // ._user_info
+  //   padding: 1rem
+  //
+  // ._user_links
+  //   margin-top: 1rem
+  //   display: flex
+  //   font-size: 1em
+  //   line-height: 1
+  //
+  //   .icon
+  //     font-size: 1em
+  //     line-height: 1
+  //     margin-right: 1rem
+  //     text-decoration: none
+  //
+  //   a
+  //     // padding: 1rem
+
 
 @media screen and (max-width:1000px)
 

@@ -132,7 +132,7 @@ for ($i=0; $i < 3; $i++) {
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
 
-<main class="container pt-4 pb-4">
+<main class="container animate__animated animate__fadeIn">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">

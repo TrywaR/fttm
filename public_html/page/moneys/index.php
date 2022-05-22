@@ -1,4 +1,4 @@
-<main class="container" id="container">
+<main class="container animate__animated animate__fadeIn" id="container">
   <section class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
@@ -30,7 +30,7 @@
   <section class="row">
     <div class="col col-12 col-md-5">
       <!-- Затраты -->
-      <div class="card animate__animated animate__pulse mb-4">
+      <div class="card mb-4">
         <div class="card-body">
           <!-- <h5 class="card-title">Новый затрат</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -166,7 +166,7 @@
         </div>
       </div>
       <!-- Получение -->
-      <div class="card animate__animated animate__pulse mb-4 animate__delay-1s">
+      <div class="card mb-4">
         <div class="card-body">
           <!-- <h5 class="card-title">Новый приход</h5> -->
           <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
@@ -280,7 +280,7 @@
       </div>
     </div>
 
-    <div class="col col-12 col-md-7 animate__animated animate__bounceInRight">
+    <div class="col col-12 col-md-7">
       <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>

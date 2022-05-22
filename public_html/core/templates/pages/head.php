@@ -47,15 +47,15 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<link rel="stylesheet" href="/template/css/main.min.css?v=5.0.8">
-	<script src="/template/js/authorizations/authorizations.js?v=5.0.8"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.0.8"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.0.8"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.0.8"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.0.8"></script>
-	<script src="/template/js/content/content.js?v=5.0.8"></script>
-	<script src="/template/js/session/session.js?v=5.0.8"></script>
-	<script src="/template/js/index.js?v=5.0.8"></script>
+	<link rel="stylesheet" href="/template/css/main.min.css?v=5.1.3">
+	<script src="/template/js/authorizations/authorizations.js?v=5.1.3"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.1.3"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.1.3"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.1.3"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.1.3"></script>
+	<script src="/template/js/content/content.js?v=5.1.3"></script>
+	<script src="/template/js/session/session.js?v=5.1.3"></script>
+	<script src="/template/js/index.js?v=5.1.3"></script>
 	<!-- main x-->
 </head>
 <body>

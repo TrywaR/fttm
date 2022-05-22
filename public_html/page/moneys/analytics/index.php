@@ -1,4 +1,4 @@
-<main class="container pt-4 pb-4">
+<main class="container animate__animated animate__fadeIn">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <section class="row animate__animated animate__flipInY">
+  <section class="row">
     <div class="col-12 mt-4 mb-4">
       <?
 

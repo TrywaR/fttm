@@ -24,6 +24,10 @@ switch ($_REQUEST['action']) {
     include_once 'times/times.php';
     break;
 
+  case 'users': # Пользователи
+    include_once 'users/users.php';
+    break;
+
   case 'times_categories': # Категории временных затрат
     include_once 'times_categories/times_categories.php';
     break;

@@ -32,6 +32,10 @@ switch ($_SERVER['REQUEST_URI']) {
     break;
 
   case '/password_recovery/': # Восстановление пароля
+    include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
+    include_once 'core/templates/pages/header.php'; # Шапка
+    include_once 'page/authorizations/password_recovery.php';
+    include_once 'core/templates/pages/footer.php'; # Подвал
     break;
 
   default: # Запрашиваемая страница

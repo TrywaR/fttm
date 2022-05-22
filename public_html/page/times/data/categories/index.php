@@ -1,4 +1,4 @@
-<main class="container pt-4 pb-4">
+<main class="container animate__animated animate__fadeIn">
   <div class="row">
     <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12 col-md-6 mb-4 animate__animated animate__bounceInLeft">
+    <div class="col-12 col-md-6 mb-4">
       <!-- Карты -->
       <div class="card">
         <div class="card-body">
