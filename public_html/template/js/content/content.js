@@ -147,12 +147,45 @@ $(function(){
 			return false
 		}
 
+		// HTML
+		// if ( oElem.data().form == 'html' ) {
+		// 	$.when(
+		// 		content_download( oData, 'json', false )
+		// 	).then( function( oData ){
+		// 		console.log( oData )
+		// 	} )
+		// 	return false
+		// }
+
 		$.when(
 		  content_download( oData, 'json' )
 		).then( function( oData ){
 			// fttm_alerts( oData )
 		})
 	})
+
+	// Ссылки
+	// $(document).on('click', 'a:not(.__no_ajax)', function(){
+	// 	console.log('click')
+	// 	// Параметры
+	// 	var
+	// 		oElem = $(this),
+	// 		sAnimateClass = oElem.data().animate_class ? oElem.data().animate_class : 'animate__zoomOut',
+	// 		oData = {
+	// 			'action' : $(this).data().action,
+	// 			'form' : $(this).data().form,
+	// 			'id' : $(this).data().id
+	// 		}
+	//
+	// 	$.when(
+	// 	  content_download( oElem.href, 'json' )
+	// 	).then( function( oData ){
+	// 		// fttm_alerts( oData )
+	// 		console.log( oData )
+	// 	})
+	//
+	// 	return false
+	// })
 })
 
 // Функции

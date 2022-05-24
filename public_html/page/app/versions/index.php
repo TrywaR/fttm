@@ -10,7 +10,8 @@
   <div class="row" id="block_version">
     <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_3">5.1.3 Mega user 2</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_4">5.1.4 Filters</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_1_3">5.1.3 Mega user 2</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_2">5.1.2 Micro fix</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_1">5.1.1 All users fix</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_0">5.1.0 Beta form for time</a>
@@ -35,6 +36,19 @@
     <div class="col col-12 col-md-8">
      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
        <div class="pt-2 pb-2">
+         <h2 id="list-item-5_1_4">5.1.4 Filter</h2>
+         <ol>
+           <li>
+             Added filters on page times and moneys
+           </li>
+           <li>
+             Added support different languages
+           </li>
+           <li>
+             Added switcher theme style (white, dark)
+           </li>
+         </ol>
+
          <h2 id="list-item-5_1_3">5.1.3 Mega user 2</h2>
          <ol>
            <li>

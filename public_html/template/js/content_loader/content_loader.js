@@ -10,6 +10,7 @@ $.fn.content_loader = function() {
   arrPageParams.scroll_block = this.data().content_loader_scroll_block // Лимит
   arrPageParams.scroll_nav = this.data().content_loader_scroll_nav // Куда добавлять данные, 0 - начало 1 - конец
   arrPageParams.parents = this.data().content_loader_parents // Родитель
+  arrPageParams.filter = this.data().content_loader_filter // Фильтр
   arrPageParams.content_selector = '#' + this.attr('id') // Куда загружать данные при скролле
   arrPageParams.elem_show_class = this.data().content_loader_show_class // Класс показа
   arrPageParams.elem_template_path = this.data().content_loader_template // Путь до шаблона, как должны выглядеть элементы
@@ -33,6 +34,7 @@ function content_loader_init() {
   arrPageContent.table = arrPageParams.table // Таблица для загрузки данных
   arrPageContent.sort = arrPageParams.sort // Сортировка
   arrPageContent.sortdir = arrPageParams.sortdir // Направление соритровки
+  arrPageContent.filter = arrPageParams.filter // Данные для фильтрации
   arrPageContent.form = arrPageParams.form // Запрос для вывода данных
   arrPageContent.limit = arrPageParams.limit ? arrPageParams.limit : 10 // Запрос для вывода данных
   arrPageContent.elem_show_class = arrPageParams.elem_show_class // Путь до шаблона, как должны выглядеть элементы
@@ -108,7 +110,8 @@ function content_loader_load( sEvent ){
       'from': arrPageContent.from,
       'sort': arrPageContent.sort,
       'sortdir': arrPageContent.sortdir,
-      'limit': arrPageContent.limit
+      'limit': arrPageContent.limit,
+      'filter': arrPageContent.filter,
     }, 'text', false )
   ).then( function( resultData ){
     if ( ! resultData ) return false

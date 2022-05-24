@@ -16,6 +16,39 @@
          <li class="list-group-item">
            <small>
              <span class="icon">
+               <i class="fas fa-globe-africa"></i>
+             </span>
+             Lang:
+           </small>
+           <?=$_SESSION['user']['lang']?>
+         </li>
+         <li class="list-group-item">
+           <small>
+             <span class="icon">
+               <i class="fas fa-tint"></i>
+             </span>
+             Theme:
+           </small>
+           <?
+           switch ((int)$_SESSION['user']['theme']) {
+             case 0:
+               ?>Auto<?
+               break;
+             case 1:
+               ?>Dark<?
+               break;
+             case 2:
+               ?>Light<?
+               break;
+             case 3:
+               ?>No<?
+               break;
+           }
+           ?>
+         </li>
+         <li class="list-group-item">
+           <small>
+             <span class="icon">
                <i class="fas fa-envelope"></i>
              </span>
              Email:

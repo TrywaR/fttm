@@ -41,6 +41,8 @@ switch ($_SERVER['REQUEST_URI']) {
   default: # Запрашиваемая страница
     // Если пользователь авторизирован
     if ( isset($_SESSION['user']) ) {
+      $olang = new lang(); // Подтягиваем языки
+
       if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) {
         include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
         include_once 'core/templates/pages/header.php'; # Шапка

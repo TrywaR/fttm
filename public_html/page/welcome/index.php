@@ -60,7 +60,7 @@
         </div>
      </div>
 
-     <div class="col col-12 pt-4 pb-4">
+     <!-- <div class="col col-12 pt-4 pb-4">
        <h2>PRICE</h2>
        <div class="">
          now free
@@ -79,7 +79,7 @@
        <div class="">
          More company
        </div>
-     </div>
+     </div> -->
 
      <div class="col col-12">
        <h2>

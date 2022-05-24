@@ -1,9 +1,30 @@
 <?
 switch ($_REQUEST['form']) {
+  case 'show': # Вывод элементов
+    $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
+    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
+
+    if ( $_REQUEST['filter'] ) {
+      $arrFilters = $_REQUEST['filter'];
+      foreach ($arrFilters as $arrFilter) {
+        if ( $arrFilter['value'] )
+          $oTime->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . '"';
+      }
+    }
+
+    $oTime->sort = 'date';
+    $oTime->sortDir = 'DESC';
+    $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrTimes = $oTime->get_time();
+    notification::send($arrTimes);
+    break;
+
   case 'form': # Форма добавления / редактирования
     // Параметры
     $arrResults = [];
     $oForm = new form();
+
     // Если редактировани
     if ( $_REQUEST['id'] ) {
       $arrResults['event'] = 'edit';
@@ -45,17 +66,6 @@ switch ($_REQUEST['form']) {
 
     $arrResults['action'] = 'times';
     notification::send($arrResults);
-    break;
-
-  case 'show': # Вывод элементов
-    $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
-    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
-    $oTime->sort = 'date';
-    $oTime->sortDir = 'DESC';
-    $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrTimes = $oTime->get_time();
-    notification::send($arrTimes);
     break;
 
   case 'save': # Сохранение изменений

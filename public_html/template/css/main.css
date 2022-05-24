@@ -1,493 +1,65 @@
-@import url(../../lib/animate/animate.min.css);
-@import url(../fonts/Geometria/stylesheet.css);
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
+/*
+Error: Undefined variable: "$color_text".
+        on line 8 of X:\dev0ps\fttm\public_html\template\sass\main.sass
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
+3:   position: relative
+4:   display: flex
+5:   flex-direction: column
+6:   justify-content: space-between
+7:   z-index: 1
+8:   color: $color_text
+9:   background: $color_main_dark
+10:   font-family: $font_default
+11:   font-size: 14px
+12:   line-height: 18px
+13:   overflow-x: hidden
 
-body {
-  line-height: 1; }
-
-ol, ul {
-  list-style: none; }
-
-blockquote, q {
-  quotes: none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-  content: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
-body .block_modal {
-  background: #101010; }
-body .modal_form {
-  background: #202022; }
-  body .modal_form .block_header {
-    padding: 1rem; }
-  body .modal_form .block_sections {
-    display: flex;
-    flex-wrap: wrap; }
-    body .modal_form .block_sections .block_section {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      padding: 1rem;
-      box-sizing: border-box; }
-      body .modal_form .block_sections .block_section._40 {
-        flex-basis: 40%;
-        min-width: 40%;
-        max-width: 100%; }
-      body .modal_form .block_sections .block_section._60 {
-        flex-basis: 60%;
-        min-width: 60%;
-        max-width: 100%; }
-      body .modal_form .block_sections .block_section._100 {
-        flex-basis: 100%;
-        min-width: 100%;
-        max-width: 100%; }
-  body .modal_form .block_footer {
-    padding: 1rem; }
-
-.input_checkbox,
-.block_input {
-  margin: 0 0 1rem; }
-  .input_checkbox label,
-  .block_input label {
-    font-size: 1em;
-    line-height: 1;
-    margin-bottom: 0.2rem; }
-
-.block_buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
-  .block_buttons .button:not(:last-child) {
-    margin-right: 0.5rem; }
-
-body .accordion-button,
-body .accordion-button:not(.collapsed) {
-  color: white;
-  background: #202022; }
-body .accordion-item {
-  color: white;
-  background: #202022; }
-body .form-select,
-body .form-select:focus,
-body .form-control,
-body .form-control:focus,
-body .form-control:disabled {
-  color: white;
-  background: #202022;
-  border-color: #101010; }
-body .form-control:disabled {
-  opacity: 0.6; }
-body .picker__box .picker__header .picker__date-display .picker__weekday-display,
-body .datepicker table tr td.active:active,
-body .datepicker table tr td.active.highlighted:active,
-body .datepicker table tr td.active.active,
-body .datepicker table tr td.active.highlighted.active {
-  color: white;
-  background: #202022; }
-body .btn {
-  color: white; }
-  body .btn:hover {
-    color: #3282c8; }
-body .card {
-  position: relative;
-  z-index: 1;
-  color: white;
-  background: #202022; }
-  body .card .card-text {
-    opacity: 0.5; }
-body .list-group {
-  padding: 0;
-  border-radius: 0.5rem; }
-body .list-group-item {
-  color: white;
-  background: #202022;
-  z-index: 1; }
-  body .list-group-item .icon {
-    font-size: 1em;
-    margin-right: 0.5rem; }
-body .list-group-item.disabled,
-body .list-group-item:disabled {
-  background: #202022; }
-body .list-group-item-action:focus,
-body .list-group-item-action:hover {
-  color: #3282c8;
-  background: #101010; }
-body .jumbotron a {
-  color: #3282c8; }
-  body .jumbotron a:hover {
-    color: #3282c8 !important;
-    opacity: 0.8; }
-body .jumbotron .lead {
-  font-size: 1em;
-  line-height: 1.2; }
-  body .jumbotron .lead .icon {
-    margin-right: 0.5rem; }
-body .badge {
-  border-radius: 0.5rem; }
-body .navbar .home_link {
-  color: white;
-  text-decoration: none; }
-
-.times {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  opacity: 0; }
-  .times ._date {
-    opacity: 0.5;
-    font-size: 0.8rem;
-    font-weight: lighter;
-    margin-right: 0.5rem; }
-  .times ._category {
-    opacity: 0.5;
-    font-size: 0.8rem;
-    font-weight: lighter;
-    margin-right: 0.5rem; }
-  .times._show_ {
-    opacity: 1; }
-
-.times_category .times_category-data {
-  position: relative;
-  z-index: 1; }
-  .times_category .times_category-data .list-group-item {
-    background: none; }
-  .times_category .times_category-data .times_category-data_bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.1;
-    border-radius: 0.5rem; }
-
-.money {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  opacity: 0; }
-  .money._show_ {
-    opacity: 1; }
-  .money ._date {
-    opacity: 0.5;
-    font-size: 0.8rem;
-    font-weight: lighter;
-    margin-right: 0.5rem; }
-  .money ._card {
-    opacity: 0.5;
-    font-size: 0.8rem;
-    font-weight: lighter; }
-  .money ._price {
-    font-size: 1rem;
-    font-weight: normal;
-    margin-right: 0.5rem; }
-  .money._type_1_ {
-    position: relative;
-    z-index: 1; }
-    .money._type_1_:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #2cb544;
-      opacity: 0.4;
-      z-index: -1; }
-
-.moneys_category .moneys_category-data {
-  position: relative;
-  z-index: 1; }
-  .moneys_category .moneys_category-data .list-group-item {
-    background: none; }
-  .moneys_category .moneys_category-data .moneys_category-data_bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 0.1;
-    border-radius: 0.5rem; }
-
-@media screen and (max-width: 1000px) {
-  .money {
-    flex-direction: column; }
-    .money .rounded-pill {
-      margin-left: auto;
-      margin-top: 0.5rem; }
-    .money:before {
-      position: absolute;
-      top: 0.3rem;
-      left: 0.3rem;
-      opacity: 0.3; } }
-.fttm_alerts {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem; }
-
-.jGrowl .jGrowl-notification {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem; }
-  .jGrowl .jGrowl-notification .jGrowl-close {
-    font-size: 1rem;
-    line-height: 1;
-    font-weight: normal; }
-  .jGrowl .jGrowl-notification .jGrowl-message {
-    font-size: 1rem;
-    line-height: 1;
-    font-weight: normal; }
-.jGrowl .sc_error {
-  color: white;
-  background: #ff7b7b; }
-.jGrowl .sc_alert {
-  color: white;
-  background: #202022; }
-.jGrowl .sc_success {
-  color: white;
-  background: #2cb544; }
-.jGrowl .sc_default {
-  color: white;
-  background: #202022; }
-
-.fttm_progress {
-  height: 0rem;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out 0s; }
-  .fttm_progress._active_ {
-    height: 1rem; }
-
-main h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem; }
-main h2 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem; }
-main h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem; }
-main p {
-  margin-bottom: 1rem; }
-main strong,
-main b {
-  font-weight: bold; }
-main i {
-  font-style: italic; }
-main ul {
-  padding: 1rem 0; }
-  main ul li {
-    padding-left: 0.5rem;
-    padding-bottom: 0.5rem; }
-main ol {
-  padding: 1rem 0; }
-  main ol li {
-    padding-left: 0.5rem;
-    padding-bottom: 0.5rem; }
-main a {
-  color: #3282c8; }
-  main a:hover {
-    color: #3282c8;
-    opacity: 0.7; }
-main small {
-  font-size: 0.8rem;
-  line-height: 1;
-  opacity: 0.3; }
-
-body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 1;
-  color: white;
-  background: #202022;
-  font-family: "Geometria";
-  font-size: 14px;
-  line-height: 18px;
-  overflow-x: hidden;
-  max-width: 100%;
-  min-height: 100vh; }
-  body:before, body:after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; }
-  body:before {
-    background: linear-gradient(0deg, rgba(15, 15, 15, 0.8) 0, rgba(40, 40, 40, 0.8) 100%);
-    opacity: 0.8;
-    z-index: -1; }
-  body:after {
-    filter: blur(0.1rem);
-    background: radial-gradient(circle, #403535 7%, #4a4a4a 100%);
-    z-index: -2; }
-
-header {
-  flex-grow: 1; }
-  header ul li {
-    margin-left: 1rem; }
-  header .container-fluid {
-    padding: 0; }
-
-main {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  box-sizing: border-box;
-  flex-grow: 100; }
-
-footer {
-  flex-grow: 1;
-  padding: 1rem; }
-  footer ._copy {
-    font-size: 0.8em;
-    line-height: 1;
-    text-align: center;
-    opacity: 0.6; }
-    footer ._copy a {
-      color: white; }
-      footer ._copy a:hover {
-        opacity: 0.5; }
-
-.block_template {
-  display: none; }
-
-.block_content_loader {
-  overflow: hidden;
-  transition: all 0.3s ease-in-out 0s; }
-
-.text_seporator {
-  margin-left: 0.2rem;
-  margin-right: 0.2rem; }
-
-.icon {
-  font-size: 1.2rem;
-  line-height: 1;
-  color: white; }
-
-.switch_icons > *:nth-child(1) {
-  display: block; }
-.switch_icons > *:nth-child(2) {
-  display: none; }
-.switch_icons._active_ > *:nth-child(1) {
-  display: none; }
-.switch_icons._active_ > *:nth-child(2) {
-  display: block; }
-
-.content_manager_buttons._hide_ {
-  display: none !important; }
-
-.block_content_loader {
-  padding: 0; }
-
-.block_analitycs {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  justify-content: center;
-  padding: 2rem 0 4rem; }
-  .block_analitycs > ._circle {
-    position: relative;
-    z-index: 1;
-    padding: 1rem;
-    text-align: center;
-    flex-grow: 1; }
-    .block_analitycs > ._circle:nth-child(even):after {
-      animation: circle linear 15s;
-      animation-iteration-count: infinite;
-      animation-duration: 15s; }
-    .block_analitycs > ._circle:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      width: 10rem;
-      height: 10rem;
-      margin: auto;
-      border-radius: 50% 40% 35% 45%;
-      background: #3282c8;
-      animation: circle ease-in-out 20s;
-      animation-iteration-count: infinite;
-      animation-duration: 20s;
-      transform-origin: 50% 50%;
-      box-shadow: 0 0 1rem 0 #101010; }
-    .block_analitycs > ._circle ._title {
-      font-size: 1.1rem;
-      line-height: 1;
-      margin-bottom: 0.5rem; }
-    .block_analitycs > ._circle ._value {
-      font-size: 1.3rem;
-      font-weight: bold;
-      line-height: 1; }
-    .block_analitycs > ._circle.__success:after {
-      background: #2cb544 !important; }
-    .block_analitycs > ._circle.__error:after {
-      background: #ff7b7b !important; }
-
-.progress_block .progress {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  transition: all 0.3s ease-in-out 0s; }
-.progress_block._edit_ .progress {
-  opacity: 0.4; }
-
-@media screen and (max-width: 1000px) {
-  .block_analitycs {
-    flex-wrap: wrap; }
-    .block_analitycs ._circle {
-      display: flex;
-      flex-direction: column;
-      min-height: 10rem;
-      max-width: 50%;
-      justify-content: center; } }
-@keyframes circle {
-  0% {
-    transform: rotate(0deg); }
-  50% {
-    transform: rotate(360deg); }
-  90% {
-    transform: rotate(260deg); }
-  100% {
-    transform: rotate(0deg); } }
-
-/*# sourceMappingURL=main.css.map */
+Backtrace:
+X:\dev0ps\fttm\public_html\template\sass\main.sass:8
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `map'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:161:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:10:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:391:in `run'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/bin/sass:13:in `<top (required)>'
+C:/Program Files (x86)/Koala/bin/sass:22:in `load'
+C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$color_text\".\A         on line 8 of X:\dev0ps\fttm\public_html\template\sass\main.sass\A \A 3:   position: relative\A 4:   display: flex\A 5:   flex-direction: column\A 6:   justify-content: space-between\A 7:   z-index: 1\A 8:   color: $color_text\A 9:   background: $color_main_dark\A 10:   font-family: $font_default\A 11:   font-size: 14px\A 12:   line-height: 18px\A 13:   overflow-x: hidden"; }

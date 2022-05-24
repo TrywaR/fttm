@@ -1,3 +1,17 @@
+<?
+$oCard = new card();
+$oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrCards = $oCard->get();
+
+$oMoneyCategory = new moneys_category();
+$oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrMoneysCategories = $oMoneyCategory->get();
+
+$oProject = new project();
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrProjects = $oProject->get();
+?>
+
 <main class="container animate__animated animate__fadeIn" id="container">
   <section class="row mb-4">
     <div class="col-12">
@@ -40,7 +54,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingZero">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
-                    Spend
+                    <?=$olang->get('Spend')?>
                   </button>
                 </h2>
                 <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
@@ -64,18 +78,9 @@
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>Наличные</option>
-                            <?
-                            $oCard = new card();
-                            $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrCards = $oCard->get();
-                            ?>
+                            <option value="0" selected><?=$olang->get('Cash')?></option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -87,12 +92,7 @@
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="category" class="form-select" size="3" aria-label="size 3 select example">
-                            <?
-                            $oMoneyCategory = new moneys_category();
-                            $oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrMoneysCategorise = $oMoneyCategory->get();
-                            ?>
-                            <?php foreach ($arrMoneysCategorise as $iIndex => $arrMoneyCategory): ?>
+                            <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
                               <?php if ( ! $iIndex ): ?>
                                 <option selected value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
                               <?php else: ?>
@@ -105,16 +105,25 @@
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
+                          <label for="inputCardId" class="col-form-label">To card</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="to_card" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected>...</option>
+                            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputProjectId" class="col-form-label">Project id</label>
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
                             <option value="0" selected>Не работа</option>
-                            <?
-                            $oProject = new project();
-                            $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrProjects = $oProject->get();
-                            ?>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
                               <?php if ( ! $iIndex ): ?>
                                 <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
@@ -176,7 +185,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Replenish
+                    <?=$olang->get('Replenish')?>
                   </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -200,18 +209,9 @@
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>Левый приход</option>
-                            <?
-                            $oProject = new project();
-                            $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrProjects = $oProject->get();
-                            ?>
+                            <option value="0" selected><?=$olang->get('NoProject')?></option>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -223,17 +223,9 @@
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                            <?
-                            $oCard = new card();
-                            $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrCards = $oCard->get();
-                            ?>
+                            <option value="0" selected><?=$olang->get('Cash')?></option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option selected value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -281,11 +273,73 @@
     </div>
 
     <div class="col col-12 col-md-7">
+      <!-- Фильтр -->
+      <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="fas fa-wallet"></i>
+          </span>
+          <select name="type" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('Spend')?></option>
+            <option value="1"><?=$olang->get('Replenish')?></option>
+          </select>
+
+          <span class="input-group-text">
+            <i class="far fa-folder"></i>
+          </span>
+          <select name="project_id" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('NoProject')?></option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+          </span>
+          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+        </div>
+
+        <div class="input-group mb-4">
+          <span class="input-group-text">
+            <i class="far fa-credit-card"></i>
+          </span>
+          <select name="card" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('Cash')?></option>
+            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="fas fa-list-ul"></i>
+          </span>
+          <select name="category" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('NoCategory')?></option>
+            <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
+              <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
       <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
         </button>
       </div>
+
       <ol
         id="moneys"
         class="block_moneys block_elems list-group list-group-numbered block_content_loader"
@@ -308,6 +362,7 @@
       <script>
         $(function(){
           $(document).find('#moneys').content_loader()
+          $(document).find('#content_filter').content_filter()
           $(document).find('#content_manager_buttons').content_manager()
         })
       </script>

@@ -1,5 +1,5 @@
 <div class="fttm_progress progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
 </div>
 <header class="container">
   <nav class="navbar navbar-expand-lg">
@@ -17,8 +17,8 @@
           <!-- <span class="navbar-toggler-icon"></span> -->
           <i class="fas fa-bars"></i>
         </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/home/') echo 'badge bg-success active';?>" aria-current="page" href="/home/">Home</a>
             </li>

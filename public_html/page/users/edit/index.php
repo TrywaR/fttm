@@ -12,6 +12,50 @@
           <input type="hidden" name="id" value="<?=$_SESSION['user']['id']?>">
 
           <div class="mb-4">
+            <label class="form-label" for="form_lang">
+              <small>
+                <i class="fas fa-globe-africa"></i>
+              </small>
+              Lang
+            </label>
+            <select id="form_lang" name="lang" class="form-select" size="3" aria-label="size 3 select example">
+              <option value="en" selected>
+                English
+              </option>
+              <option value="ru">
+                Russian
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="form_theme">
+              <small>
+                <i class="fas fa-tint"></i>
+              </small>
+              Theme
+            </label>
+            <select id="form_theme" name="theme" value="<?=$_SESSION['user']['theme']?>" class="form-select" size="3" aria-label="size 3 select example">
+              <option value="0">
+                <i class="fas fa-adjust"></i>
+                Auto
+              </option>
+              <option value="1">
+                <i class="fas fa-moon"></i>
+                Dark
+              </option>
+              <option value="2">
+                <i class="fas fa-sun"></i>
+                Light
+              </option>
+              <option value="3">
+                <i class="fas fa-bath"></i>
+                No
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-4">
             <label class="form-label" for="form_login">
               <small>
                 <i class="fas fa-user-alt"></i>
@@ -94,7 +138,7 @@
           <div class="block_buttons">
             <button class="btn btn-primary mt-2 mb-4" type="submit">
               <i class="fas fa-save"></i>
-              Save
+              <?=$olang->get('Save')?>
             </button>
           </div>
         </div>

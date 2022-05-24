@@ -111,20 +111,9 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="category_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>No category</option>
-                            <?
-                            $oTimesCategory = new times_category();
-                            $oTimesCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrTimesCategories = $oTimesCategory->get();
-                            // print_r($arrTimesCategories);
-                            // die();
-                            ?>
-                            <?php foreach ($arrTimesCategories as $iIndex => $arrTimesCategory): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option value="<?=$arrTimesCategory['id']?>"><?=$arrTimesCategory['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrTimesCategory['id']?>"><?=$arrTimesCategory['title']?></option>
-                              <?php endif; ?>
+                            <option value="0" selected><?=$olang->get('NoCategory')?></option>
+                            <?php foreach ($arrCategories as $iIndex => $arrCategory): ?>
+                              <option value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -150,7 +139,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
-                          <label for="inputDate" class="col-form-label">Date</label>
+                          <label for="inputDate" class="col-form-label"><?=$olang->get('Date')?></label>
                         </div>
                         <div class="col-12 col-md-8">
                           <input name="date" type="date" lang="en" id="inputDate" class="form-control" value="<?=date('Y-m-d')?>">
@@ -163,18 +152,9 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>No project</option>
-                            <?
-                            $oProject = new project();
-                            $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrProjects = $oProject->get();
-                            ?>
+                            <option value="0" selected><?=$olang->get('NoProject')?></option>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -190,8 +170,8 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                       </div>
                     </form>
                   </div>
@@ -204,6 +184,47 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     </div>
 
     <div class="col-12 col-md-7">
+      <!-- Фильтр -->
+      <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#times">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="far fa-folder"></i>
+          </span>
+          <select name="project_id" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('NoProject')?></option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+          </span>
+          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+        </div>
+
+        <div class="input-group mb-4">
+          <span class="input-group-text">
+            <i class="fas fa-list-ul"></i>
+          </span>
+          <select name="category_id" class="form-select">
+            <option value="" selected>...</option>
+            <option value="0"><?=$olang->get('NoCategory')?></option>
+            <?php foreach ($arrCategories as $iIndex => $arrCategory): ?>
+              <option value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
       <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
@@ -232,6 +253,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       <script>
         $(function(){
           $(document).find('#times').content_loader()
+          $(document).find('#content_filter').content_filter()
           $(document).find('#content_manager_buttons').content_manager()
         })
       </script>

@@ -98,6 +98,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between mt-3">
+                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
                       <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Add</button>
                     </div>
                   </form>

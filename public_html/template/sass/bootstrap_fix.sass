@@ -31,6 +31,17 @@ body
   .btn
     color: $color_text
 
+    &.btn-primary
+      background: $color_main_dark
+      border-color: $color_main_dark
+
+    &.btn-dark
+      background: $color_main_dark_ultra
+      border-color: $color_main_dark_ultra
+
+    &.disabled
+      color: $color_main_dark_light
+
     &:hover
       color: $color_main
 
@@ -64,6 +75,11 @@ body
   .list-group-item-action:hover
     color: $color_main
     background: $color_main_dark_ultra
+
+  .input-group-text
+    color: $color_text
+    background: $color_main_dark
+    border-color: $color_main_dark
 
   .jumbotron
     a

@@ -3,11 +3,27 @@ switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
 
+    if ( $_REQUEST['filter'] ) {
+      $arrFilters = $_REQUEST['filter'];
+      foreach ($arrFilters as $arrFilter) {
+        if ( $arrFilter['value'] )
+          switch ($arrFilter['name']) {
+            case 'date':
+              $oMoney->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . ' 00:00:00"';
+              break;
+
+            default:
+              $oMoney->query .= ' AND `' . $arrFilter['name'] . '` = ' . $arrFilter['value'];
+              break;
+          }
+      }
+    }
+
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
     $oMoney->sort = 'date';
     $oMoney->sortDir = 'DESC';
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrMoneys = $oMoney->get_money();
 
     notification::send($arrMoneys);
