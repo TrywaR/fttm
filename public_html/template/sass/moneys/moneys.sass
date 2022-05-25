@@ -8,6 +8,15 @@
   &._show_
     opacity: 1
 
+  &._card_show_true,
+  &._cardto_show_true
+    ._card
+      display: flex
+
+  &._cardto_show_true
+    ._cardto
+      display: flex
+
   ._date
     opacity: .5
     font-size: .8rem
@@ -15,9 +24,22 @@
     margin-right: .5rem
 
   ._card
+    display: none
+    align-items: center
     opacity: .5
     font-size: .8rem
     font-weight: lighter
+
+    i,
+    svg
+      margin-right: .2rem
+
+  ._cardto
+    display: none
+    align-items: center
+
+    small
+      margin: 0 .2rem
 
   ._price
     font-size: 1rem

@@ -58,6 +58,19 @@ switch ($_REQUEST['form']) {
     $arrData['email'] = $_REQUEST['email'];
     $arrData['password'] = hash( 'ripemd128', $_REQUEST['password'] );
 
+    // Referal system
+    if ( $_SESSION['referal'] ) {
+      $oUserReferal = new user( $_SESSION['referal'] );
+      if ( (int)$oUserReferal->id ) {
+        $arrData['referal'] = $_SESSION['referal'];
+        if ( (int)$oUserReferal->role == 0 ) {
+          $oUserReferal->role = 1;
+          $oUserReferal->name = 'update';
+          $oUserReferal->save();
+        }
+      }
+    };
+
     $oUser = new user();
     $oUser->arrAddFields = $arrData;
 

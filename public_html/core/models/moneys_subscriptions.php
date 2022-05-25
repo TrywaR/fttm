@@ -17,6 +17,33 @@ class moneys_subscriptions extends model
   public static $active = '';
   public static $user_id = '';
 
+  function get_subscription(){
+    $arrResult = [];
+    $arrSubscription = $this->get();
+    if ( (int)$arrSubscription['user_id'] ) $arrSubscription['edit_show'] = 'true';
+
+    if ( (int)$arrSubscription['card'] ) {
+      $oCard = new card( $arrSubscription['card'] );
+      $arrSubscription['card_val'] = (array)$oCard;
+      $arrSubscription['card_show'] = 'true';
+    }
+
+    $arrSubscription['price'] = substr($arrSubscription['price'], 0, -2);
+
+    $arrResult = $arrSubscription;
+    return $arrResult;
+  }
+
+  function get_subscriptions(){
+    $arrResults = [];
+    $arrMoneysSubscriptions = $this->get();
+    foreach ($arrMoneysSubscriptions as $arrSubscription) {
+      $oMoneysSubscription = new moneys_subscriptions( $arrSubscription['id'] );
+      $arrResults[] = $oMoneysSubscription->get_subscription();
+    }
+    return $arrResults;
+  }
+
   function __construct( $moneys_subscriptions_id = 0 )
   {
     $this->table = 'moneys_subscriptions';

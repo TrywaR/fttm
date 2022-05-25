@@ -1,3 +1,14 @@
+<?
+$oCard = new card();
+$oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrCards = $oCard->get();
+
+$oMoneyCategory = new moneys_category();
+$oMoneyCategory->sort = 'sort';
+$oMoneyCategory->sortDir = 'ASC';
+$oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+$arrMoneysCategories = $oMoneyCategory->get_categories();
+?>
 <main class="animate__animated animate__fadeIn container pt-4 pb-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -93,18 +104,9 @@
                       </div>
                       <div class="col-12 col-md-8">
                         <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                          <option value="0" selected>Cash</option>
-                          <?
-                          $oCard = new card();
-                          $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                          $arrCards = $oCard->get();
-                          ?>
+                          <option value="0" selected><?=$olang->get('Cash')?></option>
                           <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                            <?php if ( ! $iIndex ): ?>
-                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                            <?php else: ?>
-                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-                            <?php endif; ?>
+                            <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
@@ -116,17 +118,9 @@
                       </div>
                       <div class="col-12 col-md-8">
                         <select name="category" class="form-select" size="3" aria-label="size 3 select example">
-                          <?
-                          $oMoneyCategory = new moneys_category();
-                          $oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                          $arrMoneysCategorise = $oMoneyCategory->get();
-                          ?>
+                          <option value="0" selected><?=$olang->get('NoCategory')?></option>
                           <?php foreach ($arrMoneysCategorise as $iIndex => $arrMoneyCategory): ?>
-                            <?php if ( ! $iIndex ): ?>
-                              <option selected value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
-                            <?php else: ?>
-                              <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
-                            <?php endif; ?>
+                            <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
@@ -203,7 +197,7 @@
       <div class="ms-2 me-auto">
         <div class="fw-bold">
           {{title}}<br/>
-          <i class="fas fa-credit-card"></i> {{card}}
+          <small><i class="fas fa-credit-card"></i> {{card_val.title}}</small>
         </div>
       </div>
       <div class="badge bg-primary">

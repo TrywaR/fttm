@@ -16,7 +16,7 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingZero">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
-                  Add
+                  <?=$olang->get('Add')?>
                 </button>
               </h2>
               <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
@@ -33,24 +33,6 @@
                     <input type="hidden" name="form" value="save">
                     <input type="hidden" name="id" value="">
                     <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
-
-                    <!-- <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputProjectIdZero" class="col-form-label">Project id</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="project_id" type="number" id="inputProjectIdZero" class="form-control">
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputTasksIdZero" class="col-form-label">Client id</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="tasks_id" type="number" id="inputTasksIdZero" class="form-control">
-                      </div>
-                    </div> -->
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
@@ -81,6 +63,15 @@
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
+                        <label for="inputDateZero" class="col-form-label">Percent</label>
+                      </div>
+                      <div class="col-12 col-md-8">
+                        <input name="percent" type="number" id="inputDateZero" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="row align-items-center mb-1">
+                      <div class="col-12 col-md-4">
                         <label for="inputTitleZero" class="col-form-label">sort</label>
                       </div>
                       <div class="col-12 col-md-8">
@@ -96,8 +87,8 @@
                     </div>
 
                     <div class="d-flex justify-content-between mt-3">
-                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                      <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                     </div>
                   </form>
                 </div>
@@ -149,16 +140,23 @@
   </div>
 
   <div class="block_template">
-    <div class="col-12 col-md-4 mb-4 _elem card_item progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="col-12 col-md-4 mb-4 _elem card_item progress_block animate__animated animate__bounceInRight _commission_show_{{commission_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="card">
         <div class="card-body">
           <div class="ms-2 me-auto mb-2">
             <div class="fw-bold">{{title}}</div>
+            <small style="opacity:.6" title="last update"><i class="fas fa-clock"></i> {{date_update}}</small>
           </div>
-          <div class="badge bg-primary">
+
+          <div class="badge bg-primary" title="Balance">
             {{balance}} / <small>{{limit}}</small>
           </div>
-          <div class="rounded-pill">
+
+          <div class="badge bg-warning text-dark _commission" title="Commission">
+            {{commission}}
+          </div>
+
+          <div class="btn-group mt-2 w-100" role="group">
             <a href="#" class="btn content_manager_switch switch_icons">
               <div class="">
                 <i class="far fa-square"></i>
@@ -166,6 +164,9 @@
               <div class="">
                 <i class="fas fa-square"></i>
               </div>
+            </a>
+            <a href="#" title="Reload data" class="btn content_download" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
+              <i class="fas fa-retweet"></i>
             </a>
             <a href="#" class="btn content_download" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>

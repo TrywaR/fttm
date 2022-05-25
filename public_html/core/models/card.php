@@ -12,69 +12,111 @@ class card extends model
   public static $sort = '';
   public static $active = '';
   public static $user_id = '';
-  public static $date_update = '';
+  public static $date_update = ''; # Last update
+  public static $service = '';
+  public static $commission = '';
+  public static $percent = '';
+  public static $date_service = '';
+  public static $date_commission = '';
+  public static $free_days_limit = '';
 
-  // Пересчёт баланса
-  function reload_balance( $iCardId = 0 ){
-    if ( ! $iCardId ) $iCardId = $this->id;
+  // Пополнение баланса карты
+  function balance_add( $floatSum ){
+    $this->balance = (float)$this->balance + (float)$floatSum;
+    $this->date_update = date("Y-m-d H:i:s");
+    $this->save();
+    return $this->balance;
+  }
 
-    $oCard = new card( $iCardId );
-    $oCard->balance = $oCard->limit ? $oCard->limit : 0;
-    $arrCard = $oCard->get();
+  // Саписание баланса карты
+  function balance_remove( $floatSum ){
+    $this->balance = (float)$this->balance - (float)$floatSum;
+    $this->date_update = date("Y-m-d H:i:s");
+    $this->save();
+    return $this->balance;
+  }
 
+  // Пересчёт баланса карты
+  function balance_reload(){
+    $this->balance = $this->limit;
+
+    // Если кридитка, считаем комиссии
+    if ( (float)$this->limit > 0 ) $this->commission = $this->commission_reload();
+
+    // Анализируем затраты
     $oMoney = new money();
-    $oMoney->query .= ' AND `card` = ' . $iCardId;
-    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= ' AND `card` = ' . $this->id;
+    $oMoney->query .= ' AND `type` = 0';
     $arrMoneys = $oMoney->get_money();
+    foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance - (float)$arrMoney['price'];
 
-    foreach ($arrMoneys as $arrMoney) {
-      $oMoneyCategory = new moneys_category( $arrMoney['categroy'] );
-      switch ( (int)$oMoneyCategory->type ) {
-        case 0: # no categroy
-          switch ( (int)$arrMoney['type'] ) {
-            case 0: # Minus
-              $oCard->balance = $oCard->balance - $arrMoney['price'];
-            case 1: # Plus
-              $oCard->balance = $oCard->balance + $arrMoney['price'];
-              break;
-          }
-          break;
-        case 1: # Not minus
-          // code...
-          break;
-        case 2: # Plus
-          $oCard->balance = $oCard->balance + $arrMoney['price'];
-          break;
-      }
-    }
+    // Анализируем поступления
+    $oMoney = new money();
+    $oMoney->query .= ' AND `card` = ' . $this->id;
+    $oMoney->query .= ' AND `type` = 1';
+    $arrMoneys = $oMoney->get_money();
+    foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];
 
-    $oCard->date_update = date("Y-m-d H:i:s");
-    $oCard->save();
+    // Анализируем поступления с других карт
+    $oMoney = new money();
+    $oMoney->query .= ' AND `to_card` = ' . $this->id;
+    $oMoney->query .= ' AND `type` = 0';
+    $arrMoneys = $oMoney->get_money();
+    foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];
 
-    return $arrCard;
+    $this->date_update = date("Y-m-d H:i:s");
+    $this->save();
+    return $this->balance;
+  }
+
+  // Пополнение комиссии карты
+  function commission_add( $floatSum ){
+    $this->commission = (float)$this->commission + (float)$floatSum;
+    $this->date_update = date("Y-m-d H:i:s");
+    $this->save();
+    return $this->commission;
+  }
+
+  // Саписание комиссии карты
+  function commission_remove( $floatSum ){
+    $this->commission = (float)$this->commission - (float)$floatSum;
+    $this->date_update = date("Y-m-d H:i:s");
+    $this->save();
+    return $this->commission;
+  }
+
+  // Пересчёт комиссий
+  function commission_reload(){
+    $this->commission = 0;
+
+    // Анализируем затраты
+    $oMoneyCommission = new money();
+    $oMoneyCommission->query .= ' AND `card` = ' . $this->id;
+    $oMoneyCommission->query .= ' AND `category` = 1';
+    $arrMoneysCommissions = $oMoneyCommission->get_money();
+    foreach ($arrMoneysCommissions as $arrMoneyCommission) $this->commission = (float)$this->commission + (float)$arrMoneyCommission['price'];
+    return $this->commission;
   }
 
   // Вывод карты
-  function get_card( $iCardId = 0 ){
-    if ( ! $iCardId ) $iCardId = $this->id;
-
-    $oCard = new card( $iCardId );
-    $arrCard = $oCard->get();
+  function get_card(){
+    $arrCard = (array)$this;
 
     // Проверка последней оплаты, если не сходится обнавляем баланс
     $oMoney = new money();
-    $oMoney->query .= ' AND `card` = ' . $iCardId;
-    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= ' AND `card` = ' . $arrCard['id'];
+    $oMoney->query .= ' AND `user_id` = ' . $arrCard['user_id'];
     $oMoney->query .= ' ORDER BY `date` ASC LIMIT 1';
     $arrMoneys = $oMoney->get_money();
-
     $iLastMoney = strtotime($arrMoneys[0]['date']);
     $iLastUpdateCard = strtotime($arrCard['date_update']);
+    if ( $iLastMoney > $iLastUpdateCard ) $arrCard['balance'] = $this->balance_reload();
 
-    if ( $iLastMoney > $iLastUpdateCard ) $oCard->reload_balance();
-
+    // Обработка данных
     $arrCard['balance'] = substr($arrCard['balance'], 0, -2);
     $arrCard['limit'] = substr($arrCard['limit'], 0, -2);
+    $arrCard['commission'] = substr($arrCard['commission'], 0, -2);
+    if ( (float)$arrCard['commission'] > 0 ) $arrCard['commission_show'] = 'true';
 
     return $arrCard;
   }
@@ -110,6 +152,12 @@ class card extends model
       $this->active = $arrCard['active'];
       $this->user_id = $arrCard['user_id'];
       $this->date_update = $arrCard['date_update'];
+      $this->service = $arrCard['service'];
+      $this->commission = $arrCard['commission'];
+      $this->percent = $arrCard['percent'];
+      $this->date_service = $arrCard['date_service'];
+      $this->date_comismsion = $arrCard['date_commission'];
+      $this->free_days_limit = $arrCard['free_days_limit'];
     }
   }
 }

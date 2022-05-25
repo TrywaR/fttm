@@ -4,10 +4,14 @@ $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrCards = $oCard->get();
 
 $oMoneyCategory = new moneys_category();
-$oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrMoneysCategories = $oMoneyCategory->get();
+$oMoneyCategory->sort = 'sort';
+$oMoneyCategory->sortDir = 'ASC';
+$oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+$arrMoneysCategories = $oMoneyCategory->get_categories();
 
 $oProject = new project();
+$oProject->sort = 'sort';
+$oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 ?>
@@ -92,12 +96,9 @@ $arrProjects = $oProject->get();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="category" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected><?=$olang->get('NoCategory')?></option>
                             <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option selected value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -123,13 +124,9 @@ $arrProjects = $oProject->get();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>Не работа</option>
+                            <option value="0" selected><?=$olang->get('NoProject')?></option>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-                              <?php if ( ! $iIndex ): ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php else: ?>
-                                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                              <?php endif; ?>
+                              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -163,8 +160,8 @@ $arrProjects = $oProject->get();
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                       </div>
                     </form>
                   </div>
@@ -280,7 +277,7 @@ $arrProjects = $oProject->get();
             <i class="fas fa-wallet"></i>
           </span>
           <select name="type" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Type</option>
             <option value="0"><?=$olang->get('Spend')?></option>
             <option value="1"><?=$olang->get('Replenish')?></option>
           </select>
@@ -289,7 +286,7 @@ $arrProjects = $oProject->get();
             <i class="far fa-folder"></i>
           </span>
           <select name="project_id" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Project</option>
             <option value="0"><?=$olang->get('NoProject')?></option>
             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
               <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
@@ -307,7 +304,7 @@ $arrProjects = $oProject->get();
             <i class="far fa-credit-card"></i>
           </span>
           <select name="card" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Card</option>
             <option value="0"><?=$olang->get('Cash')?></option>
             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
               <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
@@ -318,7 +315,7 @@ $arrProjects = $oProject->get();
             <i class="fas fa-list-ul"></i>
           </span>
           <select name="category" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Category</option>
             <option value="0"><?=$olang->get('NoCategory')?></option>
             <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
               <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
@@ -370,16 +367,18 @@ $arrProjects = $oProject->get();
   </section>
 
   <section class="block_template">
-    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _card_show_{{card_show}} _cardto_show_{{cardto_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
-        <div class="fw-bold mb-1">
+        <div class="fw-bold mb-1 d-flex">
           <span class="_date">
             {{date}}
           </span>
           <span class="_card">
             <i class="fas fa-credit-card"></i> {{card_val.title}}
+            <span class="_cardto"> <small>></small> <i class="fas fa-credit-card"></i> {{cardto_val.title}}</span>
           </span>
         </div>
+
         <div class="badge bg-primary _price">
           {{price}}
         </div>

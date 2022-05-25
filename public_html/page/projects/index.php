@@ -151,23 +151,26 @@
           <small>#{{id}}</small>
           <h5 class="card-title">{{title}}</h5>
           <p class="card-text">{{description}}</p>
-          <a href="#" class="btn content_manager_switch switch_icons">
-            <div class="">
-              <i class="far fa-square"></i>
-            </div>
-            <div class="">
-              <i class="fas fa-square"></i>
-            </div>
-          </a>
-          <a href="/projects/analytics?project_id={{id}}" class="btn">
-            <i class="fas fa-chart-area"></i>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="projects" data-elem=".project" data-form="edit" data-animate_class="animate__flipInY">
-            <i class="fas fa-pen-square"></i>
-          </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="projects" data-form="del" data-elem=".project" data-animate_class="animate__fadeOutRightBig">
-            <i class="fas fa-minus-square"></i>
-          </a>
+          
+          <div class="btn-group mt-2 w-100" role="group">
+            <a href="#" class="btn content_manager_switch switch_icons">
+              <div class="">
+                <i class="far fa-square"></i>
+              </div>
+              <div class="">
+                <i class="fas fa-square"></i>
+              </div>
+            </a>
+            <a href="/projects/analytics?project_id={{id}}" class="btn">
+              <i class="fas fa-chart-area"></i>
+            </a>
+            <a href="#" class="btn content_download" data-id="{{id}}" data-action="projects" data-elem=".project" data-form="edit" data-animate_class="animate__flipInY">
+              <i class="fas fa-pen-square"></i>
+            </a>
+            <a href="#" class="btn content_download" data-id="{{id}}" data-action="projects" data-form="del" data-elem=".project" data-animate_class="animate__fadeOutRightBig">
+              <i class="fas fa-minus-square"></i>
+            </a>
+          </div>
         </div>
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>

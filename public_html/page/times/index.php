@@ -1,11 +1,18 @@
 <?
 $oProject = new project();
+$oProject->sort = 'sort';
+$oProject->sortDir = 'ASC';
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
+
 $arrProjectsIds = [];
 foreach ($arrProjects as $arrProject) $arrProjectsIds[$arrProject['id']] = $arrProject;
 
 $oCategory = new times_category();
-$arrCategories = $oCategory->get();
+$oCategory->sort = 'sort';
+$oCategory->sortDir = 'ASC';
+$oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+$arrCategories = $oCategory->get_categories();
 $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
@@ -191,7 +198,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
             <i class="far fa-folder"></i>
           </span>
           <select name="project_id" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Project</option>
             <option value="0"><?=$olang->get('NoProject')?></option>
             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
               <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
@@ -209,7 +216,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
             <i class="fas fa-list-ul"></i>
           </span>
           <select name="category_id" class="form-select">
-            <option value="" selected>...</option>
+            <option value="" selected>Category</option>
             <option value="0"><?=$olang->get('NoCategory')?></option>
             <?php foreach ($arrCategories as $iIndex => $arrCategory): ?>
               <option value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>

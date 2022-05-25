@@ -12,6 +12,49 @@
          <?=$_SESSION['user']['login']?>
        </div>
 
+       <small class="mt-3">
+         Other
+       </small>
+       <ul class="list-group mt-1 mb-1">
+         <li class="list-group-item">
+           <?
+           switch ((int)$_SESSION['user']['role']) {
+             case 0:
+                ?>
+                <span class="icon">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                User
+                <?
+               break;
+             case 1:
+                ?>
+                <span class="icon">
+                  <i class="fas fa-check"></i>
+                </span>
+                Valid user
+                <?
+               break;
+             case 666:
+                ?>
+                <span class="icon">
+                  <i class="fas fa-crown"></i>
+                </span>
+                Admin
+                <?
+               break;
+           }
+           ?>
+         </li>
+         <li class="list-group-item">
+           <small>Referal link:</small>
+           <input type="text" readonly class="form-control-plaintext" value="<?=config::$site_url?>/?referal=<?=$_SESSION['user']['id']?>">
+         </li>
+       </ul>
+
+       <small class="mt-3">
+         Config
+       </small>
        <ul class="list-group mt-1 mb-1">
          <li class="list-group-item">
            <small>
@@ -46,6 +89,12 @@
            }
            ?>
          </li>
+       </ul>
+
+       <small class="mt-3">
+         Info
+       </small>
+       <ul class="list-group mt-1 mb-1">
          <li class="list-group-item">
            <small>
              <span class="icon">
@@ -75,7 +124,7 @@
          </li>
        </ul>
 
-       <div class="btn-group btn-group-toggle" data-toggle="buttons">
+       <div class="btn-group btn-group-toggle mt-3 mb-3" data-toggle="buttons">
          <a class="btn btn-dark" href="/users/edit/">
            <i class="fas fa-user-edit"></i>
            Edit

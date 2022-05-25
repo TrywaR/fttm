@@ -23,21 +23,33 @@
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/home/') echo 'badge bg-success active';?>" aria-current="page" href="/home/">Home</a>
             </li>
 
-              <li class="nav-item">
-                <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
-              </li>
-            <?php else: ?>
-              <li class="nav-item">
-                <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">Login</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
+            </li>
           </ul>
           <!-- <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form> -->
+        </div>
+      <?php else: ?>
+        <div class="btn-group">
+          <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
+            <small class="icon">
+              <i class="fas fa-user-check"></i>
+            </small>
+            Sign in
+          </a>
+          <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
+            <small class="icon">
+              <i class="fas fa-user-plus"></i>
+            </small>
+            Sign up
+          </a>
         </div>
       <?php endif; ?>
     </div>

@@ -32,6 +32,16 @@ switch ($_REQUEST['form']) {
     notification::success($arrResult);
     break;
 
+  case 'reload': # Обновление данных
+    $arrResult = [];
+    $oCard = new card( $_REQUEST['id'] );
+    $oCard->balance_reload();
+    $arrResult['data'] = $oCard->get();
+    $arrResult['event'] = 'save';
+    $arrResult['text'] = 'Card update';
+    notification::success($arrResult);
+    break;
+
   case 'del': # Удаление
     $oCard = new card( $_REQUEST['id'] );
     $oCard->del();

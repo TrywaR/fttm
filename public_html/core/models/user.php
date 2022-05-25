@@ -13,6 +13,8 @@ class user extends model
   public static $date_registration = '';
   public static $theme = '';
   public static $lang = '';
+  public static $role = '';
+  public static $referal = '';
 
   public function get_user() {
     $arrUser = db::query("SELECT * FROM `users` WHERE `id` = '". $this->id . "'");
@@ -35,6 +37,8 @@ class user extends model
       $this->date_registration = $arrUser['date_registration'];
       $this->theme = $arrUser['theme'];
       $this->lang = $arrUser['lang'];
+      $this->role = $arrUser['role'];
+      $this->referal = $arrUser['referal'];
     }
     else {
       $this->lang = 'en';

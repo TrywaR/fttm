@@ -148,7 +148,7 @@
   </div>
 
   <div class="block_template">
-    <li class="list-group-item d-flex _elem money_category justify-content-between align-items-start progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item d-flex _elem money_category justify-content-between align-items-start progress_block animate__animated animate__bounceInRight  _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold">{{title}}</div>
       </div>
@@ -156,7 +156,7 @@
         {{color}}
       </div>
       <span class="rounded-pill">
-        <a href="#" class="btn content_manager_switch switch_icons">
+        <a href="#" class="btn content_manager_switch switch_icons _select">
           <div class="">
             <i class="far fa-square"></i>
           </div>
@@ -164,10 +164,10 @@
             <i class="fas fa-square"></i>
           </div>
         </a>
-        <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+        <a href="#" class="btn content_download _edit" data-id="{{id}}" data-action="moneys_categories" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
           <i class="fas fa-pen-square"></i>
         </a>
-        <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys_categories" data-form="del" data-elem=".list-group-item">
+        <a href="#" class="btn content_download _del" data-id="{{id}}" data-action="moneys_categories" data-form="del" data-elem=".list-group-item">
           <i class="fas fa-minus-square"></i>
         </a>
       </span>

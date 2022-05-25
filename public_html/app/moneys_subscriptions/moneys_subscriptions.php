@@ -6,11 +6,11 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oMoneysSubscriptions->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoneysSubscriptions->limit = $_REQUEST['limit'];
     $oMoneysSubscriptions->sort = 'sort';
-    $oMoneysSubscriptions->sortDir = 'DESC';
+    $oMoneysSubscriptions->sortDir = 'ASC';
     $oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrCategory = $oMoneysSubscriptions->get();
+    $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
-    notification::send($arrCategory);
+    notification::send($arrMoneysSubscriptions);
     break;
 
   case 'save': # Сохранение изменений

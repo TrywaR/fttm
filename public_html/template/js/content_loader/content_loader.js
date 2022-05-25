@@ -286,6 +286,7 @@ $(function(){
 
         if ( oData.success.data ) {
           switch (oData.success.event) {
+            case 'reload':
             case 'save':
               content_loader_update( oData.success.data )
               break;

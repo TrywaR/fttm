@@ -8,6 +8,12 @@ if ( $_REQUEST['app'] ) {
   die();
 }
 
+// Referal system
+if ( $_REQUEST['referal'] ) {
+  $_SESSION['referal'] = $_REQUEST['referal'];
+  exit("<meta http-equiv='refresh' content='0; url= /'>");
+}
+
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {
   case '/': # Главная страница
@@ -42,7 +48,6 @@ switch ($_SERVER['REQUEST_URI']) {
     // Если пользователь авторизирован
     if ( isset($_SESSION['user']) ) {
       $olang = new lang(); // Подтягиваем языки
-
       if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) {
         include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
         include_once 'core/templates/pages/header.php'; # Шапка
@@ -66,7 +71,7 @@ switch ($_SERVER['REQUEST_URI']) {
 
         include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
         include_once 'core/templates/pages/header.php'; # Шапка
-        echo '<main class="container pt-4 pb-4 text-center"><h1>Error 403</h1><p>Для доступа нужно <a href="/authorizations/">авторизироваться</a></p></main>';
+        echo '<main class="container pt-4 pb-4 text-center"><h1>Error 403</h1><p>You need to <a href="/authorizations/">log in</a> to access</p></main>';
         include_once 'core/templates/pages/footer.php'; # Подвал
       }
       else {

@@ -26,6 +26,13 @@ class money extends model
     if ( $arrMoney['card'] ) {
       $oCard = new card( $arrMoney['card'] );
       $arrMoney['card_val'] = (array)$oCard;
+      $arrMoney['card_show'] = 'true';
+    }
+
+    if ( $arrMoney['to_card'] ) {
+      $oCardTo = new card( $arrMoney['to_card'] );
+      $arrMoney['cardto_val'] = (array)$oCardTo;
+      $arrMoney['cardto_show'] = 'true';
     }
 
     if ( $arrMoney['category'] ) {

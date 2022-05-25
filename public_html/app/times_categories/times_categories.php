@@ -6,11 +6,11 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
     $oCategory->sort = 'sort';
-    $oCategory->sortDir = 'DESC';
-    $oCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrCategory = $oCategory->get();
+    $oCategory->sortDir = 'ASC';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
 
-    notification::send($arrCategory);
+    notification::send($arrCategories);
     break;
 
   case 'save': # Сохранение изменений

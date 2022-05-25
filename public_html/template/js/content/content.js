@@ -38,6 +38,7 @@ $(function(){
 			if ( oForm.hasClass('content_loader_form') )
 				switch (oData.success.event) {
 					case 'save':
+					case 'reload':
 						oForm.find('.form_reset').click()
 						content_loader_update( oData.success.data )
 						break;
