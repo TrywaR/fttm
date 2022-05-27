@@ -180,6 +180,8 @@ main small {
     display: flex; }
   .money._cardto_show_true ._cardto {
     display: flex; }
+  .money._subscription_show_true ._subscription {
+    display: flex; }
   .money ._date {
     opacity: 0.5;
     font-size: 0.8rem;
@@ -199,6 +201,8 @@ main small {
     align-items: center; }
     .money ._cardto small {
       margin: 0 0.2rem; }
+  .money ._subscription {
+    display: none; }
   .money ._price {
     font-size: 1rem;
     font-weight: normal;
@@ -256,6 +260,15 @@ main small {
 .money_category ._del {
   display: none; }
 
+.money_subscription._paid_show_true ._paid {
+  display: block; }
+.money_subscription._card_show_true ._card {
+  display: block; }
+.money_subscription ._paid {
+  display: none; }
+.money_subscription ._card {
+  display: none; }
+
 .card_item._commission_show_true ._commission {
   display: inline-block; }
 .card_item ._commission {
@@ -305,6 +318,11 @@ main small {
 .times_categoriy ._edit {
   display: none; }
 .times_categoriy ._del {
+  display: none; }
+
+.task._status_show_true ._status {
+  display: inline-block; }
+.task ._status {
   display: none; }
 
 body .accordion-button,

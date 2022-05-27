@@ -91,8 +91,8 @@
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                       </div>
                     </form>
                   </div>
@@ -151,7 +151,7 @@
           <small>#{{id}}</small>
           <h5 class="card-title">{{title}}</h5>
           <p class="card-text">{{description}}</p>
-          
+
           <div class="btn-group mt-2 w-100" role="group">
             <a href="#" class="btn content_manager_switch switch_icons">
               <div class="">

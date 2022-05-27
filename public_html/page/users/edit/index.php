@@ -136,7 +136,7 @@
           <div class="_fttm_alerts"></div>
 
           <div class="block_buttons">
-            <button class="btn btn-primary mt-2 mb-4" type="submit">
+            <button class="btn btn-dark mt-2 mb-4" type="submit">
               <i class="fas fa-save"></i>
               <?=$olang->get('Save')?>
             </button>

@@ -14,7 +14,7 @@
                  </span>
                  <a href="/clients/">Clients</a>
                  <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
-                 <!--, <a href="/tasks/">задачи</a>. -->
+                 , <a href="/tasks/"><?=$olang->get('Tasks')?></a>.
                </p>
              </div>
 

@@ -9,6 +9,7 @@ $oMoneyCategory->sortDir = 'ASC';
 $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 $arrMoneysCategories = $oMoneyCategory->get_categories();
 ?>
+
 <main class="animate__animated animate__fadeIn container pt-4 pb-4">
   <div class="row mb-4">
     <div class="col-12">
@@ -53,37 +54,37 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputCardIdZero" class="col-form-label">Title</label>
+                        <label for="inputTitle" class="col-form-label">Title</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <input name="title" type="text" id="inputCardIdZero" class="form-control">
+                        <input name="title" type="text" id="inputTitle" class="form-control">
                       </div>
                     </div>
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputPriceIdZero" class="col-form-label">Price</label>
+                        <label for="inputPrice" class="col-form-label">Price</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <input name="price" type="number" step="any" lang="en" id="inputPriceIdZero" class="form-control">
+                        <input name="price" type="number" step="any" lang="en" id="inputPrice" class="form-control">
                       </div>
                     </div>
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputPriceIdZero" class="col-form-label">Sum total</label>
+                        <label for="inputSum" class="col-form-label">Sum total</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <input name="sum" type="number" step="any" lang="en" id="inputPriceIdZero" class="form-control">
+                        <input name="sum" type="number" id="inputSum" class="form-control">
                       </div>
                     </div>
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputCardIdZero" class="col-form-label">Type</label>
+                        <label for="inputType" class="col-form-label">Type</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <select name="type" class="form-select" size="1" aria-label="size 3 select example">
+                        <select name="type" class="form-select" id="inputType" size="1" aria-label="size 3 select example">
                           <option value="0" selected>Every month</option>
                         </select>
                       </div>
@@ -100,10 +101,10 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputCardIdZero" class="col-form-label">Card</label>
+                        <label for="inputCard" class="col-form-label">From card</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <select name="card" class="form-select" size="3" aria-label="size 3 select example">
+                        <select name="card" class="form-select" id="inputCard" size="3" aria-label="size 3 select example">
                           <option value="0" selected><?=$olang->get('Cash')?></option>
                           <?php foreach ($arrCards as $iIndex => $arrCard): ?>
                             <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
@@ -114,10 +115,10 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputTypeIdZero" class="col-form-label">Category</label>
+                        <label for="inputCategory" class="col-form-label">Category</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <select name="category" class="form-select" size="3" aria-label="size 3 select example">
+                        <select name="category" id="inputCategory" class="form-select" size="3" aria-label="size 3 select example">
                           <option value="0" selected><?=$olang->get('NoCategory')?></option>
                           <?php foreach ($arrMoneysCategorise as $iIndex => $arrMoneyCategory): ?>
                             <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
@@ -128,23 +129,23 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 
                     <div class="row align-items-center mb-1">
                       <div class="col-12 col-md-4">
-                        <label for="inputTitleZero" class="col-form-label">Sort</label>
+                        <label for="inputSort" class="col-form-label">Sort</label>
                       </div>
                       <div class="col-12 col-md-8">
-                        <input name="sort" type="number" id="inputTitleZero" class="form-control">
+                        <input name="sort" type="number" id="inputSort" class="form-control">
                       </div>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" name="active" type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label" for="flexCheckChecked">
+                      <input class="form-check-input" name="active" type="checkbox" value="" id="flexCheckActive" checked>
+                      <label class="form-check-label" for="flexCheckActive">
                         Active
                       </label>
                     </div>
 
                     <div class="d-flex justify-content-between mt-3">
-                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                      <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-plus-square"></i> Add</button>
+                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                      <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                     </div>
                   </form>
                 </div>
@@ -167,7 +168,7 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
         id="moneys_subscriptions"
         class="block_moneys_subscriptions block_elems block_content_loader list-group list-group-numbered"
         data-content_loader_table="moneys_subscriptions"
-        data-content_loader_form="show"
+        data-content_loader_form="show_all"
         data-content_loader_limit="15"
         data-content_loader_scroll_nav="0"
         <?php if ($_REQUEST['sort']): ?>
@@ -193,28 +194,43 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
   </div>
 
   <div class="block_template">
-    <li class="list-group-item d-flex _elem money_subscription justify-content-between align-items-start progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item d-flex _elem money_subscription justify-content-between align-items-start progress_block animate__animated animate__bounceInRight _card_show_{{card_show}} _paid_show_{{paid_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold">
           {{title}}<br/>
-          <small><i class="fas fa-credit-card"></i> {{card_val.title}}</small>
+
+          <small class="_card">
+            <i class="fas fa-credit-card"></i>
+            {{card_val.title}} <br/>
+          </small>
+
+          <small class="_paid">
+            <i class="fas fa-check"></i>
+            {{paid.date}}
+          </small>
         </div>
       </div>
+
       <div class="badge bg-primary">
         {{price}}
       </div>
+
+
       <span class="rounded-pill">
         <a href="#" class="btn content_manager_switch switch_icons">
           <div class="">
             <i class="far fa-square"></i>
           </div>
+
           <div class="">
             <i class="fas fa-square"></i>
           </div>
         </a>
+
         <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys_subscriptions" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
           <i class="fas fa-pen-square"></i>
         </a>
+
         <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys_subscriptions" data-form="del" data-elem=".list-group-item">
           <i class="fas fa-minus-square"></i>
         </a>

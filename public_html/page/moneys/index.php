@@ -14,6 +14,12 @@ $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
+
+$oMoneysSubscriptions = new moneys_subscriptions();
+$oMoneysSubscriptions->sort = 'sort';
+$oMoneysSubscriptions->sortDir = 'ASC';
+$oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 ?>
 
 <main class="container animate__animated animate__fadeIn" id="container">
@@ -134,6 +140,20 @@ $arrProjects = $oProject->get();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
+                          <label for="inputProjectId" class="col-form-label"><?=$olang->get('Subscription')?></label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="subscription" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected><?=$olang->get('NoSubscription')?></option>
+                            <?php foreach ($arrMoneysSubscriptions as $iIndex => $arrMoneysSubscription): ?>
+                              <option value="<?=$arrMoneysSubscription['id']?>"><?=$arrMoneysSubscription['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDateZero" class="col-form-label">Date</label>
                         </div>
                         <div class="col-12 col-md-8">
@@ -161,7 +181,7 @@ $arrProjects = $oProject->get();
 
                       <div class="d-flex justify-content-between mt-3">
                         <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                       </div>
                     </form>
                   </div>
@@ -256,8 +276,8 @@ $arrProjects = $oProject->get();
                       </div>
 
                       <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add</button>
+                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
                       </div>
                     </form>
                   </div>
@@ -367,26 +387,31 @@ $arrProjects = $oProject->get();
   </section>
 
   <section class="block_template">
-    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _card_show_{{card_show}} _cardto_show_{{cardto_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold mb-1 d-flex">
           <span class="_date">
             {{date}}
           </span>
+
           <span class="_card">
             <i class="fas fa-credit-card"></i> {{card_val.title}}
             <span class="_cardto"> <small>></small> <i class="fas fa-credit-card"></i> {{cardto_val.title}}</span>
+            <span class="_subscription"> <small>></small> <i class="fas fa-check"></i> {{subscription_val.title}}</span>
           </span>
         </div>
 
         <div class="badge bg-primary _price">
           {{price}}
         </div>
+
         <span class="_title">
           {{title}}
         </span>
+
         <small>{{categroy_val.title}}{{project_val.title}}</small>
       </div>
+
       <span class="rounded-pill">
         <a href="#" class="btn content_manager_switch switch_icons">
           <div class="">

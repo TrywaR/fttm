@@ -17,6 +17,7 @@ class money extends model
   public static $value = ''; # minus - затраты
   public static $user_id = '';
   public static $to_card = ''; # на карту
+  public static $subscription = ''; # на подписку
 
   function prep_money( $arrMoney = [] ){
     $arrDate = explode(' ', $arrMoney['date']);
@@ -43,6 +44,12 @@ class money extends model
     if ( $arrMoney['project_id'] ) {
       $oProject = new project( $arrMoney['project_id'] );
       $arrMoney['project_val'] = (array)$oProject;
+    }
+
+    if ( $arrMoney['subscription'] ) {
+      $oMoneysSubscription = new moneys_subscriptions( $arrMoney['subscription'] );
+      $arrMoney['subscription_val'] = (array)$oMoneysSubscription;
+      $arrMoney['subscription_show'] = 'true';
     }
 
     return $arrMoney;
@@ -91,6 +98,8 @@ class money extends model
     $arrFields['card'] = ['title'=>'Карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
     $arrFields['to_card'] = ['title'=>'На карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
+    $arrFields['subscription'] = ['title'=>'Подписка','type'=>'number','disabled'=>'disabled','value'=>$this->subscription];
+
     $arrFields['active'] = ['title'=>'Активность','type'=>'hidden','value'=>$this->active];
 
     return $arrFields;
@@ -117,6 +126,7 @@ class money extends model
       $this->value = $arrMoney['value'];
       $this->user_id = $arrMoney['user_id'];
       $this->to_card = $arrMoney['to_card'];
+      $this->subscription = $arrMoney['subscription'];
     }
   }
 }
