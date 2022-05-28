@@ -1,4 +1,6 @@
 <?
+$oTask = new task();
+
 $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
@@ -11,6 +13,14 @@ $arrProjects = $oProject->get();
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Tasks</h1>
+
+          <p class="lead">
+            <span class="icon">
+              <i class="far fa-folder"></i>
+            </span>
+            <a href="/clients/">Clients</a>
+            <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
+          </p>
         </div>
       </div>
     </div>
@@ -32,7 +42,14 @@ $arrProjects = $oProject->get();
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <form class="" action="" method="post" data-content_download_edit_type="0" data-content_loader_to="#content_loader_to" data-content_loader_template=".template_money">
+                    <form
+                      class="content_loader_form"
+                      action=""
+                      method="post"
+                      data-content_download_edit_type="0"
+                      data-content_loader_to="#content_loader_to"
+                      data-content_loader_template=".template_task"
+                    >
                       <input type="hidden" name="app" value="app">
                       <input type="hidden" name="action" value="tasks">
                       <input type="hidden" name="form" value="save">
@@ -59,19 +76,10 @@ $arrProjects = $oProject->get();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="status" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>Planned</option>
-                            <option value="1">In work</option>
-                            <option value="2">Complited</option>
+                            <?php foreach ($oTask->arrStatus as $arrStatus): ?>
+                              <option value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+                            <?php endforeach; ?>
                           </select>
-                        </div>
-                      </div>
-
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputSort" class="col-form-label">Sort</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <input name="sort" type="number" id="inputSort" class="form-control">
                         </div>
                       </div>
 
@@ -86,19 +94,28 @@ $arrProjects = $oProject->get();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
-                          <label for="inputPricePlanned" class="col-form-label">Price planned</label>
+                          <label for="inputDescription" class="col-form-label">Description</label>
                         </div>
                         <div class="col-12 col-md-8">
-                          <input name="prace_planned" type="number" lang="en" id="inputPricePlanned" class="form-control">
+                          <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
                         </div>
                       </div>
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
-                          <label for="inputPriceReally" class="col-form-label">Price really</label>
+                          <label for="inputSort" class="col-form-label">Sort</label>
                         </div>
                         <div class="col-12 col-md-8">
-                          <input name="prace_really" type="number" lang="en" id="inputPriceReally" class="form-control">
+                          <input name="sort" type="number" id="inputSort" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputPricePlanned" class="col-form-label">Price planned</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <input name="price_planned" type="number" lang="en" id="inputPricePlanned" class="form-control">
                         </div>
                       </div>
 
@@ -108,24 +125,6 @@ $arrProjects = $oProject->get();
                         </div>
                         <div class="col-12 col-md-8">
                           <input name="time_planned" type="time" id="inputTimePlanned" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputTimeReally" class="col-form-label">Time really</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <input name="time_really" type="time" id="inputTimeReally" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputDescription" class="col-form-label">Description</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
                         </div>
                       </div>
 
@@ -144,6 +143,37 @@ $arrProjects = $oProject->get();
     </div>
 
     <div class="col-12 col-md-7">
+      <!-- Фильтр -->
+      <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#tasks">
+        <div class="input-group mb-4">
+          <span class="input-group-text">
+            <i class="far fa-folder"></i>
+          </span>
+          <select name="project_id" class="form-select">
+            <option value="" selected>Project</option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="fas fa-spinner"></i>
+          </span>
+          <select name="status" class="form-select">
+            <?php foreach ($oTask->arrStatus as $arrStatus): ?>
+              <option value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
       <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="tasks" data-content_manager_block="#tasks" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
         <button type="button" name="button" class="btn del">
           <i class="fas fa-folder-minus"></i>
@@ -180,7 +210,7 @@ $arrProjects = $oProject->get();
     </div>
 
     <section class="block_template">
-      <li class="list-group-item task _elem progress_block animate__animated _status_show_{{status_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+      <li class="list-group-item task _elem progress_block animate__animated _time_show_{{time_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
         <div class="ms-2 me-auto">
           <span class="_title">
             {{title}}
@@ -188,6 +218,24 @@ $arrProjects = $oProject->get();
 
           <div class="badge bg-primary _status">
             {{status_val}}
+          </div>
+
+          <div class="_project">
+            {{project.title}}
+          </div>
+        </div>
+
+        <div class="_sub">
+          <div class="_time">
+            <small><i class="fas fa-clock"></i></small>
+            {{time_really}} <span>/</span>
+            <small>{{time_planned}}</small>
+          </div>
+
+          <div class="_money">
+            <small><i class="fas fa-wallet"></i></small>
+            {{price_really}} <span>/</span>
+            <small>{{price_planned}}</small>
           </div>
         </div>
 

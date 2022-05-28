@@ -83,7 +83,7 @@ class model
     // Собираем поля которые можно редактировать
     $arrFields = db::query_all("SHOW COLUMNS FROM " . $this->table);
     $arrFieldsTypes = [];
-    if ( ! $arrFields ) notification::error( 'Ошибка при выполнении запроса: ' . mysql_error() );
+    if ( ! $arrFields ) notification::error( 'Error while executing request: ' . mysql_error() );
     foreach ($arrFields as $arrField) $arrFieldsTypes[$arrField['Field']] = $arrField['Type'];
     if ( $id ) {
       foreach ( $arrResult as $key => &$value ) {
@@ -130,12 +130,12 @@ class model
     // Проверяем наличие парамтеров
     if ( ! count($this->arrAddFields) ) {
       if ( $this->name || $this->title || $this->user_id ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
-      else notification::error( 'Нет данных для заполнения, добавьте параметр name или массив arrAddFields с параметрами!' );
+      else notification::error( 'There is no data to fill in, add the name parameter or the arrAddFields array with parameters!' );
     }
 
     // Собираем поля которые можно редактировать
     $arrFields = db::query_all("SHOW COLUMNS FROM " . $this->table);
-    if ( ! $arrFields ) notification::error( 'Ошибка при выполнении запроса: ' . mysql_error() );
+    if ( ! $arrFields ) notification::error( 'Error while executing request: ' . mysql_error() );
 
     // foreach ($arrFields as $arrField) $arrFields[$arrField['Field']] = $arrField;
     // print_r($arrField);
@@ -187,7 +187,7 @@ class model
     $this->id = db::insert($mySqlAdd);
     // if ( $iNewTableElemId ) notification::success( 'Успешное добавление!' );
     if ( $this->id ) return $this->id;
-    else notification::error( 'Ошибка добавления!' );
+    else notification::error( 'Add error!' );
   }
 
   // Сохранение
@@ -205,7 +205,7 @@ class model
     // Проверяем наличие парамтеров
     if ( ! count($this->arrAddFields) ) {
       if ( $this->name || $this->title ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
-      else notification::error( 'Нет данных для заполнения, добавьте параметр name или массив arrAddFields с параметрами!' );
+      else notification::error( 'There is no data to fill, add the name parameter or the arrAddFields array with parameters!' );
     }
     else {
       foreach ($this as $key => &$value)
@@ -214,7 +214,7 @@ class model
 
     // Собираем поля которые можно редактировать
     $arrFields = db::query_all("SHOW COLUMNS FROM " . $this->table);
-    if ( ! $arrFields ) notification::error( 'Ошибка при выполнении запроса: ' . mysql_error() );
+    if ( ! $arrFields ) notification::error( 'Error while executing request: ' . mysql_error() );
 
     // foreach ($arrFields as $arrField) $arrFields[$arrField['Field']] = $arrField;
     // print_r($arrField);
@@ -256,7 +256,7 @@ class model
     $mySqlSave .= " WHERE `id` = " . $id;
     if ( $this->show_query ) die($mySqlSave);
     // Редактируем
-    if ( db::query($mySqlSave) ) notification::error( 'Ошибка редактирования!' );
+    if ( db::query($mySqlSave) ) notification::error( 'Error edit' );
     // if ( ! db::query($mySqlSave) ) notification::success( 'Изменения сохранены!' );
     // else notification::error( 'Ошибка редактирования!' );
   }
@@ -269,8 +269,8 @@ class model
     $mySqlDel .= " WHERE `id` = '" . $id . "'";
 
     // Удаляем
-    if ( ! db::query($mySqlDel) ) notification::success( 'Успешное удаление!' );
-    else notification::error( 'Ошибка удаления!' );
+    if ( ! db::query($mySqlDel) ) notification::success( 'Delete success!' );
+    else notification::error( 'Error delete!' );
   }
 
   // function __construct()

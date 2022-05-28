@@ -10,7 +10,8 @@
   <div class="row" id="block_version">
     <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_6">5.1.6 Subscriptions and tasks</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_6">5.1.7 Tasks and analytics</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_1_6">5.1.6 Subscriptions and tasks</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_5">5.1.5 Datas for users</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_4">5.1.4 Filters</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_3">5.1.3 Mega user 2</a>
@@ -38,6 +39,13 @@
     <div class="col col-12 col-md-8">
      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
        <div class="pt-2 pb-2">
+         <h2 id="list-item-5_1_7">5.1.7 Tasks and analytics</h2>
+         <ol>
+           <li>Task time</li>
+           <li>Task money</li>
+           <li>Analytics beta</li>
+         </ol>
+
          <h2 id="list-item-5_1_6">5.1.6 Subscriptions and tasks</h2>
          <ol>
            <li>

@@ -21,35 +21,46 @@ class time extends model
   public static $category = '';
 
   function get_time(){
-    $arrTimes = [];
-    if ( $this->id ) {
-      $arrTimes = $this->get();
-      $oCategory = new times_category( $arrTimes['category_id'] );
-      $arrTimes['category_title'] = $oCategory->title;
-      $arrTimes['category_color'] = $oCategory->color;
-      $oProject = new project( $arrTimes['project_id'] );
-      $arrTimes['project_title'] = $oProject->title;
-      $arrTimes['project_color'] = $oProject->color;
+    $arrTime = [];
 
-      $dDateReally = new DateTime($arrTimes['time_really']);
-      $arrTimes['time_really'] = $dDateReally->format('H:i');
-    }
-    else {
-      $arrTimes = $this->get();
-      foreach ($arrTimes as &$arrTime) {
-        $oCategory = new times_category( $arrTime['category_id'] );
-        $arrTime['category_title'] = $oCategory->title;
-        $arrTime['category_color'] = $oCategory->color;
-        $oProject = new project( $arrTime['project_id'] );
-        $arrTime['project_title'] = $oProject->title;
-        $arrTime['project_color'] = $oProject->color;
+    $arrTime = $this->get();
 
-        $dDateReally = new DateTime($arrTime['time_really']);
-        $arrTime['time_really'] = $dDateReally->format('H:i');
-      }
+    if ( (int)$arrTime['category_id'] ) {
+      $oCategory = new times_category( $arrTime['category_id'] );
+      $arrTime['category'] = (array)$oCategory;
+      $arrTime['category_show'] = 'true';
     }
 
-    return $arrTimes;
+    if ( (int)$arrTime['project_id'] ) {
+      $oProject = new project( $arrTime['project_id'] );
+      $arrTime['project'] = (array)$oProject;
+      $arrTime['project_show'] = 'true';
+    }
+
+    // time
+    $dDateReally = new DateTime($arrTime['time_really']);
+    $arrTime['time_really'] = $dDateReally->format('H:i');
+
+    // task
+    if ( (int)$arrTime['task_id'] > 0 ) {
+      $arrTime['task_show'] = 'true';
+      $oTask = new task( $arrTime['task_id'] );
+      $arrTime['task'] = $oTask->get_task();
+    }
+
+    return $arrTime;
+  }
+
+  function get_times(){
+    $arrResults = [];
+    $arrTimes = $this->get();
+
+    foreach ($arrTimes as $arrTime) {
+      $oTime = new time( $arrTime['id'] );
+      $arrResults[] = $oTime->get_time();
+    }
+
+    return $arrResults;
   }
 
   public function fields() # Поля для редактирования

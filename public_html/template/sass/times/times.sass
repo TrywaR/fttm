@@ -1,22 +1,53 @@
 .block_times
-.times
+.time
   display: flex
   align-items: flex-end
   justify-content: center
   opacity: 0
 
-  ._date
-    opacity: .5
-    font-size: .8rem
-    font-weight: lighter
-    margin-right: .5rem
+  &._category_show_true,
+  &._project_show_true,
+  &._task_show_true
+    ._date
+      padding-bottom: 0
 
-  ._category
+    ._subs
+      display: flex
+
+  &._category_show_true
+    ._category
+      display: flex
+      
+  &._project_show_true
+    ._project
+      display: flex
+
+  &._task_show_true
+    ._task
+      display: flex
+
+  ._date
+    display: flex
     opacity: .5
-    font-size: .8rem
+    font-size: .8em
     font-weight: lighter
-    margin-right: .5rem
-    
+    padding-bottom: .5rem
+
+  ._subs
+    display: none
+    padding: .4rem .2rem .6rem
+
+    > *
+      padding-right: .5rem
+
+  ._category,
+  ._project,
+  ._task
+    opacity: .5
+    font-size: .9em
+    font-weight: lighter
+    display: none
+
   ._title
 
   &._show_

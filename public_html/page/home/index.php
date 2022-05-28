@@ -5,6 +5,19 @@
          <div class="container">
            <h1 class="display-4 text-center">FT [<?=$_SESSION['user']['login']{0}?>] M</h1>
 
+           <div class="row mt-2 mb-4">
+             <div class="col-12">
+                <h2>Today</h2>
+                <div class="progress">
+                  <?
+                  $iCurrentHour = date('H');
+                  $iLeftHour = (int)$iCurrentHour / 24 * 100;
+                  ?>
+                  <div class="progress-bar" role="progressbar" style="width: <?=$iLeftHour?>%" aria-valuenow="<?=$iLeftHour?>" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+             </div>
+           </div>
+
            <div class="row mt-4">
              <div class="col-12 col-md-4">
                <h2 class="text-center"><i class="fas fa-sitemap"></i></h2>

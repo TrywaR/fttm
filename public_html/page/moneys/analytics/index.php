@@ -23,7 +23,7 @@
       $oMoneysCategory = new moneys_category();
       $oMoneysCategory->limit = 0;
       $oMoneysCategory->sort = 'sort';
-      $oMoneysCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
       $oMoneysCategory->query .= " AND `type` = 0";
       $arrMoneysCategories = $oMoneysCategory->get();
       $arrMoneysCategoriesIds = [];

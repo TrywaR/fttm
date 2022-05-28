@@ -3,6 +3,14 @@ $oCard = new card();
 $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrCards = $oCard->get();
 
+$oTask = new task();
+$oTask->sort = 'sort';
+$oTask->sortDir = 'ASC';
+$oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrTasks = $oTask->get();
+$arrTaskId = [];
+foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
+
 $oMoneyCategory = new moneys_category();
 $oMoneyCategory->sort = 'sort';
 $oMoneyCategory->sortDir = 'ASC';
@@ -154,6 +162,20 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
+                          <label for="inputTaskId" class="col-form-label">Task id</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected><?=$olang->get('NoTask')?></option>
+                            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+                              <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDateZero" class="col-form-label">Date</label>
                         </div>
                         <div class="col-12 col-md-8">
@@ -250,6 +272,20 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
+                          <label for="inputTaskId" class="col-form-label">Task id</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected><?=$olang->get('NoTask')?></option>
+                            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+                              <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputDate" class="col-form-label">Date</label>
                         </div>
                         <div class="col-12 col-md-8">
@@ -303,24 +339,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </select>
 
           <span class="input-group-text">
-            <i class="far fa-folder"></i>
-          </span>
-          <select name="project_id" class="form-select">
-            <option value="" selected>Project</option>
-            <option value="0"><?=$olang->get('NoProject')?></option>
-            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <span class="input-group-text">
-            <i class="far fa-calendar-alt"></i>
-          </span>
-          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
-        </div>
-
-        <div class="input-group mb-4">
-          <span class="input-group-text">
             <i class="far fa-credit-card"></i>
           </span>
           <select name="card" class="form-select">
@@ -341,6 +359,34 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
               <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
             <?php endforeach; ?>
           </select>
+        </div>
+
+        <div class="input-group mb-4">
+          <span class="input-group-text">
+            <i class="far fa-folder"></i>
+          </span>
+          <select name="project_id" class="form-select">
+            <option value="" selected>Project</option>
+            <option value="0"><?=$olang->get('NoProject')?></option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="fas fa-wrench"></i>
+          </span>
+          <select name="task_id" class="form-select">
+            <option value="" selected>Task</option>
+            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+              <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+          </span>
+          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
 
           <button class="btn btn-dark" type="submit">
             <!-- <span class="icon">
@@ -387,7 +433,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
   </section>
 
   <section class="block_template">
-    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}} _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold mb-1 d-flex">
           <span class="_date">
@@ -401,15 +447,21 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
         </div>
 
-        <div class="badge bg-primary _price">
-          {{price}}
+        <div class="fw-bold d-flex align-items-center">
+          <div class="badge bg-primary _price">
+            {{price}}
+          </div>
+
+          <span class="_title">
+            {{title}}
+          </span>
+
+          <div class="_sub">
+            <small class="_category">{{categroy_val.title}}</small>
+            <small class="_project">> {{project_val.title}}</small>
+            <small class="_task">> {{task.title}}</small>
+          </div>
         </div>
-
-        <span class="_title">
-          {{title}}
-        </span>
-
-        <small>{{categroy_val.title}}{{project_val.title}}</small>
       </div>
 
       <span class="rounded-pill">

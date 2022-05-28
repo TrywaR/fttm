@@ -180,6 +180,18 @@ main small {
     display: flex; }
   .money._cardto_show_true ._cardto {
     display: flex; }
+  .money._category_show_true ._sub {
+    display: flex; }
+  .money._category_show_true ._category {
+    display: flex; }
+  .money._project_show_true ._sub {
+    display: flex; }
+  .money._project_show_true ._project {
+    display: flex; }
+  .money._task_show_true ._sub {
+    display: flex; }
+  .money._task_show_true ._task {
+    display: flex; }
   .money._subscription_show_true ._subscription {
     display: flex; }
   .money ._date {
@@ -207,6 +219,16 @@ main small {
     font-size: 1rem;
     font-weight: normal;
     margin-right: 0.5rem; }
+  .money ._sub {
+    display: none;
+    padding: 0.5rem;
+    font-weight: lighter; }
+  .money ._category {
+    display: none; }
+  .money ._project {
+    display: none; }
+  .money ._task {
+    display: none; }
   .money._type_1_ {
     position: relative;
     z-index: 1; }
@@ -274,22 +296,40 @@ main small {
 .card_item ._commission {
   display: none; }
 
-.times {
+.time {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   opacity: 0; }
-  .times ._date {
+  .time._category_show_true ._date, .time._project_show_true ._date, .time._task_show_true ._date {
+    padding-bottom: 0; }
+  .time._category_show_true ._subs, .time._project_show_true ._subs, .time._task_show_true ._subs {
+    display: flex; }
+  .time._category_show_true ._category {
+    display: flex; }
+  .time._project_show_true ._project {
+    display: flex; }
+  .time._task_show_true ._task {
+    display: flex; }
+  .time ._date {
+    display: flex;
     opacity: 0.5;
-    font-size: 0.8rem;
+    font-size: 0.8em;
     font-weight: lighter;
-    margin-right: 0.5rem; }
-  .times ._category {
+    padding-bottom: 0.5rem; }
+  .time ._subs {
+    display: none;
+    padding: 0.4rem 0.2rem 0.6rem; }
+    .time ._subs > * {
+      padding-right: 0.5rem; }
+  .time ._category,
+  .time ._project,
+  .time ._task {
     opacity: 0.5;
-    font-size: 0.8rem;
+    font-size: 0.9em;
     font-weight: lighter;
-    margin-right: 0.5rem; }
-  .times._show_ {
+    display: none; }
+  .time._show_ {
     opacity: 1; }
 
 .times_category .times_category-data {
@@ -320,10 +360,49 @@ main small {
 .times_categoriy ._del {
   display: none; }
 
-.task._status_show_true ._status {
-  display: inline-block; }
-.task ._status {
-  display: none; }
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; }
+  .task._status_show_true ._status {
+    display: inline-block; }
+  .task._project_show_true ._project {
+    display: flex;
+    font-size: 0.8em;
+    line-height: 1;
+    opacity: 0.5; }
+  .task._time_show_true ._time {
+    display: flex; }
+  .task._money_show_true ._money {
+    display: flex; }
+  .task ._status {
+    display: none; }
+  .task ._time {
+    display: none;
+    align-items: center; }
+    .task ._time i,
+    .task ._time svg {
+      margin-right: 0.5rem; }
+    .task ._time span {
+      padding: 0.2rem; }
+  .task ._money {
+    display: none;
+    align-items: center; }
+    .task ._money i,
+    .task ._money svg {
+      margin-right: 0.5rem; }
+    .task ._money span {
+      padding: 0.2rem; }
+  .task ._project {
+    display: none; }
+  .task ._sub {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0.5rem; }
+  .task._show_ {
+    opacity: 1; }
 
 body .accordion-button,
 body .accordion-button:not(.collapsed) {
@@ -559,7 +638,7 @@ footer {
       max-width: 50%;
       justify-content: center; } }
 body:before {
-  background: linear-gradient(0deg, rgba(15, 15, 15, 0.8) 0, rgba(40, 40, 40, 0.8) 100%);
+  background: linear-gradient(0deg, rgba(15, 15, 15, 0.8) 0, rgba(21, 25, 36, 0.8) 100%);
   opacity: 0.8;
   z-index: -1; }
 body:after {

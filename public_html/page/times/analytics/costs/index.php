@@ -3,7 +3,7 @@
 $oTimesCategory = new times_category();
 $oTimesCategory->limit = 0;
 $oTimesCategory->sort = 'sort';
-$oTimesCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 $arrTimesCategories = $oTimesCategory->get();
 
 $dCurrentDate = date('Y-m');

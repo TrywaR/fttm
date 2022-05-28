@@ -24,29 +24,37 @@ class money extends model
     $arrMoney['date'] = $arrDate[0];
     $arrMoney['price'] = substr($arrMoney['price'], 0, -2);
 
-    if ( $arrMoney['card'] ) {
+    if ( (int)$arrMoney['card'] ) {
       $oCard = new card( $arrMoney['card'] );
       $arrMoney['card_val'] = (array)$oCard;
       $arrMoney['card_show'] = 'true';
     }
 
-    if ( $arrMoney['to_card'] ) {
+    if ( (int)$arrMoney['to_card'] ) {
       $oCardTo = new card( $arrMoney['to_card'] );
       $arrMoney['cardto_val'] = (array)$oCardTo;
       $arrMoney['cardto_show'] = 'true';
     }
 
-    if ( $arrMoney['category'] ) {
+    if ( (int)$arrMoney['category'] ) {
+      $arrMoney['category_show'] = 'true';
       $oMoneyCategory = new moneys_category( $arrMoney['category'] );
       $arrMoney['categroy_val'] = (array)$oMoneyCategory;
     }
 
-    if ( $arrMoney['project_id'] ) {
+    if ( (int)$arrMoney['project_id'] ) {
+      $arrMoney['project_show'] = 'true';
       $oProject = new project( $arrMoney['project_id'] );
       $arrMoney['project_val'] = (array)$oProject;
     }
 
-    if ( $arrMoney['subscription'] ) {
+    if ( (int)$arrMoney['task_id'] ) {
+      $arrMoney['task_show'] = 'true';
+      $oTask = new task( $arrMoney['task_id'] );
+      $arrMoney['task'] = $oTask->get_task();
+    }
+
+    if ( (int)$arrMoney['subscription'] ) {
       $oMoneysSubscription = new moneys_subscriptions( $arrMoney['subscription'] );
       $arrMoney['subscription_val'] = (array)$oMoneysSubscription;
       $arrMoney['subscription_show'] = 'true';

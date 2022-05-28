@@ -2,31 +2,44 @@
 switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
     $oTask = new task( $_REQUEST['id'] );
-    $oTask->sort = 'date';
-    $oTask->sortDir = 'DESC';
-    $oTask->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrTasks = $oTask->get_task();
-    notification::send($arrTasks);
+    $arrTask = $oTask->get_task();
+    notification::send($arrTask);
     break;
 
   case 'show_all': # Вывод элементов
     $oTask = new task();
     if ( $_REQUEST['from'] ) $oTask->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oTask->limit = $_REQUEST['limit'];
-    $oTask->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+
+    if ( $_REQUEST['filter'] ) {
+      $arrFilters = $_REQUEST['filter'];
+      foreach ($arrFilters as $arrFilter) {
+        if ( $arrFilter['value'] )
+          $oTask->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . '"';
+      }
+    }
+
+    $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrTasks = $oTask->get_tasks();
     notification::send($arrTasks);
     break;
 
   case 'save': # Сохранение изменений
-    $arrElem = [];
+    $arrResult = [];
+
     $oTask = $_REQUEST['id'] ? new task( $_REQUEST['id'] ) : new task();
     $oTask->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $arrElem = $oTask->save();
-    else $arrElem = $oTask->add();
+    $oTask->arrAddFields['date_update'] = date("Y-m-d H:i:s");
+    if ( $_REQUEST['id'] ) $oTask->save();
+    else $oTask->add();
 
-    $oTask = new task( $arrElem['id'] );
-    notification::send($oTask->get());
+    $arrResult['data'] = $oTask->get_task();
+
+    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
+    else $arrResult['event'] = 'add';
+    $arrResult['text'] = 'Changes saved';
+
+    notification::success($arrResult);
     break;
 
   case 'del': # Удаление

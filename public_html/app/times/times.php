@@ -1,7 +1,7 @@
 <?
 switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
-    $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
+    $oTime = new time( $_REQUEST['id'] );
     if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
 
@@ -16,7 +16,28 @@ switch ($_REQUEST['form']) {
     $oTime->sort = 'date';
     $oTime->sortDir = 'DESC';
     $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrTimes = $oTime->get_time();
+    $arrTime = $oTime->get_time();
+    notification::send($arrTime);
+    break;
+
+  case 'show_all': # Вывод элементов
+    $oTime = new time();
+    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
+
+    if ( $_REQUEST['filter'] ) {
+      $arrFilters = $_REQUEST['filter'];
+      foreach ($arrFilters as $arrFilter) {
+        if ( $arrFilter['value'] )
+          $oTime->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . '"';
+      }
+    }
+
+    $oTime->sort = 'date';
+    $oTime->sortDir = 'DESC';
+    $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrTimes = $oTime->get_times();
+
     notification::send($arrTimes);
     break;
 

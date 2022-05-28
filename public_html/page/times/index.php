@@ -4,14 +4,21 @@ $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
-
 $arrProjectsIds = [];
 foreach ($arrProjects as $arrProject) $arrProjectsIds[$arrProject['id']] = $arrProject;
+
+$oTask = new task();
+$oTask->sort = 'sort';
+$oTask->sortDir = 'ASC';
+$oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrTasks = $oTask->get();
+$arrTaskId = [];
+foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
 
 $oCategory = new times_category();
 $oCategory->sort = 'sort';
 $oCategory->sortDir = 'ASC';
-$oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+$oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 $arrCategories = $oCategory->get_categories();
 $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
@@ -52,6 +59,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
               <i class="far fa-chart-bar"></i>
             </span>
             <a href="/times/analytics/costs/">Time spent</a>
+            <span class="text_seporator">,</span> <a href="/times/analytics/new/">Time spent (beta)</a>
             <!-- , <a href="/times/analytics/wages/">Приходы времени по категориям</a> -->
           </p>
         </div>
@@ -126,15 +134,6 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                         </div>
                       </div>
 
-                      <!-- <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputTimePlanned" class="col-form-label">Time planned</label>
-                        </div>
-                        <div class="col-12 col-md-4">
-                          <input name="time_planned" type="time" lang="en" id="inputTimePlanned" class="form-control">
-                        </div>
-                      </div> -->
-
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
                           <label for="inputTimeReally" class="col-form-label">Time really</label>
@@ -158,10 +157,24 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                           <label for="inputProjectId" class="col-form-label">Project id</label>
                         </div>
                         <div class="col-12 col-md-8">
-                          <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
+                          <select name="project_id" id="inputProjectId" class="form-select" size="3">
                             <option value="0" selected><?=$olang->get('NoProject')?></option>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
                               <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputTaskId" class="col-form-label">Task id</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected><?=$olang->get('NoTask')?></option>
+                            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+                              <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -223,6 +236,16 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
             <?php endforeach; ?>
           </select>
 
+          <span class="input-group-text">
+            <i class="fas fa-list-ul"></i>
+          </span>
+          <select name="task_id" class="form-select">
+            <option value="" selected>Task</option>
+            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+              <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+            <?php endforeach; ?>
+          </select>
+
           <button class="btn btn-dark" type="submit">
             <!-- <span class="icon">
               <i class="fas fa-plus"></i>
@@ -242,7 +265,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         id="times"
         class="block_times block_elems list-group list-group-numbered block_content_loader"
         data-content_loader_table="times"
-        data-content_loader_form="show"
+        data-content_loader_form="show_all"
         data-content_loader_limit="15"
         data-content_loader_scroll_nav="0"
         <?php if ($_REQUEST['sort']): ?>
@@ -266,13 +289,17 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       </script>
 
       <div class="block_template">
-        <li class="list-group-item _elem times progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+        <li class="list-group-item _elem time progress_block animate__animated _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
           <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1">
+            <div class="fw-bold">
               <small class="_date">{{date}}</small>
-              <small class="_category">{{category_title}} | {{project_title}}</small>
             </div>
-            <div class="badge bg-primary _time" style="font-size: 1rem; font-weight: normal; background: {{category_color}} ! important; margin-right:.5rem;">
+            <div class="_subs">
+              <small class="_category">{{category.title}}</small>
+              <small class="_project">{{project.title}}</small>
+              <small class="_task">> {{task.title}}</small>
+            </div>
+            <div class="badge bg-primary _time" style="font-size: 1rem; font-weight: normal; background: {{category.color}} ! important; margin-right:.5rem;">
               {{time_really}}
             </div>
             <span class="_title">{{title}}</span>
