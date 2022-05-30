@@ -20,6 +20,38 @@ class time extends model
   public static $status = '';
   public static $category = '';
 
+  function get_sum( $arrTimes = [], $sMask = 'H:i:s' ){
+    $sum = strtotime('00:00:00');
+    $totaltime = 0;
+
+    foreach( $arrTimes as $element ) {
+        // Converting the time into seconds
+        $timeinsec = strtotime($element) - $sum;
+
+        // Sum the time with previous value
+        $totaltime = $totaltime + $timeinsec;
+    }
+
+    // Totaltime is the summation of all
+    // time in seconds
+
+    // Hours is obtained by dividing
+    // totaltime with 3600
+    $h = intval($totaltime / 3600);
+
+    $totaltime = $totaltime - ($h * 3600);
+
+    // Minutes is obtained by dividing
+    // remaining total time with 60
+    $m = intval($totaltime / 60);
+
+    // Remaining value is seconds
+    $s = $totaltime - ($m * 60);
+
+    // Printing the result
+    return date($sMask, strtotime($h.':'.$m.':'.$s));
+  }
+
   function get_time(){
     $arrTime = [];
 

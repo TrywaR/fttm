@@ -1,5 +1,5 @@
 <main class="container">
-  <div class="form_block mt-4 col-12 col-md-5 animate__animated animate__flipInX">
+  <div class="form_block mt-4 col-12 col-md-5 animate__animated animate__fadeIn">
     <form id="form_user_edit" class="form_user_edit">
       <div class="card">
         <div class="card-header">
@@ -108,7 +108,7 @@
                   </small>
                   New password
                 </label>
-                <input type="password" class="form-control" id="form_new_password" name="new_password" value="">
+                <input type="password" class="form-control" id="form_new_password" autocomplete="off" name="new_password" value="">
               </div>
 
               <div class="mb-4">
@@ -118,7 +118,7 @@
                   </small>
                   Password
                 </label>
-                <input type="password" class="form-control" id="form_edit_password" name="edit_password" value="">
+                <input type="password" class="form-control" id="form_edit_password" autocomplete="off" name="edit_password" value="">
               </div>
 
               <div class="mb-4">
@@ -128,7 +128,7 @@
                   </small>
                   Password confirmation
                 </label>
-                <input type="password" class="form-control" id="form_edit_password_confirm" name="edit_password_confirm" value="">
+                <input type="password" class="form-control" id="form_edit_password_confirm" autocomplete="off" name="edit_password_confirm" value="">
               </div>
             </div>
           </div>

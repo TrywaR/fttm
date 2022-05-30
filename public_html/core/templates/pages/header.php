@@ -24,6 +24,10 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'badge bg-success active';?>" aria-current="page" href="/tasks/">Tasks</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
             </li>
 

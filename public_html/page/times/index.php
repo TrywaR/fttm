@@ -35,7 +35,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Times</h1>
+          <h1 class="display-4 sub_title">Times</h1>
 
           <p class="lead">
             <h2>

@@ -1,40 +1,80 @@
-<main class="container">
-   <div class="row">
-     <div class="col-12 animate__animated animate__fadeIn">
-       <h1>Freelance Time TrywaR Manager</h1>
+<main class="container welcome_container">
+   <div class="_section row">
+     <div class="_block col-12 animate__animated animate__fadeIn">
+       <h1 class="_title">Freelance Time TrywaR Manager</h1>
      </div>
    </div>
 
-   <div class="row animate__animated animate__fadeIn">
-     <div class="col col-12 pt-4 pb-4">
-       <h2>WTF</h2>
-       <figure>
-         <blockquote cite="https://yandex.ru/lab/yalm/share?id=4aa38ace1b050d268f565046b553df54996280f0ea5b1a6355d4c4a7ed744556">
-           Хеллоу %USER_NAME%, ты наткнулся на очередное приложение для тайм менеджмента.
-           Чем оно полезно?
-           <ul>
-             <li>
-               Отслеживание всех денежек, включая наличные, чтобы выстраивать графики и по ним ясно понимать, когда ты начал спиваться..
-             </li>
-             <li>
-               Отслеживание времени, куда ты на самом деле тратишь своё драгоценное время, чтобы его было больше, а самое главное понять и отследить сколько времени у тебя уходит на сон в разных обстоятельствах, чтобы просыпаться без будильника.
-             </li>
-             <li>
-               Помощь в разгрузке с кредитками, чтобы понять сколько у тебя уходит на оплату процентов по разным кредиткам, какая дороже, где лучше кэшбек и тд.
-             </li>
-             <li>
-               Совмещая графики потраченного времени и заработанных денег можно отслеживать какой проект отнимает много времени а денег за час работы с ним выходит слишком мало.
-             </li>
-           </ul>
-           <p>
-             В общем полезно не только фрилансерам, но и рядовым пользователям.
-           </p>
-         </blockquote>
-        <figcaption>—TrywaR</figcaption>
-      </figure>
+   <div class="_section block_bg_blianer row animate__animated animate__fadeIn">
+     <div class="_block col col-12 pt-4 pb-4">
+       <h2 class="sub_title">THIS</h2>
+
+       <div class="_list">
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-hourglass-start"></i>
+           </span>
+           <span>
+             Контроль времени
+           </span>
+         </div>
+
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-comments-dollar"></i>
+           </span>
+           <span>
+             Отслеживание финансового потока, включая наличные подписки и прочие платежи
+           </span>
+         </div>
+
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-chart-pie"></i>
+           </span>
+           <span>
+             Удобные графики, регулирования финансовых и временные затрат
+           </span>
+         </div>
+
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-tasks"></i>
+           </span>
+           <span>
+             Тикет система направленная на улучшение сроков в постановке задач, и увеличения стоимости часа работы
+           </span>
+         </div>
+
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-user-secret"></i>
+           </span>
+           <span>
+             Приоритетная анонимность, никаких метрик и трекеров, возможность пользоваться сервисом имея только логин и пароль
+           </span>
+         </div>
+
+         <div class="_item">
+           <span class="icon">
+             <i class="fas fa-ban"></i>
+           </span>
+           <span>
+             Если у вас установлен блокировщик рекламы, вы молодец
+           </span>
+         </div>
+       </div>
      </div>
 
-     <div class="col col-12 pt-4 pb-4">
+     <div class="_bg_blianer">
+       <span></span>
+       <span></span>
+       <span></span>
+     </div>
+   </div>
+
+   <div class="_section row animate__animated animate__fadeIn animate__delay-2s">
+     <!-- <div class="col col-12 pt-4 pb-4">
        <h2>PLATFORMS</h2>
         <div class="btn-group">
           <a href="#" class="btn btn-dark disabled" aria-current="page">
@@ -58,7 +98,7 @@
             Browser
           </a>
         </div>
-     </div>
+     </div> -->
 
      <!-- <div class="col col-12 pt-4 pb-4">
        <h2>PRICE</h2>
@@ -82,7 +122,7 @@
      </div> -->
 
      <div class="col col-12">
-       <h2>
+       <h2 class="sub_title">
          INFO
        </h2>
 

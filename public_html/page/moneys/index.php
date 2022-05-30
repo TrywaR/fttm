@@ -124,7 +124,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="to_card" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected>...</option>
+                            <option value="0" selected><?=$olang->get('Cash')?></option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
                               <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
                             <?php endforeach; ?>

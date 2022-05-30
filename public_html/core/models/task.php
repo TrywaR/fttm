@@ -41,25 +41,21 @@ class task extends model
 
     // time
     if ( $arrTask['time_planned'] != '00:00:00' ) {
+      $arrTask['time_planned'] = date('H:i',$arrTask['time_planned']);
       $arrTask['time_show'] = 'true';
 
       $oTime = new time();
       $oTime->query .= ' AND `task_id` = ' . $arrTask['id'];
       $arrTimes = $oTime->get();
-      $iTimeSum = 0;
 
-      if ( count($arrTimes) ) {
-        foreach ($arrTimes as $arrTime) $iTimeSum = $iTimeSum + strtotime($arrTime['time_really']);
-        $iTimeSum = $iTimeSum - strtotime("00:00:00");
-        $iTimeSum = date('H:i:s',$iTimeSum);
-      }
-
-      $arrTask['time_really'] = $iTimeSum;
+      $arrTimesResult = [];
+      if ( count($arrTimes) ) foreach ($arrTimes as $arrTime) $arrTimesResult[] = $arrTime['time_really'];
+      $arrTask['time_really'] = $oTime->get_sum( $arrTimesResult, 'H:i' );
     }
 
     // money
     if ( (int)$arrTask['price_planned'] ) {
-      $arrTask['price_planned'] = substr($arrTask['price_planned'], 0, -2);
+      $arrTask['price_planned'] = substr($arrTask['price_planned'], 0, -5);
       $arrTask['money_show'] = 'true';
       $oMoney = new money();
       $oMoney->query = ' AND `task_id` = ' . $arrTask['id'];
