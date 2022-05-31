@@ -10,8 +10,9 @@
   <div class="row" id="block_version">
     <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_6">5.1.8 Style and info</a>
-         <a class="list-group-item list-group-item-action" href="#list-item-5_1_6">5.1.7 Tasks and analytics</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_1_9">5.1.9 Markdown</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_1_8">5.1.8 Style and info</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_1_7">5.1.7 Tasks and analytics</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_6">5.1.6 Subscriptions and tasks</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_5">5.1.5 Datas for users</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_4">5.1.4 Filters</a>
@@ -40,6 +41,13 @@
     <div class="col col-12 col-md-8">
      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
        <div class="pt-2 pb-2">
+         <h2 id="list-item-5_1_9">5.1.9 Markdown</h2>
+         <ol>
+           <li>
+             Markdown in tasks
+           </li>
+         </ol>
+
          <h2 id="list-item-5_1_8">5.1.8 Style and info</h2>
          <ol>
            <li>Style update</li>

@@ -482,6 +482,10 @@ main small {
       padding: 0.2rem; }
   .task ._project {
     display: none; }
+  .task ._description_prev {
+    padding: 1rem;
+    font-size: 0.9em;
+    line-height: 1.6; }
   .task ._sub {
     display: flex;
     flex-direction: column;

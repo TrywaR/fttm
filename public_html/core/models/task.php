@@ -77,6 +77,18 @@ class task extends model
       $arrTask['price_really'] = $iMoneySum;
     }
 
+    // Description
+    $arrTask['description_prev'] = '';
+    if ( $arrTask['description'] != '' ) {
+      // Wiki mark
+      // require_once("lib/Wiky.php-master/wiky.inc.php");
+      // $oWiky = new wiky;
+      // $arrTask['description_prev'] = $oWiky->parse( htmlspecialchars( $arrTask['description'] ) );
+
+      require_once("lib/parsedown-master/Parsedown.php");
+      $oParsedown = new Parsedown();
+      $arrTask['description_prev'] = $oParsedown->text( $arrTask['description'] );
+    }
 
     return $arrTask;
   }
