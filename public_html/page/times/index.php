@@ -24,7 +24,7 @@ $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
 
-<main class="container animate__animated animate__fadeIn">
+<main class="container animate__animated animate__fadeIn block_times">
   <div class="row">
     <?
     // $oSession = new session();

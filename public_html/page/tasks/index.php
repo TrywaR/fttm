@@ -7,12 +7,12 @@ $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 ?>
-<main class="container pt-4 pb-4">
+<main class="container pt-4 pb-4 block_tasks">
   <div class="row">
     <div class="col-12  mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Tasks</h1>
+          <h1 class="display-4 sub_title">Tasks</h1>
 
           <p class="lead">
             <span class="icon">

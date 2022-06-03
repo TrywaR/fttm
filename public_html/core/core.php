@@ -20,3 +20,4 @@ include_once 'models/moneys_category.php'; # Категории затрат
 include_once 'models/moneys_subscriptions.php'; # Подписки
 include_once 'models/time.php'; # Время
 include_once 'models/times_category.php'; # Категории затрат времени
+include_once 'models/chart.php'; # Графики

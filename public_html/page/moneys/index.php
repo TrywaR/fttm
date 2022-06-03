@@ -1,6 +1,6 @@
 <?
 $oCard = new card();
-$oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 $arrCards = $oCard->get();
 
 $oTask = new task();
@@ -30,12 +30,12 @@ $oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 ?>
 
-<main class="container animate__animated animate__fadeIn" id="container">
+<main class="container animate__animated animate__fadeIn block_moneys" id="container">
   <section class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Moneys</h1>
+          <h1 class="display-4 sub_title">Moneys</h1>
           <p class="lead">
             <span class="icon">
               <i class="far fa-folder"></i>
@@ -96,9 +96,12 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('Cash')?></option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php if ( $iIndex == 0 ): ?>
+                                <option selected="selected" value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php endif; ?>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -124,7 +127,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="to_card" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('Cash')?></option>
+                            <option value="0" selected>...</option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
                               <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
                             <?php endforeach; ?>
@@ -262,9 +265,12 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="card" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('Cash')?></option>
                             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-                              <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php if ( $iIndex == 0 ): ?>
+                                <option selected="selected" value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+                              <?php endif; ?>
                             <?php endforeach; ?>
                           </select>
                         </div>

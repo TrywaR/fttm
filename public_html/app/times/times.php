@@ -16,8 +16,9 @@ switch ($_REQUEST['form']) {
     $oTime->sort = 'date';
     $oTime->sortDir = 'DESC';
     $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrTime = $oTime->get_time();
-    notification::send($arrTime);
+    $arrDataItem = $oTime->get_time();
+
+    notification::send($arrDataItem);
     break;
 
   case 'show_all': # Вывод элементов
@@ -36,9 +37,9 @@ switch ($_REQUEST['form']) {
     $oTime->sort = 'date';
     $oTime->sortDir = 'DESC';
     $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrTimes = $oTime->get_times();
+    $arrData = $oTime->get_times();
 
-    notification::send($arrTimes);
+    notification::send($arrData);
     break;
 
   case 'form': # Форма добавления / редактирования

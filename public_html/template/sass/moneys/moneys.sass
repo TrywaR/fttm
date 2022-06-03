@@ -1,4 +1,21 @@
 .block_moneys
+  .block_chart
+    background: $color_main_money_dark
+
+  .sub_title
+    color: $color_main_money
+
+    &:after
+      background: linear-gradient(to right, $color_main_money 35%, rgba(255,255,255,0) 100%)
+
+  .block_loading
+    &:before,
+    &:after
+      border-color: $color_main_money ! important
+
+    ._icon
+      color: $color_main_money ! important
+
 .money
   display: flex
   align-items: flex-end
@@ -99,7 +116,7 @@
       left: 0
       right: 0
       bottom: 0
-      background: $color_success
+      background: $color_main_money_dark
       opacity: .4
       z-index: -1
 

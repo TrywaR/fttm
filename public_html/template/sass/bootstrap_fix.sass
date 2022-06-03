@@ -30,6 +30,13 @@ body
 
   .btn
     color: $color_text
+    border-radius: $border_radius
+    background: $color_main_dark
+    @include shadow_default
+
+    &:focus
+      color: $color_main
+      @include shadow_default
 
     &.btn-primary
       background: $color_main_dark
@@ -44,6 +51,10 @@ body
 
     &:hover
       color: $color_main
+
+  .btn-group
+    .btn
+      margin: .6rem
 
   .card
     position: relative

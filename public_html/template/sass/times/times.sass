@@ -1,4 +1,21 @@
 .block_times
+  .block_chart
+    background: $color_main_time_dark
+
+  .sub_title
+    color: $color_main_time
+
+    &:after
+      background: linear-gradient(to right, $color_main_time 35%, rgba(255,255,255,0) 100%)
+
+  .block_loading
+    &:before,
+    &:after
+      border-color: $color_main_time ! important
+
+    ._icon
+      color: $color_main_time ! important
+
 .time
   display: flex
   align-items: flex-end
@@ -17,7 +34,7 @@
   &._category_show_true
     ._category
       display: flex
-      
+
   &._project_show_true
     ._project
       display: flex

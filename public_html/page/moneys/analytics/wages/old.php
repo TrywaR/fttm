@@ -1,0 +1,326 @@
+<?
+// Получаем категории
+// $arrMoneys = $db->query_all($sQuery);
+
+$oProject = new project();
+$oProject->limit = 0;
+$oProject->sort = 'sort';
+$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrProjects = $oProject->get();
+
+$arrProjects[] = array(
+  'title'=>'Без проекта',
+  'id'=> 0,
+  'color'=>sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ),
+);
+
+$dCurrentDate = date('Y-m');
+$iCurrentMonth = date('n');
+$iCurrentYear = date('Y');
+
+$arrProjectsName = [];
+$arrProjectsIds = [];
+
+foreach ($arrProjects as &$arrProject) {
+    $oMoney = new money();
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `project_id` = '" . $arrProject['id'] . "' AND `date` LIKE '" . $dCurrentDate . "%' AND `type` > '0'";
+    $arrMoneys = $oMoney->get();
+    $iProjectSum = 0;
+    foreach ($arrMoneys as &$arrMoney) {
+      $arrProject['items'][] = $arrMoney;
+      $iProjectSum = $iProjectSum + (int)$arrMoney['price'];
+    }
+    $arrProject['sum'] = $iProjectSum;
+    $arrProjectsName[$arrProject['id']] = $arrProject['title'];
+    $arrProjectsIds[$arrProject['id']] = $arrProject;
+
+    $arrProject['color'] = $arrProject['color'] ? $arrProject['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
+}
+
+// Суммы по месяцам
+$arrMounths = [];
+for ($i=1; $i < 13; $i++) {
+  $oMoney = new money();
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1'";
+  $arrMoneys = $oMoney->get();
+  $iMounthSum = 0;
+  foreach ($arrMoneys as &$arrMoney) {
+    $arrMounths[$i]['projects'][$arrMoney['project_id']] = (float)$arrMounths[$i]['projects'][$arrMoney['project_id']] + (float)$arrMoney['price'];
+    $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
+  }
+  $arrMounths[$i]['sum'] = $iMounthSum;
+  $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
+}
+
+// Суммы по годам
+$arrYears = [];
+for ($i=0; $i < 3; $i++) {
+  $oMoney = new money();
+  $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+  $oMoney->query .= " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1'";
+  $arrMoneys = $oMoney->get();
+  $iYearSum = 0;
+  foreach ($arrMoneys as &$arrMoney) {
+    $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (float)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (float)$arrMoney['price'];
+    $iYearSum = $iYearSum + (float)$arrMoney['price'];
+  }
+  $arrYears[$iCurrentYear - $i]['sum'] = $iYearSum;
+  $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
+}
+?>
+<main class="container pt-4 pb-4 animate__animated animate__fadeIn">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Moneys trip</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true">Mounth</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false">Year</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <!-- Month -->
+    <div class="tab-pane fade show active" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+      <div class="row mb-4 animate__animated animate__bounceInRight">
+        <div class="col mb-4 d-flex flex-column justify-content-center align-items-center">
+          <h2>Weges for month (<?=date("F")?>)</h2>
+          <canvas id="doughnut-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+
+          <script>
+            var myChart = new Chart(document.getElementById("doughnut-chart"), {
+              type: 'doughnut',
+              data: {
+                labels: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
+                  if ( $iIndex ) echo ", '";
+                  else echo "'";
+                  echo $arrProject['title'] . "'";
+                }?>],
+                datasets: [
+                  {
+                    label: "Population (millions)",
+                    data: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
+                      if ( $iIndex ) echo ", '";
+                      else echo "'";
+                      echo $arrProject['sum'] . "'";
+                    }?>],
+                    backgroundColor: [<?foreach ($arrProjects as $iIndex => &$arrProject) {
+                      if ( $iIndex ) echo ", '";
+                      else echo "'";
+                      echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                    }?>]
+                  }
+                ]
+              }
+            })
+            window.addEventListener('beforeprint', () => {
+              myChart.resize(600, 600)
+            })
+            window.addEventListener('afterprint', () => {
+              myChart.resize()
+            })
+          </script>
+        </div>
+        <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
+          <div class="col-12">
+            <h2 class="text-center">
+              <?=number_format($arrMounths[$iCurrentMonth]['sum'], 2, '.', ' ')?>₽
+            </h2>
+          </div>
+        </div>
+        <!-- Items -->
+        <div class="row animate__animated animate__bounceInRight animate__delay-2s">
+          <?
+          foreach ($arrProjects as &$arrProject) {
+          ?>
+          <div class="col-12 mb-4 moneys_category animate__animated animate__bounceInRight animate__delay-1s">
+            <div class="moneys_category-name">
+              <h2>
+                <span class="badge bg-primary" style="background: <?=$arrProject['color']?>!important">
+                  <?=$arrProject['title']?>
+                </span>
+                <small>
+                  <?=number_format($arrProject['sum'], 2, '.', ' ')?>₽
+                </small>
+              </h2>
+            </div>
+            <div class="moneys_category-data">
+              <ol class="list-group list-group-numbered block_content_loader">
+              <?
+              // Прикручиваем рейтинги
+              foreach ($arrProject['items'] as &$arrMoney) {
+                ?>
+                <li class="list-group-item money d-flex justify-content-between align-items-start _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity: 1;">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
+                    <div class="badge bg-primary " style="font-size: 1rem; font-weight: normal;">
+                      <?=round($arrMoney['price'])?>₽
+                    </div>
+                    <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
+                      <?
+                      $date = new DateTime($arrMoney['date']);
+                      echo $date->format('Y-m-d');
+                      ?>
+                    </span>
+                    <i class="fas fa-credit-card"></i> <small>#<?=$arrMoney['card']?></small> <?=$arrCardsIds[$arrMoney['card']]['title']?>
+                  </div>
+                </li>
+                <?
+              }
+              ?>
+              </ol>
+
+              <div class="moneys_category-data_bg" style="background: <?=$arrProject['color']?>!important"></div>
+            </div>
+          </div>
+          <?
+          }
+          ?>
+        </div>
+      </div>
+    </div>
+    <!-- Year -->
+    <div class="tab-pane fade" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
+      <div class="row mb-4 animate__animated animate__bounceInRight">
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+          <h2>Weges for year (<?=date("Y")?>)</h2>
+          <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
+          <script>
+            var myBar = new Chart(document.getElementById("bar-chart"), {
+              type: 'line',
+              data: {
+                labels: [<?foreach ($arrMounths as $key => $arrMounth) {
+                  if ( $key > 1 ) echo ", '";
+                  else echo "'";
+                  echo $arrMounth['name'] . " (" . $arrMounth['sum'] . ")'";
+                }?>],
+                datasets:
+                  [
+                    <?foreach ($arrProjects as $iIndex => &$arrProject) {?>
+                    {
+                      label: "<?=$arrProject['title']?>",
+                      data: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                        if ( $iIndex > 1 ) echo ", ";
+                        else echo "";
+
+                        echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
+                        // if ( count($arrMounth['categories']) ) echo $arrMounth['categories'][$arrProject['id']] . "";
+                        // else echo $arrMounth['sum'] . "";
+                      }?>],
+                      borderColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                        if ( $iIndex > 1 ) echo ", '";
+                        else echo "'";
+                        // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                        echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                      }?>],
+                      backgroundColor: [<?foreach ($arrMounths as $iIndex => &$arrMounth) {
+                        if ( $iIndex > 1 ) echo ", '";
+                        else echo "'";
+                        // echo $arrMounth['color'] ? $arrMounth['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                        echo $arrProject['color'] ? $arrProject['color'] . "'" : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
+                      }?>]
+                    },
+                    <?}?>
+                  ],
+              },
+              // options: {
+              //   plugins: {
+              //     filler: {
+              //       propagate: false
+              //     },
+              //     'samples-filler-analyser': {
+              //       target: 'chart-analyser'
+              //     }
+              //   },
+              //   interaction: {
+              //     intersect: false,
+              //   },
+              //   responsive: true,
+              //   scales: {
+              //     x: {
+              //       stacked: true,
+              //     },
+              //     y: {
+              //       stacked: true
+              //     }
+              //   }
+              // }
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                }
+              },
+            })
+
+            window.addEventListener('beforeprint', () => {
+              myBar.resize(600, 600);
+            });
+            window.addEventListener('afterprint', () => {
+              myBar.resize();
+            });
+          </script>
+        </div>
+      </div>
+      <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
+        <div class="col-12">
+          <h2 class="text-center">
+            <?=number_format($arrYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽
+          </h2>
+        </div>
+      </div>
+      <div class="row animate__animated animate__bounceInRight animate__delay-2s">
+        <? foreach ($arrYears as & $arrYear): ?>
+          <? if ( $arrYear['name'] ): ?>
+            <h2>
+              <?=$arrYear['name']?>
+              <small>
+                <?=number_format($arrYear['sum'], 2, '.', ' ')?>₽
+              </small>
+            </h2>
+          <? endif; ?>
+          <? foreach ($arrYear['projects'] as $iProjectId => $iProjectSum): ?>
+            <h3>
+              <span class="badge bg-primary" style="background: <?=$arrProjectsIds[$iProjectId]['color']?>!important">
+                <?=$arrProjectsIds[$iProjectId]['title']?$arrProjectsIds[$iProjectId]['title']:'Без проекта'?>
+              </span>
+
+              <?=$iProjectSum ? number_format($iProjectSum, 2, '.', ' ') : '0' ?>₽
+            </h3>
+          <? endforeach; ?>
+        <? endforeach; ?>
+
+        <div class="col col-12">
+          <?/*
+          <?foreach ($arrProjects as $iIndex => &$arrProject) {?>
+            <h2>
+              <span class="badge bg-primary" style="background: <?=$arrProject['color']?>!important">
+                <?=$arrProject['title']?>
+              </span>
+
+              <?=$arrProject['sum'] ? number_format($arrProject['sum'], 2, '.', ' ') : '0' ?>₽
+            </h2>
+            <ol class="list-group list-group-numbered block_content_loader">
+
+            </ol>
+          <?}?>
+          */?>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

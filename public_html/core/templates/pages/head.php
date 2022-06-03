@@ -40,6 +40,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
 	<!-- fancybox_galery x -->
 
+	<!-- chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+	<!-- chart.js x -->
+
 	<!-- slick_slide -->
 	<!-- <link rel="stylesheet" type="text/css" href="lib/slick-1.8.0/slick/slick.css"/> -->
 	<!-- <link rel="stylesheet" type="text/css" href="lib/slick-1.8.0/slick/slick-theme.css"/> -->
@@ -47,38 +51,38 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.1.8"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.1"> -->
 	<?
 	if ( isset($_SESSION['user']) ) {
 		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 1;
 		switch ( $iTheme ) {
 			case 0:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.1.8"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.1"><?
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.1.8"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.1"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.1.8"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.1"><?
 				break;
 			case 3:
 				break;
 		}
 	}
 	else {
-		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.1.8"><?
+		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.1"><?
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.1.8"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.1.8"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.1.8"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.1.8"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.1.8"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.1.8"></script>
-	<script src="/template/js/content/content.js?v=5.1.8"></script>
-	<script src="/template/js/session/session.js?v=5.1.8"></script>
-	<script src="/template/js/index.js?v=5.1.8"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.2.1"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.2.1"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.2.1"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.2.1"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.1"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.2.1"></script>
+	<script src="/template/js/content/content.js?v=5.2.1"></script>
+	<script src="/template/js/session/session.js?v=5.2.1"></script>
+	<script src="/template/js/index.js?v=5.2.1"></script>
 	<!-- main x-->
 </head>
 <body>

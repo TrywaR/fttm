@@ -127,31 +127,31 @@
        </h2>
 
        <ul class="list-group list-group-horizontal">
-        <a  href="/app/versions/" class="list-group-item list-group-item-action">
+        <a  href="/info/versions/" class="list-group-item list-group-item-action">
           <span class="icon">
             <i class="fas fa-code-branch"></i>
           </span>
           Updates / versions
         </a>
-        <a href="/app/contacts/" class="list-group-item list-group-item-action">
+        <a href="/info/contacts/" class="list-group-item list-group-item-action">
           <span class="icon">
             <i class="fas fa-info"></i>
           </span>
           Organization info / contacts
         </a>
-        <a href="/app/analytics/" class="list-group-item  list-group-item-action">
+        <a href="/info/analytics/" class="list-group-item  list-group-item-action">
           <span class="icon">
             <i class="fas fa-chart-line"></i>
           </span>
           Analytics
         </a>
-        <a href="/app/buy/" class="list-group-item  list-group-item-action">
+        <a href="/info/buy/" class="list-group-item  list-group-item-action">
           <span class="icon">
             <i class="fas fa-donate"></i>
           </span>
           Buy / donate
         </a>
-        <a href="/app/docs/" class="list-group-item  list-group-item-action">
+        <a href="/info/docs/" class="list-group-item  list-group-item-action">
           <span class="icon">
             <i class="fas fa-book-dead"></i>
           </span>

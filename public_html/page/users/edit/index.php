@@ -108,7 +108,7 @@
                   </small>
                   New password
                 </label>
-                <input type="password" class="form-control" id="form_new_password" autocomplete="off" name="new_password" value="">
+                <input type="password" class="form-control" id="form_new_password" autocomplete="new_password" name="new_password" value="">
               </div>
 
               <div class="mb-4">

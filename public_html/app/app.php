@@ -22,6 +22,7 @@ switch ($_REQUEST['action']) {
 
   case 'times': # Время
     include_once 'times/times.php';
+    include_once 'times/analytics.php';
     break;
 
   case 'users': # Пользователи
@@ -34,6 +35,7 @@ switch ($_REQUEST['action']) {
 
   case 'moneys': # Обработка денежек
     include_once 'moneys/moneys.php';
+    include_once 'moneys/analytics.php';
     break;
 
   case 'cards': # Карточки для денежек
@@ -46,5 +48,9 @@ switch ($_REQUEST['action']) {
 
   case 'moneys_subscriptions': # Подписки
     include_once 'moneys_subscriptions/moneys_subscriptions.php';
+    break;
+
+  case 'charts': # Графики
+    include_once 'charts/charts.php';
     break;
 }

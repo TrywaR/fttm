@@ -113,7 +113,7 @@
         id="cards"
         class="block_cards block_elems block_content_loader row"
         data-content_loader_table="cards"
-        data-content_loader_form="show"
+        data-content_loader_form="show_all"
         data-content_loader_limit="15"
         data-content_loader_scroll_nav="0"
         <?php if ($_REQUEST['sort']): ?>
@@ -140,7 +140,7 @@
   </div>
 
   <div class="block_template">
-    <div class="col-12 col-md-4 mb-4 _elem card_item progress_block animate__animated animate__bounceInRight _commission_show_{{commission_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="col-12 col-md-4 mb-4 _elem card_item progress_block animate__animated animate__bounceInRight _commission_show_{{commission_show}} _noedit_show_{{noedit}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="card">
         <div class="card-body">
           <div class="ms-2 me-auto mb-2">
@@ -157,7 +157,7 @@
           </div>
 
           <div class="btn-group mt-2 w-100" role="group">
-            <a href="#" class="btn content_manager_switch switch_icons">
+            <a href="#" class="btn content_manager_switch switch_icons _select">
               <div class="">
                 <i class="far fa-square"></i>
               </div>
@@ -165,13 +165,13 @@
                 <i class="fas fa-square"></i>
               </div>
             </a>
-            <a href="#" title="Reload data" class="btn content_download" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
+            <a href="#" title="Reload data" class="btn content_download _reload" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
               <i class="fas fa-retweet"></i>
             </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="edit" data-animate_class="animate__flipInY">
+            <a href="#" class="btn content_download _edit" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="edit" data-animate_class="animate__flipInY">
               <i class="fas fa-pen-square"></i>
             </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
+            <a href="#" class="btn content_download _del" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
               <i class="fas fa-minus-square"></i>
             </a>
           </div>

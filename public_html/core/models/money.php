@@ -39,13 +39,17 @@ class money extends model
     if ( (int)$arrMoney['category'] ) {
       $arrMoney['category_show'] = 'true';
       $oMoneyCategory = new moneys_category( $arrMoney['category'] );
-      $arrMoney['categroy_val'] = (array)$oMoneyCategory;
+      $arrMoney['categroy_val'] = [];
+      $arrMoneyCategory = (array)$oMoneyCategory;
+      $arrMoney['categroy_val']['title'] = $arrMoneyCategory['title'];
     }
 
     if ( (int)$arrMoney['project_id'] ) {
       $arrMoney['project_show'] = 'true';
       $oProject = new project( $arrMoney['project_id'] );
-      $arrMoney['project_val'] = (array)$oProject;
+      $arrMoney['project_val'] = [];
+      $arrProject = (array)$oProject;
+      $arrMoney['project_val']['title'] = $arrProject['title'];
     }
 
     if ( (int)$arrMoney['task_id'] ) {
@@ -56,7 +60,9 @@ class money extends model
 
     if ( (int)$arrMoney['subscription'] ) {
       $oMoneysSubscription = new moneys_subscriptions( $arrMoney['subscription'] );
-      $arrMoney['subscription_val'] = (array)$oMoneysSubscription;
+      $arrMoney['subscription_val'] = [];
+      $arrMoneysSubscription = (array)$oMoneysSubscription;
+      $arrMoney['subscription_val']['title'] = $arrMoneysSubscription['title'];
       $arrMoney['subscription_show'] = 'true';
     }
 
