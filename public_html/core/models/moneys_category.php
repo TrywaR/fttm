@@ -9,6 +9,7 @@ class moneys_category extends model
   public static $title = '';
   public static $sort = '';
   public static $priority = '';
+  public static $color = '';
   public static $active = '';
   public static $type = '';
   public static $user_id = '';
@@ -41,15 +42,16 @@ class moneys_category extends model
     if ( $moneys_category_id ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
       $mySql .= " WHERE `id` = '" . $moneys_category_id . "'";
-      $arrCard = db::query($mySql);
+      $arrCategory = db::query($mySql);
 
-      $this->id = $arrCard['id'];
-      $this->title = $arrCard['title'];
-      $this->sort = $arrCard['sort'];
-      $this->priority = $arrCard['priority'];
-      $this->active = $arrCard['active'];
-      $this->type = $arrCard['type'];
-      $this->user_id = $arrCard['user_id'];
+      $this->id = $arrCategory['id'];
+      $this->title = $arrCategory['title'];
+      $this->sort = $arrCategory['sort'];
+      $this->priority = $arrCategory['priority'];
+      $this->active = $arrCategory['active'];
+      $this->color = $arrCategory['color'];
+      $this->type = $arrCategory['type'];
+      $this->user_id = $arrCategory['user_id'];
     }
   }
 }

@@ -8,8 +8,46 @@
         FTTM
       </a>
       <?php if (isset($_SESSION['user'])): ?>
-        <a href="/users/" class="home_link">
-          <?=$_SESSION['user']['login']?>
+        <a href="/users/" class="home_link user_prev">
+          <span class="_login">
+            <?=$_SESSION['user']['login']?>
+          </span>
+          <small class="_role">
+            <?
+            switch ((int)$_SESSION['user']['role']) {
+              case 0:
+                 ?>
+                 <span class="_icon">
+                   <i class="fas fa-user-circle"></i>
+                 </span>
+                 <span class="_value">
+                   User
+                 </span>
+                 <?
+                break;
+              case 1:
+                 ?>
+                 <span class="_icon">
+                   <i class="fas fa-check"></i>
+                 </span>
+                 <span class="_value">
+                   Valid user
+                 </span>
+                 <?
+                break;
+              case 666:
+                 ?>
+                 <span class="_icon">
+                   <i class="fas fa-crown"></i>
+                 </span>
+                 <span class="_value">
+                   Admin
+                 </span>
+                 <?
+                break;
+            }
+            ?>
+          </small>
         </a>
       <?php endif; ?>
       <?php if (isset($_SESSION['user'])): ?>

@@ -16,6 +16,18 @@ switch ($_REQUEST['action']) {
     include_once 'projects/projects.php';
     break;
 
+  case 'projects_analytics': # Статистика
+    include_once 'projects/analytics.php';
+    break;
+
+  case 'projects_analytics_money': # Статистика
+    include_once 'projects/analytics_money.php';
+    break;
+
+  case 'projects_analytics_times': # Статистика
+    include_once 'projects/analytics_times.php';
+    break;
+
   case 'tasks': # Задачи по проектам
     include_once 'tasks/tasks.php';
     break;

@@ -153,7 +153,7 @@ class chart extends model
                 foreach ($arrDataset as $iIndex => $arrData) {
                   if ( $iIndex > 1 ) echo ", '";
                   else echo "'";
-                  echo '#00ff00';
+                  echo '#4a8e61';
                   echo "'";
                 }
               ?>],
@@ -161,7 +161,7 @@ class chart extends model
                 foreach ($arrDataset as $iIndex => $arrData) {
                   if ( $iIndex > 1 ) echo ", '";
                   else echo "'";
-                  echo '#00ff00';
+                  echo '#4a8e61';
                   echo "'";
                 }
               ?>]

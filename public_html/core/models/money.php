@@ -42,6 +42,7 @@ class money extends model
       $arrMoney['categroy_val'] = [];
       $arrMoneyCategory = (array)$oMoneyCategory;
       $arrMoney['categroy_val']['title'] = $arrMoneyCategory['title'];
+      $arrMoney['categroy_val']['color'] = $arrMoneyCategory['color'];
     }
 
     if ( (int)$arrMoney['project_id'] ) {
@@ -50,6 +51,7 @@ class money extends model
       $arrMoney['project_val'] = [];
       $arrProject = (array)$oProject;
       $arrMoney['project_val']['title'] = $arrProject['title'];
+      $arrMoney['project_val']['color'] = $arrProject['color'];
     }
 
     if ( (int)$arrMoney['task_id'] ) {
@@ -63,6 +65,7 @@ class money extends model
       $arrMoney['subscription_val'] = [];
       $arrMoneysSubscription = (array)$oMoneysSubscription;
       $arrMoney['subscription_val']['title'] = $arrMoneysSubscription['title'];
+      $arrMoney['subscription_val']['color'] = $arrMoneysSubscription['color'];
       $arrMoney['subscription_show'] = 'true';
     }
 

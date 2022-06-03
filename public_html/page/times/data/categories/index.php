@@ -1,9 +1,9 @@
-<main class="container animate__animated animate__fadeIn">
+<main class="container animate__animated animate__fadeIn block_times">
   <div class="row">
     <div class="col-12 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Times categories</h1>
+          <h1 class="display-4 sub_title">Times categories</h1>
           <p class="lead">
             <span class="icon">
               <i class="fas fa-arrow-left"></i>
@@ -78,7 +78,7 @@
                           <label for="inputTitleZero" class="col-form-label">Sort</label>
                         </div>
                         <div class="col-12 col-md-8">
-                          <input name="sort" type="number" id="inputTitleZero" class="form-control">
+                          <input name="sort" type="number" id="inputTitleZero" class="form-control" value="100">
                         </div>
                       </div>
 

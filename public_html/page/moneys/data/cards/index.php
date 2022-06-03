@@ -1,9 +1,9 @@
-<main class="container pt-4 pb-4 animate__animated animate__fadeIn">
+<main class="container animate__animated animate__fadeIn block_moneys">
   <div class="row">
     <div class="col-12 col-md-6 mb-4">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Cards</h1>
+          <h1 class="display-4 sub_title">Cards</h1>
         </div>
       </div>
     </div>

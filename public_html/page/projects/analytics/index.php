@@ -1,127 +1,15 @@
 <?
-// Получаем категории
-// $arrMoneys = $db->query_all($sQuery);
-
-$oProject = new project();
-$oProject->limit = 0;
-$oProject->sort = 'sort';
-$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrProjects = $oProject->get();
-
-$dCurrentDate = date('Y-m');
-$iCurrentMonth = date('m');
-$iCurrentYear = date('Y');
-
-$arrProjectsName = [];
-$arrProjectsIds = [];
-
 $oProject = new project( $_REQUEST['project_id'] );
-$oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProject = $oProject->get();
-$arrProject['color'] = $arrProject['color'] ? $arrProject['color'] : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) ) . "'";
-
-$arrMounths = [];
-for ($i=1; $i < 13; $i++) $arrMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
-$arrYears = [];
-for ($i=1; $i < 3; $i++) $arrYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
-
-// Доходы (Уэйдейсы)
-// Суммы по месяцам
-for ($i=1; $i < 13; $i++) {
-  $oMoney = new money();
-  $oMoney->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
-  $arrMoneys = $oMoney->get();
-  $iMounthSum = 0;
-  foreach ($arrMoneys as &$arrMoney) {
-    $arrWagesMounths[$i]['projects'][$arrMoney['project_id']] = (int)$arrWagesMounths[$i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iMounthSum = $iMounthSum + (int)$arrMoney['price'];
-  }
-  $arrWagesMounths[$i]['sum'] = $iMounthSum;
-}
-// Суммы по годам
-$arrWagesYears = [];
-for ($i=0; $i < 3; $i++) {
-  $oMoney = new money();
-  $oMoney->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
-  $arrMoneys = $oMoney->get();
-  $iYearSum = 0;
-  foreach ($arrMoneys as &$arrMoney) {
-    $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (int)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iYearSum = $iYearSum + (int)$arrMoney['price'];
-  }
-  $arrWagesYears[$iCurrentYear - $i]['sum'] = $iYearSum;
-  $arrWagesYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
-}
-
-
-// Расходы (Косты)
-// Суммы по месяцам
-$arrCostsMounths = [];
-for ($i=1; $i < 13; $i++) {
-  $oMoney = new money();
-  $oMoney->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
-  $arrMoneys = $oMoney->get();
-  $iMounthSum = 0;
-  foreach ($arrMoneys as &$arrMoney) {
-    $arrCostsMounths[$i]['projects'][$arrMoney['project_id']] = (int)$arrCostsMounths[$i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iMounthSum = $iMounthSum + (int)$arrMoney['price'];
-  }
-  $arrCostsMounths[$i]['sum'] = $iMounthSum;
-  $arrCostsMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
-}
-// Суммы по годам
-$arrCostsYears = [];
-for ($i=0; $i < 3; $i++) {
-  $oMoney = new money();
-  $oMoney->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
-  $arrMoneys = $oMoney->get();
-  $iYearSum = 0;
-  foreach ($arrMoneys as &$arrMoney) {
-    $arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] = (int)$arrYears[$iCurrentYear - $i]['projects'][$arrMoney['project_id']] + (int)$arrMoney['price'];
-    $iYearSum = $iYearSum + (int)$arrMoney['price'];
-  }
-  $arrCostsYears[$iCurrentYear - $i]['sum'] = $iYearSum;
-  $arrCostsYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
-}
-
-// Время на проект
-// Суммы по месяцам
-$arrTimesMounths = [];
-for ($i=1; $i < 13; $i++) {
-  $oTime = new time();
-  $oTime->query = " AND `date` LIKE '" . date('Y') . '-' . sprintf("%02d", $i) . "%' AND `project_id` = " . $_REQUEST['project_id'];
-  $arrTimes = $oTime->get();
-  $iMounthSum = 0;
-  foreach ($arrTimes as &$arrTime) {
-    $dDateReally = new DateTime($arrTime['time_really']);
-    $arrTime['time'] = $dDateReally->format('H.i');
-
-    $arrTimesMounths[$i]['value'] = (float)$arrTimesMounths[$i]['value'] + (float)$arrTime['time'];
-    $iMounthSum = $iMounthSum + (float)$arrTime['time'];
-  }
-  $arrTimesMounths[$i]['sum'] = $iMounthSum;
-  $arrTimesMounths[$i]['name'] = date("F", strtotime(date("Y") . "-" . sprintf("%02d", $i)));
-}
-// Время по годам
-$arrTimesYears = [];
-for ($i=0; $i < 3; $i++) {
-  $oTime = new time();
-  $oTime->query = " AND `date` LIKE '" . ( $iCurrentYear - $i ) . '-' . "%' AND `project_id` = " . $arrProject['id'];
-  $arrTimes = $oTime->get();
-  $iYearSum = 0;
-  foreach ($arrTimes as &$arrTime) {
-    $arrTimesYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] = (float)$arrTimesYears[$iCurrentYear - $i]['projects'][$arrTime['project_id']] + (float)$arrTime['time_really'];
-    $iYearSum = $iYearSum + (float)$arrTime['time_really'];
-  }
-  $arrTimesYears[$iCurrentYear - $i]['sum'] = $iYearSum;
-  $arrTimesYears[$iCurrentYear - $i]['name'] = $iCurrentYear - $i;
-}
+// $arrProject = $arrProject[0];
 ?>
-<main class="container pt-4 pb-4">
+
+<main class="container animate__animated animate__fadeIn">
   <div class="row mb-4">
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
+          <small>Project:</small>
           <h1 class="display-4"><?=$arrProject['title']?></h1>
           <p class="lead">
             <span class="icon">
@@ -134,264 +22,381 @@ for ($i=0; $i < 3; $i++) {
     </div>
   </div>
 
-  <div class="row mb-4 animate__animated animate__bounceInRight">
-    <div class="col d-flex flex-column justify-content-center align-items-center">
-      <h2>Money for yaer (<?=date("Y")?>)</h2>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
-      <canvas id="bar-chart" width="100" height="400px" style="max-height: 400px;"></canvas>
-      <script>
-        var myBar = new Chart(document.getElementById("bar-chart"), {
-          type: 'line',
-          data: {
-            labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-              if ( $key > 1 ) echo ", '";
-              else echo "'";
-              echo $arrMounth['name'] . "'";
-            }?>],
-            datasets:
-              [
-                {
-                  label: 'Wages',
-                  data: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", ";
-                    else echo "";
-                    echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
-                  }?>],
-                  borderColor: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#00ffff';
-                    echo "'";
-                  }?>],
-                  backgroundColor: [<?foreach ($arrWagesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#00ffff';
-                    echo "'";
-                  }?>]
-                },
-                {
-                  label: 'Costs',
-                  data: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", ";
-                    else echo "";
-                    echo $arrMounth['projects'][$arrProject['id']] ? $arrMounth['projects'][$arrProject['id']] : '0';
-                  }?>],
-                  borderColor: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#00ff00';
-                    echo "'";
-                  }?>],
-                  backgroundColor: [<?foreach ($arrCostsMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#00ff00';
-                    echo "'";
-                  }?>]
-                },
-              ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'top',
-              },
-            }
-          },
-        })
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true">Week</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true">Mounth</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button onclick="year_show()" class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false">Year</button>
+    </li>
+  </ul>
 
-        window.addEventListener('beforeprint', () => {
-          myBar.resize(600, 600);
-        });
-        window.addEventListener('afterprint', () => {
-          myBar.resize();
-        });
-      </script>
-    </div>
-  </div>
-
-  <div class="row mb-4 animate__animated animate__bounceInRight">
-    <div class="col d-flex flex-column justify-content-center align-items-center">
-      <h2>Time for year (<?=date("Y")?>)</h2>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
-      <canvas id="bar-chart-time" width="100" height="400px" style="max-height: 400px;"></canvas>
-      <script>
-        var myBarTime = new Chart(document.getElementById("bar-chart-time"), {
-          type: 'line',
-          data: {
-            labels: [<?foreach ($arrMounths as $key => $arrMounth) {
-              if ( $key > 1 ) echo ", '";
-              else echo "'";
-
-              $fPrice = (float)$arrWagesMounths[$key]['projects'][$_REQUEST['project_id']] - (float)$arrCostsMounths[$key]['projects'][$_REQUEST['project_id']];
-              $fTime = (float)$arrTimesMounths[$key]['value'];
-              $fPriceForHour = $fTime > 0 ? $fPrice / $fTime : 0;
-              $fPriceForHour = (float)$fPriceForHour > 0 ? $fPriceForHour : 0;
-
-              // echo $arrMounth['name'] . " (" .  . ")'";
-              echo $arrMounth['name'] . " (" . number_format($fPriceForHour, 2, '.', ' ') . "₽)'";
-            }?>],
-            datasets:
-              [
-                {
-                  label: 'Time',
-                  data: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", ";
-                    else echo "";
-                    echo $arrMounth['value'] ? $arrMounth['value'] : '0';
-                  }?>],
-                  borderColor: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#ff0000';
-                    echo "'";
-                  }?>],
-                  backgroundColor: [<?foreach ($arrTimesMounths as $iIndex => &$arrMounth) {
-                    if ( $iIndex > 1 ) echo ", '";
-                    else echo "'";
-                    echo '#ff0000';
-                    echo "'";
-                  }?>]
-                },
-              ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'top',
-              },
-            }
-          },
-        })
-
-        window.addEventListener('beforeprint', () => {
-          myBarTime.resize(600, 600);
-        });
-        window.addEventListener('afterprint', () => {
-          myBarTime.resize();
-        });
-      </script>
-    </div>
-  </div>
-
-  <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
-    <div class="col-12">
-      <p class="text-center">
-        Wages <?=number_format($arrWagesYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
-        Costs <?=number_format($arrCostsYears[$iCurrentYear]['sum'], 2, '.', ' ')?>₽ <br/>
-        Time <?=(float)$arrTimesYears[$iCurrentYear]['sum']?>ч <br/>
-
-        <?
-        $fPrice = (float)$arrWagesYears[$iCurrentYear]['sum'] - (float)$arrCostsYears[$iCurrentYear]['sum'];
-        $fTime = (float)$arrTimesYears[$iCurrentYear]['sum'];
-        $fPriceForHour = $fTime > 0 ? $fPrice / $fTime : 0;
-        $fPriceForHour = (float)$fPriceForHour > 0 ? $fPriceForHour : 0;
-        ?>
-        <small>for hour <?=number_format($fPriceForHour, 2, '.', ' ')?>₽</small>
-      </p>
-      <h2 class="text-center">
-        <?
-        $iYearProjectSum = (int)$arrWagesYears[$iCurrentYear]['sum'] - (int)$arrCostsYears[$iCurrentYear]['sum'];
-        ?>
-        <?=number_format($iYearProjectSum, 2, '.', ' ')?>₽
-      </h2>
-    </div>
-  </div>
-
-  <div class="row mb-4 animate__animated animate__bounceInRight animate__delay-1s">
-    <div class="col">
-      <h2>Costs</h2>
-    </div>
-    <div class="list-group mb-4">
-      <?
-      $oMoney = new money();
-      $oMoney->query = " AND `date` LIKE '" . date('Y-') . "%' AND `type` = '0' AND `project_id` = " . $arrProject['id'];
-      $arrMoneys = $oMoney->get();
-      ?>
-      <?php foreach ($arrMoneys as $arrMoney): ?>
-        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity:1;">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
-            <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
-              <?=number_format($arrMoney['price'], 2, '.', ' ')?>₽
-            </div>
-            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?
-              $arrMoneyDate = explode(' ', $arrMoney['date']);
-              ?>
-              <?=$arrMoneyDate[0]?>
-            </span>
-            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
-          </div>
-          <span class="rounded-pill">
-            <!-- <a href="#" class="btn content_manager_switch switch_icons">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="edit" data-elem=".list-group-item" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a> -->
+  <div class="tab-content" id="pills-tabContent">
+    <!-- Week -->
+    <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
+      <!-- Фильтр -->
+      <form class="content_filter week_filter pb-4 __no_ajax" action="">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
           </span>
 
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          <select name="week" class="form-select">
+            <option value="" selected>Current week</option>
+            <option value="1">Prev week</option>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
+      <div class="moneyforhour_block" id="moneyforhour_week">
+        <div class="_info">
+          <div class="_money">
+            <div class="_icon">
+              m
+            </div>
+            <div class="_value">
+            </div>
+          </div>
+          <div class="_time">
+            <div class="_icon">
+              t
+            </div>
+            <div class="_value">
+            </div>
           </div>
         </div>
-      <?php endforeach; ?>
+
+        <div class="_result">
+          <div class="_icon">
+            <i class="fas fa-stopwatch"></i>
+          </div>
+          <div class="_value">
+
+          </div>
+          <div class="_title">
+            Money for hour
+          </div>
+        </div>
+      </div>
+
+      <h2>Money</h2>
+      <div id="res_weeks_money" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <h2>Time</h2>
+      <div id="res_weeks_time" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(document).find('.week_filter').on ('submit', function(){
+          var iWeek = $(this).find('[name="week"]').val()
+
+          bWeekShow = false
+          week_show( iWeek )
+
+          return false
+        })
+        function week_show( iWeek ) {
+          var bWeekShow = false
+          if ( ! bWeekShow ) {
+            $.when(
+              content_download( {
+                'action': 'projects_analytics',
+                'form': 'analytics_week',
+                'project_id': <?=$arrProject['id']?>,
+                'week': iWeek,
+              }, 'text', false )
+            ).then( function( resultData ){
+              if ( ! resultData ) return false
+              var oData = $.parseJSON( resultData )
+
+              if ( oData.success ) {
+                if ( oData.success.chart_time ) $(document).find('#res_weeks_time').html( oData.success.chart_time )
+                if ( oData.success.chart_money ) $(document).find('#res_weeks_money').html( oData.success.chart_money )
+
+                if ( oData.success.money_sum ) $(document).find('#moneyforhour_week ._money ._value').html( oData.success.money_sum )
+                if ( oData.success.time_sum ) $(document).find('#moneyforhour_week ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.moneyforhour ) {
+                  $(document).find('#moneyforhour_week ._result ._value').html( oData.success.moneyforhour )
+                  $(document).find('#moneyforhour_week ._result').addClass('_active_')
+                }
+                else {
+                  $(document).find('#moneyforhour_week ._result').removeClass('_active_')
+                }
+
+                bWeekShow = true
+              }
+            })
+          }
+        }
+        week_show()
+      </script>
     </div>
 
-    <div class="col">
-      <h2>Wages</h2>
-    </div>
-    <div class="list-group">
-      <?
-      $oMoney = new money();
-      $oMoney->query = " AND `date` LIKE '" . date('Y-') . "%' AND `type` = '1' AND `project_id` = " . $arrProject['id'];
-      $arrMoneys = $oMoney->get();
-      ?>
-      <?php foreach ($arrMoneys as $arrMoney): ?>
-        <div class="list-group-item money d-flex justify-content-between align-items-start animate__animated animate__bounceInRight _type_<?=$arrMoney['type']?>_" data-content_manager_item_id="<?=$arrMoney['id']?>"  data-content_loader_item_id="<?=$arrMoney['id']?>" style="opacity:1;">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-1"><?=$arrMoney['title']?></div>
-            <div class="badge bg-primary" style="font-size: 1rem; font-weight: normal;">
-              <?=number_format($arrMoney['price'], 2, '.', ' ')?>
-            </div>
-            <span style="opacity: .5; font-size: .8rem; margin-right: 1rem">
-              <?
-              $arrMoneyDate = explode(' ', $arrMoney['date']);
-              ?>
-              <?=$arrMoneyDate[0]?>
-            </span>
-            <i class="fas fa-credit-card"></i> <?=$arrMoney['card']?>
-          </div>
-          <span class="rounded-pill">
-            <!-- <a href="#" class="btn content_manager_switch switch_icons">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="edit" data-elem=".list-group-item" data-animate_class="animate__flipInY">
-              <i class="fas fa-pen-square"></i>
-            </a>
-            <a href="#" class="btn content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a> -->
+    <!-- Month -->
+    <div class="tab-pane fade show" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+      <!-- Фильтр -->
+      <form class="content_filter month_filter pb-4 __no_ajax" action="">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
           </span>
 
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          <select name="year" class="form-select">
+            <option value="" selected>Current year</option>
+            <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+              <option value="<?=$i?>"><?=$i?></option>
+            <?}?>
+          </select>
+
+          <select name="month" class="form-select">
+            <option value="" selected>Current month</option>
+            <?for ($i=1; $i < 13; $i++) {?>
+              <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
+            <?}?>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
+      <div class="moneyforhour_block" id="moneyforhour_month">
+        <div class="_info">
+          <div class="_money">
+            <div class="_icon">
+              m
+            </div>
+            <div class="_value">
+            </div>
+          </div>
+          <div class="_time">
+            <div class="_icon">
+              t
+            </div>
+            <div class="_value">
+            </div>
           </div>
         </div>
-      <?php endforeach; ?>
+
+        <div class="_result">
+          <div class="_icon">
+            <i class="fas fa-stopwatch"></i>
+          </div>
+          <div class="_value">
+          </div>
+          <div class="_title">
+            Money for hour
+          </div>
+        </div>
+      </div>
+
+      <h2>Money</h2>
+      <div id="res_month_money" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <h2>Time</h2>
+      <div id="res_month_time" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(document).find('.month_filter').on ('submit', function(){
+          var
+          iYear = $(this).find('[name="year"]').val(),
+          iMonth = $(this).find('[name="month"]').val()
+
+          bMonthShow = false
+          month_show( iYear, iMonth )
+
+          return false
+        })
+        function month_show( iYear, iMonth ) {
+          var bMonthShow = false
+          if ( ! bMonthShow ) {
+            $.when(
+              content_download( {
+                'action': 'projects_analytics',
+                'form': 'analytics_month',
+                'project_id': <?=$arrProject['id']?>,
+                'year': iYear,
+                'month': iMonth,
+              }, 'text', false )
+            ).then( function( resultData ){
+              if ( ! resultData ) return false
+              var oData = $.parseJSON( resultData )
+
+              if ( oData.success ) {
+                if ( oData.success.chart_time ) $(document).find('#res_month_time').html( oData.success.chart_time )
+                if ( oData.success.chart_money ) $(document).find('#res_month_money').html( oData.success.chart_money )
+
+                if ( oData.success.money_sum ) $(document).find('#moneyforhour_month ._money ._value').html( oData.success.money_sum )
+                if ( oData.success.time_sum ) $(document).find('#moneyforhour_month ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.moneyforhour ) {
+                  $(document).find('#moneyforhour_month ._result ._value').html( oData.success.moneyforhour )
+                  $(document).find('#moneyforhour_month ._result').addClass('_active_')
+                }
+                else {
+                  $(document).find('#moneyforhour_month ._result').removeClass('_active_')
+                }
+
+                bMonthShow = true
+              }
+            })
+          }
+        }
+      </script>
+    </div>
+
+    <!-- Year -->
+    <div class="tab-pane fade show" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
+      <!-- Фильтр -->
+      <form class="content_filter year_filter pb-4 __no_ajax" action="">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+          </span>
+
+          <select name="year" class="form-select">
+            <option value="" selected>Current year</option>
+            <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+              <option value="<?=$i?>"><?=$i?></option>
+            <?}?>
+          </select>
+
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
+
+      <div class="moneyforhour_block" id="moneyforhour_year">
+        <div class="_info">
+          <div class="_money">
+            <div class="_icon">
+              m
+            </div>
+            <div class="_value">
+            </div>
+          </div>
+          <div class="_time">
+            <div class="_icon">
+              t
+            </div>
+            <div class="_value">
+            </div>
+          </div>
+        </div>
+
+        <div class="_result">
+          <div class="_icon">
+            <i class="fas fa-stopwatch"></i>
+          </div>
+          <div class="_value">
+          </div>
+          <div class="_title">
+            Money for hour
+          </div>
+        </div>
+      </div>
+
+      <h2>Money</h2>
+      <div id="res_year_money" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <h2>Times</h2>
+      <div id="res_year_time" class="block_chart">
+        <div class="block_loading">
+          <div class="_icon">
+            <i class="fas fa-chart-area"></i>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(document).find('.year_filter').on ('submit', function(){
+          var iYear = $(this).find('[name="year"]').val()
+
+          bYearShow = false
+          year_show( iYear )
+
+          return false
+        })
+        function year_show( iYear ) {
+          var bYearShow = false
+          if ( ! bYearShow ) {
+            $.when(
+              content_download( {
+                'action': 'projects_analytics',
+                'form': 'analytics_year',
+                'project_id': <?=$arrProject['id']?>,
+                'year': iYear,
+              }, 'text', false )
+            ).then( function( resultData ){
+              if ( ! resultData ) return false
+              var oData = $.parseJSON( resultData )
+
+              if ( oData.success ) {
+                if ( oData.success.chart_time ) $(document).find('#res_year_time').html( oData.success.chart_time )
+                if ( oData.success.chart_money ) $(document).find('#res_year_money').html( oData.success.chart_money )
+
+                if ( oData.success.money_sum ) $(document).find('#moneyforhour_year ._money ._value').html( oData.success.money_sum )
+                if ( oData.success.time_sum ) $(document).find('#moneyforhour_year ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.moneyforhour ) {
+                  $(document).find('#moneyforhour_year ._result ._value').html( oData.success.moneyforhour )
+                  $(document).find('#moneyforhour_year ._result').addClass('_active_')
+                }
+                else {
+                  $(document).find('#moneyforhour_year ._result').removeClass('_active_')
+                }
+
+                bYearShow = true
+              }
+            })
+          }
+        }
+      </script>
     </div>
   </div>
 </main>

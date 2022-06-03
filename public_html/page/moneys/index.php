@@ -113,7 +113,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="category" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoCategory')?></option>
                             <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
                               <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
                             <?php endforeach; ?>
@@ -141,7 +140,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoProject')?></option>
+                            <option value="0" selected>...</option>
                             <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
                               <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
                             <?php endforeach; ?>
@@ -155,7 +154,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="subscription" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoSubscription')?></option>
+                            <option value="0" selected>...</option>
                             <?php foreach ($arrMoneysSubscriptions as $iIndex => $arrMoneysSubscription): ?>
                               <option value="<?=$arrMoneysSubscription['id']?>"><?=$arrMoneysSubscription['title']?></option>
                             <?php endforeach; ?>
@@ -169,7 +168,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoTask')?></option>
+                            <option value="0" selected>...</option>
                             <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
                               <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
                             <?php endforeach; ?>
@@ -247,20 +246,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
-                          <label for="inputProjectId" class="col-form-label">Project id</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoProject')?></option>
-                            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-                              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
                           <label for="inputCardId" class="col-form-label">Card</label>
                         </div>
                         <div class="col-12 col-md-8">
@@ -278,11 +263,42 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
                       <div class="row align-items-center mb-1">
                         <div class="col-12 col-md-4">
+                          <label for="inputTypeIdZero" class="col-form-label">Category</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="category" class="form-select" size="3" aria-label="size 3 select example">
+                            <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
+                              <?php if ( $arrMoneyCategory['id'] == 5 ): ?>
+                                <option selected="selected" value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+                              <?php else: ?>
+                                <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
+                          <label for="inputProjectId" class="col-form-label">Project id</label>
+                        </div>
+                        <div class="col-12 col-md-8">
+                          <select name="project_id" class="form-select" size="3" aria-label="size 3 select example">
+                            <option value="0" selected>...</option>
+                            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+                              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row align-items-center mb-1">
+                        <div class="col-12 col-md-4">
                           <label for="inputTaskId" class="col-form-label">Task id</label>
                         </div>
                         <div class="col-12 col-md-8">
                           <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
-                            <option value="0" selected><?=$olang->get('NoTask')?></option>
+                            <option value="0" selected>...</option>
                             <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
                               <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
                             <?php endforeach; ?>
@@ -349,7 +365,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
           <select name="card" class="form-select">
             <option value="" selected>Card</option>
-            <option value="0"><?=$olang->get('Cash')?></option>
             <?php foreach ($arrCards as $iIndex => $arrCard): ?>
               <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
             <?php endforeach; ?>
@@ -360,7 +375,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
           <select name="category" class="form-select">
             <option value="" selected>Category</option>
-            <option value="0"><?=$olang->get('NoCategory')?></option>
             <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
               <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
             <?php endforeach; ?>
@@ -454,7 +468,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         </div>
 
         <div class="fw-bold d-flex align-items-center">
-          <div class="badge bg-primary _price">
+          <div class="badge bg-primary _price" style="font-size: 1rem; font-weight: normal; background: {{categroy_val.color}} ! important; margin-right:.5rem;">
             {{price}}
           </div>
 

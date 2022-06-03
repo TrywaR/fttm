@@ -59,7 +59,6 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
               <i class="far fa-chart-bar"></i>
             </span>
             <a href="/times/analytics/costs/">Time spent</a>
-            <span class="text_seporator">,</span> <a href="/times/analytics/new/">Time spent (beta)</a>
             <!-- , <a href="/times/analytics/wages/">Приходы времени по категориям</a> -->
           </p>
         </div>

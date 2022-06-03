@@ -264,16 +264,61 @@ main small {
   color: white;
   background: #202022; }
 
+.moneyforhour_block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 400; }
+  .moneyforhour_block > ._info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    opacity: 0.5; }
+    .moneyforhour_block > ._info > ._money, .moneyforhour_block > ._info > ._time {
+      display: flex;
+      padding: 0.2rem; }
+      .moneyforhour_block > ._info > ._money > ._icon, .moneyforhour_block > ._info > ._time > ._icon {
+        display: flex;
+        padding-right: 0.3rem;
+        font-size: 0.3em;
+        line-height: 0.8em;
+        opacity: 0.6; }
+      .moneyforhour_block > ._info > ._money > ._value, .moneyforhour_block > ._info > ._time > ._value {
+        display: flex;
+        font-size: 0.5em;
+        line-height: 0.8em; }
+  .moneyforhour_block > ._result {
+    display: none;
+    padding: 1.2rem 0;
+    font-weight: 600; }
+    .moneyforhour_block > ._result._active_ {
+      display: flex; }
+    .moneyforhour_block > ._result > ._icon {
+      display: flex;
+      padding-right: 0.5rem; }
+    .moneyforhour_block > ._result > ._title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-size: 0.5em;
+      line-height: 0.8em;
+      opacity: 0.6;
+      font-weight: 300; }
+
 .block_moneys .block_chart {
   background: #20292b; }
 .block_moneys .sub_title {
-  color: #BFEDEF; }
+  color: #4F9497; }
   .block_moneys .sub_title:after {
-    background: linear-gradient(to right, #BFEDEF 35%, rgba(255, 255, 255, 0) 100%); }
+    background: linear-gradient(to right, #4F9497 35%, rgba(255, 255, 255, 0) 100%); }
 .block_moneys .block_loading:before, .block_moneys .block_loading:after {
-  border-color: #BFEDEF !important; }
+  border-color: #4F9497 !important; }
 .block_moneys .block_loading ._icon {
-  color: #BFEDEF !important; }
+  color: #4F9497 !important; }
 
 .money {
   display: flex;
@@ -547,10 +592,11 @@ main small {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 25rem;
+  max-width: 100%;
+  height: 27rem;
   margin: 2rem 0;
   padding: 1rem;
-  box-sizing: content-box;
+  box-sizing: border-box;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.2rem 0rem rgba(30, 30, 30, 0.3), 0 0 0.6rem 0.6rem rgba(30, 30, 30, 0.3), inset 0 0 0.1rem 0 rgba(50, 50, 50, 0.3);
   transition: all 0.3s ease-in-out 0s; }
@@ -943,6 +989,24 @@ footer {
     font-size: 1.4rem;
     line-height: 1.4rem;
     color: #3282c8; }
+
+.user_prev {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start; }
+  .user_prev ._login {
+    display: flex;
+    padding-right: 0.2rem; }
+  .user_prev ._role {
+    opacity: 0.5;
+    font-size: 1em;
+    line-height: 0.1em; }
+    .user_prev ._role ._icon {
+      font-size: 0.5em;
+      line-height: 0.5em; }
+    .user_prev ._role ._value {
+      font-size: 0.5em;
+      line-height: 0.5em; }
 
 @media screen and (max-width: 1000px) {
   .block_analitycs {

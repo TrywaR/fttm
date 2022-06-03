@@ -8,18 +8,16 @@ switch ($_REQUEST['form']) {
     $arrWeek = [];
     $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
     $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Times',
+      'color' => '#dd3e3e'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
-    $arrTimesSum = [];
 
     // Обработка данных
     $iIndex = 1;
@@ -33,42 +31,34 @@ switch ($_REQUEST['form']) {
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oTime->query .= " AND `date` = '" . $dDateCurrent . "'";
+      $oTime->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrData = $oTime->get();
 
       // Сумма
-      $arrDaysTimes = [];
+      $arrResultsSum = 0;
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
         $arrResults['data'][$iIndex]['categories'][$key]['title'] = $arrCategory['title'];
-        $arrResults['data'][$iIndex]['categories'][$key]['value'] = '00:00:00';
+        $arrResults['data'][$iIndex]['categories'][$key]['value'] = 0;
         $arrResults['data'][$iIndex]['categories'][$key]['color'] = $arrCategory['color'];
       }
 
       // Записываем данные по категориям за неделю
       foreach ($arrData as & $arrDataItem) {
         $dDateReally = new DateTime($arrDataItem['time_really']);
-        $arrTimesSum[] = $arrDaysTimes[] = $arrDataItem['time'] = $dDateReally->format('H:i:s');
-        if ( $arrResults['data'][$iIndex]['categories'][$arrDataItem['category_id']]['value'] == '00:00:00' ) $arrResults['data'][$iIndex]['categories'][$arrDataItem['category_id']]['value'] = $arrDataItem['time'];
-        else $arrResults['data'][$iIndex]['categories'][$arrDataItem['category_id']]['value'] =  $oTime->get_sum( [$arrResults['data'][$iIndex]['categories'][$arrDataItem['category_id']]['value'], $arrDataItem['time']]);
+        $arrDataItem['time'] = $dDateReally->format('H.i');
+        $arrResults['data'][$iIndex]['categories'][0]['value'] = (float)$arrResults['data'][$iIndex]['categories'][0]['value'] + (float)$arrDataItem['time'];
+        $arrResultsSum = $arrResultsSum + (float)$arrDataItem['time'];
       }
 
-      $arrResults['data'][$iIndex]['sum'] = $oTime->get_sum( $arrDaysTimes );
+      $arrResults['data'][$iIndex]['sum'] = $arrResultsSum;
+      $arrResults['sum'] = (float)$arrResults['sum'] + (float)$arrResultsSum;
+
+      // Сумма
+      $arrResultsTimesSum = 0;
 
       $iIndex++;
-    }
-
-    // Заменяем значения дат на не роботские
-    foreach ( $arrResults['data'] as & $arrMonth ) {
-      $arrTime = explode(':',$arrMonth['sum']);
-      $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-      $arrMonth['sum'] = $iTimeSum;
-
-      foreach ( $arrMonth['categories'] as & $arrCategory ) {
-        $arrTime = explode(':',$arrCategory['value']);
-        $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-        $arrCategory['value'] = $iTimeSum;
-      }
     }
 
     // Создаём график
@@ -93,58 +83,44 @@ switch ($_REQUEST['form']) {
     $iYear = date('Y');
     $iMonth = date('m');
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Times',
+      'color' => '#dd3e3e'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
-    $arrTimesSum = [];
 
     // Суммы по месяцам
     for ($i=1; $i <= $iMonthDaysSum; $i++) {
+      // Собираем потраченное время
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-      $oTime->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
+      $oTime->query .= " AND `date` = '" . $dDateCurrent . "'";
+      $oTime->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrTimes = $oTime->get();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
         $arrResults['data'][$i]['categories'][$key]['title'] = $arrCategory['title'];
-        $arrResults['data'][$i]['categories'][$key]['value'] = '00:00:00';
+        $arrResults['data'][$i]['categories'][$key]['value'] = 0;
         $arrResults['data'][$i]['categories'][$key]['color'] = $arrCategory['color'];
       }
 
-      // Сумма
-      $arrDaysTimes = [];
+      // Заполняем данные
+      $iMounthSum = 0;
 
       foreach ($arrTimes as &$arrTime) {
         $dDateReally = new DateTime($arrTime['time_really']);
-        $arrTimesSum[] = $arrDaysTimes[] = $arrTime['time'] = $dDateReally->format('H:i:s');
-        if ( $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] == '00:00:00' ) $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] = $arrTime['time'];
-        else $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] =  $oTime->get_sum( [$arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'], $arrTime['time']]);
+        $arrTime['time'] = $dDateReally->format('H.i');
+        $arrResults['data'][$i]['categories'][0]['value'] = (float)$arrResults['data'][$i]['categories'][0]['value'] + (float)$arrTime['time'];
+        $iMounthSum = $iMounthSum + (float)$arrTime['time'];
       }
-
-      $arrResults['data'][$i]['sum'] = $oTime->get_sum( $arrDaysTimes );
+      $arrResults['data'][$i]['sum'] = $iMounthSum;
       $arrResults['data'][$i]['title'] = sprintf("%02d", $i);
-    }
-
-    // Заменяем значения дат на не роботские
-    foreach ( $arrResults['data'] as & $arrMonth ) {
-      $arrTime = explode(':',$arrMonth['sum']);
-      $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-      $arrMonth['sum'] = $iTimeSum;
-
-      foreach ( $arrMonth['categories'] as & $arrCategory ) {
-        $arrTime = explode(':',$arrCategory['value']);
-        $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-        $arrCategory['value'] = $iTimeSum;
-      }
     }
 
     // Создаём график
@@ -164,58 +140,42 @@ switch ($_REQUEST['form']) {
     $arrCategories = [];
 
     $iYear = date('Y');
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Times',
+      'color' => '#dd3e3e'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
-    $arrTimesSum = [];
 
     // Суммы по месяцам
     for ($i=1; $i < 13; $i++) {
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oTime->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
+      $oTime->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrTimes = $oTime->get();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
         $arrResults['data'][$i]['categories'][$key]['title'] = $arrCategory['title'];
-        $arrResults['data'][$i]['categories'][$key]['value'] = '00:00:00';
+        $arrResults['data'][$i]['categories'][$key]['value'] = 0;
         $arrResults['data'][$i]['categories'][$key]['color'] = $arrCategory['color'];
       }
 
-      // Сумма
-      $arrMonthTimes = [];
-
+      // Заполняем данные
+      $iMounthSum = 0;
       foreach ($arrTimes as &$arrTime) {
         $dDateReally = new DateTime($arrTime['time_really']);
-        $arrTimesSum[] = $arrMonthTimes[] = $arrTime['time'] = $dDateReally->format('H:i:s');
-        if ( $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] == '00:00:00' ) $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] = $arrTime['time'];
-        else $arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'] =  $oTime->get_sum( [$arrResults['data'][$i]['categories'][$arrTime['category_id']]['value'], $arrTime['time']]);
+        $arrTime['time'] = $dDateReally->format('H.i');
+        $arrResults['data'][$i]['categories'][0]['value'] = (float)$arrResults['data'][$i]['categories'][0]['value'] + (float)$arrTime['time'];
+        $iMounthSum = $iMounthSum + (float)$arrTime['time'];
       }
-
-      $arrResults['data'][$i]['sum'] = $oTime->get_sum( $arrMonthTimes );
+      $arrResults['data'][$i]['sum'] = $iMounthSum;
       $arrResults['data'][$i]['title'] = date("F", strtotime($iYear . "-" . sprintf("%02d", $i)));
-    }
-
-    // Заменяем значения дат на не роботские
-    foreach ( $arrResults['data'] as & $arrMonth ) {
-      $arrTime = explode(':',$arrMonth['sum']);
-      $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-      $arrMonth['sum'] = $iTimeSum;
-      
-      foreach ( $arrMonth['categories'] as & $arrCategory ) {
-        $arrTime = explode(':',$arrCategory['value']);
-        $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
-        $arrCategory['value'] = $iTimeSum;
-      }
     }
 
     // Создаём график

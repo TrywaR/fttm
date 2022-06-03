@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4 sub_title">Moneys trip</h1>
+          <h1 class="display-4 sub_title">Moneys trip wages</h1>
         </div>
       </div>
     </div>
@@ -34,6 +34,8 @@
                 'action': 'moneys',
                 'form': 'analytics_week',
                 'chart_type_sum': 'bar',
+                'money_type': '0',
+                'money_to_card': '0',
               }, 'text', false )
             ).then( function( resultData ){
               if ( ! resultData ) return false
@@ -58,7 +60,7 @@
         </div>
       </div>
 
-      <h2>Effeciency</h2>
+      <h2>Sum</h2>
       <div id="res_weeks_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -80,6 +82,8 @@
                 'action': 'moneys',
                 'form': 'analytics_month',
                 'chart_type_sum': 'bar',
+                'money_type': '0',
+                'money_to_card': '0',
               }, 'text', false )
             ).then( function( resultData ){
               if ( ! resultData ) return false
@@ -103,7 +107,7 @@
         </div>
       </div>
 
-      <h2>Effeciency</h2>
+      <h2>Sum</h2>
       <div id="res_month_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -125,6 +129,8 @@
                 'action': 'moneys',
                 'form': 'analytics_year',
                 'chart_type_sum': 'bar',
+                'money_type': '0',
+                'money_to_card': '0',
               }, 'text', false )
             ).then( function( resultData ){
               if ( ! resultData ) return false
@@ -149,7 +155,7 @@
         </div>
       </div>
 
-      <h2>Effeciency</h2>
+      <h2>Sum</h2>
       <div id="res_year_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">

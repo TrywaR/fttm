@@ -8,15 +8,18 @@ switch ($_REQUEST['form']) {
     $arrWeek = [];
     $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
     $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Costs',
+      'color' => '#dd3e3e'
+    );
+    $arrCategories[1] = array(
+      'title' => 'Wages',
+      'color' => '#4a8e61'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
 
@@ -32,8 +35,7 @@ switch ($_REQUEST['form']) {
       $oMoney = new money();
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` = '" . $dDateCurrent . "'";
-      if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
-      if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
+      $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrData = $oMoney->get();
 
       // Сумма
@@ -48,12 +50,15 @@ switch ($_REQUEST['form']) {
 
       // Записываем данные по категориям за неделю
       foreach ($arrData as & $arrDataItem) {
-        $arrResults['data'][$iIndex]['categories'][$arrDataItem['category']]['value'] = (float)$arrResults['data'][$iIndex]['categories'][$arrDataItem['category']]['value'] + (float)$arrDataItem['price'];
+        $arrResults['data'][$iIndex]['categories'][$arrDataItem['type']]['value'] = (float)$arrResults['data'][$iIndex]['categories'][$arrDataItem['type']]['value'] + (float)$arrDataItem['price'];
         $arrResultsSum = $arrResultsSum + (float)$arrDataItem['price'];
       }
 
       $arrResults['data'][$iIndex]['sum'] = $arrResultsSum;
       $arrResults['sum'] = (float)$arrResults['sum'] + (float)$arrResultsSum;
+
+      // Сумма
+      $arrResultsTimesSum = 0;
 
       $iIndex++;
     }
@@ -80,15 +85,18 @@ switch ($_REQUEST['form']) {
     $iYear = date('Y');
     $iMonth = date('m');
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Costs',
+      'color' => '#dd3e3e'
+    );
+    $arrCategories[1] = array(
+      'title' => 'Wages',
+      'color' => '#4a8e61'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
 
@@ -97,8 +105,7 @@ switch ($_REQUEST['form']) {
       $oMoney = new money();
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
-      if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
-      if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
+      $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrMoneys = $oMoney->get();
 
       // Подготавливаем категории
@@ -112,7 +119,7 @@ switch ($_REQUEST['form']) {
       $iMounthSum = 0;
 
       foreach ($arrMoneys as &$arrMoney) {
-        $arrResults['data'][$i]['categories'][$arrMoney['category']]['value'] = (float)$arrResults['data'][$i]['categories'][$arrMoney['category']]['value'] + (float)$arrMoney['price'];
+        $arrResults['data'][$i]['categories'][$arrMoney['type']]['value'] = (float)$arrResults['data'][$i]['categories'][$arrMoney['type']]['value'] + (float)$arrMoney['price'];
         $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
       }
       $arrResults['data'][$i]['sum'] = $iMounthSum;
@@ -136,15 +143,18 @@ switch ($_REQUEST['form']) {
     $arrCategories = [];
 
     $iYear = date('Y');
+    $iProjectId = $_REQUEST['project_id'];
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
-
+    $arrCategories = [];
+    $arrCategories[0] = array(
+      'title' => 'Costs',
+      'color' => '#dd3e3e'
+    );
+    $arrCategories[1] = array(
+      'title' => 'Wages',
+      'color' => '#4a8e61'
+    );
     $arrResults['categories'] = $arrCategories;
     $arrResults['data'] = [];
 
@@ -153,8 +163,7 @@ switch ($_REQUEST['form']) {
       $oMoney = new money();
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
-      if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
-      if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
+      $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
       $arrMoneys = $oMoney->get();
 
       // Подготавливаем категории
@@ -167,7 +176,7 @@ switch ($_REQUEST['form']) {
       // Заполняем данные
       $iMounthSum = 0;
       foreach ($arrMoneys as &$arrMoney) {
-        $arrResults['data'][$i]['categories'][$arrMoney['category']]['value'] = (float)$arrResults['data'][$i]['categories'][$arrMoney['category']]['value'] + (float)$arrMoney['price'];
+        $arrResults['data'][$i]['categories'][$arrMoney['type']]['value'] = (float)$arrResults['data'][$i]['categories'][$arrMoney['type']]['value'] + (float)$arrMoney['price'];
         $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
       }
       $arrResults['data'][$i]['sum'] = $iMounthSum;

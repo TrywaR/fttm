@@ -10,7 +10,8 @@
   <div class="row" id="block_version">
     <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_1">5.2.1 Update</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_2">5.2.2 Analytics</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_2_1">5.2.1 Update</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_0">5.2.0 Update</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_9">5.1.9 Markdown</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_1_8">5.1.8 Style and info</a>
@@ -43,6 +44,25 @@
     <div class="col col-12 col-md-8">
      <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
        <div class="pt-2 pb-2">
+         <h2 id="list-item-5_2_2">5.2.2 Analytics</h2>
+         <ol>
+           <li>
+             Fix categories update for money and times
+           </li>
+           <li>
+             Analytics for projects
+           </li>
+           <li>
+             Filter for analytics projects
+           </li>
+           <li>
+             Analytics for times
+           </li>
+           <li>
+             Analytics for moneys
+           </li>
+         </ol>
+
          <h2 id="list-item-5_2_1">5.2.1 Update</h2>
          <ol>
            <li>
