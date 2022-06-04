@@ -16,6 +16,7 @@ class moneys_subscriptions extends model
   public static $card = '';
   public static $active = '';
   public static $user_id = '';
+  public static $sDateQuery = '';
 
   function get_month(){
     // $arrResult = [];
@@ -23,18 +24,19 @@ class moneys_subscriptions extends model
 
     // За месяц
     $oMoney = new money();
-    $dCurrentDate = date('Y-m');
+    $dCurrentDate = $this->sDateQuery != '' ? $this->sDateQuery : date('Y-m');
+    // $dCurrentDate = $this->sDateQuery;
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
     $oMoney->query .= " AND `type` = '0'";
     $oMoney->query .= " AND `subscription` = '" . $this->id . "'";
-    return $oMoney->get_money();
-    // $arrMoney = $oMoney->get_money();
+    // return $oMoney->get_money();
+    $arrMoneys = $oMoney->get_money();
     // return $arrMoney;
 
-    // $iMonthSumm = 0;
-    // foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
-    // return $iMonthSumm;
+    $iMonthSum = 0;
+    foreach ($arrMoneys as $arrMoney) $iMonthSum = (int)$arrMoney['price'] + (int)$iMonthSum;
+    return $iMonthSum;
   }
 
   function get_subscription(){
@@ -50,9 +52,13 @@ class moneys_subscriptions extends model
 
     $arrSubscription['price'] = substr($arrSubscription['price'], 0, -2);
     $arrSubscription['sum'] = substr($arrSubscription['sum'], 0, -2);
-    $arrMoneys = $this->get_month();
-    if ( count($arrMoneys) ) {
-      $arrSubscription['paid'] = $arrMoneys[0];
+
+    $bMoneysSum = $this->get_month();
+    $arrSubscription['paid_sum'] = $bMoneysSum;
+    $arrSubscription['paid_need'] = (int)$arrSubscription['price'] - (int)$bMoneysSum;
+
+    if ( (int)$bMoneysSum >= (int)$arrSubscription['price'] ) {
+      $arrSubscription['paid'] = true;
       $arrSubscription['paid_show'] = 'true';
     }
 
@@ -65,6 +71,7 @@ class moneys_subscriptions extends model
     $arrMoneysSubscriptions = $this->get();
     foreach ($arrMoneysSubscriptions as $arrSubscription) {
       $oMoneysSubscription = new moneys_subscriptions( $arrSubscription['id'] );
+      if ( $this->sDateQuery ) $oMoneysSubscription->sDateQuery = $this->sDateQuery;
       $arrResults[] = $oMoneysSubscription->get_subscription();
     }
     return $arrResults;

@@ -8,6 +8,10 @@ switch ($_REQUEST['action']) {
     include_once 'clients/clients.php';
     break;
 
+  case 'analytics': # Общая статистика
+    include_once 'analytics/analytics.php';
+    break;
+
   case 'sessions': # Обработка сессий
     include_once 'sessions/sessions.php';
     break;

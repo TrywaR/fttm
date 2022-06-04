@@ -35,30 +35,26 @@
       <div class="tab-content" id="pills-tabContent">
         <!-- Week -->
         <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
-          <script>
-            var bWeekShow = false
-            function week_show() {
-              if ( ! bWeekShow ) {
-                // Получаем данные
-                $.when(
-                  content_download( {
-                    'action': 'times',
-                    'form': 'analytics_week',
-                    'chart_type_sum': 'bar',
-                  }, 'text', false )
-                ).then( function( resultData ){
-                  if ( ! resultData ) return false
-                  var oData = $.parseJSON( resultData )
+          <!-- Фильтр -->
+          <form class="content_filter week_filter pb-4 __no_ajax" action="">
+            <div class="input-group mb-2">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
 
-                  if ( oData.success ) {
-                    if ( oData.success.chart ) $(document).find('#res_weeks').html( oData.success.chart )
-                    if ( oData.success.chart_sum ) $(document).find('#res_weeks_sum').html( oData.success.chart_sum )
-                  }
-                })
-              }
-            }
-            week_show()
-          </script>
+              <select name="week" class="form-select">
+                <option value="" selected>Current week</option>
+                <option value="1">Prev week</option>
+              </select>
+
+              <button class="btn btn-dark" type="submit">
+                <!-- <span class="icon">
+                  <i class="fas fa-plus"></i>
+                </span> -->
+                Go
+              </button>
+            </div>
+          </form>
 
           <h2>Time spent for week</h2>
           <div id="res_weeks" class="block_chart">
@@ -77,33 +73,76 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Month -->
-        <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
           <script>
-            var bMonthShow = false;
-            function month_show() {
-              if ( ! bMonthShow ) {
+            $(document).find('.week_filter').on ('submit', function(){
+              var iWeek = $(this).find('[name="week"]').val()
+
+              bWeekShow = false
+              week_show( iWeek )
+
+              return false
+            })
+
+            var bWeekShow = false
+            function week_show( iWeek ) {
+              if ( ! bWeekShow ) {
                 // Получаем данные
                 $.when(
                   content_download( {
                     'action': 'times',
-                    'form': 'analytics_month',
+                    'form': 'analytics_week',
                     'chart_type_sum': 'bar',
+                    'week': iWeek,
                   }, 'text', false )
                 ).then( function( resultData ){
                   if ( ! resultData ) return false
                   var oData = $.parseJSON( resultData )
 
                   if ( oData.success ) {
-                    if ( oData.success.chart ) $(document).find('#res_month').html( oData.success.chart )
-                    if ( oData.success.chart_sum ) $(document).find('#res_month_sum').html( oData.success.chart_sum )
+                    if ( oData.success.chart ) $(document).find('#res_weeks').html( oData.success.chart )
+                    if ( oData.success.chart_sum ) $(document).find('#res_weeks_sum').html( oData.success.chart_sum )
+
+                    bWeekShow = true
                   }
                 })
               }
             }
+            week_show()
           </script>
+        </div>
+
+        <!-- Month -->
+        <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+          <!-- Фильтр -->
+          <form class="content_filter month_filter pb-4 __no_ajax" action="">
+            <div class="input-group mb-2">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+
+              <select name="year" class="form-select">
+                <option value="" selected>Current year</option>
+                <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+                  <option value="<?=$i?>"><?=$i?></option>
+                <?}?>
+              </select>
+
+              <select name="month" class="form-select">
+                <option value="" selected>Current month</option>
+                <?for ($i=1; $i < 13; $i++) {?>
+                  <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
+                <?}?>
+              </select>
+
+              <button class="btn btn-dark" type="submit">
+                <!-- <span class="icon">
+                  <i class="fas fa-plus"></i>
+                </span> -->
+                Go
+              </button>
+            </div>
+          </form>
 
           <h2>Month</h2>
           <div id="res_month" class="block_chart">
@@ -122,34 +161,71 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Year -->
-        <div class="tab-pane fade" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
           <script>
-            var bYearShow = false;
-            function year_show() {
-              if ( ! bYearShow ) {
+            $(document).find('.month_filter').on ('submit', function(){
+              var
+              iYear = $(this).find('[name="year"]').val(),
+              iMonth = $(this).find('[name="month"]').val()
+
+              bMonthShow = false
+              month_show( iYear, iMonth )
+
+              return false
+            })
+
+            var bMonthShow = false;
+            function month_show( iYear, iMonth ) {
+              if ( ! bMonthShow ) {
                 // Получаем данные
                 $.when(
                   content_download( {
                     'action': 'times',
-                    'form': 'analytics_year',
+                    'form': 'analytics_month',
                     'chart_type_sum': 'bar',
+                    'year': iYear,
+                    'month': iMonth,
                   }, 'text', false )
                 ).then( function( resultData ){
                   if ( ! resultData ) return false
                   var oData = $.parseJSON( resultData )
 
-                  // Отправляем данные а получаем график
                   if ( oData.success ) {
-                    if ( oData.success.chart ) $(document).find('#res_year').html( oData.success.chart )
-                    if ( oData.success.chart_sum ) $(document).find('#res_year_sum').html( oData.success.chart_sum )
+                    if ( oData.success.chart ) $(document).find('#res_month').html( oData.success.chart )
+                    if ( oData.success.chart_sum ) $(document).find('#res_month_sum').html( oData.success.chart_sum )
+
+                    bMonthShow = true
                   }
                 })
               }
             }
           </script>
+        </div>
+
+        <!-- Year -->
+        <div class="tab-pane fade" id="pills-yaer" role="tabpanel" aria-labelledby="pills-yaer-tab">
+          <!-- Фильтр -->
+          <form class="content_filter year_filter pb-4 __no_ajax" action="">
+            <div class="input-group mb-2">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+
+              <select name="year" class="form-select">
+                <option value="" selected>Current year</option>
+                <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+                  <option value="<?=$i?>"><?=$i?></option>
+                <?}?>
+              </select>
+
+              <button class="btn btn-dark" type="submit">
+                <!-- <span class="icon">
+                  <i class="fas fa-plus"></i>
+                </span> -->
+                Go
+              </button>
+            </div>
+          </form>
 
           <h2>Yaer</h2>
           <div id="res_year" class="block_chart">
@@ -168,6 +244,43 @@
               </div>
             </div>
           </div>
+
+          <script>
+            $(document).find('.year_filter').on ('submit', function(){
+              var iYear = $(this).find('[name="year"]').val()
+
+              bYearShow = false
+              year_show( iYear )
+
+              return false
+            })
+
+            var bYearShow = false;
+            function year_show( iYear ) {
+              if ( ! bYearShow ) {
+                // Получаем данные
+                $.when(
+                  content_download( {
+                    'action': 'times',
+                    'form': 'analytics_year',
+                    'chart_type_sum': 'bar',
+                    'year': iYear,
+                  }, 'text', false )
+                ).then( function( resultData ){
+                  if ( ! resultData ) return false
+                  var oData = $.parseJSON( resultData )
+
+                  // Отправляем данные а получаем график
+                  if ( oData.success ) {
+                    if ( oData.success.chart ) $(document).find('#res_year').html( oData.success.chart )
+                    if ( oData.success.chart_sum ) $(document).find('#res_year_sum').html( oData.success.chart_sum )
+
+                    bYearShow = true
+                  }
+                })
+              }
+            }
+          </script>
         </div>
       </div>
     </div>

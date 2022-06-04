@@ -3,11 +3,18 @@ switch ($_REQUEST['form']) {
   case 'analytics_week': # Вывод статистики за неделю
     $arrResults = [];
     $arrCategories = [];
+    $arrWeek = [];
 
     // Считаем неделю
     $arrWeek = [];
-    $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
-    $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    if ( (int)$_REQUEST['week'] ) {
+      $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('last sunday -7 days'));
+      $dDateStop = date('Y-m-d', strtotime('last sunday'));
+    }
+    else {
+      $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
+      $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    }
 
     // Получаем категории
     $oTimesCategory = new times_category();
@@ -90,8 +97,8 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
     $arrCategories = [];
 
-    $iYear = date('Y');
-    $iMonth = date('m');
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
+    $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
 
     // Получаем категории
@@ -163,7 +170,7 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
     $arrCategories = [];
 
-    $iYear = date('Y');
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
 
     // Получаем категории
     $oTimesCategory = new times_category();
@@ -210,7 +217,7 @@ switch ($_REQUEST['form']) {
       $arrTime = explode(':',$arrMonth['sum']);
       $iTimeSum = $arrTime[0] . '.' . $arrTime[1];
       $arrMonth['sum'] = $iTimeSum;
-      
+
       foreach ( $arrMonth['categories'] as & $arrCategory ) {
         $arrTime = explode(':',$arrCategory['value']);
         $iTimeSum = $arrTime[0] . '.' . $arrTime[1];

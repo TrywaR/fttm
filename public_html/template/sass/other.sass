@@ -41,61 +41,85 @@
   display: flex
   flex-direction: row
   justify-content: space-between
-  justify-content: center
-  padding: 2rem 0 4rem
+  align-items: flex-start
+  font-size: 1rem
+  line-height: 1rem
 
-  & > ._circle
+  & > ._prev
+    flex-grow: 1
     position: relative
     z-index: 1
     padding: 1rem
-    text-align: center
-    flex-grow: 1
+    display: flex
+    align-items: flex-start
+    justify-content: center
+    flex-wrap: wrap
 
-    &:nth-child(even)
-      &:after
-        animation: circle linear 15s
-        animation-iteration-count: infinite
-        animation-duration: 15s
+    & > ._icon
+      font-size: 1em
+      line-height: .8em
+      margin-right: .2rem
+      opacity: .5
 
-    &:after
-      content: ''
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      z-index: -1
-      width: 10rem
-      height: 10rem
-      margin: auto
-      border-radius: 50% 40% 35% 45%
-      // background: $color_main_light
-      background: $color_main
+    & > ._title
+      font-size: .8em
+      line-height: .8em
+      opacity: .5
 
-      animation: circle ease-in-out 20s
-      animation-iteration-count: infinite
-      animation-duration: 20s
-      transform-origin: 50% 50%
-
-      box-shadow: 0 0 1rem 0 $color_main_dark_ultra
-
-    ._title
-      font-size: 1.1rem
-      line-height: 1
-      margin-bottom: .5rem
-
-    ._value
-      font-size: 1.3rem
+    & > ._value
+      display: flex
+      justify-content: center
+      width: 100%
+      padding: .2rem
+      font-size: 1.3em
       font-weight: bold
       line-height: 1
 
+    & > ._subs
+      width: 100%
+      display: flex
+      flex-direction: column
+      padding-top: 1rem
+
+      & > ._sub
+        width: 100%
+        display: flex
+        align-items: flex-end
+        padding: .2rem
+
+        & > ._title
+          font-size: .8em
+          line-height: .8em
+          opacity: .5
+          margin-right: .5rem
+
+        & > ._value
+          &._check
+            strike
+              opacity: .4
+
+            i,
+            svg
+              margin-left: .4rem
+
+            strong
+              margin-left: .4rem
+
+        &._res
+          padding-top: .5rem
+          font-weight: 400
+
+          & > ._title
+            font-size: 1.2em
+
+          & > ._value
+            font-size: 1.2em
+
     &.__success
-      &:after
-        background: $color_success ! important
+      color: $color_success ! important
 
     &.__error
-      &:after
-        background: $color_error ! important
+      color: $color_error ! important
 
 .progress_block
   .progress
@@ -137,6 +161,11 @@
   //     // padding: 1rem
 
 .clock_revers
+  display: flex
+  flex-direction: column
+  padding: 1rem
+  box-sizing: border-box
+
   ._date
     display: flex
     flex-direction: column
@@ -196,6 +225,7 @@
         font-weight: 500
 
   ._progress
+    width: 100%
     max-width: 20rem
     margin: auto
 
@@ -206,16 +236,16 @@
   font-size: 1em
   line-height: 1
 
+  ._home_title
+    font-size: 2em
+    text-align: center
+
+    ._seporator
+      opacity: .5
+
   ._section
     padding-top: 1rem
     padding-bottom: 4rem
-
-    ._title
-      font-size: 2em
-      text-align: center
-
-      ._seporator
-        opacity: .5
 
     ._block
       display: flex
@@ -352,7 +382,7 @@
   .block_analitycs
     flex-wrap: wrap
 
-    ._circle
+    ._prev
       display: flex
       flex-direction: column
       min-height: 10rem

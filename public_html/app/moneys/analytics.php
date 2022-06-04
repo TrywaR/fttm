@@ -3,11 +3,18 @@ switch ($_REQUEST['form']) {
   case 'analytics_week': # Вывод статистики за неделю
     $arrResults = [];
     $arrCategories = [];
+    $arrWeek = [];
 
     // Считаем неделю
     $arrWeek = [];
-    $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
-    $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    if ( (int)$_REQUEST['week'] ) {
+      $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('last sunday -7 days'));
+      $dDateStop = date('Y-m-d', strtotime('last sunday'));
+    }
+    else {
+      $dDateStart = $dDateCurrent = date('Y-m-d', strtotime('monday this week'));
+      $dDateStop = date('Y-m-d', strtotime('sunday this week'));
+    }
 
     // Получаем категории
     $oMoneysCategory = new moneys_category();
@@ -77,8 +84,8 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
     $arrCategories = [];
 
-    $iYear = date('Y');
-    $iMonth = date('m');
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
+    $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
 
     // Получаем категории
@@ -135,7 +142,7 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
     $arrCategories = [];
 
-    $iYear = date('Y');
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
 
     // Получаем категории
     $oMoneysCategory = new moneys_category();
@@ -187,5 +194,73 @@ switch ($_REQUEST['form']) {
     $arrResults['chart_sum'] = $oChart->show_sum();
 
     notification::success($arrResults);
+    break;
+
+  case 'analytics': # Общая инфа
+    $arrResults = [];
+
+    // Категории которые не отнимать
+    $oMoneysCategory = new moneys_category();
+    $oMoneysCategory->limit = 0;
+    $oMoneysCategory->sort = 'sort';
+    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oMoneysCategory->query .= " AND `type` = 0";
+    $arrMoneysCategories = $oMoneysCategory->get();
+    $arrMoneysCategoriesIds = [];
+    foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesIds[$arrMoneysCategory['id']] = $arrMoneysCategory;
+
+    // День
+    $dDay = date("Y-m-d", strtotime("-1 DAY"));
+
+    // Потрачено за день
+    $oMoney = new money();
+    $oMoney->sort = 'date';
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '0' ";
+    $arrMoneys = $oMoney->get_money();
+    $iDaySumm = 0;
+    foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
+    $arrResults['iDaySumm'] = number_format($iDaySumm, 2, '.', ' ');
+
+    // Пришло за день
+    $oMoney = new money();
+    $oMoney->sort = 'date';
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '1' ";
+    $arrMoneys = $oMoney->get_money();
+    $iDaySummPlus = 0;
+    foreach ($arrMoneys as $arrMoney) $iDaySummPlus = (int)$arrMoney['price'] + (int)$iDaySummPlus;
+    $arrResults['iDaySummPlus'] = number_format($iDaySummPlus, 2, '.', ' ');
+
+    // Месяц
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
+    $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
+    $dMonth = $iYear . '-' . sprintf("%02d", $iMonth);
+
+    // За месяц ушло
+    $oMoney = new money();
+    $oMoney->sort = 'date';
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '0' ";
+    $oMoney->query .= " AND `to_card` = '0' ";
+    $arrMoneys = $oMoney->get_money();
+    $iMonthSumm = 0;
+    foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
+    $arrResults['iMonthSumm'] = number_format($iMonthSumm, 2, '.', ' ');
+
+    // За месяц пришло
+    $oMoney = new money();
+    $oMoney->sort = 'date';
+    $dCurrentDate = date('Y-m');
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
+    $arrMoneys = $oMoney->get_money();
+    $iMonthSummSalary = 0;
+    foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;
+    $arrResults['iMonthSummSalary'] = number_format($iMonthSummSalary, 2, '.', ' ');
+
+    $arrResults['balance'] = number_format($iMonthSummSalary-$iMonthSumm, 2, '.', ' ');
+
+    notification::success( $arrResults );
     break;
 }
