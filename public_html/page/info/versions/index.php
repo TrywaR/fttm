@@ -62,6 +62,9 @@
            <li>
              Subscription recounters
            </li>
+           <li>
+             Welcome page update
+           </li>
          </ol>
 
          <h2 id="list-item-5_2_2">5.2.2 Analytics</h2>

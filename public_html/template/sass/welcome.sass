@@ -1,0 +1,78 @@
+// .welcome_container
+.welcome_container
+  ._section
+    &._times
+      background: $color_main_time_dark
+
+      ._block_title,
+      ._icon
+        color: $color_main_time
+
+    &._moneys
+      background: $color_main_money_dark
+
+      ._block_title,
+      ._icon
+        color: $color_main_money
+
+    &._moneysforhour
+      background: white
+      color: black
+      margin-bottom: 4rem
+
+    ._block
+      display: flex
+      align-items: center
+      padding: 4rem 2rem 0
+      font-size: 1em
+      line-height: 1.8em
+
+      ._title
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        padding: 4rem
+        box-sizing: border-box
+
+        h1
+          font-size: 4em
+          line-height: 1
+
+        p
+          font-size: 1em
+          line-height: 1.4em
+          font-weight: 300
+          opacity: .7
+
+
+      ._content
+        flex-grow: 1
+        padding: 1rem
+        box-sizing: border-box
+
+      ._icon
+        flex-grow: 1
+        display: flex
+        justify-content: center
+        align-items: center
+        min-width: 20vw
+        font-size: 10em
+        padding: 1rem
+        box-sizing: border-box
+
+      ._block_title
+        font-size: 6em
+        line-height: 1em
+
+      ul
+        display: flex
+        flex-direction: column
+
+        li
+          box-sizing: border-box
+          padding: 1rem
+          margin: .5rem
+          border-radius: $border_radius
+          @include shadow_default
+// .welcome_container x

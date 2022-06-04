@@ -266,6 +266,67 @@ main strike {
   color: white;
   background: #202022; }
 
+.welcome_container ._section._times {
+  background: #232424; }
+  .welcome_container ._section._times ._block_title,
+  .welcome_container ._section._times ._icon {
+    color: #7FC6A4; }
+.welcome_container ._section._moneys {
+  background: #20292b; }
+  .welcome_container ._section._moneys ._block_title,
+  .welcome_container ._section._moneys ._icon {
+    color: #4F9497; }
+.welcome_container ._section._moneysforhour {
+  background: white;
+  color: black;
+  margin-bottom: 4rem; }
+.welcome_container ._section ._block {
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem 0;
+  font-size: 1em;
+  line-height: 1.8em; }
+  .welcome_container ._section ._block ._title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 4rem;
+    box-sizing: border-box; }
+    .welcome_container ._section ._block ._title h1 {
+      font-size: 4em;
+      line-height: 1; }
+    .welcome_container ._section ._block ._title p {
+      font-size: 1em;
+      line-height: 1.4em;
+      font-weight: 300;
+      opacity: 0.7; }
+  .welcome_container ._section ._block ._content {
+    flex-grow: 1;
+    padding: 1rem;
+    box-sizing: border-box; }
+  .welcome_container ._section ._block ._icon {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20vw;
+    font-size: 10em;
+    padding: 1rem;
+    box-sizing: border-box; }
+  .welcome_container ._section ._block ._block_title {
+    font-size: 6em;
+    line-height: 1em; }
+  .welcome_container ._section ._block ul {
+    display: flex;
+    flex-direction: column; }
+    .welcome_container ._section ._block ul li {
+      box-sizing: border-box;
+      padding: 1rem;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 0.2rem 0rem rgba(30, 30, 30, 0.3), 0 0 0.6rem 0.6rem rgba(30, 30, 30, 0.3), inset 0 0 0.1rem 0 rgba(50, 50, 50, 0.3); }
+
 .moneyforhour_block {
   display: flex;
   flex-wrap: wrap;
@@ -966,24 +1027,6 @@ footer {
     background: linear-gradient(to right, #3282c8 35%, rgba(255, 255, 255, 0) 100%);
     opacity: 0.5;
     z-index: -1; }
-
-.welcome_container ._section ._block ._list {
-  display: flex;
-  flex-wrap: wrap; }
-  .welcome_container ._section ._block ._list ._item {
-    flex-grow: 1;
-    width: 25rem;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    text-align: center;
-    margin: 0.2rem; }
-    .welcome_container ._section ._block ._list ._item .icon {
-      display: flex;
-      font-size: 2rem;
-      justify-content: center;
-      align-items: center;
-      padding: 0 0 2rem; }
 
 .block_loading {
   position: relative;
