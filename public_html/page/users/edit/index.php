@@ -1,5 +1,5 @@
-<main class="container">
-  <div class="form_block mt-4 col-12 col-md-5 animate__animated animate__fadeIn">
+<section class="row">
+  <div class="form_block mt-4 col-12 animate__animated animate__fadeIn">
     <form id="form_user_edit" class="form_user_edit">
       <div class="card">
         <div class="card-header">
@@ -145,4 +145,4 @@
       </div>
     </form>
   </div>
-</main>
+</section>

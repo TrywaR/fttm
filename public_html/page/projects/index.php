@@ -1,150 +1,139 @@
-<main class="container pt-4 pb-4">
-  <div class="row">
-    <div class="col-12 col-md-6 mb-4">
+<section class="row">
+  <div class="col col-12 pt-4 pb-1">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Projects</h1>
-          <p class="lead">
-            <span class="icon">
-              <i class="fas fa-arrow-left"></i>
-            </span>
-            <a href="/clients/">Clients</a>
-          </p>
+          <h1 class="display-4 sub_title">Projects</h1>
         </div>
       </div>
-    </div>
+  </div>
 
-    <div class="col col-md-6 mb-4 animate__animated animate__bounceInLeft">
-      <div class="card">
-        <div class="card-body">
-          <!-- <h5 class="card-title">Новый проект</h5> -->
-          <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
+  <div class="col col-md-6 mb-4 animate__animated animate__bounceInLeft">
+    <div class="card">
+      <div class="card-body">
+        <!-- <h5 class="card-title">Новый проект</h5> -->
+        <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
 
-          <!-- <div class="card-body"> -->
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Add project
-                  </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <form
-                      class="content_loader_form"
-                      action=""
-                      method="post"
-                      data-content_download_edit_type="0"
-                      data-content_loader_to="#content_loader_to"
-                      data-content_loader_template=".template_projects"
-                    >
-                      <input type="hidden" name="app" value="app">
-                      <input type="hidden" name="action" value="projects">
-                      <input type="hidden" name="form" value="save">
-                      <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
-                      <input type="hidden" name="id" value="">
+        <!-- <div class="card-body"> -->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Add project
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <form
+                    class="content_loader_form"
+                    action=""
+                    method="post"
+                    data-content_download_edit_type="0"
+                    data-content_loader_to="#content_loader_to"
+                    data-content_loader_template=".template_projects"
+                  >
+                    <input type="hidden" name="app" value="app">
+                    <input type="hidden" name="action" value="projects">
+                    <input type="hidden" name="form" value="save">
+                    <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
+                    <input type="hidden" name="id" value="">
 
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputClientId" class="col-form-label">Client</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <select class="form-select" aria-label="Default select example" name="client_id">
-                            <option value="0" selected>...</option>
-                            <?
-                            $oClient = new client();
-                            $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-                            $arrClients = $oClient->get();
-
-                            foreach ($arrClients as &$arrClient) {?>
-                              <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
-                            <?}?>
-                          </select>
-                        </div>
+                    <div class="row align-items-center mb-1">
+                      <div class="col-12 col-md-4">
+                        <label for="inputClientId" class="col-form-label">Client</label>
                       </div>
+                      <div class="col-12 col-md-8">
+                        <select class="form-select" aria-label="Default select example" name="client_id">
+                          <option value="0" selected>...</option>
+                          <?
+                          $oClient = new client();
+                          $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+                          $arrClients = $oClient->get();
 
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputSort" class="col-form-label">Sort</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <input name="sort" type="number" id="inputSort" class="form-control">
-                        </div>
+                          foreach ($arrClients as &$arrClient) {?>
+                            <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+                          <?}?>
+                        </select>
                       </div>
+                    </div>
 
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputTitle" class="col-form-label">Title</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <input name="title" type="text" id="inputTitle" class="form-control">
-                        </div>
+                    <div class="row align-items-center mb-1">
+                      <div class="col-12 col-md-4">
+                        <label for="inputSort" class="col-form-label">Sort</label>
                       </div>
+                      <div class="col-12 col-md-8">
+                        <input name="sort" type="number" id="inputSort" class="form-control">
+                      </div>
+                    </div>
 
-                      <div class="row align-items-center mb-1">
-                        <div class="col-12 col-md-4">
-                          <label for="inputDescription" class="col-form-label">Description</label>
-                        </div>
-                        <div class="col-12 col-md-8">
-                          <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
-                        </div>
+                    <div class="row align-items-center mb-1">
+                      <div class="col-12 col-md-4">
+                        <label for="inputTitle" class="col-form-label">Title</label>
                       </div>
+                      <div class="col-12 col-md-8">
+                        <input name="title" type="text" id="inputTitle" class="form-control">
+                      </div>
+                    </div>
 
-                      <div class="d-flex justify-content-between mt-3">
-                        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
-                        <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
+                    <div class="row align-items-center mb-1">
+                      <div class="col-12 col-md-4">
+                        <label for="inputDescription" class="col-form-label">Description</label>
                       </div>
-                    </form>
-                  </div>
+                      <div class="col-12 col-md-8">
+                        <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+                      <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-          <!-- </div> -->
-        </div>
+          </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 animate__animated animate__bounceInRight animate__delay-1s">
-      <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="projects" data-content_manager_block="#projects" data-content_manager_item=".project" data-content_manager_button=".content_manager_switch">
-        <button type="button" name="button" class="btn del">
-          <i class="fas fa-folder-minus"></i>
-        </button>
-      </div>
-
-      <div
-        id="projects"
-        class="block_projects block_elems block_content_loader row"
-        data-content_loader_table="projects"
-        data-content_loader_form="show"
-        data-content_loader_limit="15"
-        data-content_loader_scroll_nav="0"
-        <?php if ($_REQUEST['sort']): ?>
-          data-content_loader_sort="<?=$_REQUEST['sort']?>"
-          data-content_loader_sortdir="<?=$_REQUEST['sortdir']?>"
-        <?php endif; ?>
-        <?php if ($_REQUEST['filter']): ?>
-          data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
-        <?php endif; ?>
-        data-content_loader_template_selector=".block_template"
-        data-content_loader_scroll_block="#projects"
-        data-content_loader_show_class="animate__bounceInRight _show_"
-        style="max-height: 50vh; overflow: auto; overflow-x: hidden;"
-      >
-      </div>
-
-      <script>
-        $(function(){
-          $(document).find('#projects').content_loader()
-          $(document).find('#content_manager_buttons').content_manager()
-        })
-      </script>
+  <div class="col-12 animate__animated animate__bounceInRight animate__delay-1s">
+    <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="projects" data-content_manager_block="#projects" data-content_manager_item=".project" data-content_manager_button=".content_manager_switch">
+      <button type="button" name="button" class="btn del">
+        <i class="fas fa-folder-minus"></i>
+      </button>
     </div>
+
+    <div
+      id="projects"
+      class="block_projects block_elems block_content_loader row"
+      data-content_loader_table="projects"
+      data-content_loader_form="show"
+      data-content_loader_limit="15"
+      data-content_loader_scroll_nav="0"
+      <?php if ($_REQUEST['sort']): ?>
+        data-content_loader_sort="<?=$_REQUEST['sort']?>"
+        data-content_loader_sortdir="<?=$_REQUEST['sortdir']?>"
+      <?php endif; ?>
+      <?php if ($_REQUEST['filter']): ?>
+        data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
+      <?php endif; ?>
+      data-content_loader_template_selector=".block_template"
+      data-content_loader_scroll_block="#projects"
+      data-content_loader_show_class="animate__bounceInRight _show_"
+    >
+    </div>
+
+    <script>
+      $(function(){
+        $(document).find('#projects').content_loader()
+        $(document).find('#content_manager_buttons').content_manager()
+      })
+    </script>
   </div>
 
   <div class="block_template">
-    <div class="col col-12 col-md-4 mb-4 _elem project progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="col col-12 mb-4 _elem project progress_block animate__animated animate__bounceInRight" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="card">
         <div class="card-body">
           <small>№{{sort}}</small>
@@ -178,4 +167,4 @@
       </div>
     </div>
   </div>
-</main>
+</section>

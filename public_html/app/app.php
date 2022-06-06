@@ -8,6 +8,10 @@ switch ($_REQUEST['action']) {
     include_once 'clients/clients.php';
     break;
 
+  case 'navs': # Структура сайта
+    include_once 'navs/navs.php';
+    break;
+
   case 'analytics': # Общая статистика
     include_once 'analytics/analytics.php';
     break;

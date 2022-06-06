@@ -1,99 +1,97 @@
-<div class="fttm_progress progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-</div>
-<header class="container">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        FTTM
-      </a>
-      <?php if (isset($_SESSION['user'])): ?>
-        <a href="/users/" class="home_link user_prev">
-          <span class="_login">
-            <?=$_SESSION['user']['login']?>
-          </span>
-          <small class="_role">
-            <?
-            switch ((int)$_SESSION['user']['role']) {
-              case 0:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-user-circle"></i>
-                 </span>
-                 <span class="_value">
-                   User
-                 </span>
-                 <?
-                break;
-              case 1:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-check"></i>
-                 </span>
-                 <span class="_value">
-                   Valid user
-                 </span>
-                 <?
-                break;
-              case 666:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-crown"></i>
-                 </span>
-                 <span class="_value">
-                   Admin
-                 </span>
-                 <?
-                break;
-            }
-            ?>
-          </small>
-        </a>
-      <?php endif; ?>
-      <?php if (isset($_SESSION['user'])): ?>
-        <a class="navbar-toggler" href="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <!-- <span class="navbar-toggler-icon"></span> -->
-          <i class="fas fa-bars"></i>
-        </a>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/home/') echo 'badge bg-success active';?>" aria-current="page" href="/home/">Home</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/tasks/') echo 'badge bg-success active';?>" aria-current="page" href="/tasks/">Tasks</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/times/') echo 'badge bg-success active';?>" href="/times/">Times</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <?if($_SERVER['REQUEST_URI']=='/moneys/') echo 'badge bg-success active';?>" href="/moneys/">Moneys</a>
-            </li>
-          </ul>
-          <!-- <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> -->
-        </div>
-      <?php else: ?>
-        <div class="btn-group">
-          <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
-            <small class="icon">
-              <i class="fas fa-user-check"></i>
-            </small>
-            Sign in
+  <!-- Nav -->
+  <header class="col-12 col-xl-3">
+    <div class="block_nav_header">
+      <div class="block_logo">
+        <?php if ( $_SERVER['REQUEST_URI']!='/' ): ?>
+          <a class="_value" href="/">
+            FTTM
           </a>
-          <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
-            <small class="icon">
-              <i class="fas fa-user-plus"></i>
+        <?php else: ?>
+          <span class="_value">
+            FTTM
+          </span>
+        <?php endif; ?>
+      </div>
+
+      <div class="block_nav_fuller" id="block_nav_fuller">
+        <a href="#" class="_btn">
+          <span class="_icon">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+            <i class="fa-solid fa-list-ul"></i>
+          </span>
+        </a>
+      </div>
+
+      <?php if (isset($_SESSION['user'])): ?>
+        <div class="block_user_prev">
+          <a href="/users/" class="home_link user_prev">
+            <div class="_img">
+              <i class="fa-solid fa-address-book"></i>
+            </div>
+            <span class="_login">
+              <?=$_SESSION['user']['login']?>
+            </span>
+            <small class="_role">
+              <?
+              switch ((int)$_SESSION['user']['role']) {
+                case 0:
+                   ?>
+                   <span class="_icon">
+                     <i class="fas fa-user-circle"></i>
+                   </span>
+                   <span class="_value">
+                     User
+                   </span>
+                   <?
+                  break;
+                case 1:
+                   ?>
+                   <span class="_icon">
+                     <i class="fas fa-check"></i>
+                   </span>
+                   <span class="_value">
+                     Valid user
+                   </span>
+                   <?
+                  break;
+                case 666:
+                   ?>
+                   <span class="_icon">
+                     <i class="fas fa-crown"></i>
+                   </span>
+                   <span class="_value">
+                     Admin
+                   </span>
+                   <?
+                  break;
+              }
+              ?>
             </small>
-            Sign up
           </a>
         </div>
       <?php endif; ?>
     </div>
-  </nav>
-</header>
+
+    <div class="block_nav" id="block_nav">
+      <ul class="nav _main"></ul>
+      <ul class="nav _subs"></ul>
+    </div>
+
+    <!-- <div class="btn-group">
+      <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
+        <small class="icon">
+          <i class="fas fa-user-check"></i>
+        </small>
+        Sign in
+      </a>
+      <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
+        <small class="icon">
+          <i class="fas fa-user-plus"></i>
+        </small>
+        Sign up
+      </a>
+    </div> -->
+  </header>
+
+  <!-- content -->
+  <main class="col-12 col-xl-6">

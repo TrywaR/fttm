@@ -5,6 +5,15 @@ oParam.ajax_salt = {
 	'app': 'app'
 }
 oParam.site_url = '/'
+
+if ( localStorage.getItem('oParam') ) oParam = $.parseJSON( localStorage.getItem('oParam') )
+else localStorage.setItem('oParam', JSON.stringify(oParam))
+
+// Сохраниение изменений
+oParam.save = function(){
+  localStorage.setItem('oParam', JSON.stringify(oParam))
+}
+
 arrPageParams = {}
 arrPageContent = {}
 

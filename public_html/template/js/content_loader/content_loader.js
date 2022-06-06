@@ -232,8 +232,10 @@ function content_loader_elem_html( oContentLoadElem, oTemplate ){
     // Вложенные элементы
     if ( typeof oContentLoadElem[key] === 'object' ) {
       // Сохраняем для дальнейшей обработки
-      if ( ! arrPageContent.arrayObjects[oContentLoadElem.id] ) arrPageContent.arrayObjects[oContentLoadElem.id] = []
-      arrPageContent.arrayObjects[oContentLoadElem.id][key] = oContentLoadElem[key]
+      if ( arrPageContent.arrayObjects ) {
+        if ( ! arrPageContent.arrayObjects[oContentLoadElem.id] ) arrPageContent.arrayObjects[oContentLoadElem.id] = []
+        arrPageContent.arrayObjects[oContentLoadElem.id][key] = oContentLoadElem[key]
+      }
 
       for (var keySub in oContentLoadElem[key] ) {
         replaceKeyArray.push( key + '.' + keySub )

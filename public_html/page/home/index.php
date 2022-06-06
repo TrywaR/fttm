@@ -1,11 +1,13 @@
-<main class="container home_container pt-4 pb-4">
-  <div class="_section row">
-    <div class="col-12">
-      <h1 class="_home_title">FT <span class="_seporator">[</span><?=$_SESSION['user']['login']{0}?><span class="_seporator">]</span> M</h1>
+<section class="row block_home">
+  <div class="col col-12 pt-4 pb-1">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="_home_title">FT <span class="_seporator">[</span><?=$_SESSION['user']['login']{0}?><span class="_seporator">]</span> M</h1>
+      </div>
     </div>
   </div>
 
-  <div class="_section block_bg_blianer row animate__animated animate__fadeIn animate__delay-1s">
+  <div class="_section block_bg_blianer">
     <div class="col-12">
        <h2 class="sub_title">Today</h2>
 
@@ -53,226 +55,222 @@
        </script>
     </div>
 
-    <div class="col-12">
-      <h2 class="sub_title">Analytics</h2>
+    <h2 class="sub_title">Analytics</h2>
 
-      <div class="row">
-        <div class="col-12 col-md-8">
-          <!-- Фильтр -->
-          <form class="content_filter month_filter pb-4 __no_ajax" action="">
-            <div class="input-group mb-2">
-              <span class="input-group-text">
-                <i class="far fa-calendar-alt"></i>
-              </span>
+    <div class="col-12 mb-4">
+      <!-- Фильтр -->
+      <form class="content_filter month_filter pb-4 __no_ajax" action="">
+        <div class="input-group mb-2">
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+          </span>
 
-              <select name="year" class="form-select">
-                <option value="" selected>Current year</option>
-                <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
-                  <option value="<?=$i?>"><?=$i?></option>
-                <?}?>
-              </select>
+          <select name="year" class="form-select">
+            <option value="" selected>Current year</option>
+            <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+              <option value="<?=$i?>"><?=$i?></option>
+            <?}?>
+          </select>
 
-              <select name="month" class="form-select">
-                <option value="" selected>Current month</option>
-                <?for ($i=1; $i < 13; $i++) {?>
-                  <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
-                <?}?>
-              </select>
+          <select name="month" class="form-select">
+            <option value="" selected>Current month</option>
+            <?for ($i=1; $i < 13; $i++) {?>
+              <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
+            <?}?>
+          </select>
 
-              <button class="btn btn-dark" type="submit">
-                <!-- <span class="icon">
-                  <i class="fas fa-plus"></i>
-                </span> -->
-                Go
-              </button>
-            </div>
-          </form>
+          <button class="btn btn-dark" type="submit">
+            <!-- <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span> -->
+            Go
+          </button>
+        </div>
+      </form>
 
-          <div class="block_analitycs">
-            <div class="_prev">
+      <div class="block_analitycs">
+        <div class="_prev">
+          <div class="_title">
+            Times
+          </div>
+          <div class="_subs">
+            <div class="_sub">
               <div class="_title">
-                Times
+                Work
               </div>
-              <div class="_subs">
-                <div class="_sub">
-                  <div class="_title">
-                    Work
-                  </div>
-                  <div class="_value" id="block_analitycs_work">
-                  </div>
-                </div>
-                <div class="_sub">
-                  <div class="_title">
-                    Sleep
-                  </div>
-                  <div class="_value" id="block_analitycs_sleep">
-                  </div>
-                </div>
+              <div class="_value" id="block_analitycs_work">
               </div>
             </div>
-
-            <div class="_prev">
+            <div class="_sub">
               <div class="_title">
-                Moneys
+                Sleep
               </div>
-              <div class="_subs">
-                <div class="_sub">
-                  <div class="_title">
-                    Costs
-                  </div>
-                  <div class="_value" id="block_analitycs_costs">
-                  </div>
-                </div>
-                <div class="_sub">
-                  <div class="_title">
-                    Wages
-                  </div>
-                  <div class="_value" id="block_analitycs_wages">
-                  </div>
-                </div>
-                <div class="_sub">
-                  <div class="_title">
-                    Wages work
-                  </div>
-                  <div class="_value" id="block_analitycs_wages_work">
-                  </div>
-                </div>
-                <div class="_sub _res">
-                  <div class="_title">
-                    Money for hour
-                  </div>
-                  <div class="_value" id="block_analitycs_moneyforhour">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="_prev">
-              <div class="_title">
-                Subscriptions
-              </div>
-
-              <div class="_subs" id="block_analitycs_subscriptions">
+              <div class="_value" id="block_analitycs_sleep">
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4">
-          <div class="block_analitycs">
-            <div class="_prev">
+
+        <div class="_prev">
+          <div class="_title">
+            Moneys
+          </div>
+          <div class="_subs">
+            <div class="_sub">
+              <div class="_title">
+                Costs
+              </div>
+              <div class="_value" id="block_analitycs_costs">
+              </div>
+            </div>
+            <div class="_sub">
+              <div class="_title">
+                Wages
+              </div>
+              <div class="_value" id="block_analitycs_wages">
+              </div>
+            </div>
+            <div class="_sub">
+              <div class="_title">
+                Wages work
+              </div>
+              <div class="_value" id="block_analitycs_wages_work">
+              </div>
+            </div>
+            <div class="_sub _res">
+              <div class="_title">
+                Money for hour
+              </div>
+              <div class="_value" id="block_analitycs_moneyforhour">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="_prev">
+          <div class="_title">
+            Subscriptions
+          </div>
+
+          <div class="_subs" id="block_analitycs_subscriptions">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="block_analitycs">
+        <div class="_prev">
+          <div class="_title">
+            Balance
+          </div>
+          <div class="_subs" id="block_analitycs_cards">
+            <div class="_sub _res">
               <div class="_title">
                 Balance
               </div>
-              <div class="_subs" id="block_analitycs_cards">
-                <div class="_sub _res">
-                  <div class="_title">
-                    Balance
-                  </div>
-                  <strong class="_value" id="block_analitycs_balance">
-                  </strong>
-                </div>
-              </div>
+              <strong class="_value" id="block_analitycs_balance">
+              </strong>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <script>
-        $(document).find('.month_filter').on ('submit', function(){
-          var
-          iYear = $(this).find('[name="year"]').val(),
-          iMonth = $(this).find('[name="month"]').val()
+    <script>
+      $(document).find('.month_filter').on ('submit', function(){
+        var
+        iYear = $(this).find('[name="year"]').val(),
+        iMonth = $(this).find('[name="month"]').val()
 
-          bMonthShow = false
-          home_show( iYear, iMonth )
+        bMonthShow = false
+        home_show( iYear, iMonth )
 
-          return false
-        })
-        function home_show( iYear, iMonth ){
-          // Получаем данные
-          $.when(
-            content_download( {
-              'action': 'analytics',
-              'form': 'analytics',
-              'year': iYear,
-              'month': iMonth,
-            }, 'text', false )
-          ).then( function( resultData ){
-            if ( ! resultData ) return false
-            var oData = $.parseJSON( resultData )
+        return false
+      })
+      function home_show( iYear, iMonth ){
+        // Получаем данные
+        $.when(
+          content_download( {
+            'action': 'analytics',
+            'form': 'analytics',
+            'year': iYear,
+            'month': iMonth,
+          }, 'text', false )
+        ).then( function( resultData ){
+          if ( ! resultData ) return false
+          var oData = $.parseJSON( resultData )
 
-            if ( oData.success ) {
-              if ( oData.success.work ) $(document).find('#block_analitycs_work').html( oData.success.work )
-              if ( oData.success.sleep ) $(document).find('#block_analitycs_sleep').html( oData.success.sleep )
-              if ( oData.success.wages ) $(document).find('#block_analitycs_wages').html( oData.success.wages )
-              if ( oData.success.wages_work ) $(document).find('#block_analitycs_wages_work').html( oData.success.wages_work )
-              if ( oData.success.costs ) $(document).find('#block_analitycs_costs').html( oData.success.costs )
-              $(document).find('#block_analitycs_moneyforhour').html( oData.success.moneyforhour )
+          if ( oData.success ) {
+            if ( oData.success.work ) $(document).find('#block_analitycs_work').html( oData.success.work )
+            if ( oData.success.sleep ) $(document).find('#block_analitycs_sleep').html( oData.success.sleep )
+            if ( oData.success.wages ) $(document).find('#block_analitycs_wages').html( oData.success.wages )
+            if ( oData.success.wages_work ) $(document).find('#block_analitycs_wages_work').html( oData.success.wages_work )
+            if ( oData.success.costs ) $(document).find('#block_analitycs_costs').html( oData.success.costs )
+            $(document).find('#block_analitycs_moneyforhour').html( oData.success.moneyforhour )
 
-              if ( oData.success.cards.length ) {
-                var sCardsHtml = ''
-                $.each( oData.success.cards, function( iIndex, oElem ){
-                  sCardsHtml += '<div class="_sub">'
-                    sCardsHtml += '<div class="_title">'
-                      sCardsHtml += oElem.title
-                    sCardsHtml += '</div>'
-                    sCardsHtml += '<div class="_value">'
-                      sCardsHtml += oElem.balance
-                    sCardsHtml += '</div>'
-                  sCardsHtml += '</div>'
-                })
-                sCardsHtml += '<div class="_sub _res">'
+            if ( oData.success.cards.length ) {
+              var sCardsHtml = ''
+              $.each( oData.success.cards, function( iIndex, oElem ){
+                sCardsHtml += '<div class="_sub">'
                   sCardsHtml += '<div class="_title">'
-                    sCardsHtml += 'Balance'
+                    sCardsHtml += oElem.title
                   sCardsHtml += '</div>'
                   sCardsHtml += '<div class="_value">'
-                    sCardsHtml += oData.success.balance
+                    sCardsHtml += oElem.balance
                   sCardsHtml += '</div>'
                 sCardsHtml += '</div>'
-                $(document).find('#block_analitycs_cards').html( sCardsHtml )
-              }
-
-              if ( oData.success.subscriptions.length ) {
-                var sSubscriptionsHtml = ''
-                $.each( oData.success.subscriptions, function( iIndex, oElem ){
-                  sSubscriptionsHtml += '<div class="_sub">'
-                    sSubscriptionsHtml += '<div class="_title">'
-                      sSubscriptionsHtml += oElem.title
-                    sSubscriptionsHtml += '</div>'
-                      if ( oElem.paid || oElem.paid_sum > 0 ) {
-                        sSubscriptionsHtml += '<div class="_value _check">'
-                          sSubscriptionsHtml += '<strike>' + oElem.price + '</strike>'
-                          if ( oElem.paid_need > 0 ) sSubscriptionsHtml += '<strong>' + oElem.paid_need + '</strong>'
-                          else sSubscriptionsHtml += '<i class="fas fa-check"></i>'
-                        sSubscriptionsHtml += '</div>'
-                      }
-                      else {
-                        sSubscriptionsHtml += '<div class="_value">'
-                          sSubscriptionsHtml += oElem.price
-                        sSubscriptionsHtml += '</div>'
-                      }
-                  sSubscriptionsHtml += '</div>'
-                })
-
-                if ( oData.success.subscriptions_sum ) {
-                  sSubscriptionsHtml += '<div class="_sub _res">'
-                    sSubscriptionsHtml += '<div class="_title">'
-                      sSubscriptionsHtml += 'Sum'
-                    sSubscriptionsHtml += '</div>'
-                    sSubscriptionsHtml += '<strong class="_value">'
-                      sSubscriptionsHtml += oData.success.subscriptions_sum
-                    sSubscriptionsHtml += '</strong>'
-                  sSubscriptionsHtml += '</div>'
-                }
-
-                $(document).find('#block_analitycs_subscriptions').html( sSubscriptionsHtml )
-              }
+              })
+              sCardsHtml += '<div class="_sub _res">'
+                sCardsHtml += '<div class="_title">'
+                  sCardsHtml += 'Balance'
+                sCardsHtml += '</div>'
+                sCardsHtml += '<div class="_value">'
+                  sCardsHtml += oData.success.balance
+                sCardsHtml += '</div>'
+              sCardsHtml += '</div>'
+              $(document).find('#block_analitycs_cards').html( sCardsHtml )
             }
-          })
-        }
-        home_show()
-      </script>
-    </div>
+
+            if ( oData.success.subscriptions.length ) {
+              var sSubscriptionsHtml = ''
+              $.each( oData.success.subscriptions, function( iIndex, oElem ){
+                sSubscriptionsHtml += '<div class="_sub">'
+                  sSubscriptionsHtml += '<div class="_title">'
+                    sSubscriptionsHtml += oElem.title
+                  sSubscriptionsHtml += '</div>'
+                    if ( oElem.paid || oElem.paid_sum > 0 ) {
+                      sSubscriptionsHtml += '<div class="_value _check">'
+                        sSubscriptionsHtml += '<strike>' + oElem.price + '</strike>'
+                        if ( oElem.paid_need > 0 ) sSubscriptionsHtml += '<strong>' + oElem.paid_need + '</strong>'
+                        else sSubscriptionsHtml += '<i class="fas fa-check"></i>'
+                      sSubscriptionsHtml += '</div>'
+                    }
+                    else {
+                      sSubscriptionsHtml += '<div class="_value">'
+                        sSubscriptionsHtml += oElem.price
+                      sSubscriptionsHtml += '</div>'
+                    }
+                sSubscriptionsHtml += '</div>'
+              })
+
+              if ( oData.success.subscriptions_sum ) {
+                sSubscriptionsHtml += '<div class="_sub _res">'
+                  sSubscriptionsHtml += '<div class="_title">'
+                    sSubscriptionsHtml += 'Sum'
+                  sSubscriptionsHtml += '</div>'
+                  sSubscriptionsHtml += '<strong class="_value">'
+                    sSubscriptionsHtml += oData.success.subscriptions_sum
+                  sSubscriptionsHtml += '</strong>'
+                sSubscriptionsHtml += '</div>'
+              }
+
+              $(document).find('#block_analitycs_subscriptions').html( sSubscriptionsHtml )
+            }
+          }
+        })
+      }
+      home_show()
+    </script>
 
     <div class="_bg_blianer">
       <span></span>
@@ -280,94 +278,4 @@
       <span></span>
     </div>
   </div>
-
-  <div class="_section row animate__animated animate__fadeIn animate__delay-2s">
-    <div class="col-12">
-      <h2 class="sub_title">Datas</h2>
-    </div>
-
-    <div class="col-12 col-md-4">
-      <div class="_block">
-        <div class="_icon">
-          <i class="fas fa-sitemap"></i>
-        </div>
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-folder"></i>
-          </span>
-          <a href="/clients/">Clients</a>
-          <span class="text_seporator">,</span> <a href="/projects/">Projects</a>
-          , <a href="/tasks/"><?=$olang->get('Tasks')?></a>.
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-md-4">
-      <div class="_block">
-        <div class="_icon">
-          <i class="fas fa-clock"></i>
-        </div>
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-edit"></i>
-          </span>
-          <a href="/times">
-            Update
-          </a>
-        </div>
-
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-folder"></i>
-          </span>
-          <a href="/times/data/categories/">Times spend categories</a>
-          <!--, <a href="/tasks/">задачи</a>. -->
-        </div>
-
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-chart-bar"></i>
-          </span>
-          <a href="/times/analytics/costs/">Time spent</a>
-          <!-- , <a href="/times/analytics/wages/">Приходы времени по категориям</a> -->
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-md-4">
-      <div class="_block">
-        <div class="_icon">
-          <i class="fas fa-wallet"></i>
-        </div>
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-edit"></i>
-          </span>
-          <a href="/moneys">
-            Update
-          </a>
-        </div>
-
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-folder"></i>
-          </span>
-          <a href="/moneys/data/cards/">Cards</a>
-          <span class="text_seporator">,</span> <a href="/moneys/data/categories/">Moneys spend categories</a>
-          <span class="text_seporator">,</span> <a href="/moneys/data/subscriptions/">Subscriptions</a>
-        </div>
-
-        <div class="_content">
-          <span class="icon">
-            <i class="far fa-chart-bar"></i>
-          </span>
-          <a href="/moneys/analytics/">Analytics</a>
-          <span class="text_seporator">:</span>
-          <a href="/moneys/analytics/costs/">Costs</a>
-          <span class="text_seporator">,</span> <a href="/moneys/analytics/wages/">Wages</a>
-          <!-- , <a href="/times/analytics/wages/">Приходы времени по категориям</a> -->
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+</section>

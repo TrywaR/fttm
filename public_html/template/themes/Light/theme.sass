@@ -1,4 +1,37 @@
 // Настройки
 @import "config"
+@import "mixins"
 // Основные файлы стилей
 @import "../../sass/includes"
+
+body
+  &:before
+    background: linear-gradient(0deg,rgba(255, 255, 255, 0.8) 0,rgba(233, 239, 255, 0.8) 100%)
+    opacity: .8
+    z-index: -1
+
+  &:after
+    filter: blur(.1rem)
+    background: radial-gradient(circle,white 7%,#1c1a1a white)
+    z-index: -2
+
+.block_nav
+  ._subs,
+  ._main
+    .nav-item
+      .nav-link
+        &:before
+          top: auto
+          height: .1rem
+          background: $color_main
+
+.welcome_container
+  ._section
+    &._moneys
+      background: rgba(210,210,210,.1)
+
+    &._times
+      background: none
+    ._block
+      ul
+        li

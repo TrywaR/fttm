@@ -4,20 +4,11 @@ $arrProject = $oProject->get();
 // $arrProject = $arrProject[0];
 ?>
 
-<main class="container animate__animated animate__fadeIn">
-  <div class="row mb-4">
-    <div class="col-12">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <small>Project:</small>
-          <h1 class="display-4"><?=$arrProject['title']?></h1>
-          <p class="lead">
-            <span class="icon">
-              <i class="fas fa-arrow-left"></i>
-            </span>
-            <a href="/projects/">Projects</a>
-          </p>
-        </div>
+<section class="row">
+  <div class="col col-12 pt-4 pb-1">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 sub_title"><?=$arrProject['title']?></h1>
       </div>
     </div>
   </div>
@@ -399,4 +390,4 @@ $arrProject = $oProject->get();
       </script>
     </div>
   </div>
-</main>
+</section>

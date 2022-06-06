@@ -25,7 +25,8 @@
 	<!-- Bootstrap x-->
 
 	<!-- font-awesome -->
-	<script defer src="https://pro.fontawesome.com/releases/v5.10.0/js/all.js" integrity="sha384-G/ZR3ntz68JZrH4pfPJyRbjW+c0+ojii5f+GYiYwldYU69A+Ejat6yIfLSxljXxD" crossorigin="anonymous"></script>
+	<!-- <script defer src="https://pro.fontawesome.com/releases/v5.10.0/js/all.js" integrity="sha384-G/ZR3ntz68JZrH4pfPJyRbjW+c0+ojii5f+GYiYwldYU69A+Ejat6yIfLSxljXxD" crossorigin="anonymous"></script> -->
+	<script defer src="/lib/fontawesome-free-6.1.1-web/js/all.min.js"></script>
 	<!-- font-awesome  x-->
 
 	<!-- jGrowl -->
@@ -51,38 +52,42 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.3"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.4"> -->
 	<?
 	if ( isset($_SESSION['user']) ) {
 		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 1;
 		switch ( $iTheme ) {
 			case 0:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.3"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.4"><?
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.3"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.4"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.3"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.4"><?
 				break;
 			case 3:
 				break;
 		}
 	}
 	else {
-		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.3"><?
+		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.4"><?
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.2.3"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.2.3"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.2.3"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.2.3"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.3"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.2.3"></script>
-	<script src="/template/js/content/content.js?v=5.2.3"></script>
-	<script src="/template/js/session/session.js?v=5.2.3"></script>
-	<script src="/template/js/index.js?v=5.2.3"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.2.4"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.2.4"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.2.4"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.2.4"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.4"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.2.4"></script>
+	<script src="/template/js/content/content.js?v=5.2.4"></script>
+
+	<script src="/template/js/main/nav.js?v=5.2.4"></script>
+
+	<script src="/template/js/session/session.js?v=5.2.4"></script>
+	<script src="/template/js/index.js?v=5.2.4"></script>
 	<!-- main x-->
 </head>
-<body>
+
+<body class="animate__animated animate__fadeIn">
