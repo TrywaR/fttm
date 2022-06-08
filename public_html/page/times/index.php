@@ -92,7 +92,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
                       <div class="col-12 col-md-8">
                         <select name="category_id" class="form-select" size="3" aria-label="size 3 select example">
                           <?php foreach ($arrCategories as $iIndex => $arrCategory): ?>
-                            <?php if ( $iIndex == 1 ): ?>
+                            <?php if ( $iIndex == 0 ): ?>
                               <option selected="selected" value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
                             <?php else: ?>
                               <option value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
