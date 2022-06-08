@@ -65,6 +65,7 @@ switch ($_REQUEST['form']) {
     // Чтобы не затереть данные
     if ( $_REQUEST['password'] == '' && $_REQUEST['new_password'] == ''  ) $oUser->arrAddFields['password'] = $_SESSION['user']['password'];
     if ( $_REQUEST['date_registration'] == '' ) $oUser->arrAddFields['date_registration'] = $_SESSION['user']['date_registration'];
+    if ( $_REQUEST['role'] == '' ) $oUser->arrAddFields['role'] = $_SESSION['user']['role'];
 
     if ( $_REQUEST['id'] ) $oUser->save();
     else $oUser->add();

@@ -161,19 +161,232 @@
       display: flex ! important
 
 @media screen and (max-width:1199px)
-  .block_nav
-    ._subs,
-    ._main
+  body
+    &._mobile_nav_active_
+      header .block_nav_header,
+      main,
+      footer
+        filter: blur(.1rem)
 
-      .nav-item
-        .nav-link
+      .block_nav_mobile_body_blocker
+        z-index: 9997
+
+    .block_nav_fuller
+      display: none
+
+    .block_nav
+      ._subs,
+      ._main
+        position: fixed
+        bottom: -100vh
+        left: 0
+        right: 0
+        display: flex ! important
+        flex-direction: column
+        width: 100%
+        height: auto
+        max-height: 80vh
+        overflow: auto
+        overflow-x: hidden
+        z-index: 9998
+        background: $color_main_dark_ultra
+        border-radius: $border_radius $border_radius 0 0
+        @include transition_default
+        @include shadow_default
+
+        &._mobile_active_
+          bottom: $block_nav_mobile_height
+
+        .nav-item
+          .nav-link
+            ._name
+              display: flex ! important
+
+      ._main
+      ._subs
+        &:before
+          background: $color_main_dark_ultra
+
+    .block_nav_mobile
+      display: flex
+      position: fixed
+      bottom: 0
+      left: 0
+      right: 0
+      z-index: 9999
+      background: $color_main_dark
+      color: $color_main
+      font-size: 1.5em
+      line-height: 2rem
+      height: $block_nav_mobile_height
+      overflow: hidden
+
+      .nav_btn
+        flex-grow: 1
+        position: relative
+        display: flex
+        width: $block_nav_mobile_width
+        padding: 1rem
+        box-sizing: border-box
+        overflow: hidden
+        cursor: pointer
+        z-index: 1
+
+        &:before,
+        &:after
+          content: ''
+          position: absolute
+
+        &:before
+          top: -100%
+          left: 0
+          right: 0
+          width: 90%
+          height: 90%
+          margin-bottom: auto
+          margin-right: auto
+          z-index: -1
+          background: $color_main_dark_ultra
+          border-radius: 0 0 $border_radius $border_radius
+          @include transition_default
+          opacity: .95
+
+        &:after
+          top: 0
+          right: 0
+          bottom: 0
+          right: 0
+          width: 2rem
+          height: 2rem
+          margin: auto
+          border: .15rem solid transparent
+          border-right-color: $color_main
+          opacity: .1
+          z-index: -2
+
+        &:last-child
+          justify-content: flex-end ! important
+
+          &:after
+            display: none
+
+        &._active_
+          &:before
+            top: 0%
+
+        &._main,
+        &._subs
+          ._icon,
+          ._name
+            position: relative
+            display: flex
+            flex-direction: column
+            height: 2rem
+            white-space: nowrap
+
+            ._old,
+            ._new
+              position: absolute
+              white-space: nowrap
+              @include transition_default
+
+            ._old
+              bottom: 0%
+              left: 0
+
+            ._new
+              bottom: -100%
+              left: 0
+              opacity: 0
+
+            &.__new
+              ._old
+                bottom: 100%
+                opacity: 0
+
+              ._new
+                opacity: 1
+                bottom: 0%
+
+          ._icon
+            width: 2.2rem
+
+          ._name
+            width: 100%
+            overflow: hidden
+
+            ._old,
+            ._new
+              transition-delay: .1s
+
+        &._logo
+          align-items: center
+          justify-content: center
+          color: $color_main
+          width: $block_nav_mobile_logo_width
+
+        &._user
+          align-items: center
+          justify-content: center
+          width: $block_nav_mobile_user_width
+
+          ._href
+            color: $color_main
+            text-decoration: none
+
+        &._main
+          opacity: 0
+          cursor: inherit
+
+          &._showed_
+            cursor: pointer
+            opacity: 1
+
+        &._subs
+          opacity: 0
+          cursor: inherit
+
+          &._showed_
+            cursor: pointer
+            opacity: 1
+
+          ._icon
+            ._old
+              transition-delay: .4s
+            ._new
+              transition-delay: .5s
+
+          ._name
+            ._old
+              transition-delay: .5s
+            ._new
+              transition-delay: .6s
+
+    .block_nav_mobile_body_blocker
+      position: fixed
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      width: 100%
+      height: 100%
+      opacity: 0
+      cursor: pointer
+      z-index: -9997
 
 @media screen and (min-width:1200px)
-  .block_nav
-    ._subs,
-    ._main
-      flex-direction: column
+  body
+    .block_nav
+      ._subs,
+      ._main
+        flex-direction: column
 
-      .nav-item
-        .nav-link
+        .nav-item
+          .nav-link
+
+    .block_nav_mobile
+      display: none
+
+    .body_blocker
+      display: none
 // block_nav x

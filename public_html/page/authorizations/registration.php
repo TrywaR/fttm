@@ -1,7 +1,8 @@
-<main class="container">
-  <div class="form_block mt-4 col-12 col-md-5">
-    <form id="form_registration" class="form_registration">
-      <h2 class="_form_title">
+<section class="row">
+  <div class="mt-4 col-12 col-md-7 m-auto">
+    <div class="form_block">
+      <form id="form_registration" class="form_registration">
+      <h2 class="_form_title sub_title">
         Registration
       </h2>
       <input type="hidden" name="app" value="app">
@@ -31,7 +32,7 @@
 
       <div class="_fttm_alerts"></div>
 
-      <div class="block_buttons">
+      <div class="block_buttons justify-content-end">
         <button class="btn btn-primary mt-2 mb-2" type="submit"><i class="fas fa-user-plus"></i> Register</button>
       </div>
 
@@ -48,5 +49,6 @@
         </p>
       </div>
     </form>
+    </div>
   </div>
-</main>
+</section>

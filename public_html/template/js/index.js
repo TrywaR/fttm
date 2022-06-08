@@ -55,3 +55,20 @@ $(function(){
 		  target: '#list-example'
 		})
 })
+
+// adaptive
+function adaptive(){
+	if ( $(window).width() < 1200 ) {
+		$('body').addClass('mobile')
+	}
+	else {
+		$('body').removeClass('mobile')
+	}
+}
+$(function(){
+	adaptive()
+	$(window).resize(function(){
+		adaptive()
+	})
+})
+// adaptive x

@@ -41,6 +41,7 @@ main
   overflow-x: hidden
   overflow-y: auto
   max-height: 100vh
+  padding: 1rem
   @include scroll
 
 footer
@@ -58,9 +59,14 @@ footer
     line-height: 1
     text-align: center
     opacity: .6
+    margin: auto
 
     a
       color: $color_text
 
       &:hover
         opacity: .5
+
+@media screen and (max-width:1200px)
+  body
+    flex-direction: column

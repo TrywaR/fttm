@@ -1,6 +1,27 @@
 // .welcome_container
 .welcome_container
   ._section
+    &._title
+      ._block
+        ._content
+          display: flex
+          justify-content: center
+          flex-direction: column
+          padding: 6rem 4rem
+          box-sizing: border-box
+
+          h1
+            display: flex
+            flex-direction: column
+            font-size: 6em
+            line-height: 1em
+
+          p
+            font-size: 1em
+            line-height: 1.4em
+            font-weight: 300
+            opacity: .7
+
     &._times
       background: $color_main_time_dark
 
@@ -17,31 +38,28 @@
 
     &._moneysforhour
 
+    &._start
+      position: relative
+      z-index: 1
+
+      &:after
+        content: ''
+        position: absolute
+        top: -10%
+        left: -10%
+        right: -10%
+        height: 110%
+        width: 120%
+        background: $color_main_dark_ultra
+        border-radius: 50% 50% 0 0
+        z-index: -1
+
     ._block
       display: flex
       align-items: center
       padding: 4rem 2rem 0
       font-size: 1em
       line-height: 1.8em
-
-      ._title
-        display: flex
-        justify-content: center
-        align-items: center
-        flex-direction: column
-        padding: 4rem
-        box-sizing: border-box
-
-        h1
-          font-size: 4em
-          line-height: 1
-
-        p
-          font-size: 1em
-          line-height: 1.4em
-          font-weight: 300
-          opacity: .7
-
 
       ._content
         flex-grow: 1
@@ -72,4 +90,17 @@
           margin: .5rem
           border-radius: $border_radius
           @include shadow_default
+
+@media screen and (max-width:1200px)
+  body
+    .welcome_container
+      ._section
+        &._title
+          ._block
+            ._content
+              padding: 5rem 0
+
+        ._block
+          ._content
+            padding: 1rem 0
 // .welcome_container x

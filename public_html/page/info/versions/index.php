@@ -16,7 +16,8 @@
 
   <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_4">5.2.4 Structure</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_5">5.2.5 Mobile</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_2_4">5.2.4 Structure</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_3">5.2.3 Analytics sub</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_2">5.2.2 Analytics</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_1">5.2.1 Update</a>
@@ -52,6 +53,22 @@
   <div class="col col-12 col-md-8">
    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
      <div class="pt-2 pb-2">
+       <h2 id="list-item-5_2_5">5.2.5 Mobile</h2>
+       <ol>
+         <li>
+           Adaptive menu for mobile
+         </li>
+         <li>
+           Update information on welcome page
+         </li>
+         <li>
+           Donate bitcoin address
+         </li>
+         <li>
+           Style for anonim page
+         </li>
+       </ol>
+
        <h2 id="list-item-5_2_4">5.2.4 Structure</h2>
        <ol>
          <li>
