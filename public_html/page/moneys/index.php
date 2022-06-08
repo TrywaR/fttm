@@ -248,7 +248,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
                       <div class="col-12 col-md-8">
                         <select name="category" class="form-select" size="3" aria-label="size 3 select example">
                           <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
-                            <?php if ( $arrMoneyCategory['id'] == 5 ): ?>
+                            <?php if ( $arrMoneyCategory['id'] == 0 ): ?>
                               <option selected="selected" value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
                             <?php else: ?>
                               <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
