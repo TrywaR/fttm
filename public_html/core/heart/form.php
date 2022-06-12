@@ -29,16 +29,6 @@ class form
     $sResultHtml = '';
     $arrFields = $this->arrFields;
 
-    // Проверки
-    if ( isset($arrFields['creator_id']) && $arrFields['creator_id']['value'] != $_SESSION['user']['id'] ) {
-      if ( $bModeration ) {
-        $arrFields['moderation'] = ['title'=>'Запрос на активацию раздела','type'=>'checkbox'];
-        unset($arrFields['user_group']);
-        unset($arrFields['active']);
-        unset($arrFields['disabled']);
-      }
-    }
-
     $bSection = false;
     $arrFieldsTextarea = [];
     if ( ! $this->single_sections ) {

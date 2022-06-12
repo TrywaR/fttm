@@ -4,6 +4,7 @@
 // $arrTemplateParams['title'] = '';
 // $arrTemplateParams['content'] = '';
 // $arrTemplateParams['button'] = '';
+$olang = new lang();
 ?>
 
 <!-- <div class="modal" tabindex="-1"> -->

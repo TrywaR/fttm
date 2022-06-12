@@ -2,12 +2,13 @@
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
+    $oLang = new lang();
 
     $sResultHtml .= '
       <div class="btn-group">
-        <a data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Time spend">
+        <a data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <i class="fas fa-plus-circle"></i>
-          Time spend
+          ' . $oLang->get("Add") . '
         </a>
       </div>
       ';

@@ -18,7 +18,7 @@ $(function(){
 			}
 
 			// Если редирект
-			var iLocationTime = 500
+			var iLocationTime = 1000
 			if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
 			if ( oData.success.location )
 				setTimeout(function(){
@@ -26,7 +26,7 @@ $(function(){
 				}, iLocationTime)
 
 			// Если нужно перезагрузить страницу
-			if ( oData.location_reload )
+			if ( oData.success.location_reload )
 				setTimeout(function(){
 					location.reload()
 				}, iLocationTime)
@@ -54,6 +54,7 @@ $(function(){
 
 		return false
 	})
+
   // Сброс формы редактирования контента
   $(document).on('click', '.form_reset', function(){
 		var oForm = $(this).parents('form')
@@ -243,7 +244,7 @@ function content_download( oData, oReturnType, sAppStatus ) {
 				window.location.replace(oData.location)
 			}, iLocationTime)
 
-		if ( oData.location_reload )
+		if ( oData.location_reload || ( oData.success && oData.success.location_reload ) )
 			setTimeout(function(){
 				location.reload()
 			}, iLocationTime)

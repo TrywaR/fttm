@@ -2,12 +2,13 @@
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
+    $oLang = new lang();
 
     $sResultHtml .= '
       <div class="btn-group">
-        <a data-action="moneys" data-animate_class="animate__flipInY" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Moeny">
+        <a data-action="moneys" data-animate_class="animate__flipInY" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <i class="fas fa-plus-circle"></i>
-          Money control
+          ' . $oLang->get("Add") . '
         </a>
       </div>
       ';
@@ -43,18 +44,21 @@ switch ($_REQUEST['form']) {
       $oMoney->active = 1;
       $oMoney->add();
     }
-    
+
     // Поля для добавления
     $oForm->arrFields = $oMoney->fields();
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
     $oForm->arrFields['action'] = ['value'=>'moneys','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
+
     // Настройки шаблона
     $oForm->arrTemplateParams['id'] = 'content_loader_save';
+    $olang = new lang();
     $oForm->arrTemplateParams['title'] = $olang->get('Moneys');
     $oForm->arrTemplateParams['button'] = 'Save';
     $sFormHtml = $oForm->show();
+
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
     $arrResults['data'] = (array)$oMoney;

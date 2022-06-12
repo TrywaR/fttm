@@ -218,18 +218,20 @@ $arrProjects = $oProject->get();
               </div>
 
               <div class="col-6 d-flex justify-content-end">
-                <a href="#" class="btn content_manager_switch switch_icons">
-                  <div class="">
-                    <i class="far fa-square"></i>
-                  </div>
-                  <div class="">
-                    <i class="fas fa-square"></i>
-                  </div>
-                </a>
-                <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="edit" data-elem=".task" data-animate_class="animate__flipInY">
-                  <i class="fas fa-pen-square"></i>
-                </a>
-                <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="del" data-elem=".task" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+                <div class="btn-group">
+                  <a href="#" class="btn content_manager_switch switch_icons">
+                    <div class="">
+                      <i class="far fa-square"></i>
+                    </div>
+                    <div class="">
+                      <i class="fas fa-square"></i>
+                    </div>
+                  </a>
+                  <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="edit" data-elem=".task" data-animate_class="animate__flipInY">
+                    <i class="fas fa-pen-square"></i>
+                  </a>
+                  <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="del" data-elem=".task" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+                </div>
               </div>
             </div>
 

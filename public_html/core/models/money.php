@@ -81,57 +81,74 @@ class money extends model
 
   public function fields() # Поля для редактирования
   {
+    $oLang = new lang();
+
     $arrFields = [];
     $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
-    $arrFields['user_id'] = ['title'=>'Пользователь','type'=>'hidden','value'=>$_SESSION['user']['id']];
+    $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
-    $arrFields['title'] = ['title'=>'Название','type'=>'text','required'=>'required','value'=>$this->title];
-    $arrFields['description'] = ['title'=>'Описание','type'=>'textarea','value'=>$this->description];
-    $arrFields['price'] = ['title'=>'Стоимость','type'=>'number','value'=>$this->price];
-    $arrFields['date'] = ['title'=>'Дата','type'=>'date','value'=>$this->date];
-    $arrFields['type'] = ['title'=>'Тип','type'=>'number','value'=>$this->type];
+    $arrTypeFilter = [
+      array('id'=>0,'name'=>$oLang->get('Spend')),
+      array('id'=>1,'name'=>$oLang->get('Replenish')),
+    ];
+    $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$arrTypeFilter,'value'=>$this->type];
 
-    // $oCard = new card();
-    // $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    // $oCard->sort = 'sort';
-    // $oCard->sortDir = 'ASC';
-    // $arrCards = $oCard->get();
-    // $arrCardsFilter = [];
-    // foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
-    // $arrFields['card'] = ['title'=>'Карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
-    // $arrFields['to_card'] = ['title'=>'На карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+    $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2)];
+    $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','value'=>$this->date];
 
-    // $arrFields['subscription'] = ['title'=>'Подписка','type'=>'number','disabled'=>'disabled','value'=>$this->subscription];
+    $oCard = new card();
+    $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCard->sort = 'sort';
+    $oCard->sortDir = 'ASC';
+    $arrCards = $oCard->get();
+    $arrCardsFilter = [];
+    $arrCardsFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
+    $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
-    // $oMoneyCategory = new moneys_category();
-    // $oMoneyCategory->sort = 'sort';
-    // $oMoneyCategory->sortDir = 'ASC';
-    // $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    // $arrMoneysCategories = $oMoneyCategory->get_categories();
-    // $arrMoneysCategoriesFilter = [];
-    // foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
-    // $arrFields['category_id'] = ['title'=>'Категория','type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category_id];
+    $oMoneysSubscriptions = new moneys_subscriptions();
+    $oMoneysSubscriptions->sort = 'sort';
+    $oMoneysSubscriptions->sortDir = 'ASC';
+    $oMoneysSubscriptions->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
+    $arrSubscriptionsFilter = [];
+    foreach ($arrMoneysSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
+    $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-0','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
-    // $oProject = new project();
-    // $oProject->sort = 'sort';
-    // $oProject->sortDir = 'ASC';
-    // $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    // $arrProjects = $oProject->get();
-    // // $arrProjectsFilter[] = array('id'=>0,'name'=>$olang->get('NoCategory'));
-    // foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    // $arrFields['project_id'] = ['title'=>'Проект','type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    $oMoneyCategory = new moneys_category();
+    $oMoneyCategory->sort = 'sort';
+    $oMoneyCategory->sortDir = 'ASC';
+    $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
+    $arrMoneysCategories = $oMoneyCategory->get_categories();
+    $arrMoneysCategoriesFilter = [];
+    foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
+    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category_id];
 
-    // $oTask = new task();
-    // $oTask->sort = 'sort';
-    // $oTask->sortDir = 'ASC';
-    // $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    // $arrTasks = $oTask->get();
-    // $arrTaskId = [];
-    // foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
-    // $arrFields['tasks_id'] = ['title'=>'Задача','type'=>'select','options'=>$arrTasksFilter,'value'=>$this->tasks_id];
+    $oProject = new project();
+    $oProject->sort = 'sort';
+    $oProject->sortDir = 'ASC';
+    $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrProjects = $oProject->get();
+    $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
+    $arrFields['project_id'] = ['section'=>2,'title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 
-    $arrFields['active'] = ['title'=>'Активность','type'=>'hidden','value'=>$this->active];
+    $oTask = new task();
+    $oTask->sort = 'sort';
+    $oTask->sortDir = 'ASC';
+    $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrTasks = $oTask->get();
+    $arrTaskId = [];
+    $arrTasksFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    $arrFields['tasks_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->tasks_id];
+
+    $arrFields['description'] = ['section'=>2,'title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
+
+    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
 
     return $arrFields;
   }

@@ -218,6 +218,7 @@ function content_loader_elem_html( oContentLoadElem, oTemplate ){
 	// oContentLoadElem - данные для шаблона
 
   oTemplate = oTemplate ? oTemplate : arrPageContent.oTemplate
+  if ( typeof oTemplate === 'undefined' ) return false
 
   var
   oElemHtml = $(oTemplate),
@@ -292,15 +293,14 @@ $(function(){
       content_download( oData, 'json' )
     ).then( function( oData ) {
       if ( oData.success ) {
-        // Отображаем результат
-        if ( oData.success.text ) status(oData.success.text)
-        else status(oData.success)
+        var iLocationTime = 500
+        if ( oData.success.location_time ) iLocationTime = oData.success.location_time
 
-        if ( oData.success.data ) {
+        if ( oData.success.data && oData.success.event ) {
           switch (oData.success.event) {
             case 'reload':
             case 'save':
-              content_loader_update( oData.success.data )
+              var stest = content_loader_update( oData.success.data )
               break;
             case 'add':
               content_loader_add( oData.success.data )
@@ -311,11 +311,23 @@ $(function(){
           }
         }
 
-        if ( oData.success.location ) $(location).attr('href',oData.success.location)
-        if ( oData.location_reload ) location.reload()
+        if ( oData.success.location ) {
+          setTimeout(function(){
+            $(location).attr('href',oData.success.location)
+          }, iLocationTime )
+        }
+        if ( oData.success.location_reload ) {
+          setTimeout(function(){
+            location.reload()
+          }, iLocationTime )
+        }
       }
 
-      if ( oData.error ) status(oData)
+      if ( oData.location_reload ) {
+        setTimeout(function(){
+          location.reload()
+        }, iLocationTime )
+      }
     })
 
     return false

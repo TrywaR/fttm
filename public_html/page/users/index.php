@@ -1,3 +1,4 @@
+<?$oLang = new lang()?>
 <main class="container pt-4 pb-4">
   <div class="row mb-4 block_user animate__animated animate__fadeIn">
      <div class="col-12">
@@ -13,7 +14,7 @@
        </div>
 
        <small class="mt-3">
-         Other
+         <?=$oLang->get('Other')?>
        </small>
        <ul class="list-group mt-1 mb-1">
          <li class="list-group-item">
@@ -47,13 +48,13 @@
            ?>
          </li>
          <li class="list-group-item">
-           <small>Referal link:</small>
+           <small><?=$oLang->get('ReferalLink')?>:</small>
            <input type="text" readonly class="form-control-plaintext" value="<?=config::$site_url?>/?referal=<?=$_SESSION['user']['id']?>">
          </li>
        </ul>
 
        <small class="mt-3">
-         Config
+         <?=$oLang->get('Config')?>
        </small>
        <ul class="list-group mt-1 mb-1">
          <li class="list-group-item">
@@ -61,7 +62,7 @@
              <span class="icon">
                <i class="fas fa-globe-africa"></i>
              </span>
-             Lang:
+             <?=$oLang->get('Lang')?>:
            </small>
            <?=$_SESSION['user']['lang']?>
          </li>
@@ -70,7 +71,7 @@
              <span class="icon">
                <i class="fas fa-tint"></i>
              </span>
-             Theme:
+             <?=$oLang->get('Theme')?>:
            </small>
            <?
            switch ((int)$_SESSION['user']['theme']) {
@@ -83,16 +84,13 @@
              case 2:
                ?>Light<?
                break;
-             case 3:
-               ?>No<?
-               break;
            }
            ?>
          </li>
        </ul>
 
        <small class="mt-3">
-         Info
+         <?=$oLang->get('Info')?>
        </small>
        <ul class="list-group mt-1 mb-1">
          <li class="list-group-item">
@@ -100,7 +98,7 @@
              <span class="icon">
                <i class="fas fa-envelope"></i>
              </span>
-             Email:
+             <?=$oLang->get('Email')?>:
            </small>
            <?=$_SESSION['user']['email']?>
          </li>
@@ -109,7 +107,7 @@
              <span class="icon">
                <i class="fas fa-mobile"></i>
              </span>
-             Phone:
+             <?=$oLang->get('Phone')?>:
            </small>
            <?=$_SESSION['user']['phone']?>
          </li>
@@ -118,24 +116,32 @@
              <span class="icon">
                <i class="fas fa-calendar-check"></i>
              </span>
-             Registration:
+             <?=$oLang->get('DateRegistration')?>:
            </small>
            <?=$_SESSION['user']['date_registration']?>
          </li>
        </ul>
 
-       <div class="btn-group btn-group-toggle mt-3 mb-3" data-toggle="buttons">
-         <a class="btn btn-dark" href="/users/edit/">
+       <div class="btn-group">
+         <!-- <a class="btn btn-dark" href="/users/edit/"> -->
+         <a data-action="users" data-animate_class="animate__flipInY" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="<?=$oLang->get('Edit')?>">
            <i class="fas fa-user-edit"></i>
-           Edit
+           <?=$oLang->get('Edit')?>
          </a>
+
+         <a data-action="users" data-animate_class="animate__flipInY" data-form="form_new_password" href="javascript:;" class="btn btn-dark content_loader_show" title="<?=$oLang->get('ChangePassword')?>">
+           <i class="fa-solid fa-key"></i>
+           <?=$oLang->get('ChangePassword')?>
+         </a>
+
          <a class="btn btn-dark" href="#" id="user_logout">
            <i class="fas fa-user-secret"></i>
-           Exit
+           <?=$oLang->get('Exit')?>
          </a>
+
          <a class="btn btn-dark" href="#">
            <i class="fas fa-user-alt-slash"></i>
-           Delete
+           <?=$oLang->get('Delete')?>
          </a>
        </div>
      </div>

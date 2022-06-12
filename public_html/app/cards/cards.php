@@ -44,6 +44,7 @@ switch ($_REQUEST['form']) {
     $oCard->balance_reload();
     $arrResult['data'] = $oCard->get();
     $arrResult['event'] = 'save';
+    $arrResult['location_reload'] = true;
     $arrResult['text'] = 'Card update';
     notification::success($arrResult);
     break;

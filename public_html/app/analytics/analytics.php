@@ -40,6 +40,7 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oMoneysSubscriptions = new moneys_subscriptions();
+    $oMoneysSubscriptions->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oMoneysSubscriptions->sDateQuery = $dMonth;
     // $oMoneysSubscriptions->show_query = true;
     $arrResults['subscriptions'] = $oMoneysSubscriptions->get_subscriptions();
@@ -86,13 +87,15 @@ switch ($_REQUEST['form']) {
     $iBalance = 0;
     foreach ( $arrCards as & $arrCard ) $iBalance = (int)$iBalance + (int)$arrCard['balance'];
     $arrResults['cards'] = $arrCards;
-    $arrResults['balance'] = number_format($iBalance, 2, '.', ' ');
+    if ( (int)$iBalance > 0 ) $arrResults['balance'] = number_format($iBalance, 2, '.', ' ');
+    else $arrResults['balance'] = 0;
 
     // Money from hour
     $arrTime = explode(':',$arrResults['work']);
     $iTimeSum = $arrTime[0] + $arrTime[1] / 60;
     $iMoneyForHour = $iMonthSummSalaryWork / $iTimeSum;
-    $arrResults['moneyforhour'] = number_format($iMoneyForHour, 2, '.', ' ');
+    if ( (int)$iMoneyForHour > 0 ) $arrResults['moneyforhour'] = number_format($iMoneyForHour, 2, '.', ' ');
+    else $arrResults['moneyforhour'] = 0;
 
     notification::success($arrResults);
     break;

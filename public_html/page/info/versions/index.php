@@ -16,7 +16,8 @@
 
   <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_6">5.2.6 Times forms</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_7">5.2.7 Moneys forms</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_2_6">5.2.6 Times forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_5">5.2.5 Mobile</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_4">5.2.4 Structure</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_3">5.2.3 Analytics sub</a>
@@ -54,6 +55,25 @@
   <div class="col col-12 col-md-8">
    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
      <div class="pt-2 pb-2">
+       <h2 id="list-item-5_2_7">5.2.7 Moneys forms</h2>
+       <ol>
+         <li>
+           Обновлены формы в корневом разделе управления финансами
+         </li>
+         <li>
+           Обновлены стили форм
+         </li>
+         <li>
+           Исправлена система восстановления пароля и редактирования пользователя
+         </li>
+         <li>
+           Исправлена система подсчёта баланса, ранее кэш был общим)
+         </li>
+         <li>
+           Пополнена библиотека руссификации, переведена страница редактирования пользователя и корневой раздел управления финансами
+         </li>
+       </ol>
+
        <h2 id="list-item-5_2_6">5.2.6 Times forms</h2>
        <ol>
          <li>

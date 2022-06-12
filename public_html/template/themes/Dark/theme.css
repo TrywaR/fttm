@@ -168,6 +168,11 @@ table {
   .block_buttons .button:not(:last-child) {
     margin-right: 0.5rem; }
 
+.switch_values {
+  display: none; }
+  .switch_values._show_ {
+    display: flex; }
+
 main h1 {
   font-size: 1.5em;
   margin-bottom: 1rem; }
@@ -1075,8 +1080,19 @@ body .list-group-item-action:hover {
   background: #101010; }
 body .input-group-text {
   color: white;
-  background: #222228;
-  border-color: #222228; }
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 400;
+  background: #101010;
+  border-color: #101010;
+  min-width: 8rem;
+  opacity: 0.8; }
+body .form-label {
+  opacity: 0.8;
+  color: white;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 400; }
 body .jumbotron a {
   color: #3282c8; }
   body .jumbotron a:hover {

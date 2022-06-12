@@ -2,6 +2,8 @@ var oModal = {}
 
 oModal.show = function(){
   $(document).find('#fttm_modal').modal('show')
+
+  if ( $(document).find('#fttm_modal form').length ) forms_init( $(document).find('#fttm_modal form') )
 }
 
 oModal.hide = function(){

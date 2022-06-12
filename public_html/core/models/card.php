@@ -45,6 +45,7 @@ class card extends model
 
     // Анализируем затраты
     $oMoney = new money();
+    $oMoney->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oMoney->query .= ' AND `card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 0';
     $arrMoneys = $oMoney->get_money();
@@ -52,6 +53,7 @@ class card extends model
 
     // Анализируем поступления
     $oMoney = new money();
+    $oMoney->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oMoney->query .= ' AND `card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 1';
     $arrMoneys = $oMoney->get_money();
@@ -59,6 +61,7 @@ class card extends model
 
     // Анализируем поступления с других карт
     $oMoney = new money();
+    $oMoney->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oMoney->query .= ' AND `to_card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 0';
     $arrMoneys = $oMoney->get_money();
