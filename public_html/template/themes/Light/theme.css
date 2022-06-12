@@ -169,7 +169,8 @@ table {
     margin-right: 0.5rem; }
 
 .switch_values {
-  display: none; }
+  display: none;
+  transition: all 0.3s ease-in-out 0s; }
   .switch_values._show_ {
     display: flex; }
 
