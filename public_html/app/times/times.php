@@ -1,5 +1,20 @@
 <?
 switch ($_REQUEST['form']) {
+  case 'actions': # Элементы управления
+    $sResultHtml = '';
+
+    $sResultHtml .= '
+      <div class="btn-group">
+        <a data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Time spend">
+          <i class="fas fa-plus-circle"></i>
+          Time spend
+        </a>
+      </div>
+      ';
+
+    notification::send( $sResultHtml );
+    break;
+
   case 'show': # Вывод элементов
     $oTime = new time( $_REQUEST['id'] );
     if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];

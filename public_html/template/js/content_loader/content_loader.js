@@ -264,9 +264,19 @@ $(function(){
         'form': $(this).data().form,
         'parents': $(this).data().parents,
         'id': $(this).data().id,
-      }, 'json' )
+      }, 'json', false )
     ).then( function( oData ) {
-      if ( oData.form ) $.fancybox.open( oData.form )
+      if ( oData.event )
+        switch ( oData.event ) {
+          case 'add':
+            content_loader_add( oData.data )
+            break;
+        }
+
+      if ( oData.form ) {
+        oModal.set_content_full( oData.form )
+        oModal.show()
+      }
     })
 
     return false

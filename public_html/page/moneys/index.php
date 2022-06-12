@@ -31,15 +31,94 @@ $oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 ?>
 
-<section class="row block_moneys">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Moneys</h1>
+<section class="row block_jumbotron block_moneys">
+  <div class="col col-12">
+    <div class="_block_title">
+      <h1 class="sub_title _value">
+        Moenys
+      </h1>
+
+      <div class="_buttons btn-group">
+        <button class="accordion-button collapsed btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMoney" aria-expanded="false" aria-controls="flush-collapseMoney">
+          <i class="fa-solid fa-gears"></i>
+        </button>
       </div>
     </div>
   </div>
 
+  <div id="flush-collapseMoney" class="col-12 accordion-collapse collapse">
+    <!-- Фильтр -->
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys">
+      <div class="input-group mb-2">
+        <span class="input-group-text">
+          <i class="fas fa-wallet"></i>
+        </span>
+        <select name="type" class="form-select">
+          <option value="" selected>Type</option>
+          <option value="0"><?=$olang->get('Spend')?></option>
+          <option value="1"><?=$olang->get('Replenish')?></option>
+        </select>
+
+        <span class="input-group-text">
+          <i class="far fa-credit-card"></i>
+        </span>
+        <select name="card" class="form-select">
+          <option value="" selected>Card</option>
+          <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+            <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+          <?php endforeach; ?>
+        </select>
+
+        <span class="input-group-text">
+          <i class="fas fa-list-ul"></i>
+        </span>
+        <select name="category" class="form-select">
+          <option value="" selected>Category</option>
+          <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
+            <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <div class="input-group mb-4">
+        <span class="input-group-text">
+          <i class="far fa-folder"></i>
+        </span>
+        <select name="project_id" class="form-select">
+          <option value="" selected>Project</option>
+          <option value="0"><?=$olang->get('NoProject')?></option>
+          <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+            <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+          <?php endforeach; ?>
+        </select>
+
+        <span class="input-group-text">
+          <i class="fas fa-wrench"></i>
+        </span>
+        <select name="task_id" class="form-select">
+          <option value="" selected>Task</option>
+          <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+            <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+          <?php endforeach; ?>
+        </select>
+
+        <span class="input-group-text">
+          <i class="far fa-calendar-alt"></i>
+        </span>
+        <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+
+        <button class="btn btn-dark" type="submit">
+          <!-- <span class="icon">
+            <i class="fas fa-plus"></i>
+          </span> -->
+          Go
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="row block_moneys">
   <div class="col col-12">
     <!-- Затраты -->
     <div class="card mb-4">
@@ -328,75 +407,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
   </div>
 
   <div class="col col-12">
-    <!-- Фильтр -->
-    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys">
-      <div class="input-group mb-2">
-        <span class="input-group-text">
-          <i class="fas fa-wallet"></i>
-        </span>
-        <select name="type" class="form-select">
-          <option value="" selected>Type</option>
-          <option value="0"><?=$olang->get('Spend')?></option>
-          <option value="1"><?=$olang->get('Replenish')?></option>
-        </select>
-
-        <span class="input-group-text">
-          <i class="far fa-credit-card"></i>
-        </span>
-        <select name="card" class="form-select">
-          <option value="" selected>Card</option>
-          <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-            <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-          <?php endforeach; ?>
-        </select>
-
-        <span class="input-group-text">
-          <i class="fas fa-list-ul"></i>
-        </span>
-        <select name="category" class="form-select">
-          <option value="" selected>Category</option>
-          <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
-            <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-
-      <div class="input-group mb-4">
-        <span class="input-group-text">
-          <i class="far fa-folder"></i>
-        </span>
-        <select name="project_id" class="form-select">
-          <option value="" selected>Project</option>
-          <option value="0"><?=$olang->get('NoProject')?></option>
-          <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-            <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-          <?php endforeach; ?>
-        </select>
-
-        <span class="input-group-text">
-          <i class="fas fa-wrench"></i>
-        </span>
-        <select name="task_id" class="form-select">
-          <option value="" selected>Task</option>
-          <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
-            <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
-          <?php endforeach; ?>
-        </select>
-
-        <span class="input-group-text">
-          <i class="far fa-calendar-alt"></i>
-        </span>
-        <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
-
-        <button class="btn btn-dark" type="submit">
-          <!-- <span class="icon">
-            <i class="fas fa-plus"></i>
-          </span> -->
-          Go
-        </button>
-      </div>
-    </form>
-
     <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
       <button type="button" name="button" class="btn del">
         <i class="fas fa-folder-minus"></i>
@@ -426,6 +436,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         $(document).find('#moneys').content_loader()
         $(document).find('#content_filter').content_filter()
         $(document).find('#content_manager_buttons').content_manager()
+        $(document).find('#footer_actions').content_actions( {'action':'moneys'} )
       })
     </script>
   </div>

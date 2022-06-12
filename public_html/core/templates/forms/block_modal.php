@@ -5,45 +5,42 @@
 // $arrTemplateParams['content'] = '';
 // $arrTemplateParams['button'] = '';
 ?>
-<div class="block_modal" id="block_modal">
-  <form class="modal_form" id="<?=$arrTemplateParams['id']?>" method="post">
-    <div class="block_header">
+
+<!-- <div class="modal" tabindex="-1"> -->
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-lg-down" id="block_modal">
+    <form class="modal-content" id="<?=$arrTemplateParams['id']?>" method="post">
       <?php if ( $arrTemplateParams['title'] != '' ): ?>
-        <h2 class="_form_title">
-          <?=$arrTemplateParams['title']?>
-        </h2>
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <?=$arrTemplateParams['title']?>
+          </h5>
+          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
       <?php endif; ?>
-    </div>
 
-    <? if ( $arrTemplateParams['content'] ): ?>
-      <div class="block_sections">
-        <?=$arrTemplateParams['content']?>
-        <!-- <div class="block_section">
-        </div> -->
+      <div class="modal-body">
+        <div class="row">
+          <? if ( $arrTemplateParams['content'] ): ?>
+            <?=$arrTemplateParams['content']?>
+          <?php endif; ?>
 
-        <!-- <div class="block_section _40">
-        </div>
-
-        <div class="block_section _60">
-        </div> -->
-      </div>
-    <? endif; ?>
-
-    <? if ( $arrTemplateParams['html'] ): ?>
-      <div class="block_sections">
-        <div class="block_section _100">
-          <?=$arrTemplateParams['html']?>
+          <? if ( $arrTemplateParams['html'] ): ?>
+            <?=$arrTemplateParams['html']?>
+          <? endif; ?>
         </div>
       </div>
-    <? endif; ?>
 
-    <div class="block_footer">
-      <div class="form_status"></div>
+      <div class="modal-footer">
 
-      <div class="block_buttons">
-        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> Clear</button>
-        <button class="button btn btn-primary" type="submit"><i class="fas fa-save"></i> <?=$arrTemplateParams['button']?></button>
+        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+        <!-- <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Not reset</label>
+        </div> -->
+        <button class="button btn btn-dark" type="submit"><i class="fas fa-save"></i> <?=$olang->get($arrTemplateParams['button'])?></button>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+<!-- </div> -->

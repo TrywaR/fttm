@@ -2,6 +2,12 @@
 /**
  * Lang
  */
+
+/*
+  <?=$olang->get('Clear')?>
+  $olang->get('Clear')
+*/
+
 class lang
 {
   public $sUserLang = '';
@@ -31,6 +37,11 @@ class lang
       'NoSubscription' => 'Не подписка',
       'NoTask' => 'Не задача',
       'Tasks' => 'Задачи',
+
+      'Moneys' => 'Деньги',
+
+      'Times' => 'Время',
+
       'Clear' => 'Отчистить',
       'Clients' => 'Клиенты',
       'Add' => 'Добавить',
@@ -51,6 +62,11 @@ class lang
       'NoSubscription' => 'No subscription',
       'NoTask' => 'No Task',
       'Tasks' => 'Tasks',
+
+      'Moneys' => 'Moneys',
+
+      'Times' => 'Times',
+
       'Clear' => 'Clear',
       'Clients' => 'Clients',
       'Add' => 'Add',

@@ -40,9 +40,9 @@ class money extends model
       $arrMoney['category_show'] = 'true';
       $oMoneyCategory = new moneys_category( $arrMoney['category'] );
       $arrMoney['categroy_val'] = [];
-      $arrMoneyCategory = (array)$oMoneyCategory;
-      $arrMoney['categroy_val']['title'] = $arrMoneyCategory['title'];
-      $arrMoney['categroy_val']['color'] = $arrMoneyCategory['color'];
+      $arrMoneysCategory = (array)$oMoneyCategory;
+      $arrMoney['categroy_val']['title'] = $arrMoneysCategory['title'];
+      $arrMoney['categroy_val']['color'] = $arrMoneysCategory['color'];
     }
 
     if ( (int)$arrMoney['project_id'] ) {
@@ -88,34 +88,48 @@ class money extends model
 
     $arrFields['title'] = ['title'=>'Название','type'=>'text','required'=>'required','value'=>$this->title];
     $arrFields['description'] = ['title'=>'Описание','type'=>'textarea','value'=>$this->description];
-    // $arrFields['tasks_id'] = ['title'=>'Тикет','type'=>'textarea','value'=>$this->tasks_id];
     $arrFields['price'] = ['title'=>'Стоимость','type'=>'number','value'=>$this->price];
     $arrFields['date'] = ['title'=>'Дата','type'=>'date','value'=>$this->date];
     $arrFields['type'] = ['title'=>'Тип','type'=>'number','value'=>$this->type];
 
-    $oMoneyCategory = new money_category();
-    $oMoneyCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrMoneyCategories = $oMoneyCategory->get();
-    $arrMoneyCategoriesFilter = [];
-    foreach ($arrMoneyCategories as $arrMoneyCategory) $arrMoneyCategoriesFilter[] = array('id'=>$arrMoneyCategory['id'],'name'=>$arrMoneyCategory['title']);
-    $arrFields['category_id'] = ['title'=>'Категория','type'=>'select','options'=>$arrMoneyCategoriesFilter,'value'=>$this->category_id];
+    // $oCard = new card();
+    // $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    // $oCard->sort = 'sort';
+    // $oCard->sortDir = 'ASC';
+    // $arrCards = $oCard->get();
+    // $arrCardsFilter = [];
+    // foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
+    // $arrFields['card'] = ['title'=>'Карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    // $arrFields['to_card'] = ['title'=>'На карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
-    $oProject = new project();
-    $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrProjects = $oProject->get();
-    $arrProjectsFilter = [];
-    foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    $arrFields['project_id'] = ['title'=>'Проект','type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    // $arrFields['subscription'] = ['title'=>'Подписка','type'=>'number','disabled'=>'disabled','value'=>$this->subscription];
 
-    $oCard = new card();
-    $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrCards = $oCard->get();
-    $arrCardsFilter = [];
-    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
-    $arrFields['card'] = ['title'=>'Карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
-    $arrFields['to_card'] = ['title'=>'На карту','type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
+    // $oMoneyCategory = new moneys_category();
+    // $oMoneyCategory->sort = 'sort';
+    // $oMoneyCategory->sortDir = 'ASC';
+    // $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    // $arrMoneysCategories = $oMoneyCategory->get_categories();
+    // $arrMoneysCategoriesFilter = [];
+    // foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
+    // $arrFields['category_id'] = ['title'=>'Категория','type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category_id];
 
-    $arrFields['subscription'] = ['title'=>'Подписка','type'=>'number','disabled'=>'disabled','value'=>$this->subscription];
+    // $oProject = new project();
+    // $oProject->sort = 'sort';
+    // $oProject->sortDir = 'ASC';
+    // $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    // $arrProjects = $oProject->get();
+    // // $arrProjectsFilter[] = array('id'=>0,'name'=>$olang->get('NoCategory'));
+    // foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
+    // $arrFields['project_id'] = ['title'=>'Проект','type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+
+    // $oTask = new task();
+    // $oTask->sort = 'sort';
+    // $oTask->sortDir = 'ASC';
+    // $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    // $arrTasks = $oTask->get();
+    // $arrTaskId = [];
+    // foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    // $arrFields['tasks_id'] = ['title'=>'Задача','type'=>'select','options'=>$arrTasksFilter,'value'=>$this->tasks_id];
 
     $arrFields['active'] = ['title'=>'Активность','type'=>'hidden','value'=>$this->active];
 

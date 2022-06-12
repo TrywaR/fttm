@@ -7,7 +7,7 @@
 // $arrTemplateParams['required'] = '';
 // $arrTemplateParams['class'] = '';
 ?>
-<div class="input_checkbox form-check <?=$arrTemplateParams['class']?>">
+<div class="input_checkbox form-check mb-2 <?=$arrTemplateParams['class']?>">
   <input
     type="checkbox"
     class="form-check-input"

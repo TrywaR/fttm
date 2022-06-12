@@ -24,154 +24,22 @@ $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
 
-<section class="row block_times">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Times</h1>
+<section class="row block_jumbotron">
+  <div class="col col-12">
+    <div class="_block_title">
+      <h1 class="sub_title _value">
+        Times
+      </h1>
+
+      <div class="_buttons btn-group">
+        <button class="accordion-button collapsed btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTime" aria-expanded="false" aria-controls="flush-collapseTime">
+          <i class="fa-solid fa-gears"></i>
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="col-12 mb-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Time</h5>
-        <!-- <a href="#" class="btn btn-primary">Добавить</a> -->
-
-        <div class="card-body">
-          <!-- <a data-action="times" data-animate_class="animate__flipInY" data-elem=".table_row" data-form="form" href="javascript:;" class="button _icon content_loader_show" title="Потратить время">
-            <i class="fas fa-plus-circle"></i>
-            <span class="badge badge-warning">Beta</span>
-          </a> -->
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Spend
-                </button>
-              </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                  <form
-                    class="content_loader_form"
-                    action=""
-                    method="post"
-                    data-content_download_edit_type="0"
-                    data-content_loader_to="#content_loader_to"
-                    data-content_loader_template=".template_time"
-                  >
-                    <input type="hidden" name="app" value="app">
-                    <input type="hidden" name="action" value="times">
-                    <input type="hidden" name="form" value="save">
-                    <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
-                    <input type="hidden" name="id" value="">
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputTitle" class="col-form-label">Title</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="title" type="text" id="inputTitle" class="form-control">
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputDescription" class="col-form-label">Description</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputProjectId" class="col-form-label">Category id</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <select name="category_id" class="form-select" size="3" aria-label="size 3 select example">
-                          <?php foreach ($arrCategories as $iIndex => $arrCategory): ?>
-                            <?php if ( $iIndex == 0 ): ?>
-                              <option selected="selected" value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
-                            <?php else: ?>
-                              <option value="<?=$arrCategory['id']?>"><?=$arrCategory['title']?></option>
-                            <?php endif; ?>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputTimeReally" class="col-form-label">Time really</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="time_really" type="time" lang="en" id="inputTimeReally" class="form-control">
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputDate" class="col-form-label"><?=$olang->get('Date')?></label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="date" type="date" lang="en" id="inputDate" class="form-control" value="<?=date('Y-m-d')?>">
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputProjectId" class="col-form-label">Project id</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <select name="project_id" id="inputProjectId" class="form-select" size="3">
-                          <option value="0" selected><?=$olang->get('NoProject')?></option>
-                          <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-                            <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputTaskId" class="col-form-label">Task id</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <select name="task_id" id="inputTaskId" class="form-select" size="3" aria-label="size 3 select example">
-                          <option value="0" selected><?=$olang->get('NoTask')?></option>
-                          <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
-                            <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="row align-items-center mb-1">
-                      <div class="col-12 col-md-4">
-                        <label for="inputSort" class="col-form-label">Sort</label>
-                      </div>
-                      <div class="col-12 col-md-8">
-                        <input name="sort" type="number" id="inputSort" class="form-control">
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between mt-3">
-                      <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
-                      <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-12 ">
+  <div id="flush-collapseTime" class="col-12 accordion-collapse collapse">
     <!-- Фильтр -->
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#times">
       <div class="input-group mb-2">
@@ -222,7 +90,11 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         </button>
       </div>
     </form>
+  </div>
+</section>
 
+<section class="row block_times">
+  <div class="col-12">
     <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
       <button type="button" name="button" class="btn del">
         <i class="fas fa-folder-minus"></i>
@@ -252,6 +124,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         $(document).find('#times').content_loader()
         $(document).find('#content_filter').content_filter()
         $(document).find('#content_manager_buttons').content_manager()
+        $(document).find('#footer_actions').content_actions( {'action':'times'} )
       })
     </script>
 
@@ -272,8 +145,8 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
           <span class="_title">{{title}}</span>
         </div>
 
-        <span class="rounded-pill">
-          <a href="#" class="btn content_manager_switch switch_icons">
+        <span class="btn-group">
+          <a href="#" class="btn btn-dark content_manager_switch switch_icons">
             <div class="">
               <i class="far fa-square"></i>
             </div>
@@ -281,10 +154,16 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
               <i class="fas fa-square"></i>
             </div>
           </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+
+          <!-- <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-elem=".list-group-item" data-form="edit" data-animate_class="animate__flipInY">
+            <i class="fas fa-pen-square"></i>
+          </a> -->
+
+          <a data-action="times" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".time" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Time edit">
             <i class="fas fa-pen-square"></i>
           </a>
-          <a href="#" class="btn content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+
+          <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
         </span>
 
         <div class="progress">
@@ -293,5 +172,4 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
       </li>
     </div>
   </div>
-
 </section>

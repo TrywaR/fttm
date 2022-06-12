@@ -81,15 +81,15 @@ class form
     }
 
     if ( $bSection && ! $this->single_sections ) {
-      $sResultHtml .= '<div class="block_section _40">';
+      $sResultHtml .= '<div class="col-12 col-md-6">';
         $sResultHtml .= $this->fields( $arrFields );
       $sResultHtml .= '</div>';
-      $sResultHtml .= '<div class="block_section _60">';
+      $sResultHtml .= '<div class="col-12 col-md-6">';
         $sResultHtml .= $this->fields( $arrFieldsTextarea );
       $sResultHtml .= '</div>';
     }
     else {
-      $sResultHtml .= '<div class="block_section _100">';
+      $sResultHtml .= '<div class="col-12">';
         $sResultHtml .= $this->fields( $arrFields );
       $sResultHtml .= '</div>';
     }

@@ -126,7 +126,7 @@ class time extends model
     // $arrFields['type'] = ['class'=>'switch','title'=>'Тип чата','type'=>'select','options'=>$arrTypes,'value'=>$this->type];
 
     $oTimeCategory = new times_category();
-    $oTimeCategory->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oTimeCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrTimeCategories = $oTimeCategory->get();
     $arrTimeCategoriesFilter = [];
     foreach ($arrTimeCategories as $arrTimeCategory) $arrTimeCategoriesFilter[] = array('id'=>$arrTimeCategory['id'],'name'=>$arrTimeCategory['title']);
@@ -134,16 +134,19 @@ class time extends model
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+
     $arrProjects = $oProject->get();
     $arrProjectsFilter = [];
+    $arrProjectsFilter[] = array('id'=>0,'name'=>'NoProject');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
     $arrFields['project_id'] = ['title'=>'Проект','type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 
     // $arrFields['task_id'] = ['title'=>'Задача','type'=>'number','value'=>$this->task_id];
 
+    $arrFields['date'] = ['title'=>'Дата','type'=>'date','section'=>2,'value'=>$this->date];
+
     $arrFields['time_planned'] = ['title'=>'Планируемое время','type'=>'hidden','section'=>2,'value'=>$this->time_planned];
     $arrFields['time_really'] = ['title'=>'Реальное время','type'=>'timer','section'=>2,'value'=>$this->time_really];
-    $arrFields['date'] = ['title'=>'Дата','type'=>'date','section'=>2,'value'=>$this->date];
     // $arrFields['status'] = ['title'=>'Статус','type'=>'time','value'=>$this->status];
 
     $arrFields['active'] = ['title'=>'Активность','type'=>'hidden','value'=>$this->active];

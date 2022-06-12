@@ -1,5 +1,68 @@
 <?
 switch ($_REQUEST['form']) {
+  case 'actions': # Элементы управления
+    $sResultHtml = '';
+
+    $sResultHtml .= '
+      <div class="btn-group">
+        <a data-action="moneys" data-animate_class="animate__flipInY" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Moeny">
+          <i class="fas fa-plus-circle"></i>
+          Money control
+        </a>
+      </div>
+      ';
+
+    notification::send( $sResultHtml );
+    break;
+
+  case 'form': # Форма добавления / редактирования
+
+    // Параметры
+    $arrResults = [];
+    $oForm = new form();
+
+    // Если редактировани
+    if ( $_REQUEST['id'] ) {
+      $arrResults['event'] = 'edit';
+      $oMoney = new money( $_REQUEST['id'] );
+    }
+    // Если добавление
+    else {
+      $arrResults['event'] = 'add';
+      $oMoney = new money();
+      // Случайное имя для корректной работы
+      $arrDefaultsNames = array(
+        'Money for reflection',
+        'The best way',
+        'Good name, good job',
+      );
+      // Создаем элемент
+      $oMoney->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+      $oMoney->user_id = $_SESSION['user']['id'];
+      $oMoney->date = date('Y-m-d');
+      $oMoney->active = 1;
+      $oMoney->add();
+    }
+    
+    // Поля для добавления
+    $oForm->arrFields = $oMoney->fields();
+    $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
+    $oForm->arrFields['action'] = ['value'=>'moneys','type'=>'hidden'];
+    $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
+    $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
+    // Настройки шаблона
+    $oForm->arrTemplateParams['id'] = 'content_loader_save';
+    $oForm->arrTemplateParams['title'] = $olang->get('Moneys');
+    $oForm->arrTemplateParams['button'] = 'Save';
+    $sFormHtml = $oForm->show();
+    // Вывод результата
+    $arrResults['form'] = $sFormHtml;
+    $arrResults['data'] = (array)$oMoney;
+
+    $arrResults['action'] = 'moneys';
+    notification::send($arrResults);
+    break;
+
   case 'show': # Вывод элементов
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
 

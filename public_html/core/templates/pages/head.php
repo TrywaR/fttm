@@ -19,9 +19,13 @@
 	<!-- jQeury x-->
 
 	<!-- Bootstrap -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<!-- Bootstrap x-->
 
 	<!-- font-awesome -->
@@ -52,41 +56,43 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.5"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.6"> -->
 	<?
 	if ( isset($_SESSION['user']) ) {
 		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 1;
 		switch ( $iTheme ) {
 			case 0:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.5"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.6"><?
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.5"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.6"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.5"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.6"><?
 				break;
 			case 3:
 				break;
 		}
 	}
 	else {
-		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.5"><?
+		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.6"><?
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.2.5"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.2.5"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.2.5"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.2.5"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.5"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.2.5"></script>
-	<script src="/template/js/content/content.js?v=5.2.5"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.2.6"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.2.6"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.2.6"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.2.6"></script>
+	<script src="/template/js/content_actions/content_actions.js?v=5.2.6"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.6"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.2.6"></script>
+	<script src="/template/js/content/content.js?v=5.2.6"></script>
 
-	<script src="/template/js/main/nav.js?v=5.2.5"></script>
+	<script src="/template/js/main/nav.js?v=5.2.6"></script>
+	<script src="/template/js/main/modal.js?v=5.2.6"></script>
 
-	<script src="/template/js/session/session.js?v=5.2.5"></script>
-	<script src="/template/js/index.js?v=5.2.5"></script>
+	<script src="/template/js/session/session.js?v=5.2.6"></script>
+	<script src="/template/js/index.js?v=5.2.6"></script>
 	<!-- main x-->
 </head>
 

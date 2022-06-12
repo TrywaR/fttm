@@ -13,6 +13,7 @@ body
   overflow-x: hidden
   max-width: 100%
   min-height: 100vh
+  overflow: hidden
 
   &:before,
   &:after
@@ -41,8 +42,25 @@ main
   overflow-x: hidden
   overflow-y: auto
   max-height: 100vh
+  overflow: auto
   padding: 1rem
   @include scroll
+
+  .block_jumbotron
+    position: sticky
+
+    ._block_title
+      display: flex
+      justify-content: space-between
+      padding: 1rem
+
+
+      ._value
+        flex-grow: 10
+        margin: 0
+
+      ._buttons
+        flex-grow: 1
 
 footer
   display: flex
@@ -52,20 +70,26 @@ footer
   max-height: 100vh
   @include scroll
 
-  ._copy
-    // display: flex
-    padding: 1.3rem
-    font-size: .8em
-    line-height: 1
-    text-align: center
-    opacity: .6
-    margin: auto
+  .block_footer
+    display: flex
+    width: 100%
+    flex-direction: column
+    justify-content: space-between
 
-    a
-      color: $color_text
+    ._actions
 
-      &:hover
-        opacity: .5
+    ._copy
+      padding: 1.3rem
+      font-size: .8em
+      line-height: 1
+      text-align: center
+      opacity: .6
+
+      a
+        color: $color_text
+
+        &:hover
+          opacity: .5
 
 @media screen and (max-width:1200px)
   body
