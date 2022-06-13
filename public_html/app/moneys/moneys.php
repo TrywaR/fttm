@@ -1,14 +1,14 @@
 <?
+$olang = new lang();
+
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
-    $oLang = new lang();
-
     $sResultHtml .= '
       <div class="btn-group">
         <a data-action="moneys" data-animate_class="animate__flipInY" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
-          <i class="fas fa-plus-circle"></i>
-          ' . $oLang->get("Add") . '
+          <span class="_icon"><i class="fas fa-plus-circle"></i></span>
+          <span class="_icon">' . $oLang->get("Add") . '</span>
         </a>
       </div>
       ';
@@ -54,7 +54,6 @@ switch ($_REQUEST['form']) {
 
     // Настройки шаблона
     $oForm->arrTemplateParams['id'] = 'content_loader_save';
-    $olang = new lang();
     $oForm->arrTemplateParams['title'] = $olang->get('Moneys');
     $oForm->arrTemplateParams['button'] = 'Save';
     $sFormHtml = $oForm->show();
@@ -104,13 +103,23 @@ switch ($_REQUEST['form']) {
     // Обновление карты
     if ( $_REQUEST['card'] ) {
       $oCard = new card( $_REQUEST['card'] );
+
+      // Если обновление, удаляем старое значение
+      if ( $oMoney->id )
+      if ( (int)$oMoney->type ) $oCard->balance_remove( $oMoney->price );
+      else {
+        $oCard->balance_add( $oMoney->price );
+        // Если комиссиия
+        if ( (int)$oMoney->category == 2 ) $oCard->commission_remove( $oMoney->price );
+      }
+
       // Если пополнение
       if ( (int)$_REQUEST['type'] ) $oCard->balance_add( $_REQUEST['price'] );
       // Если тарата
       else {
         $oCard->balance_remove( $_REQUEST['price'] );
         // Если комиссиия
-        if ( (int)$_REQUEST['category'] == 1 ) $oCard->commission_add( $_REQUEST['price'] );
+        if ( (int)$_REQUEST['category'] == 2 ) $oCard->commission_add( $_REQUEST['price'] );
       }
     }
 
@@ -120,18 +129,14 @@ switch ($_REQUEST['form']) {
       $oCardTo->balance_add( $_REQUEST['price'] );
     }
 
-    // Убираем с карты старое значени суммы
-    if ( $_REQUEST['id'] ) {
-      $oCard->balance_remove( $oMoney->price );
-      $oMoney->save();
-    }
+    if ( $_REQUEST['id'] ) $oMoney->save();
     else $oMoney->add();
 
     $arrResult['data'] = $oMoney->get_money();
 
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';
-    $arrResult['text'] = 'Changes saved';
+    $arrResult['text'] = $oLang->get("ChangesSaved");
     notification::success($arrResult);
     break;
 
@@ -156,7 +161,7 @@ switch ($_REQUEST['form']) {
     }
 
     $arrResult['event'] = 'del';
-    $arrResult['text'] = 'Delete success';
+    $arrResult['text'] = $oLang->get("DeleteSuccess");
     notification::success($arrResult);
     break;
 }

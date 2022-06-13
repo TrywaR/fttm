@@ -20,6 +20,9 @@ body
   .form-control:disabled
     opacity: .6
 
+  .form-control-color
+    height: auto
+
   .picker__box .picker__header .picker__date-display .picker__weekday-display,
   .datepicker table tr td.active:active,
   .datepicker table tr td.active.highlighted:active,
@@ -29,10 +32,22 @@ body
     background: $color_main_light
 
   .btn
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: .6rem
     color: $color_text
     border-radius: $border_radius
     background: $color_main_dark
     @include shadow_default
+
+    ._icon
+      display: flex
+      justify-content: center
+      align-items: center
+      padding-right: .4rem
+
+    ._text
 
     &:focus
       color: $color_main
@@ -46,15 +61,25 @@ body
       background: $color_main_dark_ultra
       border-color: $color_main_dark_ultra
 
+    &.btn-danger
+      background: $color_error
+      border-color: $color_error
+      color: white
+
+      &:hover
+        color: white
+        opacity: .8
+
     &.disabled
       color: $color_main_dark_light
 
     &:hover
       color: $color_main
 
-  .btn-group
+  .btn-group,
+  .btn-group-vertical
     .btn
-      margin: .6rem
+      margin: .5rem
 
   .card
     position: relative
@@ -68,6 +93,13 @@ body
   .list-group
     padding: 0
     border-radius: $border_radius
+
+  .list-group-numbered
+    .list-group-item
+      &:before
+        opacity: .3
+        font-weight: 300
+        padding: 0 .2rem 0 0
 
   .list-group-item
     color: $color_text
@@ -94,8 +126,11 @@ body
     font-weight: 400
     background: $color_main_dark_ultra
     border-color: $color_main_dark_ultra
-    min-width: 8rem
     opacity: .8
+
+    ._text
+      display: flex
+      min-width: 8rem
 
   .form-label
     opacity: .8
@@ -132,6 +167,8 @@ body
     color: $color_text
 
   .modal
+    z-index: 9998
+
     .modal-dialog
       .modal-content
         background: $color_main_dark

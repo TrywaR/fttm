@@ -1,4 +1,6 @@
 <?
+$oLang = new lang();
+
 $oProject = new project( $_REQUEST['project_id'] );
 $arrProject = $oProject->get();
 // $arrProject = $arrProject[0];
@@ -15,13 +17,13 @@ $arrProject = $oProject->get();
 
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true">Week</button>
+      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
     </li>
     <li class="nav-item" role="presentation">
-      <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true">Mounth</button>
+      <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true"><?=$oLang->get('Month')?></button>
     </li>
     <li class="nav-item" role="presentation">
-      <button onclick="year_show()" class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false">Year</button>
+      <button onclick="year_show()" class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false"><?=$oLang->get('Year')?></button>
     </li>
   </ul>
 
@@ -44,7 +46,7 @@ $arrProject = $oProject->get();
             <!-- <span class="icon">
               <i class="fas fa-plus"></i>
             </span> -->
-            Go
+            <?=$oLang->get('Filter')?>
           </button>
         </div>
       </form>
@@ -80,7 +82,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Money</h2>
+      <h2><?=$oLang->get('Moneys')?></h2>
       <div id="res_weeks_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -89,7 +91,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Time</h2>
+      <h2><?=$oLang->get('Times')?></h2>
       <div id="res_weeks_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -171,7 +173,7 @@ $arrProject = $oProject->get();
             <!-- <span class="icon">
               <i class="fas fa-plus"></i>
             </span> -->
-            Go
+            <?=$oLang->get('Filter')?>
           </button>
         </div>
       </form>
@@ -206,7 +208,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Money</h2>
+      <h2><?=$oLang->get('Money')?></h2>
       <div id="res_month_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -215,7 +217,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Time</h2>
+      <h2><?=$oLang->get('Time')?></h2>
       <div id="res_month_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -292,7 +294,7 @@ $arrProject = $oProject->get();
             <!-- <span class="icon">
               <i class="fas fa-plus"></i>
             </span> -->
-            Go
+            <?=$oLang->get('Filter')?>
           </button>
         </div>
       </form>
@@ -327,7 +329,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Money</h2>
+      <h2><?=$oLang->get('Money')?></h2>
       <div id="res_year_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -336,7 +338,7 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2>Times</h2>
+      <h2><?=$oLang->get('Times')?></h2>
       <div id="res_year_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">

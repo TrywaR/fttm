@@ -1,107 +1,19 @@
+<section class="row block_jumbotron block_moneys">
+  <div class="col col-12">
+    <div class="_block_title">
+      <h1 class="sub_title _value">
+        <?$oLang = new lang()?>
+        <?=$oLang->get('Cards')?>
+      </h1>
+    </div>
+  </div>
+</section>
+
 <section class="row block_moneys">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Cards</h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-12 col-md-6 mb-4">
-    <!-- Добавление карты -->
-    <div class="card">
-      <div class="card-body">
-        <div class="accordion accordion-flush" id="accordionFlushExampleZero">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingZero">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseZero" aria-expanded="false" aria-controls="flush-collapseZero">
-                <?=$olang->get('Add')?>
-              </button>
-            </h2>
-            <div id="flush-collapseZero" class="accordion-collapse collapse" aria-labelledby="flush-headingZero" data-bs-parent="#accordionFlushExampleZero">
-              <div class="accordion-body">
-                <form
-                  class="content_loader_form"
-                  action=""
-                  method="post"
-                  data-content_download_edit_type="0"
-                  data-content_loader_to="#content_loader_to"
-                >
-                  <input type="hidden" name="app" value="app">
-                  <input type="hidden" name="action" value="cards">
-                  <input type="hidden" name="form" value="save">
-                  <input type="hidden" name="id" value="">
-                  <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
-
-                  <div class="row align-items-center mb-1">
-                    <div class="col-12 col-md-4">
-                      <label for="inputCardIdZero" class="col-form-label">Card</label>
-                    </div>
-                    <div class="col-12 col-md-8">
-                      <input name="title" type="text" id="inputCardIdZero" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="row align-items-center mb-1">
-                    <div class="col-12 col-md-4">
-                      <label for="inputPriceIdZero" class="col-form-label">Balance</label>
-                    </div>
-                    <div class="col-12 col-md-8">
-                      <input name="balance" type="number" id="inputPriceIdZero" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="row align-items-center mb-1">
-                    <div class="col-12 col-md-4">
-                      <label for="inputDateZero" class="col-form-label">Limit</label>
-                    </div>
-                    <div class="col-12 col-md-8">
-                      <input name="limit" type="number" id="inputDateZero" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="row align-items-center mb-1">
-                    <div class="col-12 col-md-4">
-                      <label for="inputDateZero" class="col-form-label">Percent</label>
-                    </div>
-                    <div class="col-12 col-md-8">
-                      <input name="percent" type="number" id="inputDateZero" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="row align-items-center mb-1">
-                    <div class="col-12 col-md-4">
-                      <label for="inputTitleZero" class="col-form-label">sort</label>
-                    </div>
-                    <div class="col-12 col-md-8">
-                      <input name="sort" type="number" id="inputTitleZero" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" name="active" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                      Active
-                    </label>
-                  </div>
-
-                  <div class="d-flex justify-content-between mt-3">
-                    <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-plus-square"></i> <?=$olang->get('Add')?></button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="col-12 animate__animated animate__fadeIn animate__delay-1s">
     <!-- Карты -->
-    <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="cards" data-content_manager_block="#cards" data-content_manager_item=".card_item" data-content_manager_button=".content_manager_switch">
-      <button type="button" name="button" class="btn del">
+    <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="cards" data-content_manager_block="#cards" data-content_manager_item=".card_item" data-content_manager_button=".content_manager_switch">
+      <button type="button" name="button" class="btn btn-danger del">
         <i class="fas fa-folder-minus"></i>
       </button>
     </div>
@@ -130,29 +42,40 @@
       $(function(){
         $(document).find('#cards').content_loader()
         $(document).find('#content_manager_buttons').content_manager()
+        $(document).find('#footer_actions').content_actions( {'action':'cards'} )
       })
     </script>
   </div>
 
   <div class="block_template">
-    <div class="col-12 mb-4 _elem card_item progress_block animate__animated animate__bounceInRight _commission_show_{{commission_show}} _noedit_show_{{noedit}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-      <div class="card">
-        <div class="card-body">
-          <div class="ms-2 me-auto mb-2">
-            <div class="fw-bold">{{title}}</div>
-            <small style="opacity:.6" title="last update"><i class="fas fa-clock"></i> {{date_update}}</small>
+    <div class="col-12 col-xl-6 mt-2 mb-2 _elem card_item progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+      <div class="block_card _commission_show_{{commission_show}} _noedit_show_{{noedit}}">
+        <div class="_card_head">
+          <div class="_title">
+            {{title}}
           </div>
 
-          <div class="badge bg-primary" title="Balance">
+          <div class="_update" title="<?=$oLang->get('LastUpdate')?>">
+            <div class="_icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="_val">
+              {{date_update}}
+            </div>
+          </div>
+
+          <div class="badge bg-primary _balance" title="Balance">
             {{balance}} / <small>{{limit}}</small>
           </div>
 
           <div class="badge bg-warning text-dark _commission" title="Commission">
             {{commission}}
           </div>
+        </div>
 
-          <div class="btn-group mt-2 w-100" role="group">
-            <a href="#" class="btn content_manager_switch switch_icons _select">
+        <div class="_card_footer">
+          <div class="btn-group" role="group">
+            <a href="#" class="btn btn-dark content_manager_switch switch_icons _select">
               <div class="">
                 <i class="far fa-square"></i>
               </div>
@@ -160,16 +83,23 @@
                 <i class="fas fa-square"></i>
               </div>
             </a>
-            <a href="#" title="Reload data" class="btn content_download _reload" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
+
+            <a href="#" title="<?=$oLang->get('CardReloadBalanceBtn')?>" class="btn btn-dark content_download _reload" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
               <i class="fas fa-retweet"></i>
             </a>
-            <a href="#" class="btn content_download _edit" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="edit" data-animate_class="animate__flipInY">
+
+            <a data-action="cards" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".card_item" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
               <i class="fas fa-pen-square"></i>
             </a>
-            <a href="#" class="btn content_download _del" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
+
+            <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
               <i class="fas fa-minus-square"></i>
             </a>
           </div>
+        </div>
+
+        <div class="_card_background">
+          <div class="_color" style="background: radial-gradient({{color}},rgba(0,0,0,0))"></div>
         </div>
 
         <div class="progress">

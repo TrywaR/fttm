@@ -103,6 +103,7 @@ class form
       $arrTemplateParams['buttons'] = $oFields['buttons'];
       if ( $oFields['disabled'] ) $arrTemplateParams['disabled'] = $oFields['disabled'];
       if ( $oFields['required'] ) $arrTemplateParams['required'] = $oFields['required'];
+      if ( $oFields['icon'] ) $arrTemplateParams['icon'] = $oFields['icon'];
 
       switch ( $oFields['type'] ) {
         case 'text':
@@ -118,6 +119,7 @@ class form
           break;
 
         case 'number':
+          $arrTemplateParams['step'] = $oFields['step'];
           include 'core/templates/forms/number.php';
           break;
 
@@ -139,6 +141,10 @@ class form
 
         case 'date':
           include 'core/templates/forms/date.php';
+          break;
+
+        case 'color':
+          include 'core/templates/forms/color.php';
           break;
 
         case 'code':

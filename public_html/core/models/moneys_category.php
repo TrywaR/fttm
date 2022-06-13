@@ -35,6 +35,33 @@ class moneys_category extends model
     return $arrResults;
   }
 
+
+  public function fields() # Поля для редактирования
+  {
+    $oLang = new lang();
+
+    $arrFields = [];
+    $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
+    $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
+    $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
+
+    // $arrTypeFilter = [
+    //   array('id'=>0,'name'=>$oLang->get('Spend')),
+    //   array('id'=>1,'name'=>$oLang->get('Replenish')),
+    // ];
+    // $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$arrTypeFilter,'value'=>$this->type];
+
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+    $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
+
+    $sColor = $this->color ? $this->color : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
+    $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$sColor];
+
+    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+
+    return $arrFields;
+  }
+
   function __construct( $moneys_category_id = 0 )
   {
     $this->table = 'moneys_categories';

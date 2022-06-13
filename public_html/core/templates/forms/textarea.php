@@ -13,11 +13,29 @@
   for="form_input_<?=$arrTemplateParams['name']?>"
   class="form-label"
   >
-    <?=$arrTemplateParams['title']?>
+    <?php if ( isset($arrTemplateParams['icon']) ): ?>
+      <span class="_icon">
+        <?=$arrTemplateParams['icon']?>
+      </span>
+    <?php endif; ?>
+    <?php if ( isset($arrTemplateParams['title']) ): ?>
+      <span class="_text">
+        <?=$arrTemplateParams['title']?>
+      </span>
+    <?php endif; ?>
   </label>
 
   <!-- <span class="input-group-text" >
-    <?=$arrTemplateParams['title']?>
+    <?php if ( isset($arrTemplateParams['icon']) ): ?>
+      <span class="_icon">
+        <?=$arrTemplateParams['icon']?>
+      </span>
+    <?php endif; ?>
+    <?php if ( isset($arrTemplateParams['title']) ): ?>
+      <span class="_text">
+        <?=$arrTemplateParams['title']?>
+      </span>
+    <?php endif; ?>
   </span> -->
 
   <textarea
@@ -27,6 +45,6 @@
     <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
     <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
   >
-    <?if ( $arrTemplateParams['value'] ) echo base64_decode($arrTemplateParams['value'])?>
+    <?if ( $arrTemplateParams['value'] ) echo $arrTemplateParams['value']?>
   </textarea>
 </div>

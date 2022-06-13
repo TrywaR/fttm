@@ -1,23 +1,26 @@
-<section class="row block_times">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Times trip</h1>
-      </div>
+<section class="row block_jumbotron block_times">
+  <div class="col col-12">
+    <div class="_block_title">
+      <h1 class="sub_title _value">
+        <?$oLang = new lang()?>
+        <?=$oLang->get('Times')?>
+      </h1>
     </div>
   </div>
+</section>
 
+<section class="row block_times">
   <!-- Nav -->
   <div class="col-12">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="true">Week</button>
+        <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="true"><?=$oLang->get('Week')?></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false">Mounth</button>
+        <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false"><?=$oLang->get('Month')?></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button onclick="year_show()" class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false">Year</button>
+        <button onclick="year_show()" class="nav-link" id="pills-yaer-tab" data-bs-toggle="pill" data-bs-target="#pills-yaer" type="button" role="tab" aria-controls="pills-yaer" aria-selected="false"><?=$oLang->get('Year')?></button>
       </li>
     </ul>
   </div>
@@ -47,7 +50,7 @@
           </div>
         </form>
 
-        <h2>Time spent for week</h2>
+        <h2><?=$oLang->get('Week')?></h2>
         <div id="res_weeks" class="block_chart">
           <div class="block_loading">
             <div class="_icon">
@@ -135,7 +138,7 @@
           </div>
         </form>
 
-        <h2>Month</h2>
+        <h2><?=$oLang->get('Month')?></h2>
         <div id="res_month" class="block_chart">
           <div class="block_loading">
             <div class="_icon">
@@ -218,7 +221,7 @@
           </div>
         </form>
 
-        <h2>Yaer</h2>
+        <h2><?=$oLang->get('Year')?></h2>
         <div id="res_year" class="block_chart">
           <div class="block_loading">
             <div class="_icon">

@@ -1,12 +1,15 @@
-<section class="row block_moneys">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Moneys trip</h1>
-      </div>
+<section class="row block_jumbotron block_moneys">
+  <div class="col col-12">
+    <div class="_block_title">
+      <h1 class="sub_title _value">
+        <?$oLang = new lang()?>
+        <?=$oLang->get('Moneys')?>
+      </h1>
     </div>
   </div>
+</section>
 
+<section class="row block_moneys">
   <div class="col-12">
     <h2>Yesterday</h2>
     <div class="block_analitycs">
@@ -15,7 +18,7 @@
           <i class="fas fa-minus"></i>
         </div>
         <div class="_title">
-          Costs
+          <?=$oLang->get('Wages')?>
         </div>
         <div class="_value" id="block_analitycs_daysum">
         </div>
@@ -26,7 +29,7 @@
           <i class="fas fa-plus"></i>
         </div>
         <div class="_title">
-          Wages
+          <?=$oLang->get('Costs')?>
         </div>
         <div class="_value" id="block_analitycs_dayplus">
         </div>
@@ -35,7 +38,7 @@
   </div>
 
   <div class="col-12">
-    <h2>Month</h2>
+    <h2><?=$oLang->get('Month')?></h2>
     <!-- Фильтр -->
     <form class="content_filter month_filter pb-4 __no_ajax" action="">
       <div class="input-group mb-2">
@@ -72,7 +75,7 @@
           <i class="fas fa-minus"></i>
         </div>
         <div class="_title">
-          Costs
+          <?=$oLang->get('Wages')?>
         </div>
         <div class="_value" id="block_analitycs_monthsum">
         </div>
@@ -83,7 +86,7 @@
           <i class="fas fa-plus"></i>
         </div>
         <div class="_title">
-          Weges
+          <?=$oLang->get('Costs')?>
         </div>
         <div class="_value" id="block_analitycs_monthplus">
         </div>
@@ -99,7 +102,7 @@
           <i class="fas fa-wallet"></i>
         </div>
         <div class="_title">
-          Balance
+          <?=$oLang->get('Balance')?>
         </div>
         <div class="_value" id="block_analitycs_balance">
         </div>

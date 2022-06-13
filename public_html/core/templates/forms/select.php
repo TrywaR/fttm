@@ -16,7 +16,16 @@
   </label> -->
 
   <span class="input-group-text" >
-    <?=$arrTemplateParams['title']?>
+    <?php if ( isset($arrTemplateParams['icon']) ): ?>
+      <span class="_icon">
+        <?=$arrTemplateParams['icon']?>
+      </span>
+    <?php endif; ?>
+    <?php if ( isset($arrTemplateParams['title']) ): ?>
+      <span class="_text">
+        <?=$arrTemplateParams['title']?>
+      </span>
+    <?php endif; ?>
   </span>
 
   <select

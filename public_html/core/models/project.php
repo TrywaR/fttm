@@ -13,6 +13,32 @@ class project extends model
   public static $client_id = '';
   public static $user_Id = '';
 
+  public function fields() # Поля для редактирования
+  {
+    $oLang = new lang();
+
+    $arrFields = [];
+    $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
+    $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
+    $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
+
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+    $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
+
+    $oClient = new client();
+    $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrClients = $oClient->get();
+    $arrClientsFilter = [];
+    foreach ($arrClients as $arrClient) $arrClientsFilter[] = array('id'=>$arrClient['id'],'name'=>$arrClient['title']);
+    $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'value'=>$this->client_id];
+
+    $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
+
+    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+
+    return $arrFields;
+  }
+
   function __construct( $project_id = 0 )
   {
     $this->table = 'projects';

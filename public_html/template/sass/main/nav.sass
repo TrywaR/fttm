@@ -144,17 +144,19 @@
       left: 0
       right: 0
       bottom: 0
+      overflow: hidden
 
     &:before
       border-radius: $border_radius
-      border-top-left-radius: 0
-      border-bottom-left-radius: 0
+      // border-top-left-radius: 0
+      // border-bottom-left-radius: 0
       background: $color_main_dark
       opacity: .5
       z-index: -2
 
     &:after
       box-shadow: inset .1rem 0 .5rem 0 rgba(0,0,0,.1), -.1rem 0 0rem 0 rgba(100,100,100,.1)
+      border-radius: $border_radius
       z-index: -1
 
     &._active_
@@ -216,7 +218,7 @@
       bottom: 0
       left: 0
       right: 0
-      z-index: 9999
+      z-index: 9997
       background: $color_main_dark
       color: $color_main
       font-size: 1.5em

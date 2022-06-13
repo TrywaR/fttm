@@ -7,10 +7,7 @@
 // $arrTemplateParams['class'] = '';
 ?>
 <div class="input-group mb-2 <?=$arrTemplateParams['class']?>">
-  <!-- <label
-    for="form_input_<?=$arrTemplateParams['name']?>"
-    class="form-label"
-    >
+  <!-- <label for="form_input_<?=$arrTemplateParams['name']?>" class="form-label">
     <?=$arrTemplateParams['title']?>
   </label> -->
 
@@ -28,12 +25,11 @@
   </span>
 
   <input
-    type="number"
-    class="input form-control"
-    id="form_input_<?=$arrTemplateParams['name']?>"
+    type="color"
+    class="input form-control form-control-color"
     name="<?=$arrTemplateParams['name']?>"
+    id="form_input_<?=$arrTemplateParams['name']?>"
     value="<?=$arrTemplateParams['value']?>"
-    step="<?=$arrTemplateParams['step']?>"
     <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
     <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
   >

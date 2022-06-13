@@ -95,7 +95,8 @@ class money extends model
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$arrTypeFilter,'value'=>$this->type];
 
     $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
-    $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2)];
+    $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
+
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','value'=>$this->date];
 
     $oCard = new card();
@@ -115,6 +116,7 @@ class money extends model
     $oMoneysSubscriptions->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
     $arrSubscriptionsFilter = [];
+    $arrSubscriptionsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrMoneysSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
     $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-0','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
@@ -125,7 +127,7 @@ class money extends model
     $arrMoneysCategories = $oMoneyCategory->get_categories();
     $arrMoneysCategoriesFilter = [];
     foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
-    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category_id];
+    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category];
 
     $oProject = new project();
     $oProject->sort = 'sort';

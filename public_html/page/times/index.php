@@ -1,4 +1,6 @@
 <?
+$oLang = new lang();
+
 $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
@@ -24,11 +26,11 @@ $arrCategoriesIds = [];
 foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 ?>
 
-<section class="row block_jumbotron">
+<section class="row block_jumbotron block_times">
   <div class="col col-12">
     <div class="_block_title">
       <h1 class="sub_title _value">
-        Times
+        <?=$oLang->get('Times')?>
       </h1>
 
       <div class="_buttons btn-group">
@@ -95,8 +97,8 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 
 <section class="row block_times">
   <div class="col-12">
-    <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
-      <button type="button" name="button" class="btn del">
+    <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
+      <button type="button" name="button" class="btn btn-danger del">
         <i class="fas fa-folder-minus"></i>
       </button>
     </div>

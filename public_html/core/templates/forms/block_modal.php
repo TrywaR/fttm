@@ -35,12 +35,26 @@ $olang = new lang();
 
       <div class="modal-footer">
 
-        <button type="button" class="btn form_reset"><i class="fas fa-window-close"></i> <?=$olang->get('Clear')?></button>
+        <button type="button" class="btn form_reset">
+          <div class="_icon">
+            <i class="fas fa-window-close"></i>
+          </div>
+          <div class="_text">
+            <?=$olang->get('Clear')?>
+          </div>
+        </button>
         <!-- <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Not reset</label>
         </div> -->
-        <button class="button btn btn-dark" type="submit"><i class="fas fa-save"></i> <?=$olang->get($arrTemplateParams['button'])?></button>
+        <button class="button btn btn-dark" type="submit">
+          <div class="_icon">
+            <i class="fas fa-save"></i>
+          </div>
+          <div class="_text">
+            <?=$olang->get($arrTemplateParams['button'])?>
+          </div>
+        </button>
       </div>
     </form>
   </div>

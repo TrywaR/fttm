@@ -52,7 +52,9 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys">
       <div class="input-group mb-2">
         <span class="input-group-text">
-          <i class="fas fa-wallet"></i>
+          <span class="_icon">
+            <i class="fas fa-wallet"></i>
+          </span>
         </span>
         <select name="type" class="form-select">
           <option value="" selected>Type</option>
@@ -61,7 +63,9 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         </select>
 
         <span class="input-group-text">
-          <i class="far fa-credit-card"></i>
+          <span class="_icon">
+            <i class="far fa-credit-card"></i>
+          </span>
         </span>
         <select name="card" class="form-select">
           <option value="" selected>Card</option>
@@ -71,7 +75,9 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         </select>
 
         <span class="input-group-text">
-          <i class="fas fa-list-ul"></i>
+          <span class="_icon">
+            <i class="fas fa-list-ul"></i>
+          </span>
         </span>
         <select name="category" class="form-select">
           <option value="" selected>Category</option>
@@ -83,7 +89,9 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
       <div class="input-group mb-4">
         <span class="input-group-text">
-          <i class="far fa-folder"></i>
+          <span class="_icon">
+            <i class="far fa-folder"></i>
+          </span>
         </span>
         <select name="project_id" class="form-select">
           <option value="" selected>Project</option>
@@ -104,7 +112,9 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         </select>
 
         <span class="input-group-text">
-          <i class="far fa-calendar-alt"></i>
+          <span class="_icon">
+            <i class="far fa-calendar-alt"></i>
+          </span>
         </span>
         <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
 
@@ -121,8 +131,8 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
 
 <section class="row block_moneys">
   <div class="col col-12">
-    <div id="content_manager_buttons" class="content_manager_buttons _hide_ d-flex justify-content-end mb-4" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
-      <button type="button" name="button" class="btn del">
+    <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
+      <button type="button" name="button" class="btn btn-danger del">
         <i class="fas fa-folder-minus"></i>
       </button>
     </div>
@@ -198,7 +208,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         </div>
       </a>
 
-      <a data-action="moneys" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show" title="Money edit">
+      <a data-action="moneys" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
         <i class="fas fa-pen-square"></i>
       </a>
 

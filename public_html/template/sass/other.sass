@@ -84,7 +84,7 @@
 .switch_icons
   & > *
     &:nth-child(1)
-      display: block
+      display: flex
     &:nth-child(2)
       display: none
 
@@ -93,13 +93,7 @@
       &:nth-child(1)
         display: none
       &:nth-child(2)
-        display: block
-
-
-
-.content_manager_buttons
-  &._hide_
-    display: none ! important
+        display: flex
 
 .block_content_loader
   padding: 0
@@ -394,6 +388,21 @@
     line-height: 1.4rem
     color: $color_main
 // block_loading x
+
+// elems
+.block_elems
+  ._elem
+    @include transition_default
+
+    transform-style: flat
+    transform: rotateX(25deg) translateY(4rem)
+    opacity: 0
+    transition: all .2s linear
+
+    &._show_
+      opacity: 1
+      transform: rotateX(0deg) translateY(0rem)
+// elems
 
 @media screen and (max-width:1000px)
 

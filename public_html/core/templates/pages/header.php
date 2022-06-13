@@ -1,3 +1,6 @@
+  <?
+  $oLang = new lang();
+  ?>
   <!-- Nav -->
   <header class="col-12 col-xl-3">
     <div class="block_nav_header">
@@ -73,16 +76,20 @@
         <div class="block_logining">
           <div class="btn-group">
             <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
-              <small class="icon">
+              <div class="_icon">
                 <i class="fas fa-user-check"></i>
-              </small>
-              Sign in
+              </div>
+              <div class="_text">
+                <?=$oLang->get('SignIn')?>
+              </div>
             </a>
             <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
-              <small class="icon">
+              <div class="_icon">
                 <i class="fas fa-user-plus"></i>
-              </small>
-              Sign up
+              </div>
+              <div class="_text">
+                <?=$oLang->get('SignUp')?>
+              </div>
             </a>
           </div>
         </div>
@@ -118,7 +125,7 @@
         </div>
         <div class="_name">
           <div class="_old">
-            Menu
+            <?=$oLang->get('Menu')?>
           </div>
           <div class="_new"></div>
         </div>
@@ -133,7 +140,7 @@
         </div>
         <div class="_name">
           <div class="_old">
-            Subs
+            <?=$oLang->get('MenuSub')?>
           </div>
           <div class="_new"></div>
         </div>

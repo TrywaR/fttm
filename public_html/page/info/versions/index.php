@@ -16,7 +16,8 @@
 
   <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_7">5.2.7 Moneys forms</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_8">5.2.8 Datas forms</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_2_7">5.2.7 Moneys forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_6">5.2.6 Times forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_5">5.2.5 Mobile</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_4">5.2.4 Structure</a>
@@ -55,6 +56,26 @@
   <div class="col col-12 col-md-8">
    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
      <div class="pt-2 pb-2">
+       <h2 id="list-item-5_2_8">5.2.8 Datas forms</h2>
+       <ol>
+         <li>
+           Обновлены все разделы с редактированием информации, новые формы для редактирования, общие для всех, адаптивные
+         </li>
+         <li>
+           Улучшена локализация, переведено меню и многие разделы
+         </li>
+         <li>
+           Изменена стилистика карт, теперь можно задавать цвет
+         </li>
+         <li>
+           Увеличена хранимая информация о картах (Проценты, платежы), добавлено разделение на типы: Кредитные карты, дебетовые карты, счета
+         </li>
+         <li>
+           Небольшие стилевые обновление и исправление мелких ошибок
+         </li>
+       </ol>
+
+
        <h2 id="list-item-5_2_7">5.2.7 Moneys forms</h2>
        <ol>
          <li>

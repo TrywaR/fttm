@@ -1,21 +1,92 @@
 // .card_item
 .card_item
+
+.block_card
+  position: relative
+  z-index: 1
+  border-radius: $border_radius
+  overflow: hidden
+  height: 10rem
+  padding: 1rem
+  box-sizing: border-box
+  // min-height: 10rem
+  border: none ! important
+  box-shadow: inset 0 0 .1rem 0 $color_main_money, inset -.08rem -.08rem 0 0 $color_text
+
+  ._card_head
+    display: flex
+    flex-direction: column
+    padding: 0 0 .5rem 0
+    box-sizing: border-box
+
+    ._title
+      display: flex
+      flex-direction: column
+      font-size: 1.1em
+      line-height: 1.1em
+      font-weight: 400
+
+    ._update
+      display: flex
+      font-size: 1em
+      line-height: 1.4em
+      opacity: .5
+      font-weight: 300
+
+      ._icon
+        display: flex
+        padding-right: .2rem
+
+      ._val
+
+    ._balance
+      display: flex
+      margin-bottom: .2rem
+
+    ._commission
+      display: none
+
+  ._card_footer
+    display: flex
+    justify-content: flex-end
+    border-radius: $border_radius
+    overflow: hidden
+    background: $color_main_dark_ultra
+
+  ._card_background
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: -1
+    border-radius: $border_radius
+    background: linear-gradient(135deg, rgba(0,0,0,0), $color_main)
+    overflow: hidden
+
+    ._color
+      position: absolute
+      bottom: -25%
+      right: -25%
+      width: 15rem
+      height: 15rem
+      border-radius: 50%
+      opacity: .6
+      z-index: -2
+
   &._commission_show_true
     ._commission
-      display: inline-block
-
-  ._commission
-    display: none
+      display: flex
 
   &._noedit_show_true
     ._select
-      display: inline-block
+      display: flex
 
     ._edit
-      display: inline-block
+      display: flex
 
     ._del
-      display: inline-block
+      display: flex
 
   ._select
     display: none

@@ -107,28 +107,30 @@ class task extends model
 
   public function fields() # Поля для редактирования
   {
+    $oLang = new lang();
+
     $arrFields = [];
     $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
-    $arrFields['user_id'] = ['title'=>'Пользователь','type'=>'hidden','value'=>$_SESSION['user']['id']];
+    $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
-    $arrFields['title'] = ['title'=>'Название','type'=>'text','required'=>'required','value'=>$this->title];
-    $arrFields['description'] = ['title'=>'Описание','type'=>'textarea','value'=>$this->description];
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+    $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrProjects = $oProject->get();
     $arrProjectsFilter = [];
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    $arrFields['project_id'] = ['title'=>'Проект','type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 
-    $arrFields['sort'] = ['title'=>'Сортировка','type'=>'number','value'=>$this->sort];
-    $arrFields['time_planned'] = ['title'=>'Планируемое время','type'=>'hidden','section'=>2,'value'=>$this->time_planned];
-    $arrFields['price_planned'] = ['title'=>'Планируемая стоимость','type'=>'timer','section'=>2,'value'=>$this->price_planned];
+    $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
+    $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'time','section'=>2,'value'=>$this->time_planned];
+    $arrFields['price_planned'] = ['title'=>$oLang->get('PricePlanned'),'type'=>'number','section'=>2,'value'=>substr($this->price_planned, 0, -2),'step'=>'0.01'];
 
-    $arrFields['status'] = ['title'=>'Статус','type'=>'time','type'=>'select','options'=>$this->arrResults,'value'=>$this->status];
+    $arrFields['status'] = ['title'=>$oLang->get('Status'),'type'=>'time','type'=>'select','options'=>$this->arrStatus,'value'=>$this->status];
 
-    $arrFields['active'] = ['title'=>'Активность','type'=>'hidden','value'=>$this->active];
+    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
 
     return $arrFields;
   }
