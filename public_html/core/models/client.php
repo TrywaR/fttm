@@ -42,7 +42,7 @@ class client extends model
 
       $this->id = $arrClient['id'];
       $this->title = $arrClient['title'];
-      $this->description = $arrClient['description'];
+      $this->description = base64_decode($arrClient['description']);
       $this->sort = $arrClient['sort'];
       $this->active = $arrClient['active'];
       $this->user_id = $arrClient['user_id'];

@@ -16,7 +16,8 @@
 
   <div class="col col-12 col-md-4">
       <div id="list-example" class="list-group" style="max-height: 40rem; overflow: auto;">
-         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_8">5.2.8 Datas forms</a>
+         <a class="list-group-item list-group-item-action active" href="#list-item-5_2_9">5.2.9 Design update</a>
+         <a class="list-group-item list-group-item-action" href="#list-item-5_2_8">5.2.8 Datas forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_7">5.2.7 Moneys forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_6">5.2.6 Times forms</a>
          <a class="list-group-item list-group-item-action" href="#list-item-5_2_5">5.2.5 Mobile</a>
@@ -56,6 +57,19 @@
   <div class="col col-12 col-md-8">
    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="max-height: 40rem; overflow: auto;">
      <div class="pt-2 pb-2">
+       <h2 id="list-item-5_2_9">5.2.9 Datas forms</h2>
+       <ol>
+         <li>
+           Обновление вёрстки и сетки страниц
+         </li>
+         <li>
+           Новое цветовое решение, и небольшие стилевые обновления
+         </li>
+         <li>
+           Обработка шрифтов
+         </li>
+       </ol>
+
        <h2 id="list-item-5_2_8">5.2.8 Datas forms</h2>
        <ol>
          <li>

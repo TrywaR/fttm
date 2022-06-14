@@ -1,25 +1,28 @@
-<section class="row welcome_container">
-  <div class="container">
-    <div class="_section _title row">
-      <div class="_block col-12 animate__animated animate__fadeIn">
-        <div class="_content">
-          <h1>
-            Freelance Time TrywaR Manager
-          </h1>
-          <p>
-            Это симулятор, способный оцифровать тебя, помогающий более эффективно распоряжаться своим временем и финансами
-          </p>
-          <p>
-            Оставь свой точный след в истории человечества и взгляни на свою жизнь со стороны
-          </p>
-        </div>
+<section class="welcome_container">
+  <div class="_section _title">
+    <div class="_block">
+      <div class="_content">
+        <h1 class="text-center">
+          <!-- Freelance Time TrywaR Manager -->
+          FTTM
+        </h1>
+        <p>
+          Это симулятор, способный оцифровать тебя, помогающий более эффективно распоряжаться своим временем и финансами
+        </p>
+        <p>
+          Оставь свой точный след в истории человечества и взгляни на свою жизнь со стороны
+        </p>
       </div>
+    </div>
+    <div class="_bg">
+      <video autoplay muted loop id="myVideo">
+        <source src="/template/videos/Background_08.mov" type="video/mp4">
+      </video>
     </div>
   </div>
 
-   <div class="_section _times animate__animated animate__fadeIn">
-     <div class="container">
-       <div class="_block col col-12 pt-4 pb-4">
+   <div class="_section _times">
+     <div class="_block">
          <!-- <div class="_icon">
            <i class="fas fa-clock"></i>
          </div> -->
@@ -49,12 +52,10 @@
            </ul>
          </div>
        </div>
-     </div>
    </div>
 
-   <div class="_section _moneys animate__animated animate__fadeIn">
-     <div class="container">
-       <div class="_block col col-12 pt-4 pb-4">
+   <div class="_section _moneys">
+     <div class="_block">
          <div class="_content">
            <h2 class="_block_title">Moneys</h2>
            <p>
@@ -90,12 +91,10 @@
            <i class="fas fa-wallet"></i>
          </div> -->
        </div>
-     </div>
    </div>
 
-   <div class="_section _moneysforhour animate__animated animate__fadeIn">
-     <div class="container">
-       <div class="_block col col-12 pt-4 pb-4">
+   <div class="_section _moneysforhour">
+     <div class="_block">
          <div class="_content">
            <h2 class="_block_title">Moneys for hour</h2>
            <p>
@@ -107,13 +106,11 @@
            </p>
          </div>
        </div>
-     </div>
    </div>
 
    <?php if ( ! isset($_SESSION['user'])): ?>
-     <div class="_section _start animate__animated animate__fadeIn">
-       <div class="container">
-         <div class="_block col col-12 pt-4 pb-4">
+     <div class="_section _start">
+       <div class="_block">
            <div class="_content">
              <h2 class="_block_title">Start</h2>
              <p>
@@ -137,7 +134,6 @@
              </div>
            </div>
          </div>
-       </div>
      </div>
    <?php endif; ?>
 </section>

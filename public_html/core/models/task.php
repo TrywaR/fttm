@@ -146,7 +146,7 @@ class task extends model
 
       $this->id = $arrProject['id'];
       $this->title = $arrProject['title'];
-      $this->description = $arrProject['description'];
+      $this->description = base64_decode($arrProject['description']);
       $this->sort = $arrProject['sort'];
       $this->active = $arrProject['active'];
       $this->project_id = $arrProject['project_id'];

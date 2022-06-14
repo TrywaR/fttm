@@ -115,7 +115,7 @@ class time extends model
   public function fields() # Поля для редактирования
   {
     $oLang = new lang();
-    
+
     $arrFields = [];
     $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
@@ -167,7 +167,7 @@ class time extends model
 
       $this->id = $arrTime['id'];
       $this->title = $arrTime['title'];
-      $this->description = $arrTime['description'];
+      $this->description = base64_decode($arrTime['description']);
       $this->sort = $arrTime['sort'];
       $this->active = $arrTime['active'];
       $this->project_id = $arrTime['project_id'];
