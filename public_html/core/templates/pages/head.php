@@ -56,44 +56,44 @@
 	<!-- slick_slide x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.2.9"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.0"> -->
 	<?
 	if ( isset($_SESSION['user']) ) {
 		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 1;
 		switch ( $iTheme ) {
 			case 0:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.9"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.0"><?
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.9"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.0"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.2.9"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.0"><?
 				break;
 			case 3:
 				break;
 		}
 	}
 	else {
-		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.2.9"><?
+		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.0"><?
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.2.9"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.2.9"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.2.9"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.2.9"></script>
-	<script src="/template/js/content_actions/content_actions.js?v=5.2.9"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.2.9"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.2.9"></script>
-	<script src="/template/js/content/content.js?v=5.2.9"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.3.0"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.3.0"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.3.0"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.3.0"></script>
+	<script src="/template/js/content_actions/content_actions.js?v=5.3.0"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.0"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.3.0"></script>
+	<script src="/template/js/content/content.js?v=5.3.0"></script>
 
-	<script src="/template/js/main/nav.js?v=5.2.9"></script>
-	<script src="/template/js/main/form.js?v=5.2.9"></script>
-	<script src="/template/js/main/modal.js?v=5.2.9"></script>
+	<script src="/template/js/main/nav.js?v=5.3.0"></script>
+	<script src="/template/js/main/form.js?v=5.3.0"></script>
+	<script src="/template/js/main/modal.js?v=5.3.0"></script>
 
-	<script src="/template/js/session/session.js?v=5.2.9"></script>
-	<script src="/template/js/index.js?v=5.2.9"></script>
+	<script src="/template/js/session/session.js?v=5.3.0"></script>
+	<script src="/template/js/index.js?v=5.3.0"></script>
 	<!-- main x-->
 </head>
 
