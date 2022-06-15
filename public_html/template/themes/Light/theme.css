@@ -218,7 +218,25 @@ body {
   padding: 5rem 1rem 1rem;
   box-sizing: border-box;
   max-height: 100%;
-  overflow-y: auto; }
+  overflow-y: auto;
+  /* width */
+  scrollbar-color: #edf3fe #ecf2fd;
+  scrollbar-width: thin;
+  /* Track */
+  /* Handle */
+  /* Handle on hover */ }
+  .main_content::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem; }
+  .main_content::-webkit-scrollbar-track {
+    background: #ecf2fd;
+    border-radius: 0.5rem; }
+  .main_content::-webkit-scrollbar-thumb {
+    background: #edf3fe;
+    border-radius: 0.5rem;
+    cursor: pointer; }
+  .main_content::-webkit-scrollbar-thumb:hover {
+    background: #edf3fe; }
 
 .block_footer {
   display: flex;
