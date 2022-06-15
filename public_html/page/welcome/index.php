@@ -5,6 +5,9 @@
         <h1 class="text-center">
           <!-- Freelance Time TrywaR Manager -->
           FTTM
+          <!-- HOMM -->
+          <!-- Hour Of Money Manager -->
+          <!-- money per hour Manager -->
         </h1>
         <p>
           Это симулятор, способный оцифровать тебя, помогающий более эффективно распоряжаться своим временем и финансами

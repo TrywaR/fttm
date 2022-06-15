@@ -2,8 +2,6 @@
 body
   position: relative
   display: flex
-  // flex-direction: column
-  // justify-content: space-between
   z-index: 1
   color: $color_text
   background: $color_main_dark
@@ -50,10 +48,10 @@ header
     z-index: -1
 
 main
+  position: relative
+  flex-grow: 100
   display: flex
   flex-direction: column
-  box-sizing: border-box
-  flex-grow: 100
   overflow-x: hidden
   overflow-y: auto
   max-height: 100vh
@@ -68,28 +66,11 @@ footer
   max-height: 100vh
   @include scroll
 
-  .block_footer
-    display: flex
-    width: 100%
-    flex-direction: column
-    justify-content: space-between
-
-    ._actions
-
-    ._copy
-      padding: 1.3rem
-      font-size: .8em
-      line-height: 1
-      text-align: center
-      font-weight: 100
-      opacity: .3
-
-      a
-        color: $color_text
-
-        &:hover
-          opacity: .5
+@media screen and (min-width:1199px)
+  body
 
 @media screen and (max-width:1200px)
   body
+    font-size: 12px
+    line-height: 16px
     flex-direction: column

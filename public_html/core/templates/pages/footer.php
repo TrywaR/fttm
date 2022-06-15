@@ -1,7 +1,7 @@
   </main>
 
   <!-- footer -->
-  <footer class="col-12 col-xl-3">
+  <footer>
     <div class="block_footer">
       <div id="footer_actions" class="_actions animate__animated"></div>
 

@@ -6,8 +6,8 @@
 //@include scroll
 @mixin scroll
 	/* width */
-	scrollbar-color: $color_scroll_track $color_scroll_handle
-	// scrollbar-width: thin
+	scrollbar-color: $color_scroll_handle $color_scroll_track
+	scrollbar-width: thin
 
 	&::-webkit-scrollbar
 		width: .5rem
@@ -22,7 +22,7 @@
 	&::-webkit-scrollbar-thumb
 		background: $color_scroll_handle
 		border-radius: .5rem
-		box-shadow: inset 0 0 .2em 0 $color_scroll_handle
+		// box-shadow: inset 0 0 .2em 0 $color_scroll_handle
 		cursor: pointer
 
 	/* Handle on hover */

@@ -2,7 +2,7 @@
   $oLang = new lang();
   ?>
   <!-- Nav -->
-  <header class="col-12 col-xl-3">
+  <header>
     <div class="block_nav_header">
       <div class="block_logo">
         <?php if ( $_SERVER['REQUEST_URI']!='/' ): ?>
@@ -163,4 +163,4 @@
   </header>
 
   <!-- content -->
-  <main class="col-12 col-xl-6">
+  <main>

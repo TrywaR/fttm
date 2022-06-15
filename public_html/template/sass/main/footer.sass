@@ -1,0 +1,46 @@
+// .block_footer
+.block_footer
+  display: flex
+  width: 100%
+  flex-direction: column
+  justify-content: space-between
+
+  ._actions
+
+  ._copy
+    padding: 1.3rem
+    font-size: .8em
+    line-height: 1
+    text-align: center
+    font-weight: 100
+    opacity: .3
+
+    a
+      color: $color_text
+
+      &:hover
+        opacity: .5
+
+// @media screen and (orientation:landscape) and (max-width:776px)
+@media screen and (max-width:1200px)
+  .block_footer
+    ._actions
+      position: fixed
+      bottom: -50vh
+      right: 1rem
+      font-size: 2em
+      line-height: 2em
+      z-index: 9997
+      @include transition_default
+
+      &._active_
+        bottom: calc( #{$block_nav_mobile_height} + 1rem )
+
+@media screen and (min-width:1199px)
+  .block_footer
+    ._actions
+      padding: 1rem
+
+      .btn-group
+        display: flex
+// .block_footer х

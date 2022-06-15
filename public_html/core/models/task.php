@@ -121,6 +121,7 @@ class task extends model
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrProjects = $oProject->get();
     $arrProjectsFilter = [];
+    $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
     $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 

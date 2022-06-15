@@ -97,4 +97,4 @@
 	<!-- main x-->
 </head>
 
-<body class="row animate__animated animate__fadeIn">
+<body class="animate__animated animate__fadeIn">

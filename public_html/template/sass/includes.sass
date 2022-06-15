@@ -1,18 +1,30 @@
 // STYLE
 //***
+// Config and libs
 @import "config"
 @import "mixins"
-@import "reset"
-@import "animations"
 @import "../../fonts/fonts"
-// @import "desctop"
-// @import "mobile"
-@import "modal"
-@import "form"
-@import "fttm_progress"
-@import "fttm_alerts"
-@import "welcome"
-@import "buy"
+@import "../../../lib/animate/animate.min.css"
+
+// Blocks main
+@import "main/reset"
+@import "main/main"
+@import "main/footer"
+@import "main/nav"
+@import "main/filter"
+@import "main/modal"
+@import "main/form"
+@import "main/fttm_alerts"
+@import "main/bootstrap_fix"
+@import "main/animations"
+@import "main/other"
+
+// Text
+@import "content/content"
+@import "content/loader"
+@import "content/manager"
+
+// Content
 @import "analytics/analytics"
 @import "moneys/moneys"
 @import "moneys/moneys_categories"
@@ -22,19 +34,5 @@
 @import "times/times_categories"
 @import "tasks/tasks"
 @import "charts/charts"
-
-@import "main/nav"
-@import "main/filter"
-
-@import "content/content"
-@import "content/loader"
-@import "content/manager"
-
-@import "../../../lib/animate/animate.min.css"
-@import "bootstrap_fix"
-@import "main"
-
-@import "mobile"
-@import "desctop"
-
-@import "other"
+@import "pages/welcome"
+@import "pages/buy"
