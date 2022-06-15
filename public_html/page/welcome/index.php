@@ -1,4 +1,4 @@
-<section class="welcome_container">
+<section class="welcome_container main_content">
   <div class="_section _title">
     <div class="_block">
       <div class="_content">
