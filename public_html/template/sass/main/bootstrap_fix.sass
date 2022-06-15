@@ -139,22 +139,6 @@ body
     line-height: 1em
     font-weight: 400
 
-  .jumbotron
-    a
-      color: $color_main
-
-      &:hover
-        color: $color_main ! important
-        opacity: .8
-
-    .lead
-      // display: flex
-      font-size: 1em
-      line-height: 1.2
-
-      .icon
-        margin-right: .5rem
-
   .badge
     border-radius: $border_radius
 
@@ -187,3 +171,10 @@ body
           border: none
           // background: $color_main_dark_ultra
           justify-content: space-between
+
+  .nav-pills
+    .nav-link
+      &.active,
+      &.show
+        background: $color_main
+        color: white

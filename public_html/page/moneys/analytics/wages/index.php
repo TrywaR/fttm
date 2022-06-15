@@ -1,15 +1,12 @@
-<section class="row block_jumbotron block_moneys">
-  <div class="col col-12">
-    <div class="_block_title">
-      <h1 class="sub_title _value">
-        <?$oLang = new lang()?>
-        <?=$oLang->get('Wages')?>
-      </h1>
-    </div>
+<div class="main_jumbotron">
+  <div class="_block_title">
+    <h1 class="sub_title _value">
+      <?=$oLang->get('Wages')?>
+    </h1>
   </div>
-</section>
+</div>
 
-<section class="row block_moneys">
+<div class="main_content">
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
       <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
@@ -33,8 +30,8 @@
           </span>
 
           <select name="week" class="form-select">
-            <option value="" selected>Current week</option>
-            <option value="1">Prev week</option>
+            <option value="" selected><?=$oLang->get('CurrentWeek')?></option>
+            <option value="1"><?=$oLang->get('PrevWeek')?></option>
           </select>
 
           <button class="btn btn-dark" type="submit">
@@ -46,7 +43,7 @@
         </div>
       </form>
 
-      <h2><?=$oLang->get('Week')?></h2>
+      <h2 class="sub_title"><?=$oLang->get('Week')?></h2>
       <div id="res_weeks" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -55,7 +52,7 @@
         </div>
       </div>
 
-      <h2><?=$oLang->get('Sum')?></h2>
+      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
       <div id="res_weeks_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -113,16 +110,16 @@
           </span>
 
           <select name="year" class="form-select">
-            <option value="" selected>Current year</option>
+            <option value="" selected><?=$oLang->get('CurrentYear')?></option>
             <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
           </select>
 
           <select name="month" class="form-select">
-            <option value="" selected>Current month</option>
+            <option value="" selected><?=$oLang->get('CurrentMonth')?></option>
             <?for ($i=1; $i < 13; $i++) {?>
-              <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
+              <option value="<?=$i?>"><?=$oLang->get(date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i))))?></option>
             <?}?>
           </select>
 
@@ -135,7 +132,7 @@
         </div>
       </form>
 
-      <h2><?=$oLang->get('Month')?></h2>
+      <h2 class="sub_title"><?=$oLang->get('Month')?></h2>
       <div id="res_month" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -144,7 +141,7 @@
         </div>
       </div>
 
-      <h2><?=$oLang->get('Sum')?></h2>
+      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
       <div id="res_month_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -204,7 +201,7 @@
           </span>
 
           <select name="year" class="form-select">
-            <option value="" selected>Current year</option>
+            <option value="" selected><?=$oLang->get('CurrentYaer')?></option>
             <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
@@ -219,7 +216,7 @@
         </div>
       </form>
 
-      <h2>Yaer</h2>
+      <h2 class="sub_title"><?=$oLang->get('Year')?></h2>
       <div id="res_year" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -228,7 +225,7 @@
         </div>
       </div>
 
-      <h2>Sum</h2>
+      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
       <div id="res_year_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -276,4 +273,4 @@
       </script>
     </div>
   </div>
-</section>
+</div>

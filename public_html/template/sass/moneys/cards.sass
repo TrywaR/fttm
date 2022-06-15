@@ -1,5 +1,14 @@
 // .card_item
-.card_item
+.block_cards
+  display: flex
+  flex-wrap: wrap
+
+  .card_item
+    flex-grow: 1
+    display: flex
+    justify-content: center
+    align-items: center
+    margin: .5rem
 
 .block_card
   position: relative
@@ -7,10 +16,9 @@
   border-radius: $border_radius
   overflow: hidden
   height: 11rem
-  max-width: 20rem
+  width: 20rem
   padding: 1rem
   box-sizing: border-box
-  // min-height: 10rem
   border: none ! important
   box-shadow: inset 0 0 .1rem 0 $color_main_money, inset -.08rem -.08rem 0 0 $color_text
 

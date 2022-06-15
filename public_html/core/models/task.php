@@ -162,11 +162,12 @@ class task extends model
       $this->date_create = date("Y-m-d H:i:s");
     }
 
+    $oLang = new lang();
     $this->arrStatus = [
-      array('id'=>0,'name'=>'No status'),
-      array('id'=>1,'name'=>'Planned'),
-      array('id'=>2,'name'=>'In work'),
-      array('id'=>3,'name'=>'Complited')
+      array('id'=>0,'name'=>$oLang->get('NoStatus')),
+      array('id'=>1,'name'=>$oLang->get('Planned')),
+      array('id'=>2,'name'=>$oLang->get('InWork')),
+      array('id'=>3,'name'=>$oLang->get('Complited'))
     ];
   }
 }

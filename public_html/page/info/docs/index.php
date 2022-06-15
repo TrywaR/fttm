@@ -1,13 +1,11 @@
-<section class="row">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title">Docs</h1>
-      </div>
-    </div>
+<div class="main_jumbotron">
+  <div class="_block_title">
+    <h1 class="sub_title _value">
+      <?=$oLang->get('Docs')?>
+    </h1>
   </div>
+</div>
 
-  <div class="col-12">
-    How this use
-  </div>
-</section>
+<div class="main_content">
+  How this use
+</div>

@@ -60,15 +60,25 @@
     display: none
 
   ._description_prev
-    padding: 1rem
-    font-size: .9em
-    line-height: 1.6
+    font-size: .85em
+    line-height: 1.2em
+    padding: .5rem 0 0 0
 
   ._sub
     display: flex
-    flex-direction: column
+    flex-wrap: wrap
     align-items: flex-end
-    padding: .5rem
+    justify-content: flex-end
+
+    & > *
+      padding: .4rem
+      border-radius: $border_radius
+      background: $color_main_dark
+      margin-left: .5rem
+      margin-bottom: .5rem
+
+      &:first-child
+        margin-left: 0
 
   &._show_
     opacity: 1

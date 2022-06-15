@@ -1,6 +1,6 @@
 // Отличие от того что в админке, загружается при скролле
 // Последовательная загрузка
-$.fn.content_loader = function() {
+$.fn.content_loader = function( sEvent ) {
   arrPageParams.table = this.data().content_loader_table// Таблица для загрузки данных
   arrPageParams.form = this.data().content_loader_form // Запрос для вывода данных
   arrPageParams.from = this.data().content_loader_from // Запрос для вывода данных
@@ -17,11 +17,11 @@ $.fn.content_loader = function() {
   arrPageParams.elem_template_selector = this.data().content_loader_template_selector // Селектор шаблона, как должны выглядеть элементы
 
   arrPageContent.arrayObjects = [] // Вложенные лементы для дальшей обработки
-  content_loader_init()
+  content_loader_init( sEvent )
 }
 
 // Запуск функции
-function content_loader_init() {
+function content_loader_init( sEvent ) {
   arrPageContent.scroll_block_height = $(document).find(arrPageContent.scroll_block).prop('scrollHeight')
   arrPageContent.from = 0
   if ( parseInt(arrPageParams.from) ) arrPageContent.from = arrPageParams.from
@@ -57,6 +57,8 @@ function content_loader_init() {
   if ( arrPageContent.elem_template_selector ) {
     arrPageContent.oTemplate = $(document).find(arrPageContent.elem_template_selector)
   }
+
+  if ( sEvent == 'start' ) $(document).find(arrPageContent.scroll_block).html('')
 
   // Возможность прокрутки, визуально
   $(document).find(arrPageContent.scroll_block).addClass('_scroll_').addClass('_top_')

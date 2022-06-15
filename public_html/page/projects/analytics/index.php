@@ -1,20 +1,17 @@
 <?
-$oLang = new lang();
-
 $oProject = new project( $_REQUEST['project_id'] );
 $arrProject = $oProject->get();
-// $arrProject = $arrProject[0];
 ?>
 
-<section class="row">
-  <div class="col col-12 pt-4 pb-1">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 sub_title"><?=$arrProject['title']?></h1>
-      </div>
-    </div>
+<div class="main_jumbotron">
+  <div class="_block_title">
+    <h1 class="sub_title _value">
+      <?=$arrProject['title']?>
+    </h1>
   </div>
+</div>
 
+<div class="main_content">
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
       <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
@@ -38,15 +35,12 @@ $arrProject = $oProject->get();
           </span>
 
           <select name="week" class="form-select">
-            <option value="" selected>Current week</option>
-            <option value="1">Prev week</option>
+            <option value="" selected><?=$oLang->get('CurrentWeek')?></option>
+            <option value="1"><?=$oLang->get('PrevWeek')?></option>
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
-            <?=$oLang->get('Filter')?>
+            Go
           </button>
         </div>
       </form>
@@ -77,7 +71,7 @@ $arrProject = $oProject->get();
 
           </div>
           <div class="_title">
-            Money for hour
+            <?=$oLang->get('MoneyPerHour')?>
           </div>
         </div>
       </div>
@@ -156,24 +150,21 @@ $arrProject = $oProject->get();
           </span>
 
           <select name="year" class="form-select">
-            <option value="" selected>Current year</option>
+            <option value="" selected><?=$oLang->get('CurrentYear')?></option>
             <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
           </select>
 
           <select name="month" class="form-select">
-            <option value="" selected>Current month</option>
+            <option value="" selected><?=$oLang->get('CurrentMonth')?></option>
             <?for ($i=1; $i < 13; $i++) {?>
-              <option value="<?=$i?>"><?=date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i)))?></option>
+              <option value="<?=$i?>"><?=$oLang->get(date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i))))?></option>
             <?}?>
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
-            <?=$oLang->get('Filter')?>
+            Go
           </button>
         </div>
       </form>
@@ -203,7 +194,7 @@ $arrProject = $oProject->get();
           <div class="_value">
           </div>
           <div class="_title">
-            Money for hour
+            <?=$oLang->get('MoneyPerHour')?>
           </div>
         </div>
       </div>
@@ -284,17 +275,14 @@ $arrProject = $oProject->get();
           </span>
 
           <select name="year" class="form-select">
-            <option value="" selected>Current year</option>
+            <option value="" selected><?=$oLang->get('CurrentYear')?></option>
             <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
-            <?=$oLang->get('Filter')?>
+            Go
           </button>
         </div>
       </form>
@@ -324,7 +312,7 @@ $arrProject = $oProject->get();
           <div class="_value">
           </div>
           <div class="_title">
-            Money for hour
+            <?=$oLang->get('MoneyPerHour')?>
           </div>
         </div>
       </div>
@@ -392,4 +380,4 @@ $arrProject = $oProject->get();
       </script>
     </div>
   </div>
-</section>
+</div>

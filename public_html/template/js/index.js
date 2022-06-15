@@ -54,21 +54,9 @@ $(function(){
 		var scrollSpys = new bootstrap.ScrollSpy(document.body, {
 		  target: '#list-example'
 		})
-})
 
-// adaptive
-function adaptive(){
-	if ( $(window).width() < 1200 ) {
-		$('body').addClass('mobile')
-	}
-	else {
-		$('body').removeClass('mobile')
-	}
-}
-$(function(){
-	adaptive()
-	$(window).resize(function(){
-		adaptive()
+	// shower
+	$(document).find('[data-shower]').on('click',function(){
+		$(document).find($(this).data().shower).toggleClass('_show_')
 	})
 })
-// adaptive x

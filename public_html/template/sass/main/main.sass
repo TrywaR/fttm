@@ -1,76 +1,61 @@
-// STYLE
-body
-  position: relative
-  display: flex
-  z-index: 1
-  color: $color_text
-  background: $color_main_dark
-  font-family: $font_default
-  font-size: 14px
-  line-height: 18px
-  font-weight: 400
-  overflow-x: hidden
-  max-width: 100%
-  min-height: 100vh
-  overflow: hidden
-
-  &:before,
-  &:after
-    content: ''
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    z-index: -1
-
-header
-  position: relative
-  flex-grow: 1
+// .main_jumbotron
+.main_jumbotron
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
   display: flex
   flex-direction: column
-  overflow-x: hidden
-  overflow-y: auto
-  max-height: 100vh
-  @include scroll
+  z-index: 4
 
-  &:after
-    content: ''
+  ._block_title
+    z-index: 3
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    height: 4rem
+    padding: .5rem 1rem
+    box-sizing: border-box
+    align-items: center
+    background: $color_main_dark
+    border-radius: $border_radius
+    margin-bottom: 1rem
+
+    ._value
+      width: 80%
+      margin: 0
+
+    ._buttons
+      width: 20%
+
+  ._block_content
+    z-index: 2
     position: absolute
-    top: -4rem
-    right: -1rem
-    width: 10rem
-    height: 10rem
-    border-radius: 50%
-    background: radial-gradient($color_main, $color_main_dark)
-    filter: blur(1.9rem)
-    opacity: .1
-    z-index: -1
+    top: -100%
+    left: 1rem
+    right: 1rem
+    display: flex
+    opacity: 1
+    background: $color_main_dark
+    border-radius: $border_radius
+    @include transition_default
+    box-shadow: 0 .2rem .2rem 0 rgba(10,10,10,.6), 0 0 .6rem .6rem rgba(10,10,10,.6), inset 0 0 .1rem 0 rgba(50,50,50,.3)
 
-main
-  position: relative
-  flex-grow: 100
-  display: flex
-  flex-direction: column
-  overflow-x: hidden
+    &._show_
+      opacity: 1
+      top: 100%
+// .main_jumbotron x
+
+// .main_content
+.main_content
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 1
+  padding: 5rem 1rem 1rem
+  box-sizing: border-box
+  max-height: 100%
   overflow-y: auto
-  max-height: 100vh
-  overflow: auto
-  @include scroll
-
-footer
-  display: flex
-  flex-grow: 1
-  overflow-x: hidden
-  overflow-y: auto
-  max-height: 100vh
-  @include scroll
-
-@media screen and (min-width:1199px)
-  body
-
-@media screen and (max-width:1200px)
-  body
-    font-size: 12px
-    line-height: 16px
-    flex-direction: column
+// .main_content x
