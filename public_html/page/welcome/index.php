@@ -99,7 +99,7 @@
    <div class="_section _moneysforhour">
      <div class="_block">
          <div class="_content">
-           <h2 class="_block_title">Moneys per hour</h2>
+           <h2 class="_block_title">Money per hour</h2>
            <p>
              Соединения собранную информацию по временным и денежным затратам можно увидеть много интересных данных
            </p>
