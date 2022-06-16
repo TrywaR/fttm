@@ -1,7 +1,7 @@
 <div class="main_jumbotron">
   <div class="_block_title">
     <h1 class="sub_title _value">
-      Frelance Time TrywaR Manager
+      Freelance Time <?=$_SESSION['user']['login']?> Manager
     </h1>
   </div>
 </div>

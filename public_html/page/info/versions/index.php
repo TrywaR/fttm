@@ -18,7 +18,7 @@
     </div>
 
     <div class="row">
-      <div class="col col-12 col-md-4">
+      <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
           <a class="list-group-item list-group-item-action active" href="#list-item-5_3_0">5.3.0 Mega structure</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_2_9">5.2.9 Design update</a>
@@ -59,7 +59,7 @@
           <a class="list-group-item list-group-item-action" href="#list-item-1">1.0.0 Alfa</a>
         </div>
       </div>
-      <div class="col col-12 col-md-8">
+      <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
             <h2 id="list-item-5_3_0">5.3.0 Mega structure</h2>

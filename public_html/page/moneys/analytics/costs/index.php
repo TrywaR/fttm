@@ -35,9 +35,6 @@
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
             Go
           </button>
         </div>
@@ -125,9 +122,6 @@
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
             Go
           </button>
         </div>
@@ -210,9 +204,6 @@
           </select>
 
           <button class="btn btn-dark" type="submit">
-            <!-- <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span> -->
             Go
           </button>
         </div>

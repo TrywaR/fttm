@@ -75,7 +75,7 @@ class nav
             'icon' => '<i class="fa-solid fa-folder-tree"></i>',
           ),
           '/times/analytics/costs/' => array(
-            'name' => $oLang->get('Spent'),
+            'name' => $oLang->get('Costs'),
             'url' => '/times/analytics/costs/',
             'icon' => '<i class="fa-solid fa-chart-bar"></i>',
           ),
