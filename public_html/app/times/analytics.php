@@ -61,7 +61,7 @@ switch ($_REQUEST['form']) {
       }
 
       $arrResults['data'][$iIndex]['sum'] = $oTime->get_sum( $arrDaysTimes );
-
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$oTime->get_sum( $arrDaysTimes ));
       $iIndex++;
     }
 
@@ -139,6 +139,7 @@ switch ($_REQUEST['form']) {
 
       $arrResults['data'][$i]['sum'] = $oTime->get_sum( $arrDaysTimes );
       $arrResults['data'][$i]['title'] = sprintf("%02d", $i);
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$oTime->get_sum( $arrDaysTimes ));
     }
 
     // Заменяем значения дат на не роботские
@@ -210,6 +211,7 @@ switch ($_REQUEST['form']) {
 
       $arrResults['data'][$i]['sum'] = $oTime->get_sum( $arrMonthTimes );
       $arrResults['data'][$i]['title'] = date("F", strtotime($iYear . "-" . sprintf("%02d", $i)));
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$oTime->get_sum( $arrMonthTimes ));
     }
 
     // Заменяем значения дат на не роботские

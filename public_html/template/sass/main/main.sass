@@ -39,7 +39,8 @@
     background: $color_main_dark
     border-radius: $border_radius
     @include transition_default
-    box-shadow: 0 .2rem .2rem 0 rgba(10,10,10,.6), 0 0 .6rem .6rem rgba(10,10,10,.6), inset 0 0 .1rem 0 rgba(50,50,50,.3)
+    @include shadow_default
+    // box-shadow: 0 .2rem .2rem 0 rgba(10,10,10,.6), 0 0 .6rem .6rem rgba(10,10,10,.6), inset 0 0 .1rem 0 rgba(50,50,50,.3)
 
     &._show_
       opacity: 1

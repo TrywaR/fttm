@@ -18,7 +18,7 @@
     id="cards"
     class="block_cards block_elems block_content_loader"
     data-content_loader_table="cards"
-    data-content_loader_form="show_all"
+    data-content_loader_form="show"
     data-content_loader_limit="15"
     data-content_loader_scroll_nav="0"
     <?php if ($_REQUEST['sort']): ?>
@@ -45,7 +45,7 @@
 
 <div class="block_template">
   <div class="card_item _elem progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-    <div class="block_card _commission_show_{{commission_show}} _noedit_show_{{noedit}}">
+    <div class="block_card _commission_show_{{commission_show}} _edit_show_{{edit_show}}">
       <div class="_card_head">
         <div class="_title">
           {{title}}

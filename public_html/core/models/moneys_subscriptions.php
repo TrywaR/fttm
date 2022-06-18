@@ -19,30 +19,9 @@ class moneys_subscriptions extends model
   public static $user_id = '';
   public static $sDateQuery = '';
 
-  function get_month(){
-    // $arrResult = [];
-    // $arrSubscription = $this->get();
+  public function get_subscription( $arrSubscription = [] ){
+    if ( ! $arrCategory['id'] ) $arrCategory = $this->get();
 
-    // За месяц
-    $oMoney = new money();
-    $dCurrentDate = $this->sDateQuery != '' ? $this->sDateQuery : date('Y-m');
-    // $dCurrentDate = $this->sDateQuery;
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
-    $oMoney->query .= " AND `type` = '0'";
-    $oMoney->query .= " AND `subscription` = '" . $this->id . "'";
-    // return $oMoney->get_money();
-    $arrMoneys = $oMoney->get_money();
-    // return $arrMoney;
-
-    $iMonthSum = 0;
-    foreach ($arrMoneys as $arrMoney) $iMonthSum = (int)$arrMoney['price'] + (int)$iMonthSum;
-    return $iMonthSum;
-  }
-
-  function get_subscription(){
-    $arrResult = [];
-    $arrSubscription = $this->get();
     if ( (int)$arrSubscription['user_id'] ) $arrSubscription['edit_show'] = 'true';
 
     if ( (int)$arrSubscription['card'] ) {
@@ -62,20 +41,36 @@ class moneys_subscriptions extends model
       $arrSubscription['paid'] = true;
       $arrSubscription['paid_show'] = 'true';
     }
-
-    $arrResult = $arrSubscription;
-    return $arrResult;
+    
+    return $arrSubscription;
   }
 
   function get_subscriptions(){
-    $arrResults = [];
-    $arrMoneysSubscriptions = $this->get();
-    foreach ($arrMoneysSubscriptions as $arrSubscription) {
-      $oMoneysSubscription = new moneys_subscriptions( $arrSubscription['id'] );
-      if ( $this->sDateQuery ) $oMoneysSubscription->sDateQuery = $this->sDateQuery;
-      $arrResults[] = $oMoneysSubscription->get_subscription();
-    }
-    return $arrResults;
+    $arrSubscriptions = $this->get();
+    if ( $arrSubscriptions['id'] ) $arrSubscriptions = $this->get_subscription( $arrSubscriptions );
+    else foreach ($arrSubscriptions as &$arrSubscription) $arrSubscription = $this->get_subscription($arrSubscription);
+    return $arrSubscriptions;
+  }
+
+  public function get_month(){
+    // $arrResult = [];
+    // $arrSubscription = $this->get();
+
+    // За месяц
+    $oMoney = new money();
+    $dCurrentDate = $this->sDateQuery != '' ? $this->sDateQuery : date('Y-m');
+    // $dCurrentDate = $this->sDateQuery;
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
+    $oMoney->query .= " AND `type` = '0'";
+    $oMoney->query .= " AND `subscription` = '" . $this->id . "'";
+    // return $oMoney->get_money();
+    $arrMoneys = $oMoney->get_moneys();
+    // return $arrMoney;
+
+    $iMonthSum = 0;
+    foreach ($arrMoneys as $arrMoney) $iMonthSum = (int)$arrMoney['price'] + (int)$iMonthSum;
+    return $iMonthSum;
   }
 
   public function fields() # Поля для редактирования

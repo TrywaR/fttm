@@ -14,7 +14,7 @@ body
   .form-control:focus,
   .form-control:disabled
     color: $color_text
-    background: $color_main_dark
+    background: $color_main_dark_ultra
     border-color: $color_main_dark_ultra
 
   .form-control:disabled
@@ -32,14 +32,92 @@ body
     background: $color_main_light
 
   .btn
+    position: relative
     display: flex
     justify-content: center
     align-items: center
     padding: .6rem
     color: $color_text
-    border-radius: $border_radius
-    background: $color_main_dark
+    border-radius: $border_radius ! important
+    // background: $color_main_dark
+    // background: none ! important
+    border: none ! important
+    outline: none ! important
+    @include transition_default
     @include shadow_default
+    filter: blur(.03rem)
+    z-index: 1
+
+    &:hover,
+    &:focus
+      filter: blur(0rem)
+
+      &:after
+        opacity: .15
+
+    &:active
+      filter: blur(.05rem)
+
+      &:after
+        opacity: .2
+
+    &:before,
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      border-radius: $border_radius
+
+    &:before
+      @include shadow_button
+      opacity: .5
+      z-index: -1
+
+    &:after
+      background: radial-gradient($color_main, rgba(0,0,0,0))
+      opacity: .1
+      z-index: -2
+
+    ._icon
+      position: relative
+      z-index: 1
+      display: flex
+      flex-direction: column
+      height: 100%
+      min-height: 1em
+      white-space: nowrap
+      padding: 0
+
+      ._on,
+      ._off
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        white-space: nowrap
+        @include transition_default
+
+      ._on
+        bottom: 0%
+        left: 0
+
+      ._off
+        bottom: -100%
+        left: 0
+        opacity: 0
+
+    &.__on
+      ._icon
+        ._on
+          bottom: 100%
+          opacity: 0
+
+        ._off
+          opacity: 1
+          bottom: 0%
 
     ._icon
       display: flex
@@ -55,22 +133,38 @@ body
 
     &.btn-primary
       background: $color_main_dark
-      border-color: $color_main_dark
+      // border-color: $color_main_dark
+
+      // &:after
+      //   // background: radial-gradient(rgba(0,0,0,0), $color_main_dark_ultra)
+      //   opacity: .1
+      //   z-index: -2
 
     &.btn-dark
       background: $color_main_dark_ultra
-      border-color: $color_main_dark_ultra
+      // border-color: $color_main_dark_ultra
+
+      // &:after
+      //   // background: radial-gradient(rgba(0,0,0,0), $color_main_dark_ultra)
+      //   opacity: .3
+      //   z-index: -2
 
     &.btn-danger
       background: $color_error
-      border-color: $color_error
+      // border-color: $color_error
       color: white
+
+      // &:after
+      //   background: radial-gradient(rgba(0,0,0,0), $color_error)
+      //   opacity: .3
+      //   z-index: -2
 
       &:hover
         color: white
         opacity: .8
 
     &.disabled
+      opacity: .5
       color: $color_main_dark_light
 
     &:hover
@@ -79,13 +173,35 @@ body
   .btn-group,
   .btn-group-vertical
     .btn
-      margin: .5rem
+      margin-right: .5rem
+
+      &:last-child
+        margin-right: 0
+
+  .btn-group-vertical
+    .btn
+      margin-bottom: .5rem
+
+      &:last-child
+        margin-bottom: 0
 
   .card
     position: relative
     z-index: 1
     color: $color_text
-    background: $color_main_light
+    // background: $color_main_light
+    background: transparent
+
+    // &:after
+    //   content: ''
+    //   position: absolute
+    //   top: 0
+    //   left: 0
+    //   right: 0
+    //   bottom: 0
+    //   background: $color_main_dark
+    //   opacity: .5
+    //   z-index: -1
 
     .card-text
       opacity: .5
@@ -119,18 +235,53 @@ body
     color: $color_main
     background: $color_main_dark_ultra
 
+  .input-group
+    position: relative
+    z-index: 1
+    background: $color_main_dark_ultra
+    border-radius: $border_radius
+
+    .form-select,
+    .form-select:focus,
+    .form-control,
+    .form-control:focus,
+    .form-control:disabled
+      background: transparent
+      border-color: transparent
+
+    &:before,
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      border-radius: $border_radius
+
+    &:before
+      box-shadow: 0 0 .2rem 0 rgba(200,200,200,.1), inset .1rem .1rem 0 0 rgba(0,0,0,.2)
+      opacity: .5
+      z-index: -1
+
+    &:after
+      background: radial-gradient($color_main, rgba(0,0,0,0))
+      opacity: .1
+      z-index: -2
+
   .input-group-text
     color: $color_text
     font-size: 1em
     line-height: 1em
     font-weight: 400
-    background: $color_main_dark_ultra
+    background: $color_main_dark
     border-color: $color_main_dark_ultra
     opacity: .8
 
     ._text
       display: flex
-      min-width: 8rem
+      width: 8rem
+      overflow: hidden
 
   .form-label
     opacity: .8

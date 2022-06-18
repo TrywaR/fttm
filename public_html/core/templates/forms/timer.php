@@ -6,12 +6,12 @@
 // $arrTemplateParams['required'] = '';
 // $arrTemplateParams['class'] = '';
 ?>
-<div class="input-group mb-2 <?=$arrTemplateParams['class']?>">
+<div class="input-group mb-2 <?=$arrTemplateParams['class']?> input_timer">
   <!-- <label
   for="form_input_<?=$arrTemplateParams['name']?>"
   class="form-label"><?=$arrTemplateParams['title']?></label> -->
 
-  <span class="input-group-text" >
+  <span class="input-group-text _text" >
     <?php if ( isset($arrTemplateParams['icon']) ): ?>
       <span class="_icon">
         <?=$arrTemplateParams['icon']?>
@@ -26,7 +26,7 @@
 
   <input
     type="time"
-    class="input form-control"
+    class="input form-control _input"
     id="form_input_<?=$arrTemplateParams['name']?>"
     name="<?=$arrTemplateParams['name']?>"
     <?php if ( $arrTemplateParams['value'] ): ?>
@@ -37,15 +37,18 @@
     <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
     <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
   >
-  <input type="text" disabled name="seconds" value="" class="form-control _seconds">
-</div>
 
-<div class="btn-group d-flex">
-  <button class="btn btn-dark" type="button" name="button" id="timer_<?=$arrTemplateParams['name']?>">
-    <i class="fas fa-play-circle"></i>
-  </button>
-  <button class="btn btn-dark" type="button" name="button" id="timer_<?=$arrTemplateParams['name']?>_stop">
-    <i class="fa-solid fa-circle-stop"></i>
+  <input type="text" disabled name="seconds" value="" class="form-control _seconds">
+
+  <button class="btn btn-dark _button" type="button" name="button" id="timer_<?=$arrTemplateParams['name']?>">
+    <div class="_icon">
+      <div class="_on">
+        <i class="fas fa-play-circle"></i>
+      </div>
+      <div class="_off">
+        <i class="fa-solid fa-circle-stop"></i>
+      </div>
+    </div>
   </button>
 </div>
 
@@ -59,6 +62,12 @@
 
     $(document).find('#timer_<?=$arrTemplateParams['name']?>').on ('click', function(){
       clearInterval(oTimerInterval<?=$arrTemplateParams['name']?>)
+
+      if ( $(this).hasClass('_stop_') ) {
+        $(this).removeClass('_stop_').removeClass('__on')
+        return false
+      }
+      else $(this).addClass('_stop_').addClass('__on')
 
       var
         oTimerInput = $(document).find('#form_input_<?=$arrTemplateParams['name']?>'),

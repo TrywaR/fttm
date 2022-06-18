@@ -22,15 +22,41 @@ class model
     $mySqlSalt = '';
     $mySqlShowSalt = '';
     // $mySqlSalt .= " ORDER BY  `sort` ASC";
+
     // Пагинация
+    // if ( $_REQUEST['from'] ) $this->from = $_REQUEST['from'];
+    // if ( $_REQUEST['limit'] ) $this->limit = $_REQUEST['limit'];
     $iLimit = $this->limit ? $this->limit : 0; // Пагинация, количество элементов
     $iFrom = $this->from ? $this->from : 0; // Пагинация, от
+
+    // Фильтрация
+    // if ( $_REQUEST['filter'] ) {
+    //   $arrFilters = [];
+    //   if ( $_REQUEST['filter'] == 'all' ) foreach ($_REQUEST as $key => $value) $arrFilters = array('name'=>$key,'value'=>$value);
+    //   else $arrFilters = $_REQUEST['filter'];
+    //
+    //   foreach ($arrFilters as $arrFilter) {
+    //     if ( $arrFilter['value'] ) {
+    //       switch ($arrFilter['name']) {
+    //         case 'date':
+    //         $this->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . ' 00:00:00"';
+    //         break;
+    //
+    //         default:
+    //         $this->query .= ' AND `' . $arrFilter['name'] . '` = ' . $arrFilter['value'];
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
+
     // Уникальаня выборка
     $sQuery = $this->query ? $this->query : '';
     // Сортировка
     // Сортировка mySql
     $sSort = $this->sort ? $this->sort : '';
     $sSortDir = $this->sortDir ? $this->sortDir : 'ASC';
+    $sSortMulti = $this->sortMulti ? $this->sortMulti : '';
     // Сортировка php
     $sUSort = $this->usort ? $this->usort : '';
 
@@ -58,6 +84,7 @@ class model
 
       // Сортировка mySql
       if ( $sSort ) $mySqlShowSalt .= " ORDER BY  `" . $sSort . "` " . $sSortDir;
+      if ( $sSortMulti ) $mySqlShowSalt .= " ORDER BY " . $sSortMulti;
 
       // Пагинация
       if ( $iLimit ) $mySqlShowSalt .= ' LIMIT ' . $iLimit;
@@ -123,14 +150,18 @@ class model
     $arrResult = []; // Результат
     $mySql = ''; // Запрос для вывода ячеек в таблице
     $arrFields = []; // Столбцы таблицы в базе
-    // $this->arrAddFields = []; // Значения для столбцов
+    $arrAddFields = $this->arrAddFields ? $this->arrAddFields : [] ; // Значения для столбцов
     $mySqlAdd = ''; // Запрос на добавление
     $mySqlAddSeporator = ''; // Разделитель для запроса
 
     // Проверяем наличие парамтеров
-    if ( ! count($this->arrAddFields) ) {
-      if ( $this->name || $this->title || $this->user_id ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
+    if ( ! count($arrAddFields) ) {
+      if ( $this->name || $this->title || $this->user_id ) foreach ($this as $key => $value) $arrAddFields[$key] = $value;
       else notification::error( 'There is no data to fill in, add the name parameter or the arrAddFields array with parameters!' );
+    }
+    else {
+      foreach ($this as $key => &$value)
+        if ( $arrAddFields[$key] ) $value = $arrAddFields[$key];
     }
 
     // Собираем поля которые можно редактировать
@@ -161,21 +192,21 @@ class model
       $mySqlAdd .= $mySqlAddSeporator;
       switch ( $arrField['Type'] ) {
         case 'mediumtext':
-          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         case 'longtext':
-          $mySqlAdd .= "'" . base64_encode($this->arrAddFields[$arrField['Field']]) . "'";
+          $mySqlAdd .= "'" . base64_encode($arrAddFields[$arrField['Field']]) . "'";
           break;
         case 'init':
-          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         case 'datetime':
-          if ( $this->arrAddFields[$arrField['Field'] . '_date'] )
-          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field'] . '_date'] . ' ' . $this->arrAddFields[$arrField['Field'] . '_time'] . "'";
-          else $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          if ( $arrAddFields[$arrField['Field'] . '_date'] )
+          $mySqlSave .= "'" . $arrAddFields[$arrField['Field'] . '_date'] . ' ' . $arrAddFields[$arrField['Field'] . '_time'] . "'";
+          else $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         default:
-          $mySqlAdd .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
       }
       $mySqlAddSeporator = ", ";
@@ -198,18 +229,19 @@ class model
     $mySql = ''; // Запрос для вывода ячеек в таблице
     $arrFields = ''; // Столбцы таблицы в базе
     // $arrEditFields = ''; // Новые значения для столбцов
+    $arrAddFields = $this->arrAddFields ? $this->arrAddFields : [] ; // Значения для столбцов
     $mySqlSave = ''; // Запрос на редактирование
     $mySqlSaveSeporator = ''; // Разделитель для запроса
     $id = $id ? $id : $this->id; // id элемента
 
     // Проверяем наличие парамтеров
-    if ( ! count($this->arrAddFields) ) {
-      if ( $this->name || $this->title ) foreach ($this as $key => $value) $this->arrAddFields[$key] = $value;
+    if ( ! count($arrAddFields) ) {
+      if ( $this->name || $this->title ) foreach ($this as $key => $value) $arrAddFields[$key] = $value;
       else notification::error( 'There is no data to fill, add the name parameter or the arrAddFields array with parameters!' );
     }
     else {
       foreach ($this as $key => &$value)
-        if ( $this->arrAddFields[$key] ) $value = $this->arrAddFields[$key];
+        if ( $arrAddFields[$key] ) $value = $arrAddFields[$key];
     }
 
     // Собираем поля которые можно редактировать
@@ -231,24 +263,24 @@ class model
       $mySqlSave .= $mySqlSaveSeporator . "`" . $arrField['Field'] . "` = ";
       switch ( trim(preg_replace('/\s*\([^)]*\)/', '', $arrField['Type'])) ) {
         case 'mediumtext':
-          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         case 'longtext':
-          $mySqlSave .= "'" . base64_encode($this->arrAddFields[$arrField['Field']]) . "'";
+          $mySqlSave .= "'" . base64_encode($arrAddFields[$arrField['Field']]) . "'";
           break;
         case 'tinyint':
-          $mySqlSave .= isset($this->arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
           break;
         case 'init':
-          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         case 'datetime':
-          if ( $this->arrAddFields[$arrField['Field'] . '_date'] )
-          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field'] . '_date'] . ' ' . $this->arrAddFields[$arrField['Field'] . '_time'] . "'";
-          else $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          if ( $arrAddFields[$arrField['Field'] . '_date'] )
+          $mySqlSave .= "'" . $arrAddFields[$arrField['Field'] . '_date'] . ' ' . $arrAddFields[$arrField['Field'] . '_time'] . "'";
+          else $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
         default:
-          $mySqlSave .= "'" . $this->arrAddFields[$arrField['Field']] . "'";
+          $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
       }
       $mySqlSaveSeporator = ", ";

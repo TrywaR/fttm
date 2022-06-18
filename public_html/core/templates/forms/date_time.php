@@ -9,7 +9,7 @@
 
 $arrTemplateParams['values'] = explode(' ', $arrTemplateParams['value']);
 ?>
-<div class="input-group mb-2 <?=$arrTemplateParams['class']?>">
+<div class="input-group mb-2 <?=$arrTemplateParams['class']?> input-date_time">
   <!-- <label class="form-label"><?=$arrTemplateParams['title']?></label> -->
 
   <span class="input-group-text" >
@@ -19,7 +19,7 @@ $arrTemplateParams['values'] = explode(' ', $arrTemplateParams['value']);
       </span>
     <?php endif; ?>
     <?php if ( isset($arrTemplateParams['title']) ): ?>
-      <span class="_text">
+      <span class="_text" title="<?=$arrTemplateParams['title']?>">
         <?=$arrTemplateParams['title']?>
       </span>
     <?php endif; ?>

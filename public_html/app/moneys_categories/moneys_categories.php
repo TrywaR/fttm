@@ -8,12 +8,27 @@ switch ($_REQUEST['form']) {
       <div class="btn-group">
         <a data-action="moneys_categories" data-animate_class="animate__flipInY" data-elem=".money_category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
-          <span class="_icon">' . $oLang->get("Add") . '</span>
+          <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
       </div>
       ';
 
     notification::send( $sResultHtml );
+    break;
+
+  case 'show': # Вывод элементов
+    $oCategory = $_REQUEST['id'] ? new moneys_category( $_REQUEST['id'] ) : new moneys_category();
+
+    if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
+
+    $oCategory->sort = 'sort';
+    $oCategory->sortDir = 'ASC';
+    $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+
+    $arrCategories = $oCategory->get_categories();
+
+    notification::send($arrCategories);
     break;
 
   case 'form': # Форма добавления / редактирования
@@ -60,37 +75,30 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = (array)$oMoneysCategory;
+    $arrResults['data'] = $oMoneysCategory->get_categories();
 
     $arrResults['action'] = 'moneys_categories';
     notification::send($arrResults);
-    break;
-
-  case 'show': # Вывод элементов
-    $oCategory = $_REQUEST['id'] ? new moneys_category( $_REQUEST['id'] ) : new moneys_category();
-
-    if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
-    $oCategory->sort = 'sort';
-    $oCategory->sortDir = 'ASC';
-    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrCategories = $oCategory->get_categories();
-    notification::send($arrCategories);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
     $oCategory = $_REQUEST['id'] ? new moneys_category( $_REQUEST['id'] ) : new moneys_category();
     $oCategory->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $oCategory->save();
-    else $oCategory->add();
 
+    if ( $_REQUEST['id'] ) {
+      $arrResult['event'] = 'save';
+      $oCategory->save();
+    }
+    else {
+      $arrResult['event'] = 'add';
+      $oCategory->add();
+    }
+
+    $oCategory = new moneys_category( $oCategory->id );
     $arrResult['data'] = $oCategory->get_category();
-
-    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
-    else $arrResult['event'] = 'add';
-
     $arrResult['text'] = $olang->get('ChangesSaved');
+
     notification::success($arrResult);
     break;
 

@@ -7,6 +7,7 @@ include_once 'heart/form.php'; # Формы
 include_once 'heart/lang.php'; # Переводы
 include_once 'heart/mail.php'; # Работа почты
 include_once 'heart/nav.php'; # Структура
+include_once 'heart/filter.php'; # Фильтрация
 // include_once 'heart/location.php'; # Навигация
 // include_once 'heart/page.php'; # Общая обработка страниц
 

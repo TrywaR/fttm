@@ -15,23 +15,27 @@ body
     background: radial-gradient(circle,white 7%,#1c1a1a white)
     z-index: -2
 
-.block_nav
-  ._subs,
-  ._main
-    .nav-item
-      .nav-link
-        &:before
-          top: auto
-          height: .1rem
-          background: $color_main
+  .block_nav
+    ._subs,
+    ._main
+      .nav-item
+        .nav-link
+          &:before
+            // top: auto
+            // height: .1rem
+            // background: $color_main
+            background: white
 
-.welcome_container
-  ._section
-    &._moneys
-      background: rgba(210,210,210,.1)
+  .welcome_container
+    ._section
+      &._moneys
+        background: rgba(210,210,210,.1)
 
-    &._times
-      background: none
-    ._block
-      ul
-        li
+      &._times
+        background: none
+      ._block
+        ul
+          li
+
+  .badge
+    color: $color_main

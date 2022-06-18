@@ -49,7 +49,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
+      <h2 class="sub_title">
+        <?=$oLang->get('Sum')?>
+        <span id="res_weeks_sum_res" class="badge">0</span>
+      </h2>
       <div id="res_weeks_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -77,7 +80,7 @@
                 'action': 'moneys',
                 'form': 'analytics_week',
                 'chart_type_sum': 'bar',
-                'money_type': '0',
+                'money_type': '1',
                 'money_to_card': '0',
                 'week': iWeek,
               }, 'text', false )
@@ -88,6 +91,7 @@
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_weeks').html( oData.success.chart )
                 if ( oData.success.chart_sum ) $(document).find('#res_weeks_sum').html( oData.success.chart_sum )
+                if ( oData.success.sum ) animation_number_to($("#res_weeks_sum_res"),0,oData.success.sum)
 
                 bWeekShow = true
               }
@@ -127,7 +131,9 @@
         </div>
       </form>
 
-      <h2 class="sub_title"><?=$oLang->get('Month')?></h2>
+      <h2 class="sub_title">
+        <?=$oLang->get('Month')?>
+      </h2>
       <div id="res_month" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -136,7 +142,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
+      <h2 class="sub_title">
+        <?=$oLang->get('Sum')?>
+        <span id="res_month_sum_res" class="badge">0</span>
+      </h2>
       <div id="res_month_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -166,7 +175,7 @@
                 'action': 'moneys',
                 'form': 'analytics_month',
                 'chart_type_sum': 'bar',
-                'money_type': '0',
+                'money_type': '1',
                 'money_to_card': '0',
                 'year': iYear,
                 'month': iMonth,
@@ -178,6 +187,7 @@
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_month').html( oData.success.chart )
                 if ( oData.success.chart_sum ) $(document).find('#res_month_sum').html( oData.success.chart_sum )
+                if ( oData.success.sum ) animation_number_to($("#res_month_sum_res"),0,oData.success.sum)
 
                 bMonthShow = true
               }
@@ -218,7 +228,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title"><?=$oLang->get('Sum')?></h2>
+      <h2 class="sub_title">
+        <?=$oLang->get('Sum')?>
+        <span id="res_year_sum_res" class="badge">0</span>
+      </h2>
       <div id="res_year_sum" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -246,7 +259,7 @@
                 'action': 'moneys',
                 'form': 'analytics_year',
                 'chart_type_sum': 'bar',
-                'money_type': '0',
+                'money_type': '1',
                 'money_to_card': '0',
                 'year': iYear,
               }, 'text', false )
@@ -258,6 +271,7 @@
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_year').html( oData.success.chart )
                 if ( oData.success.chart_sum ) $(document).find('#res_year_sum').html( oData.success.chart_sum )
+                if ( oData.success.sum ) animation_number_to($("#res_year_sum_res"),0,oData.success.sum)
 
                 bYearShow = true
               }

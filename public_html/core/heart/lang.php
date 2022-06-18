@@ -113,12 +113,11 @@ class lang
       'Color' => 'Цвет',
       'Limit' => 'Лимит',
       'Percent' => 'Процент',
-      'LastUpdate' => 'Последнее обновление',
       'ChangesSaved' => 'Изменения сохранены',
       'DeleteSuccess' => 'Успешное удаление',
       'ChangePassword' => 'Поменять пароль',
       'Delete' => 'Удалить',
-      'Cash' => 'Наличные',
+      'Transfer' => 'Перевод',
 
       'Day' => 'День',
       'ToDay' => 'Сегодня',
@@ -133,6 +132,8 @@ class lang
       'PrevMonth' => 'Предыдущий месяц',
       'PrevWeek' => 'Предыдущая неделя',
       'PrevDay' => 'Предыдущий день',
+      'LastUpdate' => 'Обновление',
+      'DateCreate' => 'Создан',
 
       'January' => 'Январь',
       'February' => 'Февраль',
@@ -226,9 +227,9 @@ class lang
       'Price' => 'Price',
       'Status' => 'Status',
 
-      'NoStatus' => 'NoStatus',
+      'NoStatus' => 'No status',
       'Planned' => 'Planned',
-      'InWork' => 'InWork',
+      'InWork' => 'In work',
       'Complited' => 'Complited',
 
       'PricePlanned' => 'Price planned',
@@ -273,12 +274,11 @@ class lang
       'Color' => 'Color',
       'Limit' => 'Limit',
       'Percent' => 'Percent',
-      'LastUpdate' => 'Last update',
       'ChangesSaved' => 'Changes saved',
       'DeleteSuccess' => 'Delete success',
       'ChangePassword' => 'Change password',
       'Delete' => 'Delete',
-      'Cash' => 'Cash',
+      'Transfer' => 'Transfer',
 
       'Day' => 'Day',
       'ToDay' => 'To day',
@@ -293,6 +293,8 @@ class lang
       'PrevMonth' => 'Prev month',
       'PrevWeek' => 'Prev week',
       'PrevDay' => 'Prev day',
+      'LastUpdate' => 'Update',
+      'DateCreate' => 'Create',
 
       'January' => 'January',
       'February' => 'February',

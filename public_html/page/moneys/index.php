@@ -7,6 +7,7 @@ $oTask = new task();
 $oTask->sort = 'sort';
 $oTask->sortDir = 'ASC';
 $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+$oTask->query .= ' AND `status` = 2';
 $arrTasks = $oTask->get();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
@@ -29,6 +30,11 @@ $oMoneysSubscriptions->sort = 'sort';
 $oMoneysSubscriptions->sortDir = 'ASC';
 $oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
+
+$arrTypes = [
+  array('id'=>1,'title'=>$oLang->get('Spend')),
+  array('id'=>2,'title'=>$oLang->get('Replenish')),
+];
 ?>
 
 <div class="main_jumbotron">
@@ -38,15 +44,13 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
     </h1>
 
     <div class="_buttons btn-group">
-      <button class="btn btn-dark" data-shower="#shower">
-        <i class="fa-solid fa-gears"></i>
-      </button>
+      <?include 'core/templates/elems/filter_button.php'?>
     </div>
   </div>
 
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
-    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys">
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys" data-content_filter_status="#content_filter_show">
       <div class="input-group mb-2">
         <span class="input-group-text">
           <span class="_icon">
@@ -54,9 +58,10 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
         </span>
         <select name="type" class="form-select">
-          <option value="" selected><?=$oLang->get('Type')?></option>
-          <option value="0"><?=$olang->get('Spend')?></option>
-          <option value="1"><?=$olang->get('Replenish')?></option>
+          <option value=""><?=$oLang->get('Type')?></option>
+          <?php foreach ($arrTypes as $iIndex => $arrType): ?>
+            <option value="<?=$arrType['id']?>"><?=$arrType['title']?></option>
+          <?php endforeach; ?>
         </select>
 
         <span class="input-group-text">
@@ -65,7 +70,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
         </span>
         <select name="card" class="form-select">
-          <option value="" selected><?=$oLang->get('Card')?></option>
+          <option value=""><?=$oLang->get('Card')?></option>
           <?php foreach ($arrCards as $iIndex => $arrCard): ?>
             <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
           <?php endforeach; ?>
@@ -77,7 +82,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
         </span>
         <select name="category" class="form-select">
-          <option value="" selected><?=$oLang->get('Category')?></option>
+          <option value=""><?=$oLang->get('Category')?></option>
           <?php foreach ($arrMoneysCategories as $iIndex => $arrMoneyCategory): ?>
             <option value="<?=$arrMoneyCategory['id']?>"><?=$arrMoneyCategory['title']?></option>
           <?php endforeach; ?>
@@ -91,7 +96,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           </span>
         </span>
         <select name="project_id" class="form-select">
-          <option value="" selected><?=$oLang->get('Project')?></option>
+          <option value=""><?=$oLang->get('Project')?></option>
           <option value="0"><?=$olang->get('NoProject')?></option>
           <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
             <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
@@ -102,7 +107,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
           <i class="fas fa-wrench"></i>
         </span>
         <select name="task_id" class="form-select">
-          <option value="" selected><?=$oLang->get('Task')?></option>
+          <option value=""><?=$oLang->get('Task')?></option>
           <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
             <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
           <?php endforeach; ?>
@@ -116,9 +121,6 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
         <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
 
         <button class="btn btn-dark" type="submit">
-          <!-- <span class="icon">
-            <i class="fas fa-plus"></i>
-          </span> -->
           Go
         </button>
       </div>
@@ -153,7 +155,7 @@ $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
   ></ol>
   <script>
     $(function(){
-      $(document).find('#moneys').content_loader()
+      // $(document).find('#moneys').content_loader()
       $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       $(document).find('#footer_actions').content_actions( {'action':'moneys'} )

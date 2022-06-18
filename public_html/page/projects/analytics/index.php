@@ -46,23 +46,6 @@ $arrProject = $oProject->get();
       </form>
 
       <div class="moneyforhour_block" id="moneyforhour_week">
-        <div class="_info">
-          <div class="_money">
-            <div class="_icon">
-              m
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-          <div class="_time">
-            <div class="_icon">
-              t
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-        </div>
-
         <div class="_result">
           <div class="_icon">
             <i class="fas fa-stopwatch"></i>
@@ -76,7 +59,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Moneys')?></h2>
+      <h2>
+        <?=$oLang->get('Moneys')?>
+        <span id="res_weeks_money_res" class="badge">0</span>
+      </h2>
       <div id="res_weeks_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -85,7 +71,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Times')?></h2>
+      <h2>
+        <?=$oLang->get('Times')?>
+        <span id="res_weeks_time_res" class="badge">0</span>
+      </h2>
       <div id="res_weeks_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -121,8 +110,9 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_time ) $(document).find('#res_weeks_time').html( oData.success.chart_time )
                 if ( oData.success.chart_money ) $(document).find('#res_weeks_money').html( oData.success.chart_money )
 
-                if ( oData.success.money_sum ) $(document).find('#moneyforhour_week ._money ._value').html( oData.success.money_sum )
-                if ( oData.success.time_sum ) $(document).find('#moneyforhour_week ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.money_sum ) animation_number_to($("#res_weeks_money_res"),0,oData.success.money_sum)
+                if ( oData.success.time_sum ) $("#res_weeks_time_res").html( oData.success.time_sum )
+
                 if ( oData.success.moneyforhour ) {
                   $(document).find('#moneyforhour_week ._result ._value').html( oData.success.moneyforhour )
                   $(document).find('#moneyforhour_week ._result').addClass('_active_')
@@ -151,7 +141,7 @@ $arrProject = $oProject->get();
 
           <select name="year" class="form-select">
             <option value="" selected><?=$oLang->get('CurrentYear')?></option>
-            <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+            <?for ($i=date('Y')-1; $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
           </select>
@@ -170,23 +160,6 @@ $arrProject = $oProject->get();
       </form>
 
       <div class="moneyforhour_block" id="moneyforhour_month">
-        <div class="_info">
-          <div class="_money">
-            <div class="_icon">
-              m
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-          <div class="_time">
-            <div class="_icon">
-              t
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-        </div>
-
         <div class="_result">
           <div class="_icon">
             <i class="fas fa-stopwatch"></i>
@@ -199,7 +172,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Money')?></h2>
+      <h2>
+        <?=$oLang->get('Money')?>
+        <span id="res_month_money_res" class="badge">0</span>
+      </h2>
       <div id="res_month_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -208,7 +184,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Time')?></h2>
+      <h2>
+        <?=$oLang->get('Time')?>
+        <span id="res_month_time_res" class="badge">0</span>
+      </h2>
       <div id="res_month_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -247,8 +226,9 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_time ) $(document).find('#res_month_time').html( oData.success.chart_time )
                 if ( oData.success.chart_money ) $(document).find('#res_month_money').html( oData.success.chart_money )
 
-                if ( oData.success.money_sum ) $(document).find('#moneyforhour_month ._money ._value').html( oData.success.money_sum )
-                if ( oData.success.time_sum ) $(document).find('#moneyforhour_month ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.money_sum ) animation_number_to($("#res_month_money_res"),0,oData.success.money_sum)
+                if ( oData.success.time_sum ) $("#res_month_time_res").html( oData.success.time_sum )
+
                 if ( oData.success.moneyforhour ) {
                   $(document).find('#moneyforhour_month ._result ._value').html( oData.success.moneyforhour )
                   $(document).find('#moneyforhour_month ._result').addClass('_active_')
@@ -276,7 +256,7 @@ $arrProject = $oProject->get();
 
           <select name="year" class="form-select">
             <option value="" selected><?=$oLang->get('CurrentYear')?></option>
-            <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
+            <?for ($i=date('Y')-1; $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
           </select>
@@ -288,23 +268,6 @@ $arrProject = $oProject->get();
       </form>
 
       <div class="moneyforhour_block" id="moneyforhour_year">
-        <div class="_info">
-          <div class="_money">
-            <div class="_icon">
-              m
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-          <div class="_time">
-            <div class="_icon">
-              t
-            </div>
-            <div class="_value">
-            </div>
-          </div>
-        </div>
-
         <div class="_result">
           <div class="_icon">
             <i class="fas fa-stopwatch"></i>
@@ -317,7 +280,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Money')?></h2>
+      <h2>
+        <?=$oLang->get('Money')?>
+        <span id="res_year_money_res" class="badge">0</span>
+      </h2>
       <div id="res_year_money" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -326,7 +292,10 @@ $arrProject = $oProject->get();
         </div>
       </div>
 
-      <h2><?=$oLang->get('Times')?></h2>
+      <h2>
+        <?=$oLang->get('Times')?>
+        <span id="res_year_time_res" class="badge">0</span>
+      </h2>
       <div id="res_year_time" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -362,8 +331,9 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_time ) $(document).find('#res_year_time').html( oData.success.chart_time )
                 if ( oData.success.chart_money ) $(document).find('#res_year_money').html( oData.success.chart_money )
 
-                if ( oData.success.money_sum ) $(document).find('#moneyforhour_year ._money ._value').html( oData.success.money_sum )
-                if ( oData.success.time_sum ) $(document).find('#moneyforhour_year ._time ._value').html( oData.success.time_sum )
+                if ( oData.success.money_sum ) animation_number_to($("#res_year_money_res"),0,oData.success.money_sum)
+                if ( oData.success.time_sum ) $("#res_year_time_res").html( oData.success.time_sum )
+
                 if ( oData.success.moneyforhour ) {
                   $(document).find('#moneyforhour_year ._result ._value').html( oData.success.moneyforhour )
                   $(document).find('#moneyforhour_year ._result').addClass('_active_')

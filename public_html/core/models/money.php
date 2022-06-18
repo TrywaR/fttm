@@ -8,7 +8,7 @@ class money extends model
   public static $id = '';
   public static $title = '';
   public static $project_id = '';
-  public static $tasks_id = '';
+  public static $task_id = '';
   public static $price = '';
   public static $card = '';
   public static $category = '';
@@ -19,7 +19,9 @@ class money extends model
   public static $to_card = ''; # на карту
   public static $subscription = ''; # на подписку
 
-  function prep_money( $arrMoney = [] ){
+  function get_money( $arrMoney = [] ){
+    if ( ! $arrMoney['id'] ) $arrMoney = $this->get();
+
     $arrDate = explode(' ', $arrMoney['date']);
     $arrMoney['date'] = $arrDate[0];
     $arrMoney['price'] = substr($arrMoney['price'], 0, -2);
@@ -72,10 +74,10 @@ class money extends model
     return $arrMoney;
   }
 
-  function get_money(){
+  function get_moneys(){
     $arrMoneys = $this->get();
-    if ( $arrMoneys['id'] ) $arrMoneys = $this->prep_money( $arrMoneys );
-    else foreach ($arrMoneys as &$arrMoney) $arrMoney = $this->prep_money($arrMoney);
+    if ( $arrMoneys['id'] ) $arrMoneys = $this->get_money( $arrMoneys );
+    else foreach ($arrMoneys as &$arrMoney) $arrMoney = $this->get_money($arrMoney);
     return $arrMoneys;
   }
 
@@ -89,8 +91,8 @@ class money extends model
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
     $arrTypeFilter = [
-      array('id'=>0,'name'=>$oLang->get('Spend')),
-      array('id'=>1,'name'=>$oLang->get('Replenish')),
+      array('id'=>1,'name'=>$oLang->get('Spend')),
+      array('id'=>2,'name'=>$oLang->get('Replenish')),
     ];
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$arrTypeFilter,'value'=>$this->type];
 
@@ -142,11 +144,12 @@ class money extends model
     $oTask->sort = 'sort';
     $oTask->sortDir = 'ASC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oTask->query .= ' AND `status` = 2';
     $arrTasks = $oTask->get();
     $arrTaskId = [];
     $arrTasksFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
-    $arrFields['tasks_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->tasks_id];
+    $arrFields['task_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
 
     $arrFields['description'] = ['section'=>2,'title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
 
@@ -167,7 +170,7 @@ class money extends model
       $this->id = $arrMoney['id'];
       $this->title = $arrMoney['title'];
       $this->project_id = $arrMoney['project_id'];
-      $this->tasks_id = $arrMoney['tasks_id'];
+      $this->task_id = $arrMoney['task_id'];
       $this->price = $arrMoney['price'];
       $this->card = $arrMoney['card'];
       $this->category = $arrMoney['category'];

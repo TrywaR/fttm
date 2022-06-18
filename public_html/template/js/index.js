@@ -33,12 +33,12 @@ function scroll_to(elem, fix_size, scroll_time, sScrollBlock){
   scroll_val = fix_size ? fix_size : scroll_val
   scroll_time = scroll_time != null ? scroll_time : 500
   sScrollBlock = sScrollBlock ? sScrollBlock : ''
-  scroll_val = scroll_val - $(document).find('header').height() * 3
   sScrollBlockSelector = $(window).width() >= 919 ? '#main_block_content' : 'html, body'
   if ( sScrollBlock ) sScrollBlockSelector = sScrollBlock
   $(sScrollBlockSelector).animate({
     scrollTop: scroll_val
   }, scroll_time)
+
 }
 // scroll_to x
 
@@ -56,7 +56,25 @@ $(function(){
 		})
 
 	// shower
-	$(document).find('[data-shower]').on('click',function(){
+	$(document).on('click', '[data-shower]', function(){
+		if ( $(this).data().shower_class ) $(document).find($(this).data().shower).toggleClass( $(this).data().shower_class )
 		$(document).find($(this).data().shower).toggleClass('_show_')
 	})
 })
+
+// animation_number_to
+// animation_number_to("example",900,1500,3000)
+// animation_number_to("test",10,-5,15000)
+function animation_number_to( oElem, from, to, duration, pause ) {
+  if ( ! duration ) var duration = 2000
+  if ( ! pause ) var pause = 10
+  var start = new Date().getTime()
+  setTimeout(function() {
+      var now = (new Date().getTime()) - start
+      var progress = now / duration
+      var result = Math.floor((to - from) * progress + from)
+      oElem.html( progress < 1 ? result : to )
+      if (progress < 1) setTimeout(arguments.callee, 10)
+  }, pause )
+}
+// animation_number_to x

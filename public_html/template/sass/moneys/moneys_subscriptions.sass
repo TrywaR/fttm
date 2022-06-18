@@ -2,15 +2,46 @@
 .money_subscription
   &._paid_show_true
     ._paid
-      display: block
+      display: flex
 
   &._card_show_true
     ._card
-      display: block
+      display: flex
 
   ._paid
     display: none
 
   ._card
     display: none
+
+  ._head
+    display: flex
+    align-items: center
+    padding-bottom: .5rem
+
+    ._title
+      display: flex
+      padding-left: .5rem
+      font-weight: 300
+      opacity: .6
+
+    ._price
+      padding: .2rem .5rem
+      background: $color_main_dark
+      border-radius: $border_radius
+      font-weight: 400
+
+  ._subs
+    ._item
+      align-items: flex-end
+      padding: .2rem .5rem
+      font-size: 1em
+      line-height: 1em
+
+      ._icon
+        margin-right: .5rem
+      ._text
+
+      &._card
+        opacity: .4
 // .money_subscription x

@@ -20,16 +20,17 @@ class task extends model
   public static $date_update = '';
 
 
-  function get_task() {
-    $arrTask = [];
-    $arrTask = $this->get();
+  function get_task( $arrTask = [] ) {
+    if ( ! $arrTask['id'] ) $arrTask = $this->get();
 
     // Status
     if ( (int)$arrTask['status'] ) {
       $arrTask['status_show'] = 'true';
       foreach ($this->arrStatus as $arrStatus)
-        if ( $arrStatus['id'] === (int)$arrTask['status'] )
+        if ( $arrStatus['id'] === (int)$arrTask['status'] ) {
           $arrTask['status_val'] = $arrStatus['name'];
+          $arrTask['status_color'] = $arrStatus['color'];
+        }
     }
 
     // Project
@@ -41,16 +42,19 @@ class task extends model
 
     // time
     if ( $arrTask['time_planned'] != '00:00:00' ) {
-      $arrTask['time_planned'] = date('H:i',$arrTask['time_planned']);
+      $arrTask['time_planned'] = date('H:i', strtotime($arrTask['time_planned']));
+      $arrTask['time_really'] = '00:00';
       $arrTask['time_show'] = 'true';
 
       $oTime = new time();
       $oTime->query .= ' AND `task_id` = ' . $arrTask['id'];
       $arrTimes = $oTime->get();
 
-      $arrTimesResult = [];
-      if ( count($arrTimes) ) foreach ($arrTimes as $arrTime) $arrTimesResult[] = $arrTime['time_really'];
-      $arrTask['time_really'] = $oTime->get_sum( $arrTimesResult, 'H:i' );
+      if ( count($arrTimes) ) {
+        $arrTimesResult = [];
+        foreach ($arrTimes as $arrTime) $arrTimesResult[] = $arrTime['time_really'];
+        $arrTask['time_really'] = $oTime->get_sum( $arrTimesResult );
+      }
     }
 
     // money
@@ -80,6 +84,7 @@ class task extends model
     // Description
     $arrTask['description_prev'] = '';
     if ( $arrTask['description'] != '' ) {
+      $arrTask['description_show'] = 'true';
       // Wiki mark
       // require_once("lib/Wiky.php-master/wiky.inc.php");
       // $oWiky = new wiky;
@@ -94,23 +99,19 @@ class task extends model
   }
 
   function get_tasks() {
-    $arrResults = [];
     $arrTasks = $this->get();
-
-    foreach ($arrTasks as $arrTask) {
-      $oTask = new task( $arrTask['id'] );
-      $arrResults[] = $oTask->get_task();
-    }
-
-    return $arrResults;
+    if ( $arrTasks['id'] ) $arrTasks = $this->get_task( $arrTasks );
+    else foreach ($arrTasks as &$arrTask) $arrTask = $this->get_task( $arrTask );
+    return $arrTasks;
   }
+
 
   public function fields() # Поля для редактирования
   {
     $oLang = new lang();
 
     $arrFields = [];
-    $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
+    $arrFields['id_show'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
@@ -128,6 +129,9 @@ class task extends model
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
     $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'time','section'=>2,'value'=>$this->time_planned];
     $arrFields['price_planned'] = ['title'=>$oLang->get('PricePlanned'),'type'=>'number','section'=>2,'value'=>substr($this->price_planned, 0, -2),'step'=>'0.01'];
+
+    $arrFields['date_create'] = ['title'=>$oLang->get('DateCreate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_create];
+    $arrFields['date_update'] = ['title'=>$oLang->get('LastUpdate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_update];
 
     $arrFields['status'] = ['title'=>$oLang->get('Status'),'type'=>'time','type'=>'select','options'=>$this->arrStatus,'value'=>$this->status];
 
@@ -164,10 +168,10 @@ class task extends model
 
     $oLang = new lang();
     $this->arrStatus = [
-      array('id'=>0,'name'=>$oLang->get('NoStatus')),
-      array('id'=>1,'name'=>$oLang->get('Planned')),
-      array('id'=>2,'name'=>$oLang->get('InWork')),
-      array('id'=>3,'name'=>$oLang->get('Complited'))
+      array('id'=>0,'color'=>'','name'=>$oLang->get('NoStatus')),
+      array('id'=>1,'color'=>'#3a487d','name'=>$oLang->get('Planned')),
+      array('id'=>2,'color'=>'#ce5f5f','name'=>$oLang->get('InWork')),
+      array('id'=>3,'color'=>'#3a7d61','name'=>$oLang->get('Complited'))
     ];
   }
 }

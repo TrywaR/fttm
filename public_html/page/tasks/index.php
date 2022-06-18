@@ -15,23 +15,25 @@ $arrProjects = $oProject->get();
     </h1>
 
     <div class="_buttons btn-group">
-      <button class="btn btn-dark" data-shower="#shower">
-        <i class="fa-solid fa-gears"></i>
-      </button>
+      <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
     </div>
   </div>
 
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
-    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#tasks">
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#tasks" data-content_filter_status="#content_filter_show">
       <div class="input-group">
         <span class="input-group-text">
-          <i class="far fa-folder"></i>
+          <i class="fa-solid fa-folder-tree"></i>
         </span>
         <select name="project_id" class="form-select">
-          <option value="" selected><?=$oLang->get('Project')?></option>
+          <option value="0" selected><?=$oLang->get('Project')?></option>
           <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-            <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php if ( $_REQUEST['project_id'] && $_REQUEST['project_id'] == $arrProject['id'] ): ?>
+              <option selected="selected" value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php else: ?>
+              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endif; ?>
           <?php endforeach; ?>
         </select>
 
@@ -40,7 +42,11 @@ $arrProjects = $oProject->get();
         </span>
         <select name="status" class="form-select">
           <?php foreach ($oTask->arrStatus as $arrStatus): ?>
-            <option value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+            <?php if ( $_REQUEST['status'] && $_REQUEST['status'] == $arrStatus['id'] ): ?>
+              <option selected="selected" value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+            <?php else: ?>
+              <option value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+            <?php endif; ?>
           <?php endforeach; ?>
         </select>
 
@@ -63,7 +69,7 @@ $arrProjects = $oProject->get();
     id="tasks"
     class="block_tasks block_elems block_content_loader"
     data-content_loader_table="tasks"
-    data-content_loader_form="show_all"
+    data-content_loader_form="show"
     data-content_loader_limit="15"
     data-content_loader_scroll_nav="0"
     <?php if ($_REQUEST['sort']): ?>
@@ -80,7 +86,7 @@ $arrProjects = $oProject->get();
 
   <script>
     $(function(){
-      $(document).find('#tasks').content_loader()
+      // $(document).find('#tasks').content_loader()
       $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       $(document).find('#footer_actions').content_actions( {'action':'tasks'} )
@@ -89,25 +95,20 @@ $arrProjects = $oProject->get();
 </section>
 
 <section class="block_template">
-  <div class="task _elem progress_block animate__animated _time_show_{{time_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-    <div class="card w-100 mb-2">
+  <div class="task _elem progress_block animate__animated _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="card w-100">
       <div class="card-header position-relative">
         <div class="row">
-          <div class="col-6">
+          <div class="col-12 col-md-8 d-flex align-items-center">
             <span class="_title">
               {{title}}
+              <small>
+                #{{id}}
+              </small>
             </span>
-
-            <div class="badge bg-primary _status">
-              {{status_val}}
-            </div>
-
-            <div class="_project">
-              {{project.title}}
-            </div>
           </div>
 
-          <div class="col-6 d-flex justify-content-end">
+          <div class="col-12 col-md-4 d-flex justify-content-end">
             <div class="btn-group">
               <a href="#" class="btn content_manager_switch switch_icons">
                 <div class="">
@@ -133,7 +134,15 @@ $arrProjects = $oProject->get();
       </div>
 
       <div class="card-body">
-        <div class="col-12 _sub">
+        <div class="_sub">
+          <div class="_status" style="background: {{status_color}}">
+            {{status_val}}
+          </div>
+
+          <div class="_project">
+            {{project.title}}
+          </div>
+
           <div class="_time">
             <small><i class="fas fa-clock"></i></small>
             {{time_really}} <span>/</span>
@@ -145,11 +154,14 @@ $arrProjects = $oProject->get();
             {{price_really}} <span>/</span>
             <small>{{price_planned}}</small>
           </div>
+
+          <button type="button" class="btn _description_show" name="button" data-shower="#desc_{{id}}" data-shower_class="animate__fadeIn">
+            <i class="fa-solid fa-align-left"></i>
+          </button>
         </div>
-        <div class="col-12">
-          <div class="_description_prev">
-            {{description_prev}}
-          </div>
+
+        <div class="_description_prev animate__animated" id="desc_{{id}}">
+          {{description_prev}}
         </div>
       </div>
     </div>

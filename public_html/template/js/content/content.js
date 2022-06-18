@@ -74,6 +74,7 @@ $(function(){
 			oForm.addClass('animate__animated animate__rubberBand')
 		}, 100)
 	})
+
   // Загрузка контента
   $(document).on('click', '.content_download', function(){
 		// Параметры

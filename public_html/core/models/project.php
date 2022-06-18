@@ -13,6 +13,19 @@ class project extends model
   public static $client_id = '';
   public static $user_Id = '';
 
+  function get_project( $arrProject = [] ) {
+    if ( ! $arrProject['id'] ) $arrProject = $this->get();
+
+    return $arrProject;
+  }
+
+  function get_projects(){
+    $arrProjects = $this->get();
+    if ( $arrProjects['id'] ) $arrProjects = $this->get_project( $arrProjects );
+    else foreach ($arrProjects as &$arrProject) $arrProject = $this->get_project($arrProject);
+    return $arrProjects;
+  }
+
   public function fields() # Поля для редактирования
   {
     $oLang = new lang();

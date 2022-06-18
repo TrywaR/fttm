@@ -14,27 +14,24 @@ class moneys_category extends model
   public static $type = '';
   public static $user_id = '';
 
-  function get_category(){
-    $arrResult = [];
-    $arrCategory = $this->get();
+  function get_category( $arrCategory = [] ){
+    if ( ! $arrCategory['id'] ) $arrCategory = $this->get();
+
     if ( (int)$arrCategory['user_id'] ) $arrCategory['edit_show'] = 'true';
+
     // translate
     $oLang = new lang();
     if ( $arrCategory['title'] ) $arrCategory['title'] = $oLang->get($arrCategory['title']);
-    $arrResult = $arrCategory;
-    return $arrResult;
+
+    return $arrCategory;
   }
 
   function get_categories(){
-    $arrResults = [];
-    $arrMoneysCategories = $this->get();
-    foreach ($arrMoneysCategories as $arrMoneyCategory) {
-      $oCategory = new moneys_category( $arrMoneyCategory['id'] );
-      $arrResults[] = $oCategory->get_category();
-    }
-    return $arrResults;
+    $arrCategories = $this->get();
+    if ( $arrCategories['id'] ) $arrCategories = $this->get_category( $arrCategories );
+    else foreach ($arrCategories as &$arrCategory) $arrCategory = $this->get_category($arrCategory);
+    return $arrCategories;
   }
-
 
   public function fields() # Поля для редактирования
   {

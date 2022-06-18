@@ -60,7 +60,7 @@ switch ($_REQUEST['form']) {
       }
 
       $arrResults['data'][$iIndex]['sum'] = $arrResultsSum;
-      $arrResults['sum'] = (float)$arrResults['sum'] + (float)$arrResultsSum;
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$arrResultsSum);
 
       $iIndex++;
     }
@@ -124,6 +124,7 @@ switch ($_REQUEST['form']) {
       }
       $arrResults['data'][$i]['sum'] = $iMounthSum;
       $arrResults['data'][$i]['title'] = sprintf("%02d", $i);
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$iMounthSum);
     }
 
     // Создаём график
@@ -179,6 +180,7 @@ switch ($_REQUEST['form']) {
       }
       $arrResults['data'][$i]['sum'] = $iMounthSum;
       $arrResults['data'][$i]['title'] = date("F", strtotime($iYear . "-" . sprintf("%02d", $i)));
+      $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$iMounthSum);
     }
 
     // Создаём график
@@ -216,7 +218,7 @@ switch ($_REQUEST['form']) {
     $oMoney = new money();
     $oMoney->sort = 'date';
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '0' ";
+    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '1' ";
     $arrMoneys = $oMoney->get_money();
     $iDaySumm = 0;
     foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
@@ -226,7 +228,7 @@ switch ($_REQUEST['form']) {
     $oMoney = new money();
     $oMoney->sort = 'date';
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '1' ";
+    $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '2' ";
     $arrMoneys = $oMoney->get_money();
     $iDaySummPlus = 0;
     foreach ($arrMoneys as $arrMoney) $iDaySummPlus = (int)$arrMoney['price'] + (int)$iDaySummPlus;
@@ -241,7 +243,7 @@ switch ($_REQUEST['form']) {
     $oMoney = new money();
     $oMoney->sort = 'date';
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '0' ";
+    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
     $arrMoneys = $oMoney->get_money();
     $iMonthSumm = 0;
@@ -253,7 +255,7 @@ switch ($_REQUEST['form']) {
     $oMoney->sort = 'date';
     $dCurrentDate = date('Y-m');
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
+    $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
     $arrMoneys = $oMoney->get_money();
     $iMonthSummSalary = 0;
     foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;

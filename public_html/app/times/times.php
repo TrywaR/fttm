@@ -8,12 +8,29 @@ switch ($_REQUEST['form']) {
       <div class="btn-group">
         <a data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
-          <span class="_icon">' . $oLang->get("Add") . '</span>
+          <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
       </div>
       ';
 
     notification::send( $sResultHtml );
+    break;
+
+  case 'show': # Вывод элементов
+    $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
+
+    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
+
+    $oTime->sortMulti = ' `date` DESC, `date_update` DESC ';
+    $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+
+    $oFilter = new filter();
+    $oTime->query .= $oFilter->get();
+
+    $arrTimes = $oTime->get_times();
+
+    notification::send($arrTimes);
     break;
 
   case 'form': # Форма добавления / редактирования
@@ -61,66 +78,29 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oTime->get_time();
+    $arrResults['data'] = $oTime->get_times();
 
     $arrResults['action'] = 'times';
     notification::send($arrResults);
-    break;
-
-  case 'show': # Вывод элементов
-    $oTime = new time( $_REQUEST['id'] );
-    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
-
-    if ( $_REQUEST['filter'] ) {
-      $arrFilters = $_REQUEST['filter'];
-      foreach ($arrFilters as $arrFilter) {
-        if ( $arrFilter['value'] )
-          $oTime->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . '"';
-      }
-    }
-
-    $oTime->sort = 'date';
-    $oTime->sortDir = 'DESC';
-    $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrDataItem = $oTime->get_time();
-
-    notification::send($arrDataItem);
-    break;
-
-  case 'show_all': # Вывод элементов
-    $oTime = new time();
-    if ( $_REQUEST['from'] ) $oTime->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oTime->limit = $_REQUEST['limit'];
-
-    if ( $_REQUEST['filter'] ) {
-      $arrFilters = $_REQUEST['filter'];
-      foreach ($arrFilters as $arrFilter) {
-        if ( $arrFilter['value'] )
-          $oTime->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . '"';
-      }
-    }
-
-    $oTime->sort = 'date';
-    $oTime->sortDir = 'DESC';
-    $oTime->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrData = $oTime->get_times();
-
-    notification::send($arrData);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
     $oTime = $_REQUEST['id'] ? new time( $_REQUEST['id'] ) : new time();
     $oTime->arrAddFields = $_REQUEST;
+    $oTime->arrAddFields['date_update'] = date("Y-m-d H:i:s");
 
-    if ( $_REQUEST['id'] ) $oTime->save();
-    else $oTime->add();
+    if ( $_REQUEST['id'] ) {
+      $arrResult['event'] = 'save';
+      $oTime->save();
+    }
+    else {
+      $arrResult['event'] = 'add';
+      $oTime->add();
+    }
 
-    $arrResult['data'] = $oTime->get_time();
-
-    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
-    else $arrResult['event'] = 'add';
+    $oTime = new time( $oTime->id );
+    $arrResult['data'] = $oTime->get_times();
     $arrResult['text'] = $oLang->get("ChangesSaved");
 
     notification::success($arrResult);

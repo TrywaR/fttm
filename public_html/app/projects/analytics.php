@@ -81,11 +81,11 @@ switch ($_REQUEST['form']) {
     // __________
     // Получаем категории
     $arrCategories = [];
-    $arrCategories[0] = array(
+    $arrCategories[1] = array(
       'title' => 'Costs',
       'color' => '#dd3e3e'
     );
-    $arrCategories[1] = array(
+    $arrCategories[2] = array(
       'title' => 'Wages',
       'color' => '#4a8e61'
     );
@@ -130,8 +130,8 @@ switch ($_REQUEST['form']) {
       // Записываем данные по категориям за неделю
       foreach ($arrData as & $arrDataItem) {
         $arrResults['data_money'][$iIndex]['categories'][$arrDataItem['type']]['value'] = (float)$arrResults['data_money'][$iIndex]['categories'][$arrDataItem['type']]['value'] + (float)$arrDataItem['price'];
-        if ( (int)$arrDataItem['type'] ) $arrMoneySum = $arrMoneySum + (float)$arrDataItem['price'];
-        else $arrMoneySum = $arrMoneySum - (float)$arrDataItem['price'];
+        if ( (int)$arrDataItem['type'] == 2 ) $arrMoneySum = $arrMoneySum + (float)$arrDataItem['price'];
+        if ( (int)$arrDataItem['type'] == 1 ) $arrMoneySum = $arrMoneySum - (float)$arrDataItem['price'];
       }
 
       $arrResults['data_money'][$iIndex]['sum'] = $arrMoneySum;
@@ -155,7 +155,7 @@ switch ($_REQUEST['form']) {
     }
 
     if ( (int)$arrResults['money_sum'] ) {
-      if ( $iTimeSum ) {
+      if ( (float)$iTimeSum > 1 ) { # Шобы не делить на нуль
         $arrResults['moneyforhour'] = $arrResults['money_sum'] / $iTimeSum;
         if ( (int)$arrResults['moneyforhour'] ) $arrResults['moneyforhour'] = number_format($arrResults['moneyforhour'], 2, '.', '');
       }
@@ -234,11 +234,11 @@ switch ($_REQUEST['form']) {
     // __________
     // Получаем категории
     $arrCategories = [];
-    $arrCategories[0] = array(
+    $arrCategories[1] = array(
       'title' => 'Costs',
       'color' => '#dd3e3e'
     );
-    $arrCategories[1] = array(
+    $arrCategories[2] = array(
       'title' => 'Wages',
       'color' => '#4a8e61'
     );
@@ -265,8 +265,8 @@ switch ($_REQUEST['form']) {
 
       foreach ($arrMoneys as &$arrMoney) {
         $arrResults['data_money'][$i]['categories'][$arrMoney['type']]['value'] = (float)$arrResults['data_money'][$i]['categories'][$arrMoney['type']]['value'] + (float)$arrMoney['price'];
-        if ( (int)$arrMoney['type'] ) $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
-        else $iMounthSum = $iMounthSum - (float)$arrMoney['price'];
+        if ( (int)$arrMoney['type'] == 2 ) $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
+        if ( (int)$arrMoney['type'] == 1 ) $iMounthSum = $iMounthSum - (float)$arrMoney['price'];
       }
 
       $arrResults['data_money'][$i]['sum'] = $iMounthSum;
@@ -289,7 +289,7 @@ switch ($_REQUEST['form']) {
     }
 
     if ( (int)$arrResults['money_sum'] ) {
-      if ( $iTimeSum ) {
+      if ( (float)$iTimeSum > 1 ) { # Шобы не делить на нуль
         $arrResults['moneyforhour'] = $arrResults['money_sum'] / $iTimeSum;
         if ( (int)$arrResults['moneyforhour'] ) $arrResults['moneyforhour'] = number_format($arrResults['moneyforhour'], 2, '.', '');
       }
@@ -367,11 +367,11 @@ switch ($_REQUEST['form']) {
     // __________
     // Получаем категории
     $arrCategories = [];
-    $arrCategories[0] = array(
+    $arrCategories[1] = array(
       'title' => 'Costs',
       'color' => '#dd3e3e'
     );
-    $arrCategories[1] = array(
+    $arrCategories[2] = array(
       'title' => 'Wages',
       'color' => '#4a8e61'
     );
@@ -397,8 +397,8 @@ switch ($_REQUEST['form']) {
       $iMounthSum = 0;
       foreach ($arrMoneys as &$arrMoney) {
         $arrResults['data_money'][$i]['categories'][$arrMoney['type']]['value'] = (float)$arrResults['data_money'][$i]['categories'][$arrMoney['type']]['value'] + (float)$arrMoney['price'];
-        if ( (int)$arrMoney['type'] ) $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
-        else $iMounthSum = $iMounthSum - (float)$arrMoney['price'];
+        if ( (int)$arrMoney['type'] == 2 ) $iMounthSum = $iMounthSum + (float)$arrMoney['price'];
+        if ( (int)$arrMoney['type'] == 1 ) $iMounthSum = $iMounthSum - (float)$arrMoney['price'];
       }
       $arrResults['data_money'][$i]['sum'] = $iMounthSum;
       $arrResults['data_money'][$i]['title'] = date("F", strtotime($iYear . "-" . sprintf("%02d", $i)));
@@ -420,7 +420,7 @@ switch ($_REQUEST['form']) {
     }
 
     if ( (int)$arrResults['money_sum'] ) {
-      if ( $iTimeSum ) {
+      if ( (float)$iTimeSum > 1 ) { # Шобы не делить на нуль
         $arrResults['moneyforhour'] = $arrResults['money_sum'] / $iTimeSum;
         if ( (int)$arrResults['moneyforhour'] ) $arrResults['moneyforhour'] = number_format($arrResults['moneyforhour'], 2, '.', '');
       }

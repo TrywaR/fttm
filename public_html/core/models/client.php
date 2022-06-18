@@ -12,6 +12,19 @@ class client extends model
   public static $active = '';
   public static $user_id = '';
 
+  function get_project( $arrClient = [] ) {
+    if ( ! $arrClient['id'] ) $arrClient = $this->get();
+
+    return $arrClient;
+  }
+
+  function get_clients(){
+    $arrClients = $this->get();
+    if ( $arrClients['id'] ) $arrClients = $this->get_project( $arrClients );
+    else foreach ($arrClients as &$arrClient) $arrClient = $this->get_project($arrClient);
+    return $arrClients;
+  }
+
   public function fields() # Поля для редактирования
   {
     $oLang = new lang();

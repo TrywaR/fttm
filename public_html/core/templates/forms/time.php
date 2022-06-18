@@ -20,7 +20,7 @@
       </span>
     <?php endif; ?>
     <?php if ( isset($arrTemplateParams['title']) ): ?>
-      <span class="_text">
+      <span class="_text" title="<?=$arrTemplateParams['title']?>">
         <?=$arrTemplateParams['title']?>
       </span>
     <?php endif; ?>

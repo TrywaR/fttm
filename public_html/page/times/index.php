@@ -11,6 +11,7 @@ $oTask = new task();
 $oTask->sort = 'sort';
 $oTask->sortDir = 'ASC';
 $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+$oTask->query .= ' AND `status` = 2';
 $arrTasks = $oTask->get();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
@@ -31,15 +32,13 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     </h1>
 
     <div class="_buttons btn-group">
-      <button class="btn btn-dark" data-shower="#shower">
-        <i class="fa-solid fa-gears"></i>
-      </button>
+      <?include 'core/templates/elems/filter_button.php'?>
     </div>
   </div>
 
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
-    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#times">
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#times" data-content_filter_status="#content_filter_show">
       <div class="input-group mb-2">
         <span class="input-group-text">
           <i class="far fa-folder"></i>
@@ -80,9 +79,6 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
         </select>
 
         <button class="btn btn-dark" type="submit">
-          <!-- <span class="icon">
-            <i class="fas fa-plus"></i>
-          </span> -->
           Go
         </button>
       </div>
@@ -101,7 +97,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     id="times"
     class="block_times block_elems list-group list-group-numbered block_content_loader"
     data-content_loader_table="times"
-    data-content_loader_form="show_all"
+    data-content_loader_form="show"
     data-content_loader_limit="15"
     data-content_loader_scroll_nav="0"
     <?php if ($_REQUEST['sort']): ?>
@@ -117,7 +113,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
   ></ol>
   <script>
     $(function(){
-      $(document).find('#times').content_loader()
+      // $(document).find('#times').content_loader()
       $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       $(document).find('#footer_actions').content_actions( {'action':'times'} )

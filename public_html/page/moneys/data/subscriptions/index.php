@@ -29,7 +29,7 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
     id="moneys_subscriptions"
     class="block_moneys_subscriptions block_elems block_content_loader list-group list-group-numbered"
     data-content_loader_table="moneys_subscriptions"
-    data-content_loader_form="show_all"
+    data-content_loader_form="show"
     data-content_loader_limit="15"
     data-content_loader_scroll_nav="0"
     <?php if ($_REQUEST['sort']): ?>
@@ -56,27 +56,33 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 <div class="block_template">
     <li class="list-group-item _elem d-flex money_subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100 row">
-        <span class="col-6 col-xl-6 mb-2">
+        <span class="col-12 col-md-6 mb-2">
           <span class="d-flex flex-column">
-            {{title}}<br/>
+            <span class="_head">
+              <span class="_price">
+                {{price}}
+              </span>
 
-            <small class="_card">
-              <i class="fas fa-credit-card"></i>
-              {{card_val.title}}
-            </small>
+              <span class="_title">
+                {{title}}
+              </span>
+            </span>
 
-            <small class="_paid">
-              <i class="fas fa-check"></i>
-              {{paid.date}}
-            </small>
+            <div class="_subs">
+              <span class="_item _card">
+                <span class="_icon"><i class="fas fa-credit-card"></i></span>
+                <span class="_text">{{card_val.title}}</span>
+              </span>
+
+              <span class="_item _paid">
+                <span class="_icon"><i class="fas fa-check"></i></span>
+                <span class="_text">{{paid.date}}</span>
+              </span>
+            </div>
           </span>
-
-          <div class="badge bg-primary">
-            {{price}}
-          </div>
         </span>
 
-        <span class="col-6 col-xl-6 d-flex justify-content-end">
+        <span class="col-12 col-md-6 d-flex justify-content-end align-items-center">
           <span class="btn-group">
             <a href="#" class="btn btn-dark content_manager_switch switch_icons">
               <span class="">

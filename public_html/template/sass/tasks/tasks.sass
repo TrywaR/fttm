@@ -19,8 +19,6 @@
   &._project_show_true
     ._project
       display: flex
-      font-size: .8em
-      line-height: 1
       opacity: .5
 
   &._time_show_true
@@ -29,6 +27,10 @@
 
   &._money_show_true
     ._money
+      display: flex
+
+  &._description_show_true
+    ._description_show
       display: flex
 
   ._status
@@ -43,7 +45,7 @@
       margin-right: .5rem
 
     span
-      padding: .2rem
+      padding: 0 .2rem
 
   ._money
     display: none
@@ -54,20 +56,31 @@
       margin-right: .5rem
 
     span
-      padding: .2rem
+      padding: 0 .2rem
 
   ._project
     display: none
 
+  ._description_show
+    display: none
+    
   ._description_prev
+    display: none
     font-size: .85em
     line-height: 1.2em
-    padding: .5rem 0 0 0
+    padding: .5rem
+    border-radius: $border_radius
+    background: $color_main_dark
+    @include transition_default
+
+    &._show_
+      display: flex
+      flex-direction: column
 
   ._sub
     display: flex
     flex-wrap: wrap
-    align-items: flex-end
+    align-items: center
     justify-content: flex-end
 
     & > *
@@ -79,6 +92,7 @@
 
       &:first-child
         margin-left: 0
+        margin-right: auto
 
   &._show_
     opacity: 1

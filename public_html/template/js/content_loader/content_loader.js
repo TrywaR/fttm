@@ -211,7 +211,9 @@ function content_loader_scroll_to( sEvent ) {
     else
       $(document).find( arrPageContent.content_selector ).on('load', scroll_to(0, 0, 180, $(document).find(arrPageContent.scroll_block)))
   // Если подгрузка элементов, то скролим к последнему показанному перез догрузкой
-  if ( sEvent == 'continue' ) scroll_to(0, sScrollBlockHeightValue, 0, $(document).find(arrPageContent.scroll_block))
+  if ( sEvent == 'continue' ) {
+    scroll_to(0, sScrollBlockHeightValue, 0, $(document).find(arrPageContent.scroll_block))
+  }
 }
 
 // Шаблон элемента
@@ -256,7 +258,6 @@ function content_loader_elem_html( oContentLoadElem, oTemplate ){
 
   return sElemHtml
 }
-
 
 $(function(){
   // Кнопка показа формы

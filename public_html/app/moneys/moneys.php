@@ -8,7 +8,7 @@ switch ($_REQUEST['form']) {
       <div class="btn-group">
         <a data-action="moneys" data-animate_class="animate__flipInY" data-elem=".money" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
-          <span class="_icon">' . $oLang->get("Add") . '</span>
+          <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
       </div>
       ';
@@ -16,8 +16,22 @@ switch ($_REQUEST['form']) {
     notification::send( $sResultHtml );
     break;
 
-  case 'form': # Форма добавления / редактирования
+  case 'show': # Вывод элементов
+    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
+    if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
+    $oMoney->sortMulti = ' `date` DESC, `date_update` DESC ';
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
+    $oFilter = new filter();
+    $oMoney->query .= $oFilter->get();
+
+    $arrMoneys = $oMoney->get_moneys();
+
+    notification::send($arrMoneys);
+    break;
+
+  case 'form': # Форма добавления / редактирования
     // Параметры
     $arrResults = [];
     $oForm = new form();
@@ -43,6 +57,7 @@ switch ($_REQUEST['form']) {
       $oMoney->date = date('Y-m-d');
       $oMoney->active = 1;
       $oMoney->add();
+      $oMoney = new money( $oMoney->id );
     }
 
     // Поля для добавления
@@ -60,44 +75,16 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = (array)$oMoney;
-
+    $arrResults['data'] = $oMoney->get_money();
     $arrResults['action'] = 'moneys';
+
     notification::send($arrResults);
-    break;
-
-  case 'show': # Вывод элементов
-    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
-
-    if ( $_REQUEST['filter'] ) {
-      $arrFilters = $_REQUEST['filter'];
-      foreach ($arrFilters as $arrFilter) {
-        if ( $arrFilter['value'] )
-          switch ($arrFilter['name']) {
-            case 'date':
-              $oMoney->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . ' 00:00:00"';
-              break;
-
-            default:
-              $oMoney->query .= ' AND `' . $arrFilter['name'] . '` = ' . $arrFilter['value'];
-              break;
-          }
-      }
-    }
-
-    if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
-    $oMoney->sort = 'date';
-    $oMoney->sortDir = 'DESC';
-    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrMoneys = $oMoney->get_money();
-
-    notification::send($arrMoneys);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
+    $oMoney->arrAddFields['date_update'] = date("Y-m-d H:i:s");
     $oMoney->arrAddFields = $_REQUEST;
 
     // Обновление карты
@@ -106,7 +93,7 @@ switch ($_REQUEST['form']) {
 
       // Если обновление, удаляем старое значение
       if ( $oMoney->id )
-      if ( (int)$oMoney->type ) $oCard->balance_remove( $oMoney->price );
+      if ( (int)$oMoney->type == 2 ) $oCard->balance_remove( $oMoney->price );
       else {
         $oCard->balance_add( $oMoney->price );
         // Если комиссиия
@@ -114,7 +101,7 @@ switch ($_REQUEST['form']) {
       }
 
       // Если пополнение
-      if ( (int)$_REQUEST['type'] ) $oCard->balance_add( $_REQUEST['price'] );
+      if ( (int)$_REQUEST['type'] == 2 ) $oCard->balance_add( $_REQUEST['price'] );
       // Если тарата
       else {
         $oCard->balance_remove( $_REQUEST['price'] );
@@ -129,14 +116,19 @@ switch ($_REQUEST['form']) {
       $oCardTo->balance_add( $_REQUEST['price'] );
     }
 
-    if ( $_REQUEST['id'] ) $oMoney->save();
-    else $oMoney->add();
+    if ( $_REQUEST['id'] ) {
+      $arrResult['event'] = 'save';
+      $oMoney->save();
+    }
+    else {
+      $arrResult['event'] = 'add';
+      $oMoney->add();
+    }
 
-    $arrResult['data'] = $oMoney->get_money();
-
-    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
-    else $arrResult['event'] = 'add';
+    $oMoney = new money( $oMoney->id );
+    $arrResult['data'] = $oMoney->get_moneys();
     $arrResult['text'] = $oLang->get("ChangesSaved");
+
     notification::success($arrResult);
     break;
 
@@ -149,7 +141,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['card'] ) {
       $oCard = new card( $_REQUEST['card'] );
       // Если пополнение
-      if ( (int)$_REQUEST['type'] ) {
+      if ( (int)$_REQUEST['type'] == 2 ) {
         $oCard->balance_remove( $_REQUEST['price'] );
       }
       // Если тарата

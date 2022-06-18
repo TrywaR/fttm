@@ -20,7 +20,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_0">5.3.0 Mega structure</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_1">5.3.1 Betclock</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_3_0">5.3.0 Mega structure</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_2_9">5.2.9 Design update</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_2_8">5.2.8 Datas forms</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_2_7">5.2.7 Moneys forms</a>
@@ -62,6 +63,40 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_3_1">5.3.1 Betclock</h2>
+            <ol>
+              <li>
+                Исправлены ошибки в белой теме
+              </li>
+              <li>
+                Фильтр на странице проектов
+              </li>
+              <li>
+                В расходах и доходах выведены общие суммы
+              </li>
+              <li>
+                Изменены типы данных для денег, 1 - расход, 2 - поступление
+              </li>
+              <li>
+                Исправлена работа скрола в лоадере
+              </li>
+              <li>
+                Изменены цвета полей ввода
+              </li>
+              <li>
+                Во времени добавлена дата последнего редактирования, таким образом теперь сортируется так что последние добавленные и отредактированные записи в самом верху, раньше сортировка была только по дате
+              </li>
+              <li>
+                Исправлена ошибка с обновлением времени на лету
+              </li>
+              <li>
+                Стили кнопок (Нажатие, наведение)
+              </li>
+              <li>
+                Общие стили для списков элементов
+              </li>
+            </ol>
+
             <h2 id="list-item-5_3_0">5.3.0 Mega structure</h2>
             <ol>
               <li>

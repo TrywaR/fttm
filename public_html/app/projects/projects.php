@@ -4,17 +4,33 @@ $oLang = new lang();
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
-
     $sResultHtml .= '
       <div class="btn-group">
         <a data-action="projects" data-animate_class="animate__flipInY" data-elem=".project" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
-          <span class="_icon">' . $oLang->get("Add") . '</span>
+          <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
       </div>
       ';
 
     notification::send( $sResultHtml );
+    break;
+
+  case 'show': # Вывод элементов
+    $oProject = $_REQUEST['id'] ? new project( $_REQUEST['id'] ) : new project();
+
+    if ( $_REQUEST['from'] ) $oProject->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oProject->limit = $_REQUEST['limit'];
+
+    $oProject->sort = 'sort';
+    $oProject->sortDir = 'ASC';
+    $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+
+    $oFilter = new filter();
+    $oProject->query .= $oFilter->get();
+
+    $arrProjects = $oProject->get_projects();
+    notification::send($arrProjects);
     break;
 
   case 'form': # Форма добавления / редактирования
@@ -59,36 +75,30 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oProject->get();
+    $arrResults['data'] = $oProject->get_projects();
 
     $arrResults['action'] = 'projects';
     notification::send($arrResults);
-    break;
-
-  case 'show': # Вывод элементов
-    $oProject = $_REQUEST['id'] ? new project( $_REQUEST['id'] ) : new project();
-    if ( $_REQUEST['from'] ) $oProject->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oProject->limit = $_REQUEST['limit'];
-    $oProject->sort = 'sort';
-    $oProject->sortDir = 'ASC';
-    $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrProjects = $oProject->get();
-    notification::send($arrProjects);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
     $oProject = $_REQUEST['id'] ? new project( $_REQUEST['id'] ) : new project();
     $oProject->arrAddFields = $_REQUEST;
-    if ( $_REQUEST['id'] ) $oProject->save();
-    else $oProject->add();
 
-    $arrResult['data'] = $oProject->get();
+    if ( $_REQUEST['id'] ) {
+      $arrResult['event'] = 'save';
+      $oProject->save();
+    }
+    else {
+      $arrResult['event'] = 'add';
+      $oProject->add();
+    }
 
-    if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
-    else $arrResult['event'] = 'add';
-
+    $oProject = new project( $oProject->id );
+    $arrResult['data'] = $oProject->get_projects();
     $arrResult['text'] = $oLang->get("ChangesSaved");
+
     notification::success($arrResult);
     break;
 

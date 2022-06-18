@@ -16,6 +16,7 @@ class time extends model
   public static $time_planned = '';
   public static $time_really = '';
   public static $date = '';
+  public $date_update = '';
   public static $category_id = '';
   public static $status = '';
   public static $category = '';
@@ -69,14 +70,12 @@ class time extends model
     // return date($sMask, strtotime($h.':'.$m.':'.$s));
   }
 
-  function get_time(){
-    $arrTime = [];
-
-    $arrTime = $this->get();
+  function get_time( $arrTime = [] ){
+    if ( ! $arrTime['id'] ) $arrTime = $this->get();
 
     if ( (int)$arrTime['category_id'] ) {
       $oCategory = new times_category( $arrTime['category_id'] );
-      $arrTime['category'] = (array)$oCategory;
+      $arrTime['category'] = $oCategory->get_category();
       $arrTime['category_show'] = 'true';
     }
 
@@ -101,15 +100,10 @@ class time extends model
   }
 
   function get_times(){
-    $arrResults = [];
     $arrTimes = $this->get();
-
-    foreach ($arrTimes as $arrTime) {
-      $oTime = new time( $arrTime['id'] );
-      $arrResults[] = $oTime->get_time();
-    }
-
-    return $arrResults;
+    if ( $arrTimes['id'] ) $arrTimes = $this->get_time( $arrTimes );
+    else foreach ($arrTimes as &$arrTime) $arrTime = $this->get_time( $arrTime );
+    return $arrTimes;
   }
 
   public function fields() # Поля для редактирования
@@ -129,8 +123,9 @@ class time extends model
 
     $oTimeCategory = new times_category();
     $oTimeCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimeCategories = $oTimeCategory->get();
+    $arrTimeCategories = $oTimeCategory->get_categories();
     $arrTimeCategoriesFilter = [];
+    $arrTimeCategoriesFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrTimeCategories as $arrTimeCategory) $arrTimeCategoriesFilter[] = array('id'=>$arrTimeCategory['id'],'name'=>$arrTimeCategory['title']);
     $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrTimeCategoriesFilter,'value'=>$this->category_id];
 
@@ -139,13 +134,23 @@ class time extends model
 
     $arrProjects = $oProject->get();
     $arrProjectsFilter = [];
-    $arrProjectsFilter[] = array('id'=>0,'name'=>$oLang->get('NoProject'));
+    $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
     $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 
-    // $arrFields['task_id'] = ['title'=>'Задача','type'=>'number','value'=>$this->task_id];
+    $oTask = new task();
+    $oTask->sort = 'sort';
+    $oTask->sortDir = 'ASC';
+    $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oTask->query .= ' AND `status` = 2';
+    $arrTasks = $oTask->get_tasks();
+    $arrTasksFilter = [];
+    $arrTasksFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    $arrFields['task_id'] = ['title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
 
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','section'=>2,'value'=>$this->date];
+    $arrFields['date_update'] = ['title'=>$oLang->get('LastUpdate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_update];
 
     $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'hidden','section'=>2,'value'=>$this->time_planned];
     $arrFields['time_really'] = ['title'=>$oLang->get('TimesReally'),'type'=>'timer','section'=>2,'value'=>$this->time_really];
@@ -176,8 +181,12 @@ class time extends model
       $this->time_planned = $arrTime['time_planned'];
       $this->time_really = $arrTime['time_really'];
       $this->date = $arrTime['date'];
+      $this->date_update = $arrTime['date_update'];
       $this->category_id = $arrTime['category_id'];
       $this->status = $arrTime['status'];
+    }
+    else {
+      $this->date_update = date("Y-m-d H:i:s");
     }
   }
 }

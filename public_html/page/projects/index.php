@@ -1,8 +1,41 @@
+<?
+$oClient = new client();
+$oClient->sort = 'sort';
+$oClient->sortDir = 'ASC';
+$oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrClients = $oClient->get();
+?>
+
 <div class="main_jumbotron">
   <div class="_block_title">
     <h1 class="sub_title _value">
       <?=$oLang->get('Projects')?>
     </h1>
+
+    <div class="_buttons btn-group">
+      <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
+    </div>
+  </div>
+
+  <div class="_block_content" id="shower">
+    <!-- Фильтр -->
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#projects" data-content_filter_status="#content_filter_show">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="far fa-folder"></i>
+        </span>
+        <select name="client_id" class="form-select">
+          <option value="0" selected><?=$oLang->get('Client')?></option>
+          <?php foreach ($arrClients as $iIndex => $arrClient): ?>
+            <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+          <?php endforeach; ?>
+        </select>
+
+        <button class="btn btn-dark" type="submit">
+          Go
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -30,17 +63,12 @@
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#projects"
     data-content_loader_show_class="animate__bounceInRight _show_"
-  >
-    <div class="block_loading">
-      <div class="_icon">
-        <i class="fas fa-chart-area"></i>
-      </div>
-    </div>
-  </div>
+  ></div>
 
   <script>
     $(function(){
-      $(document).find('#projects').content_loader( 'start' )
+      // $(document).find('#projects').content_loader( 'start' )
+      $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       $(document).find('#footer_actions').content_actions( {'action':'projects'} )
     })
