@@ -144,9 +144,19 @@ class time extends model
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
     $arrTasks = $oTask->get_tasks();
+
     $arrTasksFilter = [];
     $arrTasksFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    $arrTaskCurrent = [];
+    if ( (int)$this->task_id ) {
+      $oTaskCurrent = new task( $this->task_id );
+      $arrTaskCurrent = $oTaskCurrent->get_tasks();
+      $arrTasksFilter[] = array('id'=>$arrTaskCurrent['id'],'name'=>$arrTaskCurrent['title']);
+    }
+    foreach ( $arrTasks as $arrTask ) {
+      if ( $arrTaskCurrent['id'] && $arrTaskCurrent['id'] == $arrTask['id'] ) continue;
+      $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    }
     $arrFields['task_id'] = ['title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
 
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','section'=>2,'value'=>$this->date];

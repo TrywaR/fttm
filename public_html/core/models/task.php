@@ -68,11 +68,11 @@ class task extends model
       if ( count($arrMoneys) ) {
         foreach ($arrMoneys as $arrMoney) {
           switch ( (int)$arrMoney['type'] ) {
-            case 0: # Траты
+            case 1: # Траты
             $iMoneySum = $iMoneySum - $arrMoney['price'];
             break;
 
-            case 1: # Приход
+            case 2: # Приход
             $iMoneySum = $iMoneySum + $arrMoney['price'];
             break;
           }

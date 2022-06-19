@@ -1588,10 +1588,10 @@ main {
     display: none; }
   .money ._task {
     display: none; }
-  .money._type_1_ {
+  .money._type_2_ {
     position: relative;
     z-index: 1; }
-    .money._type_1_:after {
+    .money._type_2_:after {
       content: "";
       position: absolute;
       top: 0;

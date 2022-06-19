@@ -109,7 +109,7 @@ class money extends model
     $arrCardsFilter = [];
     $arrCardsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
-    $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    $arrFields['card'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
     $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
     $oMoneysSubscriptions = new moneys_subscriptions();
@@ -120,7 +120,7 @@ class money extends model
     $arrSubscriptionsFilter = [];
     $arrSubscriptionsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrMoneysSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
-    $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-0','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
+    $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
     $oMoneyCategory = new moneys_category();
     $oMoneyCategory->sort = 'sort';
@@ -145,10 +145,20 @@ class money extends model
     $oTask->sortDir = 'ASC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
-    $arrTasks = $oTask->get();
+    $arrTasks = $oTask->get_tasks();
+
     $arrTaskId = [];
     $arrTasksFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrTasks as $arrTask) $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    $arrTaskCurrent = [];
+    if ( (int)$this->task_id ) {
+      $oTaskCurrent = new task( $this->task_id );
+      $arrTaskCurrent = $oTaskCurrent->get_tasks();
+      $arrTasksFilter[] = array('id'=>$arrTaskCurrent['id'],'name'=>$arrTaskCurrent['title']);
+    }
+    foreach ( $arrTasks as $arrTask ) {
+      if ( $arrTaskCurrent['id'] && $arrTaskCurrent['id'] == $arrTask['id'] ) continue;
+      $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
+    }
     $arrFields['task_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
 
     $arrFields['description'] = ['section'=>2,'title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
