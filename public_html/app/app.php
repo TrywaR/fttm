@@ -8,6 +8,10 @@ switch ($_REQUEST['action']) {
     include_once 'clients/clients.php';
     break;
 
+  case 'homes': # Главная страница
+    include_once 'homes/homes.php';
+    break;
+
   case 'navs': # Структура сайта
     include_once 'navs/navs.php';
     break;
@@ -18,6 +22,10 @@ switch ($_REQUEST['action']) {
 
   case 'sessions': # Обработка сессий
     include_once 'sessions/sessions.php';
+    break;
+
+  case 'categories': # Категории
+    include_once 'categories/categories.php';
     break;
 
   case 'projects': # Обработка проектов
@@ -49,10 +57,6 @@ switch ($_REQUEST['action']) {
     include_once 'users/users.php';
     break;
 
-  case 'times_categories': # Категории временных затрат
-    include_once 'times_categories/times_categories.php';
-    break;
-
   case 'moneys': # Обработка денежек
     include_once 'moneys/moneys.php';
     include_once 'moneys/analytics.php';
@@ -60,10 +64,6 @@ switch ($_REQUEST['action']) {
 
   case 'cards': # Карточки для денежек
     include_once 'cards/cards.php';
-    break;
-
-  case 'moneys_categories': # Типы затрат
-    include_once 'moneys_categories/moneys_categories.php';
     break;
 
   case 'moneys_subscriptions': # Подписки

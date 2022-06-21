@@ -16,7 +16,7 @@ $arrTasks = $oTask->get();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
 
-$oCategory = new times_category();
+$oCategory = new category();
 $oCategory->sort = 'sort';
 $oCategory->sortDir = 'ASC';
 $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
@@ -134,7 +134,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
           <small class="_task">> {{task.title}}</small>
         </div>
         <div class="badge bg-primary _time" style="font-size: 1rem; font-weight: normal; background: {{category.color}} ! important; margin-right:.5rem;">
-          {{time_really}}
+          {{time}}
         </div>
         <span class="_title">{{title}}</span>
       </div>

@@ -74,8 +74,10 @@ class time extends model
     if ( ! $arrTime['id'] ) $arrTime = $this->get();
 
     if ( (int)$arrTime['category_id'] ) {
-      $oCategory = new times_category( $arrTime['category_id'] );
-      $arrTime['category'] = $oCategory->get_category();
+      $oCategory = new category( $arrTime['category_id'] );
+      $arrTime['category'] = (array)$oCategory;
+      $oLang = new lang();
+      $arrTime['categroy']['title'] = $oLang->get($arrTime['categroy']['title']);
       $arrTime['category_show'] = 'true';
     }
 
@@ -87,13 +89,13 @@ class time extends model
 
     // time
     $dDateReally = new DateTime($arrTime['time_really']);
-    $arrTime['time_really'] = $dDateReally->format('H:i');
+    $arrTime['time'] = $dDateReally->format('H:i');
 
     // task
-    if ( (int)$arrTime['task_id'] > 0 ) {
+    if ( (int)$arrTime['task_id'] ) {
       $arrTime['task_show'] = 'true';
       $oTask = new task( $arrTime['task_id'] );
-      $arrTime['task'] = $oTask->get_task();
+      $arrTime['task'] = (array)$oTask;
     }
 
     return $arrTime;
@@ -121,7 +123,7 @@ class time extends model
     // $arrFields['sort'] = ['title'=>'Сортировка','type'=>'number','value'=>$this->sort];
     // $arrFields['type'] = ['class'=>'switch','title'=>'Тип чата','type'=>'select','options'=>$arrTypes,'value'=>$this->type];
 
-    $oTimeCategory = new times_category();
+    $oTimeCategory = new category();
     $oTimeCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrTimeCategories = $oTimeCategory->get_categories();
     $arrTimeCategoriesFilter = [];

@@ -5,13 +5,17 @@
   <header>
     <div class="block_nav_header">
       <div class="block_logo">
+        <?
+        if ( isset($_SESSION['user']) ) $sLogoText = 'FT <span class="_seporator">[</span>' . $_SESSION['user']['login']{0} . '<span class="_seporator">]</span> M';
+        else  $sLogoText = 'FT <span class="_seporator">[</span>Y<span class="_seporator">]</span> M';
+        ?>
         <?php if ( $_SERVER['REQUEST_URI']!='/' ): ?>
           <a class="_value" href="/">
-            FTTM
+            <?=$sLogoText?>
           </a>
         <?php else: ?>
           <span class="_value">
-            FTTM
+            <?=$sLogoText?>
           </span>
         <?php endif; ?>
       </div>

@@ -124,6 +124,24 @@
                  <?=$_SESSION['user']['date_registration']?>
                </li>
              </ul>
+
+             <small class="mt-3">
+               <?=$oLang->get('Protect')?>
+             </small>
+             <ul class="list-group mt-1 mb-1">
+               <li class="list-group-item">
+                 <small>
+                   <span class="icon">
+                     <i class="fa-solid fa-shield"></i>
+                   </span>
+                   <?=$oLang->get('Protect')?>:
+                 </small>
+                 <?
+                 $oUser = new user( $_SESSION['user']['id'] );
+                 echo $oUser->arrProtectTypesIds[ $_SESSION['user']['protect'] ]['name'];
+                 ?>
+               </li>
+             </ul>
            </div>
          </div>
        </div>

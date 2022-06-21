@@ -30,18 +30,22 @@ class moneys_subscriptions extends model
       $arrSubscription['card_show'] = 'true';
     }
 
-    $arrSubscription['price'] = substr($arrSubscription['price'], 0, -2);
-    $arrSubscription['sum'] = substr($arrSubscription['sum'], 0, -2);
+    $arrSubscription['price'] = ceil(substr($arrSubscription['price'], 0, -2));
+    $arrSubscription['sum'] = ceil(substr($arrSubscription['sum'], 0, -2));
 
-    $bMoneysSum = $this->get_month();
-    $arrSubscription['paid_sum'] = $bMoneysSum;
-    $arrSubscription['paid_need'] = (int)$arrSubscription['price'] - (int)$bMoneysSum;
+    $arrPaids = $this->get_month_paids( $arrSubscription['id'] );
 
-    if ( (int)$bMoneysSum >= (int)$arrSubscription['price'] ) {
-      $arrSubscription['paid'] = true;
+    if ( count($arrPaids['data']) ) {
+      $arrSubscription['paid_sum'] = ceil($arrPaids['sum']);
+      $iSubscriptionNeed = ceil((int)$arrSubscription['price'] - (int)$arrPaids['sum']);
+      if ( $iSubscriptionNeed > 1 ) {
+        $arrSubscription['paid_need'] = $iSubscriptionNeed;
+        $arrSubscription['paid_need_show'] = 'true';
+      }
+      if ( ! (int)$arrSubscription['paid_need'] ) $arrSubscription['paid'] = true;
       $arrSubscription['paid_show'] = 'true';
     }
-    
+
     return $arrSubscription;
   }
 
@@ -62,15 +66,45 @@ class moneys_subscriptions extends model
     // $dCurrentDate = $this->sDateQuery;
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
-    $oMoney->query .= " AND `type` = '0'";
+    $oMoney->query .= " AND `type` = '1'";
     $oMoney->query .= " AND `subscription` = '" . $this->id . "'";
     // return $oMoney->get_money();
     $arrMoneys = $oMoney->get_moneys();
     // return $arrMoney;
 
     $iMonthSum = 0;
-    foreach ($arrMoneys as $arrMoney) $iMonthSum = (int)$arrMoney['price'] + (int)$iMonthSum;
+    if ( $arrMoneys['id'] ) $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+    else foreach ($arrMoneys as $arrMoney) $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
     return $iMonthSum;
+  }
+
+  public function get_month_paids( $iSubscriptionId = 0 ){
+    if ( ! $iSubscriptionId ) $iSubscriptionId = $this->id;
+
+    $arrResult = [];
+    $arrResult['data'] = [];
+
+    // За месяц
+    $oMoney = new money();
+    $dCurrentDate = $this->sDateQuery != '' ? $this->sDateQuery : date('Y-m');
+    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
+    $oMoney->query .= " AND `type` = '1'";
+    $oMoney->query .= " AND `subscription` = '" . $iSubscriptionId . "'";
+    $arrMoneys = $oMoney->get_moneys();
+
+    $iMonthSum = 0;
+
+    if ( $arrMoneys['id'] ) {
+      $arrResult['data'][] = $arrMoney;
+      $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+    }
+    else foreach ($arrMoneys as $arrMoney) {
+      $arrResult['data'][] = $arrMoney;
+      $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+    }
+    $arrResult['sum'] = $iMonthSum;
+    return $arrResult;
   }
 
   public function fields() # Поля для редактирования
@@ -95,7 +129,7 @@ class moneys_subscriptions extends model
     foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
     $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
 
-    $oMoneyCategory = new moneys_category();
+    $oMoneyCategory = new category();
     $oMoneyCategory->sort = 'sort';
     $oMoneyCategory->sortDir = 'ASC';
     $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';

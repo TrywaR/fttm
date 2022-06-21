@@ -1,0 +1,94 @@
+// .block_liveliner
+.block_liveliner
+  ._liveliner_day
+    display: flex
+    flex-direction: column
+    min-height: 30rem
+    padding: 1rem
+    margin-bottom: .5rem
+    box-sizing: border-box
+    border-radius: $border_radius
+    background: $color_main_dark
+
+    ._day
+      display: flex
+      align-items: center
+      justify-content: space-between
+      font-size: 1.4em
+      line-height: 1.4em
+      font-weight: 600
+      padding-bottom: .5rem
+
+      ._number
+      ._button
+
+    ._vals
+      position: relative
+      display: flex
+      flex-direction: column
+      height: 30rem
+      z-index: 1
+
+      &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        width: 1rem
+        height: 100%
+        background: $color_main_dark_ultra
+        border-radius: $border_radius
+        @include shadow_default
+        z-index: -1
+
+      ._category
+        position: relative
+        display: flex
+        flex-direction: column
+        justify-content: center
+        padding: .2rem 1rem .2rem 2rem
+        margin-bottom: .4rem
+        box-sizing: border-box
+        overflow: hidden
+        border-radius: $border_radius
+        // color: white
+        z-index: 1
+
+        ._content
+          display: flex
+          align-items: center
+          height: 100%
+          @include transition_default
+
+          ._title
+            font-size: 1.2em
+            line-height: 1.2em
+            font-weight: 400
+
+          ._times
+            opacity: .7
+            display: none
+
+          ._moneys
+            opacity: .7
+            display: none
+
+          ._background_moneys
+            position: absolute
+            left: 0
+            bottom: 0
+            height: 1rem
+            border-radius: $border_radius
+            z-index: -1
+
+          ._background_times
+            position: absolute
+            top: 0
+            left: 0
+            bottom: 0
+            width: 1rem
+            height: 100%
+            border-radius: $border_radius
+            z-index: -1
+// .block_liveliner x

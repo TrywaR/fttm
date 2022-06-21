@@ -3,7 +3,7 @@ $oCard = new card();
 $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrCards = $oCard->get();
 
-$oMoneyCategory = new moneys_category();
+$oMoneyCategory = new category();
 $oMoneyCategory->sort = 'sort';
 $oMoneyCategory->sortDir = 'ASC';
 $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
@@ -54,7 +54,7 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem d-flex money_subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item _elem d-flex money_subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100 row">
         <span class="col-12 col-md-6 mb-2">
           <span class="d-flex flex-column">
@@ -76,7 +76,14 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 
               <span class="_item _paid">
                 <span class="_icon"><i class="fas fa-check"></i></span>
-                <span class="_text">{{paid.date}}</span>
+                <span class="_text">
+                  <span class="_sum">
+                    {{paid_sum}}
+                  </span>
+                  <span class="_need">
+                    {{paid_need}}
+                  </span>
+                </span>
               </span>
             </div>
           </span>

@@ -73,7 +73,7 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oSubscriptions->get_subscription();
+    $arrResults['data'] = $oSubscriptions->get_subscriptions();
     $arrResults['action'] = 'moneys_subscriptions';
 
     notification::send($arrResults);
@@ -94,7 +94,7 @@ switch ($_REQUEST['form']) {
     }
 
     $oSubscriptions = new moneys_subscriptions( $oSubscriptions->id );
-    $arrResult['data'] = $oSubscriptions->get_subscription();
+    $arrResult['data'] = $oSubscriptions->get_subscriptions();
     $arrResult['text'] = $olang->get('ChangesSaved');
 
     notification::success($arrResult);

@@ -29,6 +29,13 @@ class nav
         'name' => $oLang->get('Home'),
         'url' => '/home/',
         'icon' => '<i class="fa-solid fa-house"></i>',
+        'subs' => [
+          '/home/analytics/' => array(
+            'name' => $oLang->get('Analytics'),
+            'url' => '/home/analytics/',
+            'icon' => '<i class="fas fa-chart-line"></i>',
+          ),
+        ]
       ),
       '/moneys/' => array(
         'id' => 3,
@@ -36,10 +43,10 @@ class nav
         'url' => '/moneys/',
         'icon' => '<i class="fa-solid fa-wallet"></i>',
         'subs' => [
-          '/times/data/categories/' => array(
+          '/categories/' => array(
             'name' => $oLang->get('Categories'),
-            'url' => '/moneys/data/categories/',
-            'icon' => '<i class="fa-solid fa-folder-tree"></i>',
+            'url' => '/categories/',
+            'icon' => '<i class="fa-solid fa-list"></i>',
           ),
           '/moneys/data/cards/' => array(
             'name' => $oLang->get('Cards'),
@@ -69,10 +76,10 @@ class nav
         'url' => '/times/',
         'icon' => '<i class="fa-solid fa-clock"></i>',
         'subs' => [
-          '/times/data/categories/' => array(
+          '/categories/' => array(
             'name' => $oLang->get('Categories'),
-            'url' => '/times/data/categories/',
-            'icon' => '<i class="fa-solid fa-folder-tree"></i>',
+            'url' => '/categories/',
+            'icon' => '<i class="fa-solid fa-list"></i>',
           ),
           '/times/analytics/costs/' => array(
             'name' => $oLang->get('Costs'),
@@ -98,6 +105,12 @@ class nav
             'icon' => '<i class="fa-solid fa-folder-tree"></i>',
           ),
         ],
+      ),
+      '/categories/' => array(
+        'id' => 6,
+        'name' => $oLang->get('Categories'),
+        'url' => '/categories/',
+        'icon' => '<i class="fa-solid fa-list"></i>',
       ),
       '/projects/' => array(
         'id' => 6,

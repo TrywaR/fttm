@@ -51,7 +51,7 @@
 
       <h2 class="sub_title">
         <?=$oLang->get('Sum')?>
-        <span id="res_weeks_sum_res" class="badge">0</span>
+        <span id="res_weeks_sum_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_weeks_sum" class="block_chart">
         <div class="block_loading">
@@ -144,7 +144,7 @@
 
       <h2 class="sub_title">
         <?=$oLang->get('Sum')?>
-        <span id="res_month_sum_res" class="badge">0</span>
+        <span id="res_month_sum_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_month_sum" class="block_chart">
         <div class="block_loading">
@@ -230,7 +230,7 @@
 
       <h2 class="sub_title">
         <?=$oLang->get('Sum')?>
-        <span id="res_year_sum_res" class="badge">0</span>
+        <span id="res_year_sum_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_year_sum" class="block_chart">
         <div class="block_loading">

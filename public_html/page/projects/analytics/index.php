@@ -61,7 +61,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Moneys')?>
-        <span id="res_weeks_money_res" class="badge">0</span>
+        <span id="res_weeks_money_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_weeks_money" class="block_chart">
         <div class="block_loading">
@@ -73,7 +73,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Times')?>
-        <span id="res_weeks_time_res" class="badge">0</span>
+        <span id="res_weeks_time_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_weeks_time" class="block_chart">
         <div class="block_loading">
@@ -174,7 +174,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Money')?>
-        <span id="res_month_money_res" class="badge">0</span>
+        <span id="res_month_money_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_month_money" class="block_chart">
         <div class="block_loading">
@@ -186,7 +186,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Time')?>
-        <span id="res_month_time_res" class="badge">0</span>
+        <span id="res_month_time_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_month_time" class="block_chart">
         <div class="block_loading">
@@ -282,7 +282,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Money')?>
-        <span id="res_year_money_res" class="badge">0</span>
+        <span id="res_year_money_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_year_money" class="block_chart">
         <div class="block_loading">
@@ -294,7 +294,7 @@ $arrProject = $oProject->get();
 
       <h2>
         <?=$oLang->get('Times')?>
-        <span id="res_year_time_res" class="badge">0</span>
+        <span id="res_year_time_res" class="badge bg-primary">0</span>
       </h2>
       <div id="res_year_time" class="block_chart">
         <div class="block_loading">

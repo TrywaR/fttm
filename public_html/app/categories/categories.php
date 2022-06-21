@@ -6,7 +6,7 @@ switch ($_REQUEST['form']) {
     $sResultHtml = '';
     $sResultHtml .= '
       <div class="btn-group">
-        <a data-action="times_categories" data-animate_class="animate__flipInY" data-elem=".times_category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
+        <a data-action="categories" data-animate_class="animate__flipInY" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
           <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
@@ -17,21 +17,22 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'show': # Вывод элементов
-    $oCategory = $_REQUEST['id'] ? new times_category( $_REQUEST['id'] ) : new times_category();
+    $oCategory = $_REQUEST['id'] ? new category( $_REQUEST['id'] ) : new category();
 
     if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
 
     $oCategory->sort = 'sort';
     $oCategory->sortDir = 'ASC';
+    $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 
-    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get_categories();
 
     notification::send($arrCategories);
     break;
 
   case 'form': # Форма добавления / редактирования
+
     // Параметры
     $arrResults = [];
     $oForm = new form();
@@ -39,12 +40,12 @@ switch ($_REQUEST['form']) {
     // Если редактировани
     if ( $_REQUEST['id'] ) {
       $arrResults['event'] = 'edit';
-      $oTimesCategory = new times_category( $_REQUEST['id'] );
+      $oMoneysCategory = new category( $_REQUEST['id'] );
     }
     // Если добавление
     else {
       $arrResults['event'] = 'add';
-      $oTimesCategory = new times_category();
+      $oMoneysCategory = new category();
       // Случайное имя для корректной работы
       $arrDefaultsNames = array(
         'Money for reflection',
@@ -52,17 +53,17 @@ switch ($_REQUEST['form']) {
         'Good name, good job',
       );
       // Создаем элемент
-      $oTimesCategory->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
-      $oTimesCategory->user_id = $_SESSION['user']['id'];
-      $oTimesCategory->date = date('Y-m-d');
-      $oTimesCategory->active = 1;
-      $oTimesCategory->add();
+      $oMoneysCategory->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+      $oMoneysCategory->user_id = $_SESSION['user']['id'];
+      $oMoneysCategory->date = date('Y-m-d');
+      $oMoneysCategory->active = 1;
+      $oMoneysCategory->add();
     }
 
     // Поля для добавления
-    $oForm->arrFields = $oTimesCategory->fields();
+    $oForm->arrFields = $oMoneysCategory->fields();
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
-    $oForm->arrFields['action'] = ['value'=>'times_categories','type'=>'hidden'];
+    $oForm->arrFields['action'] = ['value'=>'categories','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
 
@@ -74,15 +75,15 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oTimesCategory->get_categories();
-    $arrResults['action'] = 'times_categories';
+    $arrResults['data'] = $oMoneysCategory->get_categories();
 
+    $arrResults['action'] = 'categories';
     notification::send($arrResults);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $oCategory = $_REQUEST['id'] ? new times_category( $_REQUEST['id'] ) : new times_category();
+    $oCategory = $_REQUEST['id'] ? new category( $_REQUEST['id'] ) : new category();
     $oCategory->arrAddFields = $_REQUEST;
 
     if ( $_REQUEST['id'] ) {
@@ -94,15 +95,15 @@ switch ($_REQUEST['form']) {
       $oCategory->add();
     }
 
-    $oCategory = new times_category( $oCategory->id );
+    $oCategory = new category( $oCategory->id );
     $arrResult['data'] = $oCategory->get_categories();
-    $arrResult['text'] = $oLang->get("ChangesSaved");
+    $arrResult['text'] = $olang->get('ChangesSaved');
 
     notification::success($arrResult);
     break;
 
   case 'del': # Удаление
-    $oCategory = new times_category( $_REQUEST['id'] );
+    $oCategory = new category( $_REQUEST['id'] );
     $oCategory->del();
     break;
 }

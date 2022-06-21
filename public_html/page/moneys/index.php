@@ -12,7 +12,7 @@ $arrTasks = $oTask->get();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
 
-$oMoneyCategory = new moneys_category();
+$oMoneyCategory = new category();
 $oMoneyCategory->sort = 'sort';
 $oMoneyCategory->sortDir = 'ASC';
 $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
@@ -190,7 +190,7 @@ $arrTypes = [
         <div class="_sub">
           <small class="_category">{{categroy_val.title}}</small>
           <small class="_project">> {{project_val.title}}</small>
-          <small class="_task">> {{task.title}}</small>
+          <small class="_task">> {{task_val.title}}</small>
         </div>
       </div>
     </div>

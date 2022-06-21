@@ -14,16 +14,20 @@ class lang
   public $arrLang = [];
 
   function get( $sText = '' ){
+    // load lang
+    switch ($this->sUserLang) {
+      case 'ru':
+        $this->ru();
+        break;
+      case 'en':
+        $this->en();
+        break;
+    }
     if ( $this->arrLang[$this->sUserLang] && isset($this->arrLang[$this->sUserLang][$sText]) ) return $this->arrLang[$this->sUserLang][$sText];
     else return $sText;
   }
 
-  function __construct()
-  {
-    $this->sUserLang = 'en';
-    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) $this->sUserLang = $_SESSION['user']['lang'];
-    // ru
-    $this->arrLang = [];
+  function ru(){
     $this->arrLang['ru'] = [
       'Categories' => 'Категории',
       'Category' => 'Категория',
@@ -174,6 +178,12 @@ class lang
       'Projects' => 'Проекты',
       'Project' => 'Проект',
 
+      'Protect' => 'Защита',
+      'ProtectType' => 'Тип защиты',
+      'ProtectYes' => 'Защита установлена',
+      'ProtectNo' => 'Защита не установлена',
+      'ProtectKeyYes' => 'Защита по ключу',
+
       'Versions' => 'Версии',
       'Contacts' => 'Контакты',
       'Donate' => 'Донаты',
@@ -184,7 +194,9 @@ class lang
       'SignUp' => 'Регистрация',
       'SignIn' => 'Вход',
     ];
+  }
 
+  function en(){
     $this->arrLang['en'] = [
       'Categories' => 'Categories',
       'Category' => 'Category',
@@ -335,6 +347,12 @@ class lang
       'Projects' => 'Projects',
       'Project' => 'Project',
 
+      'Protect' => 'Protect',
+      'ProtectType' => 'Protect type',
+      'ProtectYes' => 'Protect yes',
+      'ProtectNo' => 'Protect no',
+      'ProtectKeyYes' => 'Protect key yes',
+
       'Versions' => 'Versions',
       'Contacts' => 'Contacts',
       'Donate' => 'Donate',
@@ -345,6 +363,13 @@ class lang
       'SignUp' => 'Sign up',
       'SignIn' => 'Sign in',
     ];
+  }
+
+  function __construct()
+  {
+    $this->sUserLang = 'en';
+    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) $this->sUserLang = $_SESSION['user']['lang'];
+    $this->arrLang = [];
   }
 }
 $oLang = new lang();

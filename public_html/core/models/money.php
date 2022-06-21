@@ -18,8 +18,9 @@ class money extends model
   public static $user_id = '';
   public static $to_card = ''; # на карту
   public static $subscription = ''; # на подписку
+  public static $protected = ''; # защещённые данные
 
-  function get_money( $arrMoney = [] ){
+  public function get_money( $arrMoney = [] ){
     if ( ! $arrMoney['id'] ) $arrMoney = $this->get();
 
     $arrDate = explode(' ', $arrMoney['date']);
@@ -40,34 +41,27 @@ class money extends model
 
     if ( (int)$arrMoney['category'] ) {
       $arrMoney['category_show'] = 'true';
-      $oMoneyCategory = new moneys_category( $arrMoney['category'] );
-      $arrMoney['categroy_val'] = [];
-      $arrMoneysCategory = (array)$oMoneyCategory;
-      $arrMoney['categroy_val']['title'] = $arrMoneysCategory['title'];
-      $arrMoney['categroy_val']['color'] = $arrMoneysCategory['color'];
+      $oCategory = new category( $arrMoney['category'] );
+      $arrMoney['categroy_val'] = (array)$oCategory;
+      $oLang = new lang();
+      $arrMoney['categroy_val']['title'] = $oLang->get($arrMoney['categroy_val']['title']);
     }
 
     if ( (int)$arrMoney['project_id'] ) {
       $arrMoney['project_show'] = 'true';
       $oProject = new project( $arrMoney['project_id'] );
-      $arrMoney['project_val'] = [];
-      $arrProject = (array)$oProject;
-      $arrMoney['project_val']['title'] = $arrProject['title'];
-      $arrMoney['project_val']['color'] = $arrProject['color'];
+      $arrMoney['project_val'] = (array)$oProject;
     }
 
     if ( (int)$arrMoney['task_id'] ) {
       $arrMoney['task_show'] = 'true';
       $oTask = new task( $arrMoney['task_id'] );
-      $arrMoney['task'] = $oTask->get_task();
+      $arrMoney['task_val'] = (array)$oTask;
     }
 
     if ( (int)$arrMoney['subscription'] ) {
       $oMoneysSubscription = new moneys_subscriptions( $arrMoney['subscription'] );
-      $arrMoney['subscription_val'] = [];
-      $arrMoneysSubscription = (array)$oMoneysSubscription;
-      $arrMoney['subscription_val']['title'] = $arrMoneysSubscription['title'];
-      $arrMoney['subscription_val']['color'] = $arrMoneysSubscription['color'];
+      $arrMoney['subscription_val'] = (array)$oMoneysSubscription;
       $arrMoney['subscription_show'] = 'true';
     }
 
@@ -122,14 +116,14 @@ class money extends model
     foreach ($arrMoneysSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
     $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
-    $oMoneyCategory = new moneys_category();
-    $oMoneyCategory->sort = 'sort';
-    $oMoneyCategory->sortDir = 'ASC';
-    $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneyCategory->get_categories();
-    $arrMoneysCategoriesFilter = [];
-    foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
-    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category];
+    $oCategory = new category();
+    $oCategory->sort = 'sort';
+    $oCategory->sortDir = 'ASC';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesFilter = [];
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category];
 
     $oProject = new project();
     $oProject->sort = 'sort';
@@ -190,6 +184,7 @@ class money extends model
       $this->user_id = $arrMoney['user_id'];
       $this->to_card = $arrMoney['to_card'];
       $this->subscription = $arrMoney['subscription'];
+      $this->protected = $arrMoney['protected'];
     }
   }
 }

@@ -17,14 +17,15 @@ switch ($_REQUEST['form']) {
     }
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
     $arrTimesSum = [];
 
@@ -102,14 +103,15 @@ switch ($_REQUEST['form']) {
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
     $arrTimesSum = [];
 
@@ -174,14 +176,15 @@ switch ($_REQUEST['form']) {
     $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
 
     // Получаем категории
-    $oTimesCategory = new times_category();
-    $oTimesCategory->limit = 0;
-    $oTimesCategory->sort = 'sort';
-    $oTimesCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimesCategories = $oTimesCategory->get();
-    foreach ($arrTimesCategories as &$arrTimesCategory) $arrCategories[$arrTimesCategory['id']] = $arrTimesCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
     $arrTimesSum = [];
 

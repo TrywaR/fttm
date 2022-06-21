@@ -17,14 +17,15 @@ switch ($_REQUEST['form']) {
     }
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
 
     // Обработка данных
@@ -89,14 +90,15 @@ switch ($_REQUEST['form']) {
     $iMonthDaysSum = cal_days_in_month(CAL_GREGORIAN, $iMonth, $iYear);
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
 
     // Суммы по месяцам
@@ -146,14 +148,15 @@ switch ($_REQUEST['form']) {
     $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
 
     // Получаем категории
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneysCategory->get();
-    foreach ($arrMoneysCategories as &$arrMoneyCategory) $arrCategories[$arrMoneyCategory['id']] = $arrMoneyCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-    $arrResults['categories'] = $arrCategories;
+    $arrResults['categories'] = $arrCategoriesIds;
     $arrResults['data'] = [];
 
     // Суммы по месяцам
@@ -202,14 +205,14 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
 
     // Категории которые не отнимать
-    $oMoneysCategory = new moneys_category();
-    $oMoneysCategory->limit = 0;
-    $oMoneysCategory->sort = 'sort';
-    $oMoneysCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oMoneysCategory->query .= " AND `type` = 0";
-    $arrMoneysCategories = $oMoneysCategory->get();
-    $arrMoneysCategoriesIds = [];
-    foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesIds[$arrMoneysCategory['id']] = $arrMoneysCategory;
+    $oCategory = new category();
+    $oCategory->limit = 0;
+    $oCategory->sort = 'sort';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query .= " AND `type` = 0";
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesIds = [];
+    foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
     // День
     $dDay = date("Y-m-d", strtotime("-1 DAY"));
@@ -221,7 +224,7 @@ switch ($_REQUEST['form']) {
     $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '1' ";
     $arrMoneys = $oMoney->get_money();
     $iDaySumm = 0;
-    foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
+    foreach ($arrMoneys as $arrMoney) if ( isset($arrCategoriesIds[$arrMoney['category']]) ) $iDaySumm = (int)$arrMoney['price'] + (int)$iDaySumm;
     $arrResults['iDaySumm'] = number_format($iDaySumm, 2, '.', ' ');
 
     // Пришло за день
@@ -246,9 +249,9 @@ switch ($_REQUEST['form']) {
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
     $arrMoneys = $oMoney->get_money();
-    $iMonthSumm = 0;
-    foreach ($arrMoneys as $arrMoney) if ( isset($arrMoneysCategoriesIds[$arrMoney['category']]) ) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
-    $arrResults['iMonthSumm'] = number_format($iMonthSumm, 2, '.', ' ');
+    $iMonthSum = 0;
+    foreach ($arrMoneys as $arrMoney) if ( isset($arrCategoriesIds[$arrMoney['category']]) ) $iMonthSum = (int)$arrMoney['price'] + (int)$iMonthSum;
+    $arrResults['iMonthSum'] = number_format($iMonthSum, 2, '.', ' ');
 
     // За месяц пришло
     $oMoney = new money();
@@ -257,11 +260,11 @@ switch ($_REQUEST['form']) {
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
     $arrMoneys = $oMoney->get_money();
-    $iMonthSummSalary = 0;
-    foreach ($arrMoneys as $arrMoney) $iMonthSummSalary = (int)$arrMoney['price'] + (int)$iMonthSummSalary;
-    $arrResults['iMonthSummSalary'] = number_format($iMonthSummSalary, 2, '.', ' ');
+    $iMonthSumSalary = 0;
+    foreach ($arrMoneys as $arrMoney) $iMonthSumSalary = (int)$arrMoney['price'] + (int)$iMonthSumSalary;
+    $arrResults['iMonthSumSalary'] = number_format($iMonthSumSalary, 2, '.', ' ');
 
-    $arrResults['balance'] = number_format($iMonthSummSalary-$iMonthSumm, 2, '.', ' ');
+    $arrResults['balance'] = number_format($iMonthSumSalary-$iMonthSum, 2, '.', ' ');
 
     notification::success( $arrResults );
     break;

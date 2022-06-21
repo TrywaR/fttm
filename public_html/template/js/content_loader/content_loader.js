@@ -58,7 +58,8 @@ function content_loader_init( sEvent ) {
     arrPageContent.oTemplate = $(document).find(arrPageContent.elem_template_selector)
   }
 
-  if ( sEvent == 'start' ) $(document).find(arrPageContent.scroll_block).html('')
+  // if ( sEvent == 'start' )
+  $(document).find(arrPageContent.scroll_block).html('<small class="_loading"><i class="fa-solid fa-spinner fa-spin"></i></small>')
 
   // Возможность прокрутки, визуально
   $(document).find(arrPageContent.scroll_block).addClass('_scroll_').addClass('_top_')
@@ -116,7 +117,13 @@ function content_loader_load( sEvent ){
       'filter': arrPageContent.filter,
     }, 'text', false )
   ).then( function( resultData ){
-    if ( ! resultData ) return false
+    if ( ! resultData || resultData == '[]' ) {
+      if ( sEvent == 'start' ) $(document).find( arrPageContent.content_selector ).html( '<small class="_not_result"><span>Not result</span><i class="fa-solid fa-face-frown-open"></i></small>' )
+      return false
+    }
+    else {
+      if ( sEvent == 'start' ) $(document).find( arrPageContent.content_selector ).html( '' )
+    }
     var oContentLoadElems = $.parseJSON( resultData )
     var sResultHtml = ''
 

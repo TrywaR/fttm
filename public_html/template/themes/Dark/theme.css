@@ -902,7 +902,10 @@ body .form-label {
   line-height: 1em;
   font-weight: 400; }
 body .badge {
+  color: white;
   border-radius: 0.5rem; }
+  body .badge.bg-primary {
+    background: #7661db !important; }
 body .navbar .home_link {
   color: white;
   text-decoration: none; }
@@ -1407,8 +1410,28 @@ main {
     cursor: pointer; }
   .block_content_loader::-webkit-scrollbar-thumb:hover {
     background: #1f1f26; }
-  .block_content_loader .block_loading {
-    margin: auto; }
+  .block_content_loader > ._loading {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+    justify-content: center;
+    align-items: center; }
+    .block_content_loader > ._loading svg {
+      margin-top: 0.5rem;
+      font-size: 2em;
+      line-height: 2em; }
+  .block_content_loader > ._not_result {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+    justify-content: center;
+    align-items: center; }
+    .block_content_loader > ._not_result svg {
+      margin-top: 0.5rem;
+      font-size: 2em;
+      line-height: 2em; }
   .block_content_loader > * {
     position: relative;
     z-index: 1;
@@ -1643,9 +1666,13 @@ main {
 
 .money_subscription._paid_show_true ._paid {
   display: flex; }
+.money_subscription._paid_need_show_true ._need {
+  display: flex; }
 .money_subscription._card_show_true ._card {
   display: flex; }
 .money_subscription ._paid {
+  display: none; }
+.money_subscription ._need {
   display: none; }
 .money_subscription ._card {
   display: none; }
@@ -1668,8 +1695,17 @@ main {
   padding: 0.2rem 0.5rem;
   font-size: 1em;
   line-height: 1em; }
+  .money_subscription ._subs ._item._paid ._need {
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.2rem;
+    border-radius: 0.5rem;
+    background: #ff7b7b;
+    color: white; }
   .money_subscription ._subs ._item ._icon {
     margin-right: 0.5rem; }
+  .money_subscription ._subs ._item ._text {
+    display: flex;
+    align-items: center; }
   .money_subscription ._subs ._item._card {
     opacity: 0.4; }
 
@@ -1893,6 +1929,8 @@ main {
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end; }
+    .task ._sub ._status {
+      color: white; }
     .task ._sub > * {
       padding: 0.4rem;
       border-radius: 0.5rem;
@@ -2086,6 +2124,84 @@ main {
         .block_home ._section ._block ._content .icon {
           font-size: 1em;
           margin-right: 0.5rem; }
+
+.block_liveliner ._liveliner_day {
+  display: flex;
+  flex-direction: column;
+  min-height: 30rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background: #222228; }
+  .block_liveliner ._liveliner_day ._day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4em;
+    line-height: 1.4em;
+    font-weight: 600;
+    padding-bottom: 0.5rem; }
+  .block_liveliner ._liveliner_day ._vals {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    z-index: 1; }
+    .block_liveliner ._liveliner_day ._vals:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1rem;
+      height: 100%;
+      background: #101010;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 0.2rem 0rem rgba(30, 30, 30, 0.3), 0 0 0.6rem 0.6rem rgba(30, 30, 30, 0.3), inset 0 0 0.1rem 0 rgba(50, 50, 50, 0.3);
+      z-index: -1; }
+    .block_liveliner ._liveliner_day ._vals ._category {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.2rem 1rem 0.2rem 2rem;
+      margin-bottom: 0.4rem;
+      box-sizing: border-box;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      z-index: 1; }
+      .block_liveliner ._liveliner_day ._vals ._category ._content {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: all 0.3s ease-in-out 0s; }
+        .block_liveliner ._liveliner_day ._vals ._category ._content ._title {
+          font-size: 1.2em;
+          line-height: 1.2em;
+          font-weight: 400; }
+        .block_liveliner ._liveliner_day ._vals ._category ._content ._times {
+          opacity: 0.7;
+          display: none; }
+        .block_liveliner ._liveliner_day ._vals ._category ._content ._moneys {
+          opacity: 0.7;
+          display: none; }
+        .block_liveliner ._liveliner_day ._vals ._category ._content ._background_moneys {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 1rem;
+          border-radius: 0.5rem;
+          z-index: -1; }
+        .block_liveliner ._liveliner_day ._vals ._category ._content ._background_times {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 1rem;
+          height: 100%;
+          border-radius: 0.5rem;
+          z-index: -1; }
 
 body:before {
   background: linear-gradient(0deg, rgba(15, 15, 15, 0.8) 0, rgba(21, 25, 36, 0.8) 100%);
