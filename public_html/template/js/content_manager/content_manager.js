@@ -3,6 +3,7 @@ $.fn.content_manager = function() {
   arrPageParams.content_manager_block = this.data().content_manager_block
   arrPageParams.content_manager_item = this.data().content_manager_item
   arrPageParams.content_manager_button = this.data().content_manager_button
+  arrPageParams.content_manager_sum = this.data().content_manager_sum
   content_manager_init( this.attr('id') )
 }
 
@@ -13,6 +14,20 @@ function content_manager_init( oContentManagerButtonsId ) {
   		$(this).toggleClass('_active_')
   		// $(this).parents('.list-group-item').toggleClass('content_manager_select')
   		$(this).parents('._elem').toggleClass('content_manager_select')
+
+      // Подсчёт суммы если надо
+      if ( arrPageParams.content_manager_sum ) {
+        if ( $(document).find(arrPageParams.content_manager_block).find('.content_manager_select').length ) {
+          var iContentManagerSum = 0
+          $(document).find(arrPageParams.content_manager_block).find('.content_manager_select').each(function(){
+            iContentManagerSum = iContentManagerSum + parseInt($(this).find(arrPageParams.content_manager_sum).html())
+          })
+          animation_number_to(oContentManagerButtons.find('.content_manager_sum'),parseInt(oContentManagerButtons.find('.content_manager_sum').html()),iContentManagerSum,500)
+        }
+        else {
+          animation_number_to(oContentManagerButtons.find('.content_manager_sum'),parseInt(oContentManagerButtons.find('.content_manager_sum').html()),0,500)
+        }
+      }
 
   		if ( $(document).find(arrPageParams.content_manager_block).find('.content_manager_select').length ) {
   			// Анимация показа активных кнопок

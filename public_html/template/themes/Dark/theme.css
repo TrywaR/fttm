@@ -1489,6 +1489,14 @@ main {
     display: none !important; }
   .content_manager_buttons .btn {
     margin-bottom: 0.2rem; }
+  .content_manager_buttons .content_manager_sum {
+    padding: 0.6rem 1rem;
+    font-size: 1.5em;
+    line-height: 1rem;
+    font-weight: 500;
+    background: #7661db;
+    border-radius: 0.5rem;
+    color: white; }
 
 .moneyforhour_block {
   display: flex;

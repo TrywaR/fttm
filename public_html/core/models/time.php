@@ -123,13 +123,13 @@ class time extends model
     // $arrFields['sort'] = ['title'=>'Сортировка','type'=>'number','value'=>$this->sort];
     // $arrFields['type'] = ['class'=>'switch','title'=>'Тип чата','type'=>'select','options'=>$arrTypes,'value'=>$this->type];
 
-    $oTimeCategory = new category();
-    $oTimeCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrTimeCategories = $oTimeCategory->get_categories();
-    $arrTimeCategoriesFilter = [];
-    $arrTimeCategoriesFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrTimeCategories as $arrTimeCategory) $arrTimeCategoriesFilter[] = array('id'=>$arrTimeCategory['id'],'name'=>$arrTimeCategory['title']);
-    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrTimeCategoriesFilter,'value'=>$this->category_id];
+    $oCategory = new category();
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesFilter = [];
+    $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category_id];
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];

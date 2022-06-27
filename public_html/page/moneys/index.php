@@ -129,7 +129,8 @@ $arrTypes = [
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
+  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch"  data-content_manager_sum="._price">
+    <div class="content_manager_sum"></div>
     <button type="button" name="button" class="btn btn-danger del">
       <i class="fas fa-folder-minus"></i>
     </button>

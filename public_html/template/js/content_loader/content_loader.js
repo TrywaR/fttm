@@ -44,27 +44,36 @@ function content_loader_init( sEvent ) {
   arrPageContent.oTemplate = {} // Объект шаблона
   // '#chronology'
 
-  // Загружаем шаблон
+  // Отображаем загрузку
+  $(document).find(arrPageContent.content_selector).html('<small class="_loading"><i class="fa-solid fa-spinner fa-spin"></i></small>')
+
+  // Загружаем шаблон и данные
+  content_loader_template()
+}
+
+// Загрузка шаблона
+function content_loader_template() {
   if ( arrPageContent.elem_template_path ) {
-    $.get('templates/' + arrPageContent.elem_template_path)
+    $.get('/templates/' + arrPageContent.elem_template_path)
     .fail(function(data){
-      app_status({'error': 'Шаблон не найден: ' + sTemplatePath})
+      status({'error': 'Шаблон не найден: ' + arrPageContent.elem_template_path})
     })
     .done(function(data){
-      if ( data ) arrPageContent.oTemplate = $('<div/>').html(data)
+      if ( data ) {
+        arrPageContent.oTemplate = $('<div/>').html(data)
+        // Вставляем данные и настраиваем загрузку при прокрутке
+        content_loader_load( 'start' )
+        content_loader_scroll_init()
+      }
     })
   }
-  if ( arrPageContent.elem_template_selector ) {
-    arrPageContent.oTemplate = $(document).find(arrPageContent.elem_template_selector)
+  else {
+    if ( arrPageContent.elem_template_selector ) {
+      arrPageContent.oTemplate = $(document).find(arrPageContent.elem_template_selector)
+      content_loader_load( 'start' )
+      content_loader_scroll_init()
+    }
   }
-
-  // if ( sEvent == 'start' )
-  $(document).find(arrPageContent.scroll_block).html('<small class="_loading"><i class="fa-solid fa-spinner fa-spin"></i></small>')
-
-  // Возможность прокрутки, визуально
-  $(document).find(arrPageContent.scroll_block).addClass('_scroll_').addClass('_top_')
-  content_loader_load( 'start' )
-  content_loader_scroll_init()
 }
 
 // Инициализация поля загрузки
@@ -256,7 +265,11 @@ function content_loader_elem_html( oContentLoadElem, oTemplate ){
     }
   }
   for(var i = 0; i < replaceKeyArray.length; i++) {
-    sElemHtml = sElemHtml.split('{{' + replaceKeyArray[i] + '}}').join(replaceValueArray[i])
+    if ( sElemHtml != '' ) {
+      if ( sElemHtml != '' && replaceKeyArray[i] && replaceValueArray[i] )
+      if ( sElemHtml.indexOf('{{' + replaceKeyArray[i] + '}}') )
+      sElemHtml = sElemHtml.split('{{' + replaceKeyArray[i] + '}}').join(replaceValueArray[i])
+    }
   }
 
   // Убираем пустые поля

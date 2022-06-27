@@ -122,6 +122,7 @@ class money extends model
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
     $arrCategories = $oCategory->get_categories();
     $arrCategoriesFilter = [];
+    $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
     $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category];
 
