@@ -30,21 +30,30 @@ switch ($_SERVER['REQUEST_URI']) {
   case '/authorizations/': # Авторизация
     include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
     include_once 'core/templates/pages/header.php'; # Шапка
-    include_once 'page/authorizations/index.php';
+
+    if (file_exists('page/authorizations/index_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/index_' . $olang->sUserLang . '.php';
+    else include_once 'page/authorizations/index.php';
+
     include_once 'core/templates/pages/footer.php'; # Подвал
     break;
 
   case '/registration/': # Регистрация
     include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
     include_once 'core/templates/pages/header.php'; # Шапка
-    include_once 'page/authorizations/registration.php';
+
+    if (file_exists('page/authorizations/registration_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/registration_' . $olang->sUserLang . '.php';
+    else include_once 'page/authorizations/registration.php';
+
     include_once 'core/templates/pages/footer.php'; # Подвал
     break;
 
   case '/password_recovery/': # Восстановление пароля
     include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
     include_once 'core/templates/pages/header.php'; # Шапка
-    include_once 'page/authorizations/password_recovery.php';
+
+    if (file_exists('page/authorizations/password_recovery_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/password_recovery_' . $olang->sUserLang . '.php';
+    else include_once 'page/authorizations/password_recovery.php';
+
     include_once 'core/templates/pages/footer.php'; # Подвал
     break;
 

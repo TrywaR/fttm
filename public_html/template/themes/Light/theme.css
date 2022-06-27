@@ -1056,6 +1056,9 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
     .block_logo ._value ._nickname {
       font-weight: 800; }
 
+@media screen and (max-width: 1000px) {
+  .block_logo {
+    font-size: 0.6rem; } }
 .block_logining {
   display: flex;
   width: 100%;
@@ -1982,35 +1985,40 @@ main {
   transition: all 0.3s ease-in-out 0s; }
 
 .welcome_container {
-  padding: 0 0 5rem 0; }
+  padding: 0 0 0 0;
+  overflow-x: hidden; }
   .welcome_container ._section {
     position: relative;
     z-index: 1; }
-    .welcome_container ._section ._block {
+    .welcome_container ._section > ._block {
       display: flex;
       align-items: center;
       padding: 5rem 2rem;
       font-size: 1em;
       line-height: 1.4em; }
-      .welcome_container ._section ._block ._content {
+      .welcome_container ._section > ._block ._content {
         flex-grow: 1; }
-      .welcome_container ._section ._block ._icon {
-        flex-grow: 1;
+      .welcome_container ._section > ._block > ._icon {
+        position: absolute;
+        top: 0;
+        right: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-width: 20vw;
         font-size: 10em;
         padding: 1rem;
-        box-sizing: border-box; }
-      .welcome_container ._section ._block ._block_title {
+        box-sizing: border-box;
+        transform: rotate(30deg);
+        opacity: 0.1;
+        z-index: -1; }
+      .welcome_container ._section > ._block ._block_title {
         font-size: 6em;
         line-height: 1em;
         font-weight: 600; }
-      .welcome_container ._section ._block ul {
+      .welcome_container ._section > ._block ul {
         display: flex;
         flex-direction: column; }
-        .welcome_container ._section ._block ul li {
+        .welcome_container ._section > ._block ul li {
           box-sizing: border-box;
           padding: 1rem;
           margin: 0.5rem;

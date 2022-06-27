@@ -13,6 +13,7 @@ class lang
   public $sUserLang = '';
   public $arrLang = [];
 
+  // Получение перевода
   function get( $sText = '' ){
     // load lang
     switch ($this->sUserLang) {
@@ -367,8 +368,22 @@ class lang
 
   function __construct()
   {
-    $this->sUserLang = 'en';
-    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) $this->sUserLang = $_SESSION['user']['lang'];
+    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
+      $this->sUserLang = $_SESSION['user']['lang'];
+    }
+    else {
+      if ( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) {
+        $arrlang = explode(';',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $arrlangs = explode(',',$arrlang[0]);
+        if ( count($arrlangs) ) {
+          $slang = $arrlangs[1];
+          if ( $slang ) $this->sUserLang = $slang;
+          else $this->sUserLang = 'ens';
+        }
+      }
+    }
+    // $this->sUserLang = 'en';
+    // if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) $this->sUserLang = $_SESSION['user']['lang'];
     $this->arrLang = [];
   }
 }

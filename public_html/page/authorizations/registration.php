@@ -33,7 +33,14 @@
       <div class="_fttm_alerts"></div>
 
       <div class="block_buttons justify-content-end">
-        <button class="btn btn-primary mt-2 mb-2" type="submit"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="btn btn-primary mt-2 mb-2" type="submit">
+          <div class="_icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="_text">
+            Register
+          </div>
+        </button>
       </div>
 
       <div class="mt-4 block_sub_text">

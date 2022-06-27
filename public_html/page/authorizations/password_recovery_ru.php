@@ -3,7 +3,7 @@
     <div class="form_block">
       <form id="form_password_recovery" class="form_password_recovery">
       <h2 class="_form_title sub_title">
-        Password recovery
+        Восстановление пароля
       </h2>
       <input type="hidden" name="app" value="app">
       <input type="hidden" name="action" value="authorizations">
@@ -24,7 +24,7 @@
             <i class="fas fa-paper-plane"></i>
           </div>
           <div class="_text">
-            Send new password on email
+            Отправить новый пароль на почту
           </div>
         </button>
       </div>
@@ -32,7 +32,7 @@
       <div class="mt-4 block_sub_text">
         <p>
           <a class="content_upload" href="/authorizations/">
-            Already have an account, login
+            Повторить вход
           </a>
         </p>
       </div>

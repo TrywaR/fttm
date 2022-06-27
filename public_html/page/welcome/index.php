@@ -115,22 +115,7 @@
              <p>
                Попробуй, быстрая регистрация без использования электронной почты и номера телефона
              </p>
-             <div class="block_logining">
-               <div class="btn-group">
-                 <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
-                   <small class="icon">
-                     <i class="fas fa-user-check"></i>
-                   </small>
-                   Sign in
-                 </a>
-                 <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
-                   <small class="icon">
-                     <i class="fas fa-user-plus"></i>
-                   </small>
-                   Sign up
-                 </a>
-               </div>
-             </div>
+             <?include 'core/templates/pages/logining.php';?>
            </div>
          </div>
      </div>

@@ -44,7 +44,14 @@
           <div class="_fttm_alerts"></div>
 
           <div class="block_buttons justify-content-end">
-            <button class="btn btn-primary mt-2 mb-2" type="submit"><i class="fas fa-user-check"></i> Sign in</button>
+            <button class="btn btn-primary mt-2 mb-2" type="submit">
+              <div class="_icon">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <div class="_text">
+                Sign in
+              </div>
+            </button>
           </div>
 
           <div class="mt-4 block_sub_text">

@@ -18,9 +18,9 @@
 
    <div class="_section _times">
      <div class="_block">
-         <!-- <div class="_icon">
+         <div class="_icon">
            <i class="fas fa-clock"></i>
-         </div> -->
+         </div>
          <div class="_content">
            <h2 class="_block_title"><?=$oLang->get('Times')?></h2>
           <p>
@@ -43,6 +43,10 @@
 
    <div class="_section _moneys">
      <div class="_block">
+       <div class="_icon">
+         <i class="fas fa-wallet"></i>
+       </div>
+
          <div class="_content">
            <h2 class="_block_title"><?=$oLang->get('Moneys')?></h2>
             <p>This service will help you effectively manage your finances through complete analysis.</p>
@@ -57,15 +61,14 @@
               <li>racking fees and delinquencies on credit cards, charges on debit cards</li>
             </ul>
          </div>
-
-         <!-- <div class="_icon">
-           <i class="fas fa-wallet"></i>
-         </div> -->
        </div>
    </div>
 
    <div class="_section _moneysforhour">
      <div class="_block">
+       <div class="_icon">
+         <i class="fa-solid fa-clipboard-check"></i>
+       </div>
          <div class="_content">
            <h2 class="_block_title">Time is money</h2>
             <p>A unique tool of our service is a combination of time and money analysis, which allows you to calculate the value of your time in money. </p>
@@ -83,22 +86,7 @@
              <p>
                Try it, quick registration without using email and phone number
              </p>
-             <div class="block_logining">
-               <div class="btn-group">
-                 <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/') echo 'badge bg-success active';?>" href="/authorizations/">
-                   <small class="icon">
-                     <i class="fas fa-user-check"></i>
-                   </small>
-                   Sign in
-                 </a>
-                 <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'badge bg-success active';?>" href="/registration/">
-                   <small class="icon">
-                     <i class="fas fa-user-plus"></i>
-                   </small>
-                   Sign up
-                 </a>
-               </div>
-             </div>
+             <?include 'core/templates/pages/logining.php';?>
            </div>
          </div>
      </div>
