@@ -2,7 +2,7 @@
   <div class="block_jumbotron">
     <div class="_block_title">
       <h1 class="sub_title _value">
-        FT <span class="_seporator">[</span><?=$_SESSION['user']['login']{0}?><span class="_seporator">]</span> M
+        <?include 'core/templates/pages/logo.php'?>
       </h1>
     </div>
   </div>

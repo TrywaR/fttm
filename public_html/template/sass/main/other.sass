@@ -1,14 +1,36 @@
 // .block_logo
 .block_logo
   display: flex
+  font-size: 1.5rem
+  line-height: 1
   width: 100%
 
+  &._white
+    ._value
+      color: white
+      // text-shadow: .15rem .15rem 0 $color_main_dark
+
+      ._seporator
+        color: $color_main
+
   ._value
-    font-size: 1.4rem
-    line-height: 1.4rem
+    display: flex
+    align-items: center
+    font-size: 1.4em
+    line-height: 1.4em
     font-weight: 500
     color: $color_main
     text-decoration: none
+    // text-shadow: .15rem .15rem 0 $color_main
+
+    ._seporator
+      font-weight: 300
+      text-shadow: none
+      color: $color_main
+      opacity: .7
+
+    ._nickname
+      font-weight: 800
 // .block_logo x
 
 // .block_logining

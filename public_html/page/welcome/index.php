@@ -3,11 +3,7 @@
     <div class="_block">
       <div class="_content">
         <h1 class="text-center">
-          <!-- Freelance Time TrywaR Manager -->
-          FTTM
-          <!-- HOMM -->
-          <!-- Hour Of Money Manager -->
-          <!-- money per hour Manager -->
+          Freelance Time Your Manager
         </h1>
         <p>
           Это симулятор, способный оцифровать тебя, помогающий более эффективно распоряжаться своим временем и финансами
@@ -30,7 +26,7 @@
            <i class="fas fa-clock"></i>
          </div> -->
          <div class="_content">
-           <h2 class="_block_title">Times</h2>
+           <h2 class="_block_title"><?=$oLang->get('Times')?></h2>
            <p>
              Этот сервис содержит систему для учёта времени,
              она позволит найти время для любого дела, или распоряжаться безценным временем более надёжно
@@ -60,7 +56,7 @@
    <div class="_section _moneys">
      <div class="_block">
          <div class="_content">
-           <h2 class="_block_title">Moneys</h2>
+           <h2 class="_block_title"><?=$oLang->get('Moneys')?></h2>
            <p>
              Учёт финансовых потоков для отслеживания их по категориям, проектам, взаимодействуя с неограниченным количеством носителей:
              наличные, кредитки, счета, кэшбеки и прочее
@@ -99,7 +95,7 @@
    <div class="_section _moneysforhour">
      <div class="_block">
          <div class="_content">
-           <h2 class="_block_title">Money per hour</h2>
+           <h2 class="_block_title">Time is money</h2>
            <p>
              Соединения собранную информацию по временным и денежным затратам можно увидеть много интересных данных
            </p>

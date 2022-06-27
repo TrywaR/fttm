@@ -1,7 +1,7 @@
 <div class="main_jumbotron">
   <div class="_block_title">
     <h1 class="sub_title _value">
-      Freelance Time <?=$_SESSION['user']['login']?> Manager
+      <?=$_SESSION['user']['login']?>
     </h1>
   </div>
 </div>
@@ -11,9 +11,9 @@
     <div class="row block_user">
        <div class="col-12 col-xl-7 mt-4">
          <div class="card">
-           <div class="card-header">
+           <!-- <div class="card-header">
              <?=$_SESSION['user']['login']?>
-           </div>
+           </div> -->
 
            <div class="card-body">
              <small class="mt-3">

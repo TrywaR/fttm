@@ -1033,13 +1033,28 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
     transform: translate(0rem, 0rem); } }
 .block_logo {
   display: flex;
+  font-size: 1.5rem;
+  line-height: 1;
   width: 100%; }
+  .block_logo._white ._value {
+    color: white; }
+    .block_logo._white ._value ._seporator {
+      color: #7661db; }
   .block_logo ._value {
-    font-size: 1.4rem;
-    line-height: 1.4rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.4em;
+    line-height: 1.4em;
     font-weight: 500;
     color: #7661db;
     text-decoration: none; }
+    .block_logo ._value ._seporator {
+      font-weight: 300;
+      text-shadow: none;
+      color: #7661db;
+      opacity: 0.7; }
+    .block_logo ._value ._nickname {
+      font-weight: 800; }
 
 .block_logining {
   display: flex;
@@ -1767,6 +1782,7 @@ main {
     display: flex;
     justify-content: flex-end;
     border-radius: 0.5rem;
+    padding: 0.5rem 0;
     overflow: hidden;
     background: #dae8fb; }
   .block_card ._card_background {
@@ -2015,7 +2031,7 @@ main {
           display: flex;
           flex-direction: column;
           padding-bottom: 2rem;
-          font-size: 8em;
+          font-size: 7em;
           line-height: 1;
           font-weight: 600;
           z-index: 1;

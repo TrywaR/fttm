@@ -33,7 +33,7 @@ class lang
       'Category' => 'Категория',
       'NoCategory' => 'Без категории',
       'Date' => 'Дата',
-      'Spend' => 'Тарата',
+      'Spend' => 'Трата',
       'Balance' => 'Баланс',
       'Replenish' => 'Получение',
       'NoProject' => 'Не проект',
@@ -217,7 +217,7 @@ class lang
       'Analytics' => 'Analytics',
       'MoneyPerHour' => 'Money per hour',
 
-      'Moneys' => 'Moneys',
+      'Moneys' => 'Money',
       'Money' => 'Money',
       'Payment' => 'Payment',
       'PaymentDay' => 'Payment day',
@@ -247,10 +247,10 @@ class lang
       'PricePlanned' => 'Price planned',
       'MoneysCategories' => 'Moneys categories',
 
-      'Times' => 'Times',
+      'Times' => 'Time',
       'Time' => 'Time',
-      'TimesPlanned' => 'Times planned',
-      'TimesReally' => 'Times really',
+      'TimesPlanned' => 'Time planned',
+      'TimesReally' => 'Time really',
       'Effeciency' => 'Effeciency',
 
       'User' => 'User',

@@ -1,6 +1,7 @@
 <?
 session_start();
 include_once 'core/core.php'; # Основные настройки
+$olang = new lang(); // Подтягиваем языки
 
 // Если запросы на обработку данных
 if ( $_REQUEST['app'] ) {
@@ -19,7 +20,10 @@ switch ($_SERVER['REQUEST_URI']) {
   case '/': # Главная страница
     include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
     include_once 'core/templates/pages/header.php'; # Шапка
-    include_once 'page/welcome/index.php';
+
+    if (file_exists('page/welcome/index_' . $olang->sUserLang . '.php')) include_once 'page/welcome/index_' . $olang->sUserLang . '.php';
+    else include_once 'page/welcome/index.php';
+
     include_once 'core/templates/pages/footer.php'; # Подвал
     break;
 
@@ -47,11 +51,14 @@ switch ($_SERVER['REQUEST_URI']) {
   default: # Запрашиваемая страница
     // Если пользователь авторизирован
     if ( isset($_SESSION['user']) ) {
-      $olang = new lang(); // Подтягиваем языки
       if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) {
         include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
         include_once 'core/templates/pages/header.php'; # Шапка
-        include_once 'page'.$_SERVER['REDIRECT_URL'].'index.php';
+
+        // Проверка наличия файла с языком
+        if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index_' . $olang->sUserLang . '.php')) include_once 'page'.$_SERVER['REDIRECT_URL'].'index_' . $olang->sUserLang . '.php';
+        else include_once 'page'.$_SERVER['REDIRECT_URL'].'index.php';
+
         include_once 'core/templates/pages/footer.php'; # Подвал
       }
       else {

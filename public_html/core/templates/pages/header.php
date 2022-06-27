@@ -4,21 +4,7 @@
   <!-- Nav -->
   <header>
     <div class="block_nav_header">
-      <div class="block_logo">
-        <?
-        if ( isset($_SESSION['user']) ) $sLogoText = 'FT <span class="_seporator">[</span>' . $_SESSION['user']['login']{0} . '<span class="_seporator">]</span> M';
-        else  $sLogoText = 'FT <span class="_seporator">[</span>Y<span class="_seporator">]</span> M';
-        ?>
-        <?php if ( $_SERVER['REQUEST_URI']!='/' ): ?>
-          <a class="_value" href="/">
-            <?=$sLogoText?>
-          </a>
-        <?php else: ?>
-          <span class="_value">
-            <?=$sLogoText?>
-          </span>
-        <?php endif; ?>
-      </div>
+      <?include 'core/templates/pages/logo.php'?>
 
       <?php if (isset($_SESSION['user'])): ?>
         <div class="block_nav_fuller" id="block_nav_fuller">
@@ -107,17 +93,7 @@
 
     <div class="block_nav_mobile">
       <div class="nav_btn _logo">
-        <div class="block_logo">
-          <?php if ( $_SERVER['REQUEST_URI']!='/' ): ?>
-            <a class="_value" href="/">
-              FTTM
-            </a>
-          <?php else: ?>
-            <span class="_value">
-              FTTM
-            </span>
-          <?php endif; ?>
-        </div>
+        <?include 'core/templates/pages/logo.php';?>
       </div>
 
       <div class="nav_btn _main" id="block_nav_mobile_main">
