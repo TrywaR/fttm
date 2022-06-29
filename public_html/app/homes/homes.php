@@ -1,6 +1,15 @@
 <?
-function get_day ( $arrCategoriesIds = [], $iDay = 0, $iMonth = 0, $iYear = 0 ) {
+function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
   $arrResult = [];
+
+  // Получаем категории
+  $oCategory = new category();
+  $oCategory->limit = 0;
+  $oCategory->sort = 'sort';
+  $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+  $arrCategories = $oCategory->get_categories();
+  $arrCategoriesIds = [];
+  foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
   $arrResult['day'] = $iDay;
   $arrResult['month'] = $iMonth;
@@ -38,7 +47,7 @@ function get_day ( $arrCategoriesIds = [], $iDay = 0, $iMonth = 0, $iYear = 0 ) 
 
     $dDateReally = new DateTime($arrTime['time_really']);
     $arrTimesSum[] = $arrDataItem = $dDateReally->format('H:i:s');
-    if ( isset($arrTimesCategoriesIds[$arrTime['category_id']]['sum']) ) $arrTimesCategoriesIds[$arrTime['category_id']]['sum'] = $arrDataItem;
+    if ( ! isset($arrTimesCategoriesIds[$arrTime['category_id']]['sum']) ) $arrTimesCategoriesIds[$arrTime['category_id']]['sum'] = $arrDataItem;
     else $arrTimesCategoriesIds[$arrTime['category_id']]['sum'] =  $oTime->get_sum( [$arrTimesCategoriesIds[$arrTime['category_id']]['sum'], $arrDataItem] );
   }
   $iTimesCategoriesSum = floor($oTime->get_sum( $arrTimesSum ));
@@ -50,8 +59,12 @@ function get_day ( $arrCategoriesIds = [], $iDay = 0, $iMonth = 0, $iYear = 0 ) 
     $arrResult['categories'][$arrCategory['id']]['color'] = $arrCategory['color'];
     $arrResult['categories'][$arrCategory['id']]['moneys'] = $arrMoneysCategoriesIds[$arrCategory['id']];
     $arrResult['categories'][$arrCategory['id']]['times'] = $arrTimesCategoriesIds[$arrCategory['id']];
-    $arrResult['categories'][$arrCategory['id']]['moneys_sum'] = $iMoneysCategoriesSum;
   }
+
+  if ( $iMoneysCategoriesSum ) $arrResult['moneys_sum'] = round($iMoneysCategoriesSum);
+  else $arrResult['moneys_sum'] = 0;
+
+  $arrResult['times_sum'] = $iTimesCategoriesSum;
 
   return $arrResult;
 }
@@ -93,20 +106,11 @@ switch ($_REQUEST['form']) {
   case 'get_day':
     $arrResults = [];
 
-    // Получаем категории
-    $oCategory = new category();
-    $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
-    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrCategories = $oCategory->get_categories();
-    $arrCategoriesIds = [];
-    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
-
     // Разбивка по дням
     $iDay = (int)$_REQUEST['day'] ? $_REQUEST['day'] : date('d');
     $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
     $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
-    $arrResults = get_day( $arrCategoriesIds, $iDay, $iMonth, $iYear );
+    $arrResults = get_day( $iDay, $iMonth, $iYear );
 
     // Выводим текущий день
     notification::send( $arrResults );
@@ -114,15 +118,6 @@ switch ($_REQUEST['form']) {
 
   case 'prev_day':
     $arrResults = [];
-
-    // Получаем категории
-    $oCategory = new category();
-    $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
-    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrCategories = $oCategory->get_categories();
-    $arrCategoriesIds = [];
-    foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
     // Разбивка по дням
     $iCurrentDay = (int)$_REQUEST['day'] ? $_REQUEST['day'] : date('d');
@@ -133,7 +128,7 @@ switch ($_REQUEST['form']) {
     $iMonth = date('m', strtotime('-1 day', strtotime($iCurrentDay . '-' . $iCurrentMonth . '-' . $iCurrentYear)));
     $iYear = date('Y', strtotime('-1 day', strtotime($iCurrentDay . '-' . $iCurrentMonth . '-' . $iCurrentYear)));
 
-    $arrResults = get_day( $arrCategoriesIds, $iDay, $iMonth, $iYear );
+    $arrResults = get_day( $iDay, $iMonth, $iYear );
 
     // Выводим текущий день
     notification::send( $arrResults );

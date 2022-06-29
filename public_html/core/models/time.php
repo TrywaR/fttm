@@ -13,7 +13,6 @@ class time extends model
   public static $project_id = '';
   public static $task_id = '';
   public static $user_id = '';
-  public static $time_planned = '';
   public static $time_really = '';
   public static $date = '';
   public $date_update = '';
@@ -31,43 +30,6 @@ class time extends model
         $i %= 60;
     }
     return sprintf('%02d:%02d', $h, $i);
-
-    // $sum = strtotime('00:00:00');
-    // $totaltime = 0;
-    //
-    // foreach( $arrTimes as $element ) {
-    //     // Converting the time into seconds
-    //     $timeinsec = strtotime($element) - $sum;
-    //
-    //     // Sum the time with previous value
-    //     $totaltime = $totaltime + $timeinsec;
-    // }
-    //
-    // // Totaltime is the summation of all
-    // // time in seconds
-    //
-    // // Hours is obtained by dividing
-    // // totaltime with 3600
-    // $h = intval($totaltime / 3600);
-    //
-    // $totaltime = $totaltime - ($h * 3600);
-    //
-    // // Minutes is obtained by dividing
-    // // remaining total time with 60
-    // $m = intval($totaltime / 60);
-    //
-    // // Remaining value is seconds
-    // $s = $totaltime - ($m * 60);
-    //
-    // // Обработка данных
-    // $h = sprintf("%02d", $h);
-    // $m = sprintf("%02d", $m);
-    // $s = sprintf("%02d", $s);
-    //
-    // // Printing the result
-    // return $h.':'.$m.':'.$s;
-    // echo $sMask;
-    // return date($sMask, strtotime($h.':'.$m.':'.$s));
   }
 
   function get_time( $arrTime = [] ){
@@ -164,7 +126,7 @@ class time extends model
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','section'=>2,'value'=>$this->date];
     $arrFields['date_update'] = ['title'=>$oLang->get('LastUpdate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_update];
 
-    $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'hidden','section'=>2,'value'=>$this->time_planned];
+    // $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'hidden','section'=>2,'value'=>$this->time_planned];
     $arrFields['time_really'] = ['title'=>$oLang->get('TimesReally'),'type'=>'timer','section'=>2,'value'=>$this->time_really];
     // $arrFields['status'] = ['title'=>'Статус','type'=>'time','value'=>$this->status];
 
@@ -190,7 +152,6 @@ class time extends model
       $this->project_id = $arrTime['project_id'];
       $this->task_id = $arrTime['task_id'];
       $this->user_id = $arrTime['user_id'];
-      $this->time_planned = $arrTime['time_planned'];
       $this->time_really = $arrTime['time_really'];
       $this->date = $arrTime['date'];
       $this->date_update = $arrTime['date_update'];

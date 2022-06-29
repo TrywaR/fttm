@@ -282,14 +282,42 @@ function content_loader_elem_html( oContentLoadElem, oTemplate ){
 $(function(){
   // Кнопка показа формы
   $(document).on('click', '.content_loader_show', function(){
+    var oData = {
+      'action': $(this).data().action,
+      'form': $(this).data().form,
+      'parents': $(this).data().parents,
+      'id': $(this).data().id,
+    }
+
+    // Подставляем данные в форму из ссылки
+    oData.data = {}
+    oElemSuccessClick = {}
+    if ( $(this).data().success_click ) oElemSuccessClick = $(document).find($(this).data().success_click)
+    if ( $(this).data().full ) oData.data = $(this).data()
+    // Подставляем данные из фильтра (url)
+    if ( $(this).data().filter ) {
+      var url = window.location
+      new URL(url).searchParams.forEach(function (val, key) {
+        if (oData.data[key] !== undefined) { // Проверяем параметр на undefined
+          /* Проверяем, имеется ли в объекте аналогичный urlParams[key]
+          *  Если его нет, то добавляем его в объект
+          */
+          if ( ! Array.isArray(params[key]) ) {
+              oData.data[key] = [params[key]]
+          }
+          oData.data[key].push(val)
+        }
+        else {
+            oData.data[key] = val
+        }
+      })
+    }
+
     $.when(
-      content_download(  {
-        'action': $(this).data().action,
-        'form': $(this).data().form,
-        'parents': $(this).data().parents,
-        'id': $(this).data().id,
-      }, 'json', false )
+      content_download( oData, 'json', false )
     ).then( function( oData ) {
+      if ( oElemSuccessClick.length ) oElemSuccessClick.click()
+
       if ( oData.event )
         switch ( oData.event ) {
           case 'add':
@@ -333,6 +361,8 @@ $(function(){
               break;
           }
         }
+
+        if ( oForm.find('[name="success_click"]').length ) $(document).find(oForm.find('[name="success_click"]').val()).click()
 
         if ( oData.success.location ) {
           setTimeout(function(){
