@@ -2,10 +2,20 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<?$sTitle = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;?>
-	<title>U<?=$sTitle?>LIFE</title>
+	<?
+	$sTitle = '';
+
+	$sTitleUser = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;
+	$sTitle = 'U' . $sTitleUser . 'LIFE';
+
+	$oNav = new nav();
+	if ( isset($oNav->arrNav[$_SERVER['REQUEST_URI']]) ) $sTitle .= ' > ' . $oNav->arrNav[$_SERVER['REQUEST_URI']]['name'];
+	?>
+
+	<title><?=$sTitle?></title>
+
 	<meta name="format-detection" content="telephone=no">
-	<meta name="description" content="You life scanner and saver, and money, times, tasks manager system!">
+	<meta name="description" content="You life scanner and saver. Time, money, tasks manager system!">
 	<!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -143,6 +153,11 @@
 			$('body').removeClass('_loading_')
 		})
 	</script>
+
+	<meta property="og:title" content="<?=$sTitle?>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<?=config::$site_url . $_SERVER['REQUEST_URI']?>" />
+	<meta property="og:image" content="<?=config::$site_url . '/template/imgs/logo.png'?>" />
 </head>
 
 <body class="animate__animated animate__fadeIn _loading_">

@@ -24,6 +24,24 @@ class nav
       //   'url' => '/',
       //   'icon' => '',
       // ),
+      '/authorizations/' => array(
+        'id' => 2,
+        'name' => $oLang->get('Authorizations'),
+        'url' => '/authorizations/',
+        'menu_hide' => true,
+      ),
+      '/registration/' => array(
+        'id' => 2,
+        'name' => $oLang->get('Registration'),
+        'url' => '/registration/',
+        'menu_hide' => true,
+      ),
+      '/password_recovery/' => array(
+        'id' => 2,
+        'name' => $oLang->get('PasswordRecovery'),
+        'url' => '/password_recovery/',
+        'menu_hide' => true,
+      ),
       '/dashboard/' => array(
         'id' => 2,
         'name' => $oLang->get('Dashboard'),

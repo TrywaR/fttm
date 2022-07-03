@@ -3,6 +3,14 @@
 Options -Indexes
 ErrorDocument 404 "/404.html"
 
+# Rewrite www.domain.com -> domain.com -- used with SEO Strict URLs plugin
+RewriteCond %{HTTP_HOST} .
+RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+RewriteCond %{SERVER_PORT} !^443
+RewriteRule (.*) https://u0life.com/$1 [R=301,L]
+
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteBase /
