@@ -22,6 +22,6 @@
 
   <p>
     <i class="fas fa-envelope"></i>
-    <a href="mailto:send@trywar.ru?subject=Feedback_fttm">send@trywar.ru</a>
+    <a href="mailto:info@u0life.com?subject=Feedback_u0life">info@u0life.com</a>
   </p>
 </div>
