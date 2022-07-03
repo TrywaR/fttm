@@ -20,7 +20,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_4">5.3.4 Betclock 4</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_5">5.3.5 Betclock 5</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_3_4">5.3.4 Betclock 4</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_3">5.3.3 Betclock 3</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_2">5.3.2 Betclock 2</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_1">5.3.1 Betclock</a>
@@ -66,6 +67,28 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_3_5">5.3.5 Betclock 5</h2>
+            <ol>
+              <li>
+                Улучшена анимация отрисовки чисел
+              </li>
+              <li>
+                Добавлены страницы для документации
+              </li>
+              <li>
+                Обнавлена структура меню
+              </li>
+              <li>
+                Плавное первое появления контента (Пока определяется тема)
+              </li>
+              <li>
+                Автоматическое определение темы устройства (Тёмная, светлая)
+              </li>
+              <li>Подписки теперь не завязаны за деньги, в дальнейшем можно будет делать подписки для времени, с автоматическим списыванием например раз в месяц (Спорт зал, поездка на работу и тд)</li>
+              <li>У подписок теперь есть поля для описания, чтобы вставлять например ссылки</li>
+              <li>Новая общая категория "Alcohol"</li>
+            </ol>
+
             <h2 id="list-item-5_3_4">5.3.4 Betclock 4</h2>
             <ol>
               <li>
@@ -75,7 +98,7 @@
                 Теперь данные в фильтре автоматически дублируются в формы добавления времени или денег
               </li>
             </ol>
-            
+
             <h2 id="list-item-5_3_3">5.3.3 Betclock 3</h2>
             <ol>
               <li>

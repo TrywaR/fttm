@@ -25,11 +25,11 @@ $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrProjects = $oProject->get();
 
 
-$oMoneysSubscriptions = new moneys_subscriptions();
-$oMoneysSubscriptions->sort = 'sort';
-$oMoneysSubscriptions->sortDir = 'ASC';
-$oMoneysSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
+$oSubscriptions = new subscription();
+$oSubscriptions->sort = 'sort';
+$oSubscriptions->sortDir = 'ASC';
+$oSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrSubscriptions = $oSubscriptions->get_subscriptions();
 
 $arrTypes = [
   array('id'=>1,'title'=>$oLang->get('Spend')),

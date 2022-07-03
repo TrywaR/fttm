@@ -45,10 +45,6 @@ function scroll_to(elem, fix_size, scroll_time, sScrollBlock){
 $(function(){
   // Обработка сессий
   session_init();
-  // themes
-	var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
-	if ( prefersDarkScheme.matches ) document.body.classList.add("dark-theme")
-	else document.body.classList.remove("dark-theme")
   // bootstrap
 	if ( $(document).find('#list-example').length )
 		var scrollSpys = new bootstrap.ScrollSpy(document.body, {
@@ -59,22 +55,39 @@ $(function(){
 	$(document).on('click', '[data-shower]', function(){
 		if ( $(this).data().shower_class ) $(document).find($(this).data().shower).toggleClass( $(this).data().shower_class )
 		$(document).find($(this).data().shower).toggleClass('_show_')
+		return false
 	})
 })
 
 // animation_number_to
 // animation_number_to("example",900,1500,3000)
 // animation_number_to("test",10,-5,15000)
-function animation_number_to( oElem, from, to, duration, pause ) {
-  if ( ! duration ) var duration = 2000
-  if ( ! pause ) var pause = 10
-  var start = new Date().getTime()
-  setTimeout(function() {
-      var now = (new Date().getTime()) - start
-      var progress = now / duration
-      var result = Math.floor((to - from) * progress + from)
-      oElem.html( progress < 1 ? result : to )
-      if (progress < 1) setTimeout(arguments.callee, 10)
-  }, pause )
+function animation_number_to( oElem, iFrom, iTo, iDuration, sTheme, sFormat ) {
+	if ( ! oElem.length ) return false
+	if ( ! iDuration ) var iDuration = 2000
+	if ( ! sTheme ) var sTheme = 'minimal'
+	if ( ! sFormat ) var sFormat = '( ddd),dd'
+	if ( ! iFrom ) var iFrom = 0
+	if ( ! iTo ) var iTo = 0
+
+	if ( parseFloat(iFrom.toString().indexOf(':')) > 0 || parseFloat(iTo.toString().indexOf(':')) > 0 ) {
+		sFormat = '(dd):dd'
+		iTo = parseFloat(iTo.toString().replace(':', '.'))
+	}
+
+	iFrom = parseFloat(iFrom.toString().replace(/\s/g, ''))
+	iTo = parseFloat(iTo.toString().replace(/\s/g, ''))
+
+	var oOdometer = new Odometer({
+	  el: oElem[0],
+	  value: iFrom,
+	  theme: sTheme,
+	  format: sFormat,
+	  duration: iDuration
+	})
+
+	// oOdometer.render()
+
+	oOdometer.update( iTo )
 }
 // animation_number_to x

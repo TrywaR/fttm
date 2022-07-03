@@ -24,7 +24,6 @@ switch ($_REQUEST['form']) {
       $arrResults['times']['categories'][$key]['color'] = $arrCategory['color'];
     }
 
-
     // Сумма
     $arrMonthTimes = [];
     $oTime = new time();
@@ -42,16 +41,16 @@ switch ($_REQUEST['form']) {
     $arrResults['sleep'] = $arrResults['times']['categories'][5]['value'];
 
     // Подписки
-    $oMoneysSubscriptions = new moneys_subscriptions();
-    $oMoneysSubscriptions->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oMoneysSubscriptions->sDateQuery = $dMonth;
-    // $oMoneysSubscriptions->show_query = true;
-    $arrResults['subscriptions'] = $oMoneysSubscriptions->get_subscriptions();
+    $oSubscription = new subscription();
+    $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oSubscription->sDateQuery = $dMonth;
+    // $oSubscription->show_query = true;
+    $arrResults['subscriptions'] = $oSubscription->get_subscriptions();
     $arrResults['subscriptions_sum'] = 0;
-    foreach ( $arrResults['subscriptions'] as $arrMoneysSubscription ) {
-      if ( ! $arrMoneysSubscription['paid'] ) {
-        if ( $arrMoneysSubscription['paid_sum'] ) $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrMoneysSubscription['paid_need'];
-        else $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrMoneysSubscription['price'];
+    foreach ( $arrResults['subscriptions'] as $arrSubscription ) {
+      if ( ! $arrSubscription['paid'] ) {
+        if ( $arrSubscription['paid_sum'] ) $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['paid_need'];
+        else $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
       }
     }
     $arrResults['subscriptions_sum'] = number_format($arrResults['subscriptions_sum'], 2, '.', ' ');

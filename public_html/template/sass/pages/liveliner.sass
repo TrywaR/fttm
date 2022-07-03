@@ -10,6 +10,11 @@
     box-sizing: border-box
     border-radius: $border_radius
     background: $color_main_dark
+    filter: blur(0)
+    @include transition_default
+
+    &._loading_
+      filter: blur(.1rem)
 
     ._line_moneys
       position: absolute
@@ -49,23 +54,29 @@
         box-sizing: border-box
         opacity: .5
 
-    ._day
+    ._date
       display: flex
-      align-items: center
-      justify-content: space-between
-      font-size: 1.4em
-      line-height: 1.4em
-      font-weight: 600
       padding-bottom: .5rem
 
-      ._number
-      ._button
+      ._day
+        display: flex
+        align-items: center
+        justify-content: space-between
+        text-align: center
+        font-size: 2em
+        line-height: 1.4em
+        font-weight: 400
+        padding: 0
+
+        ._number
+        ._button
 
     ._vals
       position: relative
       display: flex
       flex-direction: column
       height: 35rem
+      padding-left: .25rem
       z-index: 1
 
       ._category
@@ -81,8 +92,11 @@
         z-index: 1
 
         ._buttons
-          display: flex
-          align-items: center
+          position: absolute
+          top: 0
+          right: 0
+          bottom: 0
+          z-index: 3
 
           ._button
 
@@ -138,4 +152,29 @@
             height: 100%
             border-radius: $border_radius 0 0 $border_radius
             z-index: -1
+
+    ._buttons
+      display: flex
+      align-items: center
+      justify-content: center
+      padding: 0 .5rem
+      box-sizing: border-box
+
+      ._button
+        display: flex
+        text-decoration: none
+        color: $color_text
+        opacity: .3
+        padding: .5rem
+        box-sizing: border-box
+        font-size: 1.3em
+        @include transition_default
+
+        &:hover
+          opacity: 1
+          color: $color_main
+
+        svg
+          margin: 0
+          padding: 0
 // .block_liveliner x

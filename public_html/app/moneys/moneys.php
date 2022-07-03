@@ -62,7 +62,19 @@ switch ($_REQUEST['form']) {
 
     // Поля для добавления
     $oForm->arrFields = $oMoney->fields();
+
+    // Сразу заполняем некоторые данне если переданны
+    if ( $_REQUEST['data'] ) {
+      foreach ($_REQUEST['data'] as $key => $value) {
+        if ( isset($oForm->arrFields[$key]) ) {
+          $oForm->arrFields[$key]['value'] = $value;
+          // $oForm->arrFields[$key]['type'] = 'hidden';
+        }
+      }
+    }
+
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
+    if ( $_REQUEST['data'] && $_REQUEST['data']['success_click'] ) $oForm->arrFields['success_click'] = ['value'=>$_REQUEST['data']['success_click'],'type'=>'hidden'];
     $oForm->arrFields['action'] = ['value'=>'moneys','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];

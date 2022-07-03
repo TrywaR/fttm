@@ -2,16 +2,17 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title>FTTM</title>
+	<?$sTitle = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;?>
+	<title>U<?=$sTitle?>LIFE</title>
 	<meta name="format-detection" content="telephone=no">
-	<meta name="description" content="Free Time TrywaR Manager">
+	<meta name="description" content="You life scanner and saver, and money, times, tasks manager system!">
 	<!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- color theme -->
-	<meta name="theme-color" content="#000000">
-	<meta name="msapplication-navbutton-color" content="#000000">
-	<meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+	<meta name="theme-color" content="#7661db">
+	<meta name="msapplication-navbutton-color" content="#7661db">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#7661db">
 	<!-- color theme x-->
 
 	<!-- jQeury -->
@@ -50,51 +51,98 @@
 	<!-- chart.js x -->
 
 	<!-- slick_slide -->
-	<!-- <link rel="stylesheet" type="text/css" href="lib/slick-1.8.0/slick/slick.css"/> -->
-	<!-- <link rel="stylesheet" type="text/css" href="lib/slick-1.8.0/slick/slick-theme.css"/> -->
-	<!-- <script type="text/javascript" src="lib/slick-1.8.0/slick/slick.min.js"></script> -->
+	<!-- <link rel="stylesheet" type="text/css" href="/lib/slick-1.8.0/slick/slick.css"/> -->
+	<!-- <link rel="stylesheet" type="text/css" href="/lib/slick-1.8.0/slick/slick-theme.css"/> -->
+	<!-- <script type="text/javascript" src="/lib/slick-1.8.0/slick/slick.min.js"></script> -->
 	<!-- slick_slide x-->
 
+	<!-- odometer -->
+	<link rel="stylesheet" type="text/css" href="/lib/odometer-master/themes/odometer-theme-minimal.css"/>
+	<script type="text/javascript" src="/lib/odometer-master/odometer.min.js"></script>
+	<!-- odometer x-->
+
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.4"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.5"> -->
 	<?
+	$bThemeAuto = false;
 	if ( isset($_SESSION['user']) ) {
-		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 1;
+		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 0;
 		switch ( $iTheme ) {
 			case 0:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.4"><?
+				# auto
+				$bThemeAuto = true;
+				/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?*/
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.4"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.4"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.5"><?
 				break;
 			case 3:
 				break;
 		}
 	}
 	else {
-		?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.4"><?
+		# auto
+		$bThemeAuto = true;
+		/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?*/
+	}
+
+	if ( $bThemeAuto ) {
+		?>
+		<script>
+			var
+				prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)"),
+				sThemePath = prefersDarkScheme.matches ? '/template/themes/Dark/theme.min.css?v=5.3.5' : '/template/themes/Light/theme.min.css?v=5.3.5'
+
+			document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="` + sThemePath + `">`)
+		</script>
+		<?
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.3.4"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.3.4"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.3.4"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.3.4"></script>
-	<script src="/template/js/content_actions/content_actions.js?v=5.3.4"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.4"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.3.4"></script>
-	<script src="/template/js/content/content.js?v=5.3.4"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.3.5"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.3.5"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.3.5"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.3.5"></script>
+	<script src="/template/js/content_actions/content_actions.js?v=5.3.5"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.5"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.3.5"></script>
+	<script src="/template/js/content/content.js?v=5.3.5"></script>
 
-	<script src="/template/js/main/nav.js?v=5.3.4"></script>
-	<script src="/template/js/main/form.js?v=5.3.4"></script>
-	<script src="/template/js/main/modal.js?v=5.3.4"></script>
+	<script src="/template/js/main/nav.js?v=5.3.5"></script>
+	<script src="/template/js/main/form.js?v=5.3.5"></script>
+	<script src="/template/js/main/modal.js?v=5.3.5"></script>
 
-	<script src="/template/js/session/session.js?v=5.3.4"></script>
-	<script src="/template/js/index.js?v=5.3.4"></script>
+	<script src="/template/js/session/session.js?v=5.3.5"></script>
+	<script src="/template/js/index.js?v=5.3.5"></script>
 	<!-- main x-->
+
+	<style media="screen">
+		body {}
+		body:after {}
+
+		body header,
+		body main,
+		body footer {
+			opacity: 1;
+			transition: all .4s ease;
+		}
+
+		body._loading_ header,
+		body._loading_ main,
+		body._loading_ footer {
+			opacity: 0;
+		}
+
+		body._loading_:after {}
+	</style>
+	<script>
+		window.addEventListener("load", function(event) {
+			$('body').removeClass('_loading_')
+		})
+	</script>
 </head>
 
-<body class="animate__animated animate__fadeIn">
+<body class="animate__animated animate__fadeIn _loading_">

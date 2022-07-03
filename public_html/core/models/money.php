@@ -60,8 +60,8 @@ class money extends model
     }
 
     if ( (int)$arrMoney['subscription'] ) {
-      $oMoneysSubscription = new moneys_subscriptions( $arrMoney['subscription'] );
-      $arrMoney['subscription_val'] = (array)$oMoneysSubscription;
+      $oSubscription = new subscription( $arrMoney['subscription'] );
+      $arrMoney['subscription_val'] = (array)$oSubscription;
       $arrMoney['subscription_show'] = 'true';
     }
 
@@ -106,14 +106,14 @@ class money extends model
     $arrFields['card'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
     $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
-    $oMoneysSubscriptions = new moneys_subscriptions();
-    $oMoneysSubscriptions->sort = 'sort';
-    $oMoneysSubscriptions->sortDir = 'ASC';
-    $oMoneysSubscriptions->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $arrMoneysSubscriptions = $oMoneysSubscriptions->get_subscriptions();
+    $oSubscription = new subscription();
+    $oSubscription->sort = 'sort';
+    $oSubscription->sortDir = 'ASC';
+    $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrSubscriptions = $oSubscription->get_subscriptions();
     $arrSubscriptionsFilter = [];
     $arrSubscriptionsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrMoneysSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
+    foreach ($arrSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
     $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
     $oCategory = new category();

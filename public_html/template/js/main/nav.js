@@ -5,15 +5,18 @@ $(function(){
       if ( oParam.block_nav_fuller ) {
         $(document).find('#block_nav_fuller').addClass('_full_')
         $(document).find('#block_nav').addClass('_full_')
+        $(document).find('header').addClass('_full_')
       }
       else {
         $(document).find('#block_nav_fuller').removeClass('_full_')
         $(document).find('#block_nav').removeClass('_full_')
+        $(document).find('header').removeClass('_full_')
       }
     }
     else {
       $(document).find('#block_nav_fuller').addClass('_full_')
       $(document).find('#block_nav').addClass('_full_')
+      $(document).find('header').addClass('_full_')
     }
 
     // load menu
@@ -46,7 +49,7 @@ $(function(){
           // Шаблон
           var oElemHtml = content_loader_elem_html( oElem, oTemplate )
           // Добавление
-          $(document).find('#block_nav ._main').append( oElemHtml )
+          if ( ! oElem.menu_hide ) $(document).find('#block_nav ._main').append( oElemHtml )
           // Вложенность
           if ( oElem.subs && oElem.active ) {
             $(document).find('#block_nav_mobile_subs').addClass('_showed_')
@@ -63,7 +66,7 @@ $(function(){
               // Шаблон
               var oElemSubHtml = content_loader_elem_html( oElemSub, oTemplate )
               // Добавление
-              $(document).find('#block_nav ._subs').append( oElemSubHtml )
+              if ( ! oElem.menu_hide ) $(document).find('#block_nav ._subs').append( oElemSubHtml )
             })
           }
         })
@@ -84,11 +87,13 @@ $(function(){
   // Раскрытие меню
   $(document).find('#block_nav_fuller ._btn').on('click', function(){
     if ( $(document).find('#block_nav').hasClass('_full_') ) {
+      $(document).find('header').removeClass('_full_')
       $(document).find('#block_nav_fuller').removeClass('_full_')
       $(document).find('#block_nav').removeClass('_full_')
       oParam.block_nav_fuller = false
     }
     else {
+      $(document).find('header').addClass('_full_')
       $(document).find('#block_nav_fuller').addClass('_full_')
       $(document).find('#block_nav').addClass('_full_')
       oParam.block_nav_fuller = true

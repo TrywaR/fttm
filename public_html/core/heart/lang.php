@@ -65,6 +65,9 @@ class lang
       'CardFreeDaysLimit' => 'Количество безпроцентных дней',
       'CardDateCommissions' => 'Дата платежа коммиссий',
       'CardDateBillPercent' => 'Дата зачисления процентов',
+      'CardMinPayment' => 'Минимальный платёж',
+      'CardMinPaymentPercent' => 'Процент минимального платежа',
+      'CardMinPaymentDate' => 'Дата минимального платежа',
       'Card' => 'Карта',
       'ToCard' => 'На карту',
       'FromCard' => 'С карты',
@@ -123,6 +126,7 @@ class lang
       'ChangePassword' => 'Поменять пароль',
       'Delete' => 'Удалить',
       'Transfer' => 'Перевод',
+      'Dashboard' => 'Главная',
 
       'Day' => 'День',
       'ToDay' => 'Сегодня',
@@ -178,6 +182,7 @@ class lang
       'Home' => 'Главная',
       'Projects' => 'Проекты',
       'Project' => 'Проект',
+      'Alcohol' => 'Алкоголь',
 
       'Protect' => 'Защита',
       'ProtectType' => 'Тип защиты',
@@ -234,6 +239,9 @@ class lang
       'CardFreeDaysLimit' => 'Card free days limit',
       'CardDateCommissions' => 'Card date commissions',
       'CardDateBillPercent' => 'Card date bill enrollment',
+      'CardMinPayment' => 'Card min payment',
+      'CardMinPaymentPercent' => 'Card min payment percent',
+      'CardMinPaymentDate' => 'Card min payment date',
       'Card' => 'Card',
       'ToCard' => 'To card',
       'FromCard' => 'From card',
@@ -292,6 +300,7 @@ class lang
       'ChangePassword' => 'Change password',
       'Delete' => 'Delete',
       'Transfer' => 'Transfer',
+      'Dashboard' => 'Dashboard',
 
       'Day' => 'Day',
       'ToDay' => 'To day',
@@ -347,6 +356,7 @@ class lang
       'Home' => 'Home',
       'Projects' => 'Projects',
       'Project' => 'Project',
+      'Alcohol' => 'Alcohol',
 
       'Protect' => 'Protect',
       'ProtectType' => 'Protect type',

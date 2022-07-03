@@ -17,6 +17,26 @@ switch ($_REQUEST['form']) {
     notification::send( $sResultHtml );
     break;
 
+  case 'active': # Активные тикеты
+    $arrResults = [];
+    $oTask = $_REQUEST['id'] ? new task( $_REQUEST['id'] ) : new task();
+
+    if ( $_REQUEST['from'] ) $oTask->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oTask->limit = $_REQUEST['limit'];
+
+    $oTask->sortMulti = ' `sort` DESC, `date_update` DESC ';
+    $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oTask->query .= ' AND `status` = 2';
+
+    $oFilter = new filter();
+    $oTask->query .= $oFilter->get();
+
+    $arrTasks = $oTask->get_tasks();
+
+    $arrResults['tasks'] = $arrTasks;
+    notification::send($arrResults);
+    break;
+
   case 'show': # Вывод элементов
     $oTask = $_REQUEST['id'] ? new task( $_REQUEST['id'] ) : new task();
 

@@ -111,10 +111,10 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_money ) $(document).find('#res_weeks_money').html( oData.success.chart_money )
 
                 if ( oData.success.money_sum ) animation_number_to($("#res_weeks_money_res"),0,oData.success.money_sum)
-                if ( oData.success.time_sum ) $("#res_weeks_time_res").html( oData.success.time_sum )
+                if ( oData.success.time_sum ) animation_number_to($("#res_weeks_time_res"),0,oData.success.time_sum)
 
                 if ( oData.success.moneyforhour ) {
-                  $(document).find('#moneyforhour_week ._result ._value').html( oData.success.moneyforhour )
+                  animation_number_to($(document).find('#moneyforhour_week ._result ._value'),0,oData.success.moneyforhour)
                   $(document).find('#moneyforhour_week ._result').addClass('_active_')
                 }
                 else {
@@ -227,10 +227,10 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_money ) $(document).find('#res_month_money').html( oData.success.chart_money )
 
                 if ( oData.success.money_sum ) animation_number_to($("#res_month_money_res"),0,oData.success.money_sum)
-                if ( oData.success.time_sum ) $("#res_month_time_res").html( oData.success.time_sum )
+                if ( oData.success.time_sum ) animation_number_to($("#res_month_time_res"),0,oData.success.time_sum)
 
                 if ( oData.success.moneyforhour ) {
-                  $(document).find('#moneyforhour_month ._result ._value').html( oData.success.moneyforhour )
+                  animation_number_to($(document).find('#moneyforhour_month ._result ._value'),0,oData.success.moneyforhour)
                   $(document).find('#moneyforhour_month ._result').addClass('_active_')
                 }
                 else {
@@ -332,10 +332,10 @@ $arrProject = $oProject->get();
                 if ( oData.success.chart_money ) $(document).find('#res_year_money').html( oData.success.chart_money )
 
                 if ( oData.success.money_sum ) animation_number_to($("#res_year_money_res"),0,oData.success.money_sum)
-                if ( oData.success.time_sum ) $("#res_year_time_res").html( oData.success.time_sum )
+                if ( oData.success.time_sum ) animation_number_to($("#res_year_time_res"),0,oData.success.time_sum)
 
                 if ( oData.success.moneyforhour ) {
-                  $(document).find('#moneyforhour_year ._result ._value').html( oData.success.moneyforhour )
+                  animation_number_to($(document).find('#moneyforhour_year ._result ._value'),0,oData.success.moneyforhour)
                   $(document).find('#moneyforhour_year ._result').addClass('_active_')
                 }
                 else {

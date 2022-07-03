@@ -7,5 +7,23 @@
 </div>
 
 <div class="main_content">
-  How this use
+  <h2>How this use</h2>
+
+  <ul>
+    <li>
+      <a href="/info/users">
+        <?=$oLang->get('User')?>
+      </a>
+    </li>
+    <li>
+      <a href="/info/categories">
+        <?=$oLang->get('Categories')?>
+      </a>
+    </li>
+    <li>
+      <a href="/info/subscriptions">
+        <?=$oLang->get('Subscriptions')?>
+      </a>
+    </li>
+  </ul>
 </div>

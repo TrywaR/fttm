@@ -1,5 +1,5 @@
-// .money_subscription
-.money_subscription
+// .subscription
+.subscription
   &._paid_show_true
     ._paid
       display: flex
@@ -64,4 +64,58 @@
 
       &._card
         opacity: .4
-// .money_subscription x
+
+.subscription_min
+  position: relative
+  z-index: 1
+  color: $color_text
+
+  ._edit
+    position: absolute
+    top: 1rem
+    right: 1rem
+    color: $color_main_dark_ultra
+
+  ._title
+    margin-bottom: .5rem
+
+  ._sub
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    ._buttons
+      display: flex
+
+      ._button
+        &:not(:last-child)
+          margin-right: .5rem
+
+    ._value
+      font-size: 1.2em
+      font-weight: 400
+      text-align: right
+
+      &._check
+
+  ._background
+    position: absolute
+    top: .5rem
+    left: .5rem
+    right: .5rem
+    bottom: .5rem
+    z-index: -1
+    border-radius: $border_radius
+    background: linear-gradient(135deg, $color_main_dark, $color_main)
+    overflow: hidden
+
+    ._color
+      position: absolute
+      bottom: -25%
+      right: -25%
+      width: 5rem
+      height: 5rem
+      border-radius: 50%
+      opacity: .6
+      z-index: -2
+// .subscription x

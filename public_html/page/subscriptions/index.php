@@ -3,11 +3,11 @@ $oCard = new card();
 $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 $arrCards = $oCard->get();
 
-$oMoneyCategory = new category();
-$oMoneyCategory->sort = 'sort';
-$oMoneyCategory->sortDir = 'ASC';
-$oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-$arrMoneysCategories = $oMoneyCategory->get_categories();
+$oCategory = new category();
+$oCategory->sort = 'sort';
+$oCategory->sortDir = 'ASC';
+$oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+$arrCategories = $oCategory->get_categories();
 ?>
 
 <div class="main_jumbotron">
@@ -19,16 +19,16 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="moneys_subscriptions" data-content_manager_block="#moneys_subscriptions" data-content_manager_item=".money_subscription" data-content_manager_button=".content_manager_switch">
+  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="subscriptions" data-content_manager_block="#subscriptions" data-content_manager_item=".money_subscription" data-content_manager_button=".content_manager_switch">
     <button type="button" name="button" class="btn btn-danger del">
       <i class="fas fa-folder-minus"></i>
     </button>
   </div>
 
   <ol
-    id="moneys_subscriptions"
-    class="block_moneys_subscriptions block_elems block_content_loader list-group list-group-numbered"
-    data-content_loader_table="moneys_subscriptions"
+    id="subscriptions"
+    class="block_subscriptions block_elems block_content_loader list-group list-group-numbered"
+    data-content_loader_table="subscriptions"
     data-content_loader_form="show"
     data-content_loader_limit="15"
     data-content_loader_scroll_nav="0"
@@ -40,21 +40,21 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
       data-content_loader_parents="<?=$_REQUEST['filter_value']?>"
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
-    data-content_loader_scroll_block="#moneys_subscriptions"
+    data-content_loader_scroll_block="#subscriptions"
     data-content_loader_show_class="animate__bounceInRight _show_"
     >
   </ol>
   <script>
     $(function(){
-      $(document).find('#moneys_subscriptions').content_loader()
+      $(document).find('#subscriptions').content_loader()
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'moneys_subscriptions'} )
+      $(document).find('#footer_actions').content_actions( {'action':'subscriptions'} )
     })
   </script>
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem d-flex money_subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item _elem d-flex subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100 row">
         <span class="col-12 col-md-6 mb-2">
           <span class="d-flex flex-column">
@@ -101,11 +101,11 @@ $arrMoneysCategories = $oMoneyCategory->get_categories();
               </span>
             </a>
 
-            <a data-action="moneys_subscriptions" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money_subscription" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
+            <a data-action="subscriptions" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money_subscription" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
               <i class="fas fa-pen-square"></i>
             </a>
 
-            <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="moneys_subscriptions" data-form="del" data-elem=".list-group-item">
+            <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="subscriptions" data-form="del" data-elem=".list-group-item">
               <i class="fas fa-minus-square"></i>
             </a>
           </span>

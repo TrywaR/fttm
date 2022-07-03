@@ -22,6 +22,9 @@ class card extends model
   public static $date_service = '';
   public static $date_commission = '';
   public static $free_days_limit = '';
+  public static $min_payment = ''; # Минимальный платёж
+  public static $min_payment_percent = ''; # Процент минимального платежа
+  public static $min_payment_date = ''; # Дата минимального платежа
 
   // Вывод карты
   function get_card( $arrCard = [] ){
@@ -166,6 +169,10 @@ class card extends model
     $arrFields['date_commission'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardDateCommissions'),'type'=>'date','value'=>$this->date_commission];
     $arrFields['date_bill_percent'] = ['class'=>'switch_values switch_type-2','title'=>$oLang->get('CardDateBillPercent'),'type'=>'date','value'=>$this->date_bill_percent];
 
+    $arrFields['min_payment'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPayment'),'type'=>'number','value'=>$this->min_payment];
+    $arrFields['min_payment_percent'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
+    $arrFields['min_payment_date'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
+
     // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
 
     return $arrFields;
@@ -197,6 +204,9 @@ class card extends model
       $this->date_service = $arrCard['date_service'];
       $this->date_comismsion = $arrCard['date_commission'];
       $this->free_days_limit = $arrCard['free_days_limit'];
+      $this->min_payment = $arrCard['min_payment'];
+      $this->min_payment_percent = $arrCard['min_payment_percent'];
+      $this->min_payment_date = $arrCard['min_payment_date'];
     }
 
     $this->arrTypes = [

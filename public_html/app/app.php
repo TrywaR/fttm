@@ -8,8 +8,8 @@ switch ($_REQUEST['action']) {
     include_once 'clients/clients.php';
     break;
 
-  case 'homes': # Главная страница
-    include_once 'homes/homes.php';
+  case 'dashboards': # Главная страница
+    include_once 'dashboards/dashboards.php';
     break;
 
   case 'navs': # Структура сайта
@@ -66,8 +66,8 @@ switch ($_REQUEST['action']) {
     include_once 'cards/cards.php';
     break;
 
-  case 'moneys_subscriptions': # Подписки
-    include_once 'moneys_subscriptions/moneys_subscriptions.php';
+  case 'subscriptions': # Подписки
+    include_once 'subscriptions/subscriptions.php';
     break;
 
   case 'charts': # Графики

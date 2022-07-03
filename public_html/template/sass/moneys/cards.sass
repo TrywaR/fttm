@@ -63,6 +63,11 @@
     overflow: hidden
     background: $color_main_dark_ultra
 
+    .btn-group
+      .btn
+        &:last-child
+          margin-right: .5rem
+
   ._card_background
     position: absolute
     top: 0
@@ -106,4 +111,61 @@
 
   ._del
     display: none
+
+.block_card_min
+  position: relative
+  display: flex
+  flex-direction: column
+  z-index: 1
+  color: $color_text
+
+  ._title
+    font-size: 1.2em
+    font-weight: 400
+    margin-bottom: .5rem
+
+    small
+
+  ._sub
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-end
+
+    ._buttons
+      display: flex
+      ._button
+        &:not(:last-child)
+          margin-right: .5rem
+
+    ._update
+      display: flex
+      opacity: .5
+      font-size: .8em
+      padding: .2rem 0
+
+    ._balance
+      font-size: 1.1em
+      font-weight: 600
+
+  ._background
+    position: absolute
+    top: .5rem
+    left: .5rem
+    right: .5rem
+    bottom: .5rem
+    z-index: -1
+    border-radius: $border_radius
+    background: linear-gradient(135deg, $color_main_dark, $color_main)
+    overflow: hidden
+
+    ._color
+      position: absolute
+      bottom: -25%
+      right: -25%
+      width: 5rem
+      height: 5rem
+      border-radius: 50%
+      opacity: .6
+      z-index: -2
 // .card_item x

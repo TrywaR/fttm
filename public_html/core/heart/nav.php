@@ -24,18 +24,11 @@ class nav
       //   'url' => '/',
       //   'icon' => '',
       // ),
-      '/home/' => array(
+      '/dashboard/' => array(
         'id' => 2,
-        'name' => $oLang->get('Home'),
-        'url' => '/home/',
-        'icon' => '<i class="fa-solid fa-house"></i>',
-        'subs' => [
-          '/home/analytics/' => array(
-            'name' => $oLang->get('Analytics'),
-            'url' => '/home/analytics/',
-            'icon' => '<i class="fas fa-chart-line"></i>',
-          ),
-        ]
+        'name' => $oLang->get('Dashboard'),
+        'url' => '/dashboard/',
+        'icon' => '<i class="fa-solid fa-grip"></i>',
       ),
       '/moneys/' => array(
         'id' => 3,
@@ -43,20 +36,10 @@ class nav
         'url' => '/moneys/',
         'icon' => '<i class="fa-solid fa-wallet"></i>',
         'subs' => [
-          '/categories/' => array(
-            'name' => $oLang->get('Categories'),
-            'url' => '/categories/',
-            'icon' => '<i class="fa-solid fa-list"></i>',
-          ),
           '/moneys/data/cards/' => array(
             'name' => $oLang->get('Cards'),
             'url' => '/moneys/data/cards/',
             'icon' => '<i class="fa-solid fa-credit-card"></i>',
-          ),
-          '/moneys/data/subscriptions/' => array(
-            'name' => $oLang->get('Subscriptions'),
-            'url' => '/moneys/data/subscriptions/',
-            'icon' => '<i class="fa-solid fa-money-check-dollar"></i>',
           ),
           '/moneys/analytics/costs/' => array(
             'name' => $oLang->get('Costs'),
@@ -76,11 +59,6 @@ class nav
         'url' => '/times/',
         'icon' => '<i class="fa-solid fa-clock"></i>',
         'subs' => [
-          '/categories/' => array(
-            'name' => $oLang->get('Categories'),
-            'url' => '/categories/',
-            'icon' => '<i class="fa-solid fa-list"></i>',
-          ),
           '/times/analytics/costs/' => array(
             'name' => $oLang->get('Costs'),
             'url' => '/times/analytics/costs/',
@@ -93,18 +71,6 @@ class nav
         'name' => $oLang->get('Tasks'),
         'url' => '/tasks/',
         'icon' => '<i class="fa-solid fa-person-digging"></i>',
-        'subs' => [
-          '/projects/data/clients/' => array(
-            'name' => $oLang->get('Clients'),
-            'url' => '/projects/data/clients/',
-            'icon' => '<i class="fa-solid fa-folder"></i>',
-          ),
-          '/projects/' => array(
-            'name' => $oLang->get('Projects'),
-            'url' => '/projects/',
-            'icon' => '<i class="fa-solid fa-folder-tree"></i>',
-          ),
-        ],
       ),
       '/categories/' => array(
         'id' => 6,
@@ -112,49 +78,58 @@ class nav
         'url' => '/categories/',
         'icon' => '<i class="fa-solid fa-list"></i>',
       ),
+      '/subscriptions/' => array(
+        'name' => $oLang->get('Subscriptions'),
+        'url' => '/subscriptions/',
+        'icon' => '<i class="fa-solid fa-calendar-check"></i>',
+      ),
+      '/clients/' => array(
+        'name' => $oLang->get('Clients'),
+        'url' => '/clients/',
+        'icon' => '<i class="fa-solid fa-folder"></i>',
+      ),
       '/projects/' => array(
         'id' => 6,
         'name' => $oLang->get('Projects'),
         'url' => '/projects/',
         'icon' => '<i class="fa-solid fa-folder-tree"></i>',
-        'subs' => [
-          '/projects/data/clients/' => array(
-            'name' => $oLang->get('Clients'),
-            'url' => '/projects/data/clients/',
-            'icon' => '<i class="fa-solid fa-folder"></i>',
-          ),
-        ],
       ),
       '/info/' => array(
         'id' => 7,
         'name' => $oLang->get('Info'),
         'url' => '/info/',
         'icon' => '<i class="fa-solid fa-circle-info"></i>',
+        'menu_hide' => false,
         'subs' => [
           '/info/versions/' => array(
             'name' => $oLang->get('Versions'),
             'url' => '/info/versions/',
             'icon' => '<i class="fas fa-code-branch"></i>',
+            'menu_hide' => false,
           ),
           '/info/contacts/' => array(
             'name' => $oLang->get('Contacts'),
             'url' => '/info/contacts/',
             'icon' => '<i class="fas fa-info"></i>',
+            'menu_hide' => false,
           ),
           '/info/analytics/' => array(
             'name' => $oLang->get('Analytics'),
             'url' => '/info/analytics/',
             'icon' => '<i class="fas fa-chart-line"></i>',
+            'menu_hide' => false,
           ),
           '/info/buy/' => array(
             'name' => $oLang->get('Donate'),
             'url' => '/info/buy/',
             'icon' => '<i class="fas fa-donate"></i>',
+            'menu_hide' => false,
           ),
           '/info/docs/' => array(
             'name' => $oLang->get('Docs'),
             'url' => '/info/docs/',
             'icon' => '<i class="fas fa-book-dead"></i>',
+            'menu_hide' => true,
           ),
         ],
       ),

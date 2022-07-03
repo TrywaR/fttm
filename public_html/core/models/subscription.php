@@ -1,14 +1,15 @@
 <?
 /**
- * moneys_subscriptions
+ * subscription
  */
-class moneys_subscriptions extends model
+class subscription extends model
 {
   public static $table = ''; # Таблица в bd
   public static $id = '';
   public static $title = '';
   public static $sort = '';
   public static $price = '';
+  public static $time = '';
   public static $sum = '';
   public static $type = '';
   public static $arrTypes = '';
@@ -17,6 +18,7 @@ class moneys_subscriptions extends model
   public static $card = '';
   public static $active = '';
   public static $user_id = '';
+  public static $description = '';
   public static $sDateQuery = '';
 
   public function get_subscription( $arrSubscription = [] ){
@@ -28,6 +30,11 @@ class moneys_subscriptions extends model
       $oCard = new card( $arrSubscription['card'] );
       $arrSubscription['card_val'] = (array)$oCard;
       $arrSubscription['card_show'] = 'true';
+    }
+
+    if ( (int)$arrSubscription['category'] ) {
+      $oCategory = new card( $arrSubscription['category'] );
+      $arrSubscription['category_val'] = (array)$oCategory;
     }
 
     $arrSubscription['price'] = ceil(substr($arrSubscription['price'], 0, -2));
@@ -94,14 +101,15 @@ class moneys_subscriptions extends model
     $arrMoneys = $oMoney->get_moneys();
 
     $iMonthSum = 0;
-
-    if ( $arrMoneys['id'] ) {
-      $arrResult['data'][] = $arrMoney;
-      $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
-    }
-    else foreach ($arrMoneys as $arrMoney) {
-      $arrResult['data'][] = $arrMoney;
-      $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+    if ( is_array($arrMoneys) ) {
+      if ( $arrMoneys['id'] ) {
+        $arrResult['data'][] = $arrMoney;
+        $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+      }
+      else foreach ($arrMoneys as $arrMoney) {
+        $arrResult['data'][] = $arrMoney;
+        $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
+      }
     }
     $arrResult['sum'] = $iMonthSum;
     return $arrResult;
@@ -129,14 +137,14 @@ class moneys_subscriptions extends model
     foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
     $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
 
-    $oMoneyCategory = new category();
-    $oMoneyCategory->sort = 'sort';
-    $oMoneyCategory->sortDir = 'ASC';
-    $oMoneyCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
-    $arrMoneysCategories = $oMoneyCategory->get_categories();
-    $arrMoneysCategoriesFilter = [];
-    foreach ($arrMoneysCategories as $arrMoneysCategory) $arrMoneysCategoriesFilter[] = array('id'=>$arrMoneysCategory['id'],'name'=>$arrMoneysCategory['title']);
-    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrMoneysCategoriesFilter,'value'=>$this->category];
+    $oCategory = new category();
+    $oCategory->sort = 'sort';
+    $oCategory->sortDir = 'ASC';
+    $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    $arrCategoriesFilter = [];
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category];
 
     $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
@@ -144,6 +152,8 @@ class moneys_subscriptions extends model
     // $arrFields['sum'] = ['title'=>$oLang->get('Sum'),'type'=>'number','value'=>$this->sum];
     $arrFields['price'] = ['title'=>$oLang->get('Payment'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
     $arrFields['sum'] = ['title'=>$oLang->get('Sum'),'type'=>'number','value'=>substr($this->sum, 0, -2),'step'=>'0.01'];
+
+    $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
 
     // $sColor = $this->color ? $this->color : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
     // $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$sColor];
@@ -153,26 +163,28 @@ class moneys_subscriptions extends model
     return $arrFields;
   }
 
-  function __construct( $moneys_subscriptions_id = 0 )
+  function __construct( $iSubscriptionsId = 0 )
   {
     $oLang = new lang();
-    $this->table = 'moneys_subscriptions';
+    $this->table = 'subscriptions';
 
-    if ( $moneys_subscriptions_id ) {
+    if ( $iSubscriptionsId ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
-      $mySql .= " WHERE `id` = '" . $moneys_subscriptions_id . "'";
+      $mySql .= " WHERE `id` = '" . $iSubscriptionsId . "'";
       $arrCard = db::query($mySql);
 
       $this->id = $arrCard['id'];
       $this->title = $arrCard['title'];
       $this->sort = $arrCard['sort'];
       $this->price = $arrCard['price'];
+      $this->time = $arrCard['time'];
       $this->sum = $arrCard['sum'];
       $this->type = $arrCard['type'];
       $this->day = $arrCard['day'];
       $this->category = $arrCard['category'];
       $this->card = $arrCard['card'];
       $this->active = $arrCard['active'];
+      $this->description = base64_decode($arrCard['description']);
       $this->user_id = $arrCard['user_id'];
     }
 

@@ -22,6 +22,6 @@ include_once 'models/task.php'; # Задачи
 include_once 'models/money.php'; # Деньги
 include_once 'models/card.php'; # Карты для денег
 include_once 'models/category.php'; # Категории
-include_once 'models/moneys_subscriptions.php'; # Подписки
+include_once 'models/subscription.php'; # Подписки
 include_once 'models/time.php'; # Время
 include_once 'models/chart.php'; # Графики

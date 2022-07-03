@@ -16,6 +16,75 @@ switch ($_REQUEST['form']) {
     notification::send( $sResultHtml );
     break;
 
+  case 'month': # Статистика за месяц
+    $arrResults = [];
+
+    // Месяц
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
+    $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
+    $dMonth = $iYear . '-' . sprintf("%02d", $iMonth);
+
+    // Собираем карты
+    $oCard = $_REQUEST['id'] ? new card( $_REQUEST['id'] ) : new card();
+    if ( $_REQUEST['from'] ) $oCard->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oCard->limit = $_REQUEST['limit'];
+    $oCard->sort = 'sort';
+    $oCard->sortDir = 'ASC';
+    $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCards = $oCard->get_cards();
+
+    $arrMoneys = [];
+
+    foreach ($arrCards as $arrCard) {
+      // array('id'=>0,'name'=>$oLang->get('CardDebit')),
+      // array('id'=>1,'name'=>$oLang->get('CardCredit')),
+      // array('id'=>2,'name'=>$oLang->get('CardBill')),
+      switch ($arrCard['type']) {
+        case 0: # Депетовая
+          break;
+        case 1: # Кредитовая
+          // Оплата за обслуживание
+          // Оплата коммиссии
+          // - Определяем когда оплата за обслуживание
+          // $arrCard['service']
+          // $arrCard['date_service']
+          // - Если время платить, собираем денежку
+          // $arrMoneys
+          break;
+        case 2: # Счёт
+          // Начисление
+          break;
+      }
+    }
+
+    // Определяем тип
+    // - Карты
+    // Оплата за обслуживание
+    // - Определяем когда оплата за обслуживание
+    // - Если время платить, собираем денежку
+
+    // - Кредитка
+    // Оплата коммиссии
+    // - Определяем безпроцентный период
+    // - Вытасвиваем платежи за это время (хз зачем)
+    // - Вытаскиваем платежи дальше без процентного периода (Берём лемит в год)
+    // - Прибавляем переводы на карту
+    // - От полученной суммы вычитаем процент
+    // - Выставляем этот платёж, учитывая дату платежа
+
+    // - Счёт, дебет
+    // Начисление
+    // - Узнаем период после которого идёт начисление (Например месяц)
+    // - Берем платежи сделанные месяц* назад
+    // - Добавляем переводы на карту или счёт
+    // - Получаем процент от суммы
+    // Выставляем начисление
+
+    // Сортируем по дате
+
+    notification::send($arrResults);
+    break;
+
   case 'show': # Вывод элементов
     $oCard = $_REQUEST['id'] ? new card( $_REQUEST['id'] ) : new card();
 

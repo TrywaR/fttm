@@ -10,7 +10,6 @@
   display: flex
   align-items: center
   justify-content: center
-  opacity: 0
 
   &._status_show_true
     ._status
@@ -98,5 +97,44 @@
         margin-right: auto
 
   &._show_
-    opacity: 1
+
+.task_min
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  ._edit
+    position: absolute
+    top: 1rem
+    right: 1rem
+    color: $color_main_dark_ultra
+
+  ._title
+    font-size: 1.2em
+    font-weight: 400
+    margin-bottom: .5rem
+
+    small
+
+  ._sub
+    display: flex
+    justify-content: space-between
+    align-items: center
+    font-size: .9em
+    font-weight: 300
+
+    ._status
+      padding: .2rem .5rem
+      color: white
+      font-size: .8em
+      border-radius: $border_radius
+
+    ._buttons
+      display: flex
+
+      ._button
+        &:not(:last-child)
+          margin-right: .5rem
+
+    ._project
 // .tasks x

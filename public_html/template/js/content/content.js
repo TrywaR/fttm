@@ -1,59 +1,59 @@
 // События
 $(function(){
   // Отправка данных с формы
-	$(document).find('form:not(.__no_ajax)').on ('submit', function(){
-		var
-		oForm = $(this)
-		oData = oForm.serializeArray()
-
-		$.when(
-			content_download( oData, 'json', true )
-		).done( function( oData ){
-			if ( ! oData.success ) return false
-
-			// Если модель, то сохраняем в локали
-			if ( oData.success.model ) {
-				localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
-				// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
-			}
-
-			// Если редирект
-			var iLocationTime = 1000
-			if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
-			if ( oData.success.location )
-				setTimeout(function(){
-				  window.location.replace( oData.success.location )
-				}, iLocationTime)
-
-			// Если нужно перезагрузить страницу
-			if ( oData.success.location_reload )
-				setTimeout(function(){
-					location.reload()
-				}, iLocationTime)
-
-			// Перезагружаем страницу если надо
-			if( oForm.hasClass('reload_page') ) location.reload()
-
-			// Добавляем в данные
-			if ( oForm.hasClass('content_loader_form') )
-				switch (oData.success.event) {
-					case 'save':
-					case 'reload':
-						oForm.find('.form_reset').click()
-						content_loader_update( oData.success.data )
-						break;
-					case 'add':
-						oForm.find('.form_reset').click()
-						content_loader_add( oData.success.data )
-						break;
-					case 'del':
-						content_loader_del( oData.success.data )
-						break;
-				}
-		})
-
-		return false
-	})
+	// $(document).find('form:not(.__no_ajax)').on ('submit', function(){
+	// 	var
+	// 	oForm = $(this)
+	// 	oData = oForm.serializeArray()
+	//
+	// 	$.when(
+	// 		content_download( oData, 'json', true )
+	// 	).done( function( oData ){
+	// 		if ( ! oData.success ) return false
+	//
+	// 		// Если модель, то сохраняем в локали
+	// 		if ( oData.success.model ) {
+	// 			localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
+	// 			// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
+	// 		}
+	//
+	// 		// Если редирект
+	// 		var iLocationTime = 1000
+	// 		if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
+	// 		if ( oData.success.location )
+	// 			setTimeout(function(){
+	// 			  window.location.replace( oData.success.location )
+	// 			}, iLocationTime)
+	//
+	// 		// Если нужно перезагрузить страницу
+	// 		if ( oData.success.location_reload )
+	// 			setTimeout(function(){
+	// 				location.reload()
+	// 			}, iLocationTime)
+	//
+	// 		// Перезагружаем страницу если надо
+	// 		if( oForm.hasClass('reload_page') ) location.reload()
+	//
+	// 		// Добавляем в данные
+	// 		if ( oForm.hasClass('content_loader_form') )
+	// 			switch (oData.success.event) {
+	// 				case 'save':
+	// 				case 'reload':
+	// 					oForm.find('.form_reset').click()
+	// 					content_loader_update( oData.success.data )
+	// 					break;
+	// 				case 'add':
+	// 					oForm.find('.form_reset').click()
+	// 					content_loader_add( oData.success.data )
+	// 					break;
+	// 				case 'del':
+	// 					content_loader_del( oData.success.data )
+	// 					break;
+	// 			}
+	// 	})
+	//
+	// 	return false
+	// })
 
   // Сброс формы редактирования контента
   $(document).on('click', '.form_reset', function(){
