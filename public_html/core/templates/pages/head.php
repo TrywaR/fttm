@@ -15,7 +15,7 @@
 	<title><?=$sTitle?></title>
 
 	<meta name="format-detection" content="telephone=no">
-	<meta name="description" content="You life scanner and saver. Time, money, tasks manager system!">
+	<meta name="description" content="<?=$oLang->get('HomePageDescription')?>">
 	<!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 

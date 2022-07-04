@@ -30,6 +30,7 @@ class lang
 
   function ru(){
     $this->arrLang['ru'] = [
+      'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
       'Categories' => 'Категории',
       'Category' => 'Категория',
       'NoCategory' => 'Без категории',
@@ -207,6 +208,7 @@ class lang
 
   function en(){
     $this->arrLang['en'] = [
+      'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',
       'Categories' => 'Categories',
       'Category' => 'Category',
       'NoCategory' => 'No category',

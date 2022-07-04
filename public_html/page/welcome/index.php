@@ -5,12 +5,8 @@
         <h1 class="text-center">
           Freelance Time Your Manager
         </h1>
-        <p>
-          Это симулятор, способный оцифровать тебя, помогающий более эффективно распоряжаться своим временем и финансами
-        </p>
-        <p>
-          Оставь свой точный след в истории человечества и взгляни на свою жизнь со стороны
-        </p>
+        <p>This is a simulator that can digitize you, helping you manage your time and finances more efficiently.</p>
+        <p>Leave your exact mark in the history of mankind and look at your life from the side</p>
       </div>
     </div>
     <div class="_bg">
@@ -22,32 +18,24 @@
 
    <div class="_section _times">
      <div class="_block">
-         <!-- <div class="_icon">
+         <div class="_icon">
            <i class="fas fa-clock"></i>
-         </div> -->
+         </div>
          <div class="_content">
            <h2 class="_block_title"><?=$oLang->get('Times')?></h2>
-           <p>
-             Этот сервис содержит систему для учёта времени,
-             она позволит найти время для любого дела, или распоряжаться безценным временем более надёжно
-           </p>
-           <p>
-             Например отслеживая различные временные расходы, ты сможешь определить сколько времени в различных обстоятельствах уходит на сон, и планировать время на него по часам, просыпаясь без будильника
-           </p>
-           <p>
-             Для этого есть возможности:
-           </p>
+          <p>
+            Time is an irreplaceable resource that is always in short supply. But with this service you can easily manage it. You'll be surprised at how much more time you'll have and how much more productive your activities will become, whether it's work, rest or sleep.
+          </p>
+          <p>
+            By tracking your time, you'll find it easier to optimize it, down to the minute, which will undoubtedly have an impact on your quality of life.
+          </p>
+          <p>
+            The following functions are available:
+          </p>
            <ul>
-             <li>
-               Разделения затраченного времени по категориям
-             </li>
-             <li>
-               Построение графиков затрат времени по различным периодам времени
-             </li>
-             <li>
-               Отслеживание времени на конкретные задачи, с определением планируемого времени и реально затраченного, что позволит отследить на сколько точно ты
-               планируешь затраты по времени на задачи, и улучшить этот навык
-             </li>
+             <li>Division of time spent into categories</li>
+              <li>Plotting time expenditure graphs for different time periods</li>
+              <li>Tracking your time spent on tasks, by comparing planned time with actual time spent, to see exactly how much time you're planning to spend on tasks and you'll improve your time management skills.</li>
            </ul>
          </div>
        </div>
@@ -55,54 +43,37 @@
 
    <div class="_section _moneys">
      <div class="_block">
+       <div class="_icon">
+         <i class="fas fa-wallet"></i>
+       </div>
+
          <div class="_content">
            <h2 class="_block_title"><?=$oLang->get('Moneys')?></h2>
-           <p>
-             Учёт финансовых потоков для отслеживания их по категориям, проектам, взаимодействуя с неограниченным количеством носителей:
-             наличные, кредитки, счета, кэшбеки и прочее
-           </p>
-           <p>
-             Для этого есть возможности:
-           </p>
-           <ul>
-             <li>
-               Разделения финансов по категориям
-             </li>
-             <li>
-               Построение графиков затрат финансов по различным периодам времени
-             </li>
-             <li>
-               Затраты и пополнения по отдельным проектам
-             </li>
-             <li>
-               Отслеживание ежемесячных платежей и подписок
-             </li>
-             <li>
-               Учитывание переводов между своими картами
-             </li>
-             <li>
-               Отслеживание коммиссии и просрочек платежей по кредитным картам, начисления по дебетовым
-             </li>
-           </ul>
+            <p>This service will help you effectively manage your finances through complete analysis.</p>
+            <p>Detailed tracking of all financial flows and dividing them into an unlimited number of categories, such as: cash, credit cards, bank accounts, cashback and more. This analysis will not only help you better control your incoming money but also help you plan your future purchases.</p>
+            <p>The following functions are available:</p>
+            <ul>
+              <li>Splitting your finances into categories.</li>
+              <li>onstruction of graphs of expenditures of finances by different periods of time</li>
+              <li>pending and replenishments for individual projects</li>
+              <li>racking monthly payments and subscriptions</li>
+              <li>racking transfers between your cards</li>
+              <li>racking fees and delinquencies on credit cards, charges on debit cards</li>
+            </ul>
          </div>
-
-         <!-- <div class="_icon">
-           <i class="fas fa-wallet"></i>
-         </div> -->
        </div>
    </div>
 
    <div class="_section _moneysforhour">
      <div class="_block">
+       <div class="_icon">
+         <i class="fa-solid fa-clipboard-check"></i>
+       </div>
          <div class="_content">
            <h2 class="_block_title">Time is money</h2>
-           <p>
-             Соединения собранную информацию по временным и денежным затратам можно увидеть много интересных данных
-           </p>
-           <p>
-             Например: Сколько стоит твой час работы, как в общем так и по отдельным проектам, это позволит урегулировать стоимость своих услуг, учитывая финансововые и временные затраты на работу<br/>
-             Такие данные дают поддержку и понятное обоснование для повышения стоимости своих услуг
-           </p>
+            <p>A unique tool of our service is a combination of time and money analysis, which allows you to calculate the value of your time in money. </p>
+            <p>For example: How much your working hour costs, both in general and on individual projects. This will allow you to adjust the cost of your services, taking into account the financial and time costs of your work. </p>
+            <p>Such data helps to assess the picture of the work done in an unbiased manner, that can serve as a justification for increasing the cost of your services in the labor market.</p>
          </div>
        </div>
    </div>
@@ -113,7 +84,7 @@
            <div class="_content">
              <h2 class="_block_title">Start</h2>
              <p>
-               Попробуй, быстрая регистрация без использования электронной почты и номера телефона
+               Try it, quick registration without using email and phone number
              </p>
              <?include 'core/templates/pages/logining.php';?>
            </div>
