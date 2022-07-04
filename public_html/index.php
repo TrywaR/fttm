@@ -1,5 +1,7 @@
 <?
 session_start();
+$_SESSION['version'] = '5.3.6';
+
 include_once 'core/core.php'; # Основные настройки
 $olang = new lang(); // Подтягиваем языки
 
