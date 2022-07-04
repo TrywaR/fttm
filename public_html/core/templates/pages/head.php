@@ -5,8 +5,9 @@
 	<?
 	$sTitle = '';
 
-	$sTitleUser = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;
-	$sTitle = 'U' . $sTitleUser . 'LIFE';
+	// $sTitleUser = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;
+	// $sTitle = 'U' . $sTitleUser . 'LIFE';
+	$sTitle = 'u0life';
 
 	$oNav = new nav();
 	if ( isset($oNav->arrNav[$_SERVER['REQUEST_URI']]) ) $sTitle .= ' > ' . $oNav->arrNav[$_SERVER['REQUEST_URI']]['name'];
@@ -24,6 +25,14 @@
 	<meta name="msapplication-navbutton-color" content="#7661db">
 	<meta name="apple-mobile-web-app-status-bar-style" content="#7661db">
 	<!-- color theme x-->
+
+	<!-- icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/template/imgs/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/template/imgs/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/template/imgs/icons/favicon-16x16.png">
+	<link rel="manifest" href="/template/imgs/icons/site.webmanifest">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<!-- icons x -->
 
 	<!-- jQeury -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -72,7 +81,7 @@
 	<!-- odometer x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.5"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.6"> -->
 	<?
 	$bThemeAuto = false;
 	if ( isset($_SESSION['user']) ) {
@@ -81,13 +90,13 @@
 			case 0:
 				# auto
 				$bThemeAuto = true;
-				/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?*/
+				/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.6"><?*/
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.6"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.5"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.6"><?
 				break;
 			case 3:
 				break;
@@ -96,7 +105,7 @@
 	else {
 		# auto
 		$bThemeAuto = true;
-		/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.5"><?*/
+		/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.6"><?*/
 	}
 
 	if ( $bThemeAuto ) {
@@ -104,7 +113,7 @@
 		<script>
 			var
 				prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)"),
-				sThemePath = prefersDarkScheme.matches ? '/template/themes/Dark/theme.min.css?v=5.3.5' : '/template/themes/Light/theme.min.css?v=5.3.5'
+				sThemePath = prefersDarkScheme.matches ? '/template/themes/Dark/theme.min.css?v=5.3.6' : '/template/themes/Light/theme.min.css?v=5.3.6'
 
 			document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="` + sThemePath + `">`)
 		</script>
@@ -112,21 +121,21 @@
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.3.5"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.3.5"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.3.5"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.3.5"></script>
-	<script src="/template/js/content_actions/content_actions.js?v=5.3.5"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.5"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.3.5"></script>
-	<script src="/template/js/content/content.js?v=5.3.5"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=5.3.6"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=5.3.6"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=5.3.6"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=5.3.6"></script>
+	<script src="/template/js/content_actions/content_actions.js?v=5.3.6"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.6"></script>
+	<script src="/template/js/alerts/alerts.js?v=5.3.6"></script>
+	<script src="/template/js/content/content.js?v=5.3.6"></script>
 
-	<script src="/template/js/main/nav.js?v=5.3.5"></script>
-	<script src="/template/js/main/form.js?v=5.3.5"></script>
-	<script src="/template/js/main/modal.js?v=5.3.5"></script>
+	<script src="/template/js/main/nav.js?v=5.3.6"></script>
+	<script src="/template/js/main/form.js?v=5.3.6"></script>
+	<script src="/template/js/main/modal.js?v=5.3.6"></script>
 
-	<script src="/template/js/session/session.js?v=5.3.5"></script>
-	<script src="/template/js/index.js?v=5.3.5"></script>
+	<script src="/template/js/session/session.js?v=5.3.6"></script>
+	<script src="/template/js/index.js?v=5.3.6"></script>
 	<!-- main x-->
 
 	<style media="screen">

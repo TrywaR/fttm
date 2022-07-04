@@ -3,9 +3,9 @@
     <div class="_block">
       <div class="_content">
         <h1 class="text-center">
-          Freelance Time Your Manager
+          Your <span>0</span> life
         </h1>
-        <p>This is a simulator that can digitize you, helping you manage your time and finances more efficiently.</p>
+        <p>This is a simulator that can digitize your life, helping you manage your time and finances more efficiently.</p>
         <p>Leave your exact mark in the history of mankind and look at your life from the side</p>
       </div>
     </div>
