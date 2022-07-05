@@ -7,7 +7,7 @@
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="categories" data-content_manager_block="#categories" data-content_manager_item=".money_category" data-content_manager_button=".content_manager_switch">
+  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="categories" data-content_manager_block="#categories" data-content_manager_item=".category" data-content_manager_button=".content_manager_switch">
     <button type="button" name="button" class="btn btn-danger del">
       <i class="fas fa-folder-minus"></i>
     </button>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="block_template">
-    <li class="list-group-item d-flex _elem money_category progress_block animate__animated  _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item d-flex _elem category progress_block animate__animated  _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="row d-flex w-100 justify-content-between align-items-start">
         <span class="col-12 col-xl-6 mb-2">
           <span class="d-flex">
@@ -64,11 +64,11 @@
               </div>
             </a>
 
-            <a data-action="categories" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money_category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
+            <a data-action="categories" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
               <i class="fas fa-pen-square"></i>
             </a>
 
-            <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".money_category">
+            <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".category">
               <i class="fas fa-minus-square"></i>
             </a>
           </span>

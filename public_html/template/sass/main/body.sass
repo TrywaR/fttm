@@ -6,8 +6,8 @@ body
   color: $color_text
   background: $color_main_dark
   font-family: $font_default
-  font-size: 14px
-  line-height: 18px
+  font-size: 16px
+  line-height: 26px
   font-weight: 400
   overflow-x: hidden
   max-width: 100%
@@ -71,7 +71,7 @@ body
     header
       min-width: 15rem
       max-width: 15rem
-      
+
       &._full_
         min-width: 25%
 
@@ -83,10 +83,13 @@ body
 
 @media screen and (max-width:1200px)
   body
-    font-size: 12px
-    line-height: 16px
+    font-size: 14px
+    line-height: 22px
     flex-direction: column
 
     header
     main
+      height: 100vh
+      padding-bottom: 5rem
+
     footer

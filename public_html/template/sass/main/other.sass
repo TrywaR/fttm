@@ -41,6 +41,24 @@
       text-decoration: none
       color: $color_text
 
+.block_social
+  display: flex
+  justify-content: center
+  align-items: center
+
+  ._item
+    display: flex
+    padding: .5rem
+    font-size: 1.3em
+    box-sizing: border-box
+    text-decoration: none
+    color: $color_text
+    opacity: .15
+
+    &:hover
+      color: $color_text
+      opacity: 1
+
 @media screen and (max-width:1000px)
   .block_logo
     font-size: .6rem

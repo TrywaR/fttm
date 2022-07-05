@@ -20,7 +20,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_6">5.3.6 u0life</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_7">5.3.7 u0life 2</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_3_6">5.3.6 u0life</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_5">5.3.5 Betclock 5</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_4">5.3.4 Betclock 4</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_3">5.3.3 Betclock 3</a>
@@ -68,6 +69,31 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_3_7">5.3.7 u0life 2</h2>
+            <ol>
+              <li>
+                Небольшие изменения в работе мобильной версии
+              </li>
+              <li>
+                Исправлен баг отображения графика на дашборде
+              </li>
+              <li>
+                Обновлены ссылка на донат сервисы
+              </li>
+              <li>
+                Мелкие стилевые правки
+              </li>
+              <li>
+                Исправлена ошибка с возможностью удалять фиксированыне категории
+              </li>
+              <li>
+                Увеличен размер шрифта
+              </li>
+              <li>
+                Добавленны ссылки на основные соц сети
+              </li>
+            </ol>
+
             <h2 id="list-item-5_3_6">5.3.6 u0life</h2>
             <ol>
               <li>

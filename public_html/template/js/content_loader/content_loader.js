@@ -125,7 +125,10 @@ function content_loader_load( sEvent ){
       'limit': arrPageContent.limit,
       'filter': arrPageContent.filter,
     }, 'text', false )
-  ).then( function( resultData ){
+  ).fail(function( xhr, textStatus, errorThrown ){
+    $(document).find( arrPageContent.content_selector ).html( '<small class="_error_result"><span>Error: ' + xhr.statusText +  '(' + xhr.status + ')</span><i class="fa-solid fa-triangle-exclamation"></i></small>' )
+
+  }).then( function( resultData ){
     if ( ! resultData || resultData == '[]' ) {
       if ( sEvent == 'start' ) $(document).find( arrPageContent.content_selector ).html( '<small class="_not_result"><span>Not result</span><i class="fa-solid fa-face-frown-open"></i></small>' )
       return false

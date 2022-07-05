@@ -157,7 +157,9 @@
               sResultHtml += '<div class="_vals">'
 
                 $.each(oData.categories, function( iCategoryId, oCategory ){
-                  iMoneysDayCategoriesSum = oCategory.moneys && Math.abs(oCategory.moneys.sum) > iMoneysDayCategoriesSum ? parseInt(oCategory.moneys.sum) : iMoneysDayCategoriesSum
+                  if ( oCategory.moneys && oCategory.moneys.sum ) {
+                    iMoneysDayCategoriesSum = Math.abs(oCategory.moneys.sum) > iMoneysDayCategoriesSum ? Math.abs(oCategory.moneys.sum) : iMoneysDayCategoriesSum
+                  }
                 })
 
                 $.each(oData.categories, function( iCategoryId, oCategory ){
