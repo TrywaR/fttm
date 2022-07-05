@@ -81,7 +81,7 @@ switch ($_REQUEST['form']) {
 
     // Отправляем в телегу
     $mailNew = new mail();
-    $telegram_messages = 'Новый пользователь: ' . $_REQUEST['login'] . ' %0A';
+    $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
     if ( $_SESSION['referal'] ) {
       $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
     }
