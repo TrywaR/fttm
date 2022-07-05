@@ -4,12 +4,12 @@
  */
 class config
 {
-  static $user = 'trywar4y_fttm';
-  static $password = 't4pQRJs*';
+  static $user = 'db_login';
+  static $password = 'pass';
   static $host = 'localhost';
-  static $db = 'trywar4y_fttm';
-  static $site_url = 'fttm.trywar.ru';
-  static $site_root = '/home/t/trywar4y/fttm.trywar.ru/public_html/';
+  static $db = 'db_login';
+  static $site_url = 'url.com';
+  static $site_root = '/root/';
   static $arrConfig = [];
   static $arrLeng = [];
   static $arrUsersGroups = [];
