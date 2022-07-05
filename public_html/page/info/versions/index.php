@@ -9,15 +9,6 @@
 <div class="main_content">
   <div class="container">
     <div class="row">
-      <div class="col-12 mt-2 mb-2">
-        <a href="https://github.com/TrywaR/fttm">
-          <i class="fab fa-github"></i>
-          GitHub
-        </a>
-      </div>
-    </div>
-
-    <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
           <a class="list-group-item list-group-item-action active" href="#list-item-5_3_7">5.3.7 u0life 2</a>
@@ -71,6 +62,9 @@
           <div class="pt-2 pb-2">
             <h2 id="list-item-5_3_7">5.3.7 u0life 2</h2>
             <ol>
+              <li>
+                Исправлена ошибка с регистрацией и восстановлением пароля, инфомрация появляется мгновенно
+              </li>
               <li>
                 Небольшие изменения в работе мобильной версии
               </li>

@@ -81,7 +81,7 @@
 	<!-- odometer x-->
 
 	<!-- main -->
-	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=5.3.61"> -->
+	<!-- <link rel="stylesheet" href="/template/css/main.min.css?v=<?=$_SESSION['version']?>"> -->
 	<?
 	$bThemeAuto = false;
 	if ( isset($_SESSION['user']) ) {
@@ -90,13 +90,13 @@
 			case 0:
 				# auto
 				$bThemeAuto = true;
-				/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.61"><?*/
+				/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=<?=$_SESSION['version']?>"><?*/
 				break;
 			case 1:
-				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.61"><?
+				?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=<?=$_SESSION['version']?>"><?
 				break;
 			case 2:
-				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=5.3.61"><?
+				?><link rel="stylesheet" href="/template/themes/Light/theme.min.css?v=<?=$_SESSION['version']?>"><?
 				break;
 			case 3:
 				break;
@@ -105,7 +105,7 @@
 	else {
 		# auto
 		$bThemeAuto = true;
-		/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=5.3.61"><?*/
+		/*?><link rel="stylesheet" href="/template/themes/Dark/theme.min.css?v=<?=$_SESSION['version']?>"><?*/
 	}
 
 	if ( $bThemeAuto ) {
@@ -113,7 +113,7 @@
 		<script>
 			var
 				prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)"),
-				sThemePath = prefersDarkScheme.matches ? '/template/themes/Dark/theme.min.css?v=5.3.61' : '/template/themes/Light/theme.min.css?v=5.3.61'
+				sThemePath = prefersDarkScheme.matches ? '/template/themes/Dark/theme.min.css?v=<?=$_SESSION['version']?>' : '/template/themes/Light/theme.min.css?v=<?=$_SESSION['version']?>'
 
 			document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="` + sThemePath + `">`)
 		</script>
@@ -121,21 +121,21 @@
 	}
 	?>
 
-	<script src="/template/js/authorizations/authorizations.js?v=5.3.61"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=5.3.61"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=5.3.61"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=5.3.61"></script>
-	<script src="/template/js/content_actions/content_actions.js?v=5.3.61"></script>
-	<script src="/template/js/progress_bar/progress_bar.js?v=5.3.61"></script>
-	<script src="/template/js/alerts/alerts.js?v=5.3.61"></script>
-	<script src="/template/js/content/content.js?v=5.3.61"></script>
+	<script src="/template/js/authorizations/authorizations.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content_loader/content_loader.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content_manager/content_manager.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content_filter/content_filter.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content_actions/content_actions.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/progress_bar/progress_bar.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/alerts/alerts.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/content.js?v=<?=$_SESSION['version']?>"></script>
 
-	<script src="/template/js/main/nav.js?v=5.3.61"></script>
-	<script src="/template/js/main/form.js?v=5.3.61"></script>
-	<script src="/template/js/main/modal.js?v=5.3.61"></script>
+	<script src="/template/js/main/nav.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/main/form.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/main/modal.js?v=<?=$_SESSION['version']?>"></script>
 
-	<script src="/template/js/session/session.js?v=5.3.61"></script>
-	<script src="/template/js/index.js?v=5.3.61"></script>
+	<script src="/template/js/session/session.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/index.js?v=<?=$_SESSION['version']?>"></script>
 	<!-- main x-->
 
 	<style media="screen">

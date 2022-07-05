@@ -11,6 +11,38 @@ $(function(){
     return false
   })
 
+  // From registration
+  $(document).find('#form_registration,#form_password_recovery').on ('submit', function(){
+    var
+		oForm = $(this)
+		oData = oForm.serializeArray()
+
+		$.when(
+			content_download( oData, 'json', true )
+		).done( function( oData ){
+			if ( ! oData.success ) return false
+
+			// Если редирект
+			var iLocationTime = 1000
+			if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
+			if ( oData.success.location )
+				setTimeout(function(){
+				  window.location.replace( oData.success.location )
+				}, iLocationTime)
+
+			// Если нужно перезагрузить страницу
+			if ( oData.success.location_reload )
+				setTimeout(function(){
+					location.reload()
+				}, iLocationTime)
+
+			// Перезагружаем страницу если надо
+			if( oForm.hasClass('reload_page') ) location.reload()
+		})
+
+		return false
+  })
+
   // From logout
   $(document).find('#form_authorization_logout').on ('submit', function(){
     $.when(

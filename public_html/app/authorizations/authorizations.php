@@ -79,6 +79,14 @@ switch ($_REQUEST['form']) {
     $arrResults['location'] = '/authorizations/';
     $arrResults['location_time'] = 2000;
 
+    // Отправляем в телегу
+    $mailNew = new mail();
+    $telegram_messages = 'Новый пользователь: ' . $_REQUEST['login'] . ' %0A';
+    if ( $_SESSION['referal'] ) {
+      $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
+    }
+    $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
+
     if ( $oUser->add() ) notification::success($arrResults);
     else notification::error('Something went wrong, oh, call the super programmers!');
     break;

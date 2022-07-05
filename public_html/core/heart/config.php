@@ -21,6 +21,6 @@ config::$arrConfig = [
   'name' => 'FTTM',
   'email_to' => 'send@trywar.ru',
   'email_from' => 'fttm@trywar.ru',
-  'telegram_api_key' => 'FTTM',
-  'telegram_chat_id' => 'FTTM',
+  'telegram_api_key' => '5205928432:AAEcOLTnko7-l5xz7jtNJlgbHLBKqreEvDw',
+  'telegram_chat_id' => '-785574397',
 ];
