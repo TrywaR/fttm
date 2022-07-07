@@ -30,6 +30,7 @@ class lang
 
   function ru(){
     $this->arrLang['ru'] = [
+      'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
       'Categories' => 'Категории',
       'Category' => 'Категория',
@@ -46,6 +47,7 @@ class lang
       'NoTask' => 'Не задача',
       'Tasks' => 'Задачи',
       'Task' => 'Задача',
+      'Welcome' => 'Добро пожаловать',
 
       'Analytics' => 'Аналитика',
       'MoneyPerHour' => 'Денег за час',
@@ -208,6 +210,7 @@ class lang
 
   function en(){
     $this->arrLang['en'] = [
+      'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',
       'Categories' => 'Categories',
       'Category' => 'Category',
@@ -224,6 +227,7 @@ class lang
       'NoTask' => 'No Task',
       'Tasks' => 'Tasks',
       'Task' => 'Task',
+      'Welcome' => 'Welcome',
 
       'Analytics' => 'Analytics',
       'MoneyPerHour' => 'Money per hour',

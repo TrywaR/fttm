@@ -50,7 +50,7 @@
           </a>
         </p>
         <p>
-          <a class="content_upload" href="/password_recovery/">
+          <a class="content_upload" href="/authorizations/password_recovery/">
             If you have forgotten your password, click here.
           </a>
         </p>

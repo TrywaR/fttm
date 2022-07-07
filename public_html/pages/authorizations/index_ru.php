@@ -56,12 +56,12 @@
 
           <div class="mt-4 block_sub_text">
             <p>
-              <a class="content_upload" href="/registration/">
+              <a class="content_upload" href="/authorizations/registration/">
                 Регистрация
               </a>
             </p>
             <p>
-              <a class="content_upload" href="/password_recovery/">
+              <a class="content_upload" href="/authorizations/password_recovery/">
                 Восстановление пароля
               </a>
             </p>

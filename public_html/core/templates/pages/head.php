@@ -2,21 +2,9 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<?
-	$sTitle = '';
-
-	// $sTitleUser = isset($_SESSION['user']) ? $_SESSION['user']['login']{0} : 0;
-	// $sTitle = 'U' . $sTitleUser . 'LIFE';
-	$sTitle = 'u0life';
-
-	$oNav = new nav();
-	if ( isset($oNav->arrNav[$_SERVER['REQUEST_URI']]) ) $sTitle .= ' > ' . $oNav->arrNav[$_SERVER['REQUEST_URI']]['name'];
-	?>
-
-	<title><?=$sTitle?></title>
-
+	<title><?=page::get_title()?></title>
 	<meta name="format-detection" content="telephone=no">
-	<meta name="description" content="<?=$oLang->get('HomePageDescription')?>">
+	<meta name="description" content="<?=page::get_description()?>">
 	<!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 

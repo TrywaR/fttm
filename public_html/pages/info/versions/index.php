@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_7">5.3.7 u0life 2</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_8">5.3.8 u0life 3</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_3_7">5.3.7 u0life 2</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_6">5.3.6 u0life</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_5">5.3.5 Betclock 5</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_4">5.3.4 Betclock 4</a>
@@ -60,6 +61,25 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_3_8">5.3.8 u0life 3</h2>
+            <ol>
+              <li>
+                Изменена система доступа к страницам
+              </li>
+              <li>
+                Страницы ошибок теперь могут быть локализованы
+              </li>
+              <li>
+                Страницы авторизации, регистрации и восстановления пароля могут быть локализированы
+              </li>
+              <li>
+                Анонимным пользователям доступны страницы справок
+              </li>
+              <li>
+                Настроены заголовки страниц и описания для роботов и поисковиков
+              </li>
+            </ol>
+
             <h2 id="list-item-5_3_7">5.3.7 u0life 2</h2>
             <ol>
               <li>

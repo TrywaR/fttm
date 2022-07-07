@@ -50,7 +50,7 @@
           </a>
         </p>
         <p>
-          <a class="content_upload" href="/password_recovery/">
+          <a class="content_upload" href="/authorizations/password_recovery/">
             Восстановить пароль
           </a>
         </p>

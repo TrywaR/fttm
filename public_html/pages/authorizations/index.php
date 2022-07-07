@@ -56,12 +56,12 @@
 
           <div class="mt-4 block_sub_text">
             <p>
-              <a class="content_upload" href="/registration/">
+              <a class="content_upload" href="/authorizations/registration/">
                 If you don't have an account yet, click here to register.
               </a>
             </p>
             <p>
-              <a class="content_upload" href="/password_recovery/">
+              <a class="content_upload" href="/authorizations/password_recovery/">
                 If you have forgotten your password, click here.
               </a>
             </p>

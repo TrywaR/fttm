@@ -9,8 +9,8 @@ include_once 'heart/mail.php'; # Работа почты
 include_once 'heart/nav.php'; # Структура
 include_once 'heart/filter.php'; # Фильтрация
 include_once 'heart/protect.php'; # Шифроватор
-// include_once 'heart/location.php'; # Навигация
-// include_once 'heart/page.php'; # Общая обработка страниц
+include_once 'heart/location.php'; # Навигация
+include_once 'heart/page.php'; # Общая обработка страниц
 
 // Модели
 include_once 'models/model.php'; # Основной класс

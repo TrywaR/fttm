@@ -1,6 +1,6 @@
 <?
 session_start();
-$_SESSION['version'] = '5.3.71';
+$_SESSION['version'] = '5.3.8';
 
 include_once 'core/core.php'; # Основные настройки
 $olang = new lang(); // Подтягиваем языки
@@ -19,87 +19,51 @@ if ( $_REQUEST['referal'] ) {
 
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {
-  case '/': # Главная страница
-    include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-    include_once 'core/templates/pages/header.php'; # Шапка
-
-    if (file_exists('page/welcome/index_' . $olang->sUserLang . '.php')) include_once 'page/welcome/index_' . $olang->sUserLang . '.php';
-    else include_once 'page/welcome/index.php';
-
-    include_once 'core/templates/pages/footer.php'; # Подвал
-    break;
-
-  case '/authorizations/': # Авторизация
-    include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-    include_once 'core/templates/pages/header.php'; # Шапка
-
-    if (file_exists('page/authorizations/index_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/index_' . $olang->sUserLang . '.php';
-    else include_once 'page/authorizations/index.php';
-
-    include_once 'core/templates/pages/footer.php'; # Подвал
-    break;
-
-  case '/registration/': # Регистрация
-    include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-    include_once 'core/templates/pages/header.php'; # Шапка
-
-    if (file_exists('page/authorizations/registration_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/registration_' . $olang->sUserLang . '.php';
-    else include_once 'page/authorizations/registration.php';
-
-    include_once 'core/templates/pages/footer.php'; # Подвал
-    break;
-
-  case '/password_recovery/': # Восстановление пароля
-    include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-    include_once 'core/templates/pages/header.php'; # Шапка
-
-    if (file_exists('page/authorizations/password_recovery_' . $olang->sUserLang . '.php')) include_once 'page/authorizations/password_recovery_' . $olang->sUserLang . '.php';
-    else include_once 'page/authorizations/password_recovery.php';
-
-    include_once 'core/templates/pages/footer.php'; # Подвал
-    break;
-
   default: # Запрашиваемая страница
-    // Если пользователь авторизирован
-    if ( isset($_SESSION['user']) ) {
-      if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) {
-        include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-        include_once 'core/templates/pages/header.php'; # Шапка
+    // Параметры
+    $oNav = new nav();
+    $arrNavCurrent = end($oNav->arrNavsPath);
+    $sIncludePathContent = $_SERVER['REDIRECT_URL'] != '' ? 'pages'.$_SERVER['REDIRECT_URL'].'index' : 'pages/welcome/index';
 
-        // Проверка наличия файла с языком
-        if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index_' . $olang->sUserLang . '.php')) include_once 'page'.$_SERVER['REDIRECT_URL'].'index_' . $olang->sUserLang . '.php';
-        else include_once 'page'.$_SERVER['REDIRECT_URL'].'index.php';
+    // Проверки
+    $bUser = isset($_SESSION['user']) ? 1 : 0;
+    $iUserRole = isset($_SESSION['user']) ? $_SESSION['user']['role_val'] : 0;
+    $iAccessLevel = isset($arrNavCurrent['access']) ? $arrNavCurrent['access'] : -1;
+    $bFile = file_exists($sIncludePathContent.'.php') ? 1 : 0;
 
-        include_once 'core/templates/pages/footer.php'; # Подвал
-      }
-      else {
-        http_response_code(404);
+    // Содержаине
+    include_once 'core/templates/pages/head.php';
 
-        include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-        include_once 'core/templates/pages/header.php'; # Шапка
-        echo '<main class="container pt-4 pb-4 text-center"><h1>Error 404</h1></main>';
-        include_once 'core/templates/pages/footer.php'; # Подвал
+    include_once 'core/templates/pages/header.php';
+
+    // Существование файла
+    if ( $bFile ) {
+      // Доступ не всем
+      if ( $iAccessLevel >= 0 ) {
+        // Зарегистрирован ли пользователь
+        if ( $bUser ) {
+          // Недостаточно прав
+          if ( $iUserRole > $iAccessLevel ) {
+            http_response_code(403);
+            $sIncludePathContent = 'pages/errors/403/role';
+          }
+        }
+        // Нужно авторизироваться
+        else {
+          http_response_code(403);
+          $sIncludePathContent = 'pages/errors/403/index';
+        }
       }
     }
-    // Пользователь не авторизирован
+    // Нет файла
     else {
-      // exit("<meta http-equiv='refresh' content='0; url= /authorizations/'>");
-      if (file_exists('page'.$_SERVER['REDIRECT_URL'].'index.php')) {
-        http_response_code(403);
-
-        include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-        include_once 'core/templates/pages/header.php'; # Шапка
-        echo '<main class="container pt-4 pb-4 text-center"><h1>Error 403</h1><p>You need to <a href="/authorizations/">log in</a> to access</p></main>';
-        include_once 'core/templates/pages/footer.php'; # Подвал
-      }
-      else {
-        http_response_code(404);
-
-        include_once 'core/templates/pages/head.php'; # Подключаемые необходимые данныу
-        include_once 'core/templates/pages/header.php'; # Шапка
-        echo '<main class="container pt-4 pb-4 text-center"><h1>Error 404</h1></main>';
-        include_once 'core/templates/pages/footer.php'; # Подвал
-      }
+      $sIncludePathContent = 'pages/errors/404/index';
     }
+
+    // Проверка наличия файла с языком
+    if ( file_exists( $sIncludePathContent . '_' . $olang->sUserLang . '.php') ) include_once $sIncludePathContent . '_' . $olang->sUserLang . '.php';
+    else include_once $sIncludePathContent . '.php';
+
+    include_once 'core/templates/pages/footer.php';
     break;
 }

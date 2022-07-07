@@ -4,10 +4,16 @@
  */
 class page
 {
-  // function get_title (){
-  //   $oLocation = new location();
-  //   return config::$arrConfig['name'] . $oLocation->get_title();
-  // }
+  function get_title () {
+    $oLocation = new location();
+    return $oLocation->get_title();
+  }
+
+  function get_description () {
+    $oLocation = new location();
+    return $oLocation->get_description();
+  }
+
   function get_micromark (){
     $sResultHtml = '';
     $sResultHtml .= '<meta property="og:title" content="' . page::get_title() . '" />';
@@ -17,9 +23,7 @@ class page
     return $sResultHtml;
   }
 
-  function __construct()
-  {
-    // code...
+  function __construct() {
   }
 }
-// $page = new page();
+$page = new page();
