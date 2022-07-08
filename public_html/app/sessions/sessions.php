@@ -3,12 +3,24 @@ switch ($_REQUEST['form']) {
   case 'theme': # Переключение темы в сессии
     $arrResult = [];
     $arrResult['theme'] = $_SESSION['theme'] = $_REQUEST['theme'];
+    if ( isset($_SESSION['user']) ) {
+      $oUser = new user( $_SESSION['user']['id'] );
+      $oUser->arrAddFields['name'] = 'update';
+      $oUser->arrAddFields['theme'] = $arrResult['theme'];
+      $oUser->save();
+    }
     notification::success($arrResult);
     break;
 
   case 'lang': # Переключение языка в сессии
     $arrResult = [];
     $arrResult['lang'] = $_SESSION['lang'] = $_REQUEST['lang'];
+    if ( isset($_SESSION['user']) ) {
+      $oUser = new user( $_SESSION['user']['id'] );
+      $oUser->arrAddFields['name'] = 'update';
+      $oUser->arrAddFields['lang'] = $arrResult['lang'];
+      $oUser->save();
+    }
     notification::success($arrResult);
     break;
 

@@ -99,9 +99,9 @@ $(function(){
 			content_download( {
 				'action': 'sessions',
 				'form': 'theme',
-				'val': $(this).data().val,
+				'theme': $(this).data().val,
 			}, 'json', false )
-		).then( function( resultData ){
+		).then( function( oData ){
 			if ( oData.success ) location.reload()
 		})
 	})
@@ -113,9 +113,9 @@ $(function(){
 			content_download( {
 				'action': 'sessions',
 				'form': 'lang',
-				'val': $(this).data().val,
+				'lang': $(this).data().val,
 			}, 'json', false )
-		).then( function( resultData ){
+		).then( function( oData ){
 			if ( oData.success ) location.reload()
 		})
 	})

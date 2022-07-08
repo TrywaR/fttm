@@ -13,17 +13,19 @@
         </div>
       </div> -->
 
-      <div class="_theme">
-        <div class="block_swich" id="theme_switch">
-          <div class="_vals">
-            <div class="_val <?=$_SESSION['theme'] == 1 ? '_select_' : ''?>" data-val="1">
-              <i class="fa-solid fa-moon"></i>
+      <div class="_params">
+        <div class="_item _theme">
+          <div class="block_swich" id="theme_switch">
+            <div class="_vals">
+              <div class="_val <?=$_SESSION['theme'] == 1 ? '_select_' : ''?>" data-val="1">
+                <i class="fa-solid fa-moon"></i>
+              </div>
+              <div class="_val  <?=$_SESSION['theme'] == 2 ? '_select_' : ''?>" data-val="2">
+                <i class="fa-solid fa-sun"></i>
+              </div>
             </div>
-            <div class="_val  <?=$_SESSION['theme'] == 2 ? '_select_' : ''?>" data-val="2">
-              <i class="fa-solid fa-sun"></i>
-            </div>
+            <input class="_input" type="hidden" name="theme" value="">
           </div>
-          <input class="_input" type="hidden" name="theme" value="">
         </div>
       </div>
 

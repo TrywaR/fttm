@@ -74,7 +74,8 @@
 	$bThemeAuto = false;
 	if ( isset($_SESSION['user']) ) {
 		$iTheme = $_SESSION['theme'] ? (int)$_SESSION['theme'] : 0;
-		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 0;
+		if ( $_SESSION['user'] ) $iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 0;
+		die($iTheme);
 		switch ( $iTheme ) {
 			case 0:
 				# auto
