@@ -79,7 +79,7 @@ function content_filter_active( oFilter ) {
         if ( arrPageParams.content_filter_status ) $(document).find(arrPageParams.content_filter_status).addClass('__on')
         oFilter.addClass('_active_')
       }
-      
+
       $(document).find( arrPageParams.content_filter_block ).data('content_loader_filter', oFilter.serializeArray())
 
       setTimeout(function(){

@@ -7,23 +7,48 @@
 </div>
 
 <div class="main_content">
-  <h2>How this use</h2>
-
-  <ul>
-    <li>
-      <a href="/info/users">
-        <?=$oLang->get('User')?>
-      </a>
-    </li>
-    <li>
-      <a href="/info/categories">
-        <?=$oLang->get('Categories')?>
-      </a>
-    </li>
-    <li>
-      <a href="/info/subscriptions">
-        <?=$oLang->get('Subscriptions')?>
-      </a>
-    </li>
-  </ul>
+  <div class="block_docs">
+    <ul class="_sub_menu">
+      <!-- <li class="_item">
+        <a class="_link" href="/info/docs/users">
+          <?=$oLang->get('User')?>
+        </a>
+      </li> -->
+      <li class="_item">
+        <a class="_link" href="/info/docs/moneys">
+          <?=$oLang->get('Moneys')?>
+        </a>
+      </li>
+      <li class="_item">
+        <a class="_link" href="/info/docs/times">
+          <?=$oLang->get('Times')?>
+        </a>
+      </li>
+      <li class="_item">
+        <a class="_link" href="/info/docs/tasks">
+          <?=$oLang->get('Tasks')?>
+        </a>
+      </li>
+      <li class="_item">
+        <a class="_link" href="/info/docs/categories">
+          <?=$oLang->get('Categories')?>
+        </a>
+      </li>
+      <li class="_item">
+        <a class="_link" href="/info/docs/subscriptions">
+          <?=$oLang->get('Subscriptions')?>
+        </a>
+      </li>
+      <li class="_item">
+        <a class="_link" href="/info/docs/projects">
+          <?=$oLang->get('Projects')?>
+        </a>
+      </li>
+      <!-- <li class="_item">
+        <a class="_link" href="/info/docs/clitents">
+          <?=$oLang->get('Clients')?>
+        </a>
+      </li> -->
+    </ul>
+  </div>
 </div>

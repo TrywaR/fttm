@@ -91,3 +91,33 @@ function animation_number_to( oElem, iFrom, iTo, iDuration, sTheme, sFormat ) {
 	oOdometer.update( iTo )
 }
 // animation_number_to x
+
+$(function(){
+	// theme_switch
+	$(document).find('#theme_switch ._val').on ('click', function(){
+		$.when(
+			content_download( {
+				'action': 'sessions',
+				'form': 'theme',
+				'val': $(this).data().val,
+			}, 'json', false )
+		).then( function( resultData ){
+			if ( oData.success ) location.reload()
+		})
+	})
+	// theme_switch x
+
+	// lang_switch
+	$(document).find('#lang_switch ._val').on ('click', function(){
+		$.when(
+			content_download( {
+				'action': 'sessions',
+				'form': 'lang',
+				'val': $(this).data().val,
+			}, 'json', false )
+		).then( function( resultData ){
+			if ( oData.success ) location.reload()
+		})
+	})
+	// lang_switch x
+})

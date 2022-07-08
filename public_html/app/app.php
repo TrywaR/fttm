@@ -53,6 +53,10 @@ switch ($_REQUEST['action']) {
     include_once 'times/analytics.php';
     break;
 
+  case 'profiles': # Профиль
+    include_once 'profiles/profiles.php';
+    break;
+
   case 'users': # Пользователи
     include_once 'users/users.php';
     break;

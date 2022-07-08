@@ -64,7 +64,7 @@ class nav
         'name' => $oLang->get('HomePageTitle'),
         'description' => $oLang->get('HomePageDescription'),
         'url' => '/',
-        'icon' => '',
+        'icon' => '<i class="fa-solid fa-house"></i>',
       ),
 
       '/authorizations/' => array(
@@ -91,12 +91,22 @@ class nav
         ]
       ),
 
-      '/users/' => array(
+      '/profile/' => array(
         'name' => $oLang->get('User'),
         'description' => $oLang->get('User'),
-        'url' => '/users/',
+        'url' => '/profile/',
         'icon' => '<i class="fa-solid fa-user"></i>',
         'access' => 0,
+        'menu_hide' => true,
+      ),
+
+      '/users/' => array(
+        'name' => $oLang->get('Users'),
+        'description' => $oLang->get('Users'),
+        'url' => '/users/',
+        'icon' => '<i class="fa-solid fa-users"></i>',
+        'access' => 0,
+        'menu_hide' => true,
       ),
 
       '/dashboard/' => array(
@@ -235,7 +245,7 @@ class nav
             'description' => $oLang->get('Docs'),
             'url' => '/info/docs/',
             'icon' => '<i class="fas fa-book-dead"></i>',
-            'menu_hide' => true,
+            'menu_hide' => false,
           ),
         ],
       ),

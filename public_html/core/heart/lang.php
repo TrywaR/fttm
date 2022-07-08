@@ -132,7 +132,7 @@ class lang
       'PasswordRecovery' => 'Восстановление пароля',
       'Delete' => 'Удалить',
       'Transfer' => 'Перевод',
-      'Dashboard' => 'Главная',
+      'Dashboard' => 'Панель упарвления',
 
       'Day' => 'День',
       'ToDay' => 'Сегодня',
@@ -390,22 +390,30 @@ class lang
 
   function __construct()
   {
+    // Берём язык пользователя
     if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
       $this->sUserLang = $_SESSION['user']['lang'];
     }
+    // Другое
     else {
-      if ( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) {
-        $arrlang = explode(';',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-        $arrlangs = explode(',',$arrlang[0]);
-        if ( count($arrlangs) ) {
-          $slang = $arrlangs[1];
-          if ( $slang ) $this->sUserLang = $slang;
-          else $this->sUserLang = 'ens';
-        }
+      // Указанные в сессии
+      if ( $_SESSION['lang'] ) {
+        $this->sUserLang = $_SESSION['lang'];
+      }
+      else {
+        // Автоопределения от браузера
+        if ( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) {
+          $arrlang = explode(';',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+          $arrlangs = explode(',',$arrlang[0]);
+          if ( count($arrlangs) ) {
+            $slang = $arrlangs[1];
+            if ( $slang ) $this->sUserLang = $slang;
+            else $this->sUserLang = 'ens';
+          }
+        }  
       }
     }
-    // $this->sUserLang = 'en';
-    // if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) $this->sUserLang = $_SESSION['user']['lang'];
+
     $this->arrLang = [];
   }
 }

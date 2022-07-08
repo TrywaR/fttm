@@ -13,6 +13,8 @@ switch ($_REQUEST['form']) {
       // Создаём модель пользователя
       $arrResult['model'] = 'user';
       $arrResult['data'] = $_SESSION['user'] = $arrUser;
+      $_SESSION['theme'] = $_SESSION['user']['theme'];
+      $_SESSION['lang'] = $_SESSION['user']['lang'];
       $arrResult['text'] = 'Successful login!';
       $arrResult['location'] = '/';
       // Обновляем сессию

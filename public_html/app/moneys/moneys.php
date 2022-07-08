@@ -18,8 +18,10 @@ switch ($_REQUEST['form']) {
 
   case 'show': # Вывод элементов
     $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
+
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
+
     $oMoney->sortMulti = ' `date` DESC, `date_update` DESC ';
     $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
@@ -74,9 +76,9 @@ switch ($_REQUEST['form']) {
     }
 
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
-    if ( $_REQUEST['data'] && $_REQUEST['data']['success_click'] ) $oForm->arrFields['success_click'] = ['value'=>$_REQUEST['data']['success_click'],'type'=>'hidden'];
     $oForm->arrFields['action'] = ['value'=>'moneys','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
+    if ( $_REQUEST['data'] && $_REQUEST['data']['success_click'] ) $oForm->arrFields['success_click'] = ['value'=>$_REQUEST['data']['success_click'],'type'=>'hidden'];
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
 
     // Настройки шаблона
@@ -87,7 +89,7 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oMoney->get_money();
+    $arrResults['data'] = $oMoney->get_moneys();
     $arrResults['action'] = 'moneys';
 
     notification::send($arrResults);

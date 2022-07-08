@@ -1,5 +1,17 @@
 <?
 switch ($_REQUEST['form']) {
+  case 'theme': # Переключение темы в сессии
+    $arrResult = [];
+    $arrResult['theme'] = $_SESSION['theme'] = $_REQUEST['theme'];
+    notification::success($arrResult);
+    break;
+
+  case 'lang': # Переключение языка в сессии
+    $arrResult = [];
+    $arrResult['lang'] = $_SESSION['lang'] = $_REQUEST['lang'];
+    notification::success($arrResult);
+    break;
+
   case 'new': # Новая сессия
     $arrResult = [];
     $oSession = new session();
@@ -22,6 +34,8 @@ switch ($_REQUEST['form']) {
         $oUser = new user( $arrSession['user_id'] );
         $arrUser = $oUser->get_user();
         $arrResult['user'] = $_SESSION['user'] = $arrUser;
+        $_SESSION['theme'] = $_SESSION['user']['theme'];
+        $_SESSION['lang'] = $_SESSION['user']['lang'];
       }
       // Восстанавливаем сессиию
       $oSession->session = $arrSession['session'];

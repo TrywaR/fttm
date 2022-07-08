@@ -11,10 +11,10 @@
     <div class="_doc">
       <div class="_content">
         <p>
-          Depending on your needs, in addition to existing categories, you can add your own.
+          В зависимости от Ваших потребностей, помимо уже существующих категорий, Вы можете добавлять свои.
         </p>
         <p>
-          Categories will be displayed in Time and Money charts.
+          Категории будут отображаться во временных и денежных графиках.
         </p>
       </div>
     </div>

@@ -20,7 +20,10 @@
     padding: .5rem
     box-sizing: border-box
     width: 10rem
-    height: 5rem
+    // height: 5rem
+    height: 100%
+    max-height: 100%
+    min-height: 5rem
     background: url(../../imgs/logos/logo-dark.svg) no-repeat center center
     background-size: contain
     text-decoration: none
@@ -465,7 +468,57 @@ body
     ._day
 // .block_date x
 
+// .block_swich
+.block_swich
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+  ._vals
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    border-radius: $border_radius
+    overflow: hidden
+    z-index: 1
+
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      border-radius: $border_radius
+      background: $color_main_dark
+      opacity: .5
+      z-index: -1
+
+    ._val
+      display: flex
+      justify-content: center
+      align-items: center
+      padding: .5rem
+      cursor: pointer
+
+      &._select_
+        background: $color_main_dark
+        color: $color_text
+
+  ._input
+// .block_swich x
+
 @media screen and (max-width:1000px)
+  .block_logo
+    ._value
+      min-height: 100%
+
+      ._version
+        bottom: -.5rem
+        font-size: .3em
 
   .block_analitycs
     flex-wrap: wrap

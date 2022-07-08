@@ -73,6 +73,7 @@
 	<?
 	$bThemeAuto = false;
 	if ( isset($_SESSION['user']) ) {
+		$iTheme = $_SESSION['theme'] ? (int)$_SESSION['theme'] : 0;
 		$iTheme = $_SESSION['user']['theme'] ? (int)$_SESSION['user']['theme'] : 0;
 		switch ( $iTheme ) {
 			case 0:
@@ -110,13 +111,13 @@
 	?>
 
 	<script src="/template/js/authorizations/authorizations.js?v=<?=$_SESSION['version']?>"></script>
-	<script src="/template/js/content_loader/content_loader.js?v=<?=$_SESSION['version']?>"></script>
-	<script src="/template/js/content_manager/content_manager.js?v=<?=$_SESSION['version']?>"></script>
-	<script src="/template/js/content_filter/content_filter.js?v=<?=$_SESSION['version']?>"></script>
-	<script src="/template/js/content_actions/content_actions.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/content.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/loader.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/manager.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/filter.js?v=<?=$_SESSION['version']?>"></script>
+	<script src="/template/js/content/actions.js?v=<?=$_SESSION['version']?>"></script>
 	<script src="/template/js/progress_bar/progress_bar.js?v=<?=$_SESSION['version']?>"></script>
 	<script src="/template/js/alerts/alerts.js?v=<?=$_SESSION['version']?>"></script>
-	<script src="/template/js/content/content.js?v=<?=$_SESSION['version']?>"></script>
 
 	<script src="/template/js/main/nav.js?v=<?=$_SESSION['version']?>"></script>
 	<script src="/template/js/main/form.js?v=<?=$_SESSION['version']?>"></script>
@@ -142,7 +143,6 @@
 		body._loading_ footer {
 			opacity: 0;
 		}
-
 		body._loading_:after {}
 	</style>
 	<script>
@@ -154,7 +154,7 @@
 	<meta property="og:title" content="<?=$sTitle?>" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="<?=config::$site_url . $_SERVER['REQUEST_URI']?>" />
-	<meta property="og:image" content="<?=config::$site_url . '/template/imgs/logo.png'?>" />
+	<meta property="og:image" content="<?=config::$site_url . '/template/imgs/logos/logo.svg'?>" />
 </head>
 
 <body class="animate__animated animate__fadeIn _loading_">

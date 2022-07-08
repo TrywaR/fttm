@@ -17,7 +17,7 @@
         </div>
 
         <div class="block_user_prev">
-          <a href="/users/" class="home_link user_prev">
+          <a href="/profile/" class="home_link user_prev">
             <div class="_img">
               <i class="fa-solid fa-address-book"></i>
             </div>
@@ -109,7 +109,7 @@
 
       <div class="nav_btn _user">
         <?php if (isset($_SESSION['user'])): ?>
-          <a class="_href" href="/users/">
+          <a class="_href" href="/profile/">
             <i class="fa-solid fa-address-book"></i>
           </a>
         <?php else: ?>
