@@ -57,6 +57,8 @@ $(function(){
 		$(document).find($(this).data().shower).toggleClass('_show_')
 		return false
 	})
+
+
 })
 
 // animation_number_to
@@ -94,12 +96,21 @@ function animation_number_to( oElem, iFrom, iTo, iDuration, sTheme, sFormat ) {
 
 $(function(){
 	// theme_switch
+	if ( localStorage.getItem('theme') ) {
+		content_download( {
+			'action': 'sessions',
+			'form': 'theme',
+			'theme': localStorage.getItem('theme'),
+		}, 'json', false )
+	}
+
 	$(document).find('#theme_switch ._val').on ('click', function(){
+		var oButton = $(this)
 		$.when(
 			content_download( {
 				'action': 'sessions',
 				'form': 'theme',
-				'theme': $(this).data().val,
+				'theme': oButton.data().val,
 			}, 'json', false )
 		).then( function( oData ){
 			if ( oData.success ) location.reload()
@@ -108,12 +119,13 @@ $(function(){
 	// theme_switch x
 
 	// lang_switch
-	$(document).find('#lang_switch ._val').on ('click', function(){
+	$(document).find('#lang_switch ._vals').on ('change', function(){
+		var oButton = $(this)
 		$.when(
 			content_download( {
 				'action': 'sessions',
 				'form': 'lang',
-				'lang': $(this).data().val,
+				'lang': oButton.val(),
 			}, 'json', false )
 		).then( function( oData ){
 			if ( oData.success ) location.reload()

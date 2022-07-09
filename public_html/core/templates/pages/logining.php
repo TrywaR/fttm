@@ -11,7 +11,7 @@
         <?=$oLang->get('SignIn')?>
       </div>
     </a>
-    <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/registration/') echo 'disabled';?>" href="/registration/">
+    <a class="btn btn-primary <?if($_SERVER['REQUEST_URI']=='/authorizations/registration/') echo 'disabled';?>" href="/authorizations/registration/">
       <div class="_icon">
         <i class="fas fa-user-plus"></i>
       </div>

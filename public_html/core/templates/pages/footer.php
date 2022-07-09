@@ -6,12 +6,7 @@
     <div id="footer_actions" class="_actions animate__animated"></div>
 
     <div class="_bottom">
-      <!-- <div class="_lang">
-        <div class="block_swich">
-          <div class="_val">en</div>
-          <div class="_val">ru</div>
-        </div>
-      </div> -->
+      <?include 'core/templates/elems/soc_block.php'?>
 
       <div class="_params">
         <div class="_item _theme">
@@ -24,21 +19,17 @@
                 <i class="fa-solid fa-sun"></i>
               </div>
             </div>
-            <input class="_input" type="hidden" name="theme" value="">
           </div>
         </div>
-      </div>
 
-      <div class="_social block_social">
-        <a class="_item" href="https://t.me/u0life" target="_blank">
-          <i class="fa-brands fa-telegram"></i>
-        </a>
-        <a class="_item" href="https://www.instagram.com/u0life/" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a class="_item" href="https://www.tiktok.com/@u0life" target="_blank">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
+        <div class="_item _lang">
+          <div class="block_swich" id="lang_switch">
+            <select class="select _vals" name="lang">
+              <option <?=$_SESSION['lang'] == 'en' ? 'selected="selected"' : ''?> value="en">en</option>
+              <option <?=$_SESSION['lang'] == 'ru' ? 'selected="selected"' : ''?> value="ru">ru</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div class="_copy">

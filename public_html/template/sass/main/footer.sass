@@ -13,9 +13,13 @@
       justify-content: center
 
       ._item
+        display: flex
+        justify-content: center
+        align-items: center
         padding: .5rem
 
     ._social
+      padding: .5rem 0
 
     ._lang
       opacity: .5
@@ -52,7 +56,45 @@
       &._active_
         bottom: calc( #{$block_nav_mobile_height} + 1rem )
 
-@media screen and (min-width:1199px)
+    ._bottom
+      position: fixed
+      left: 0
+      right: 0
+      bottom: -100%
+      z-index: 9996
+      padding: 1rem
+      // background: $color_main_dark_ultra
+      @include transition_default
+      @include shadow_default
+
+      .block_social
+        ._item
+          opacity: .3
+
+      ._params
+        ._item
+          opacity: .8
+
+      ._copy
+        opacity: .3
+
+      &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        border-radius: $border_radius
+        background: $color_main_dark_ultra
+        opacity: .98
+        z-index: -1
+
+      &._active_
+        bottom: $block_nav_mobile_height
+
+
+@media screen and (min-width:1200px)
   .block_footer
     ._actions
       padding: 1rem

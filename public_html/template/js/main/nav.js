@@ -84,6 +84,12 @@ $(function(){
   //   if ( $(this).attr('href') == '/' + arrThisPath[1] + '/'  ) $(this).addClass('_active_')
   // })
 
+  // Логотип на мобиле
+  $(document).find('.block_nav_mobile .nav_btn._logo').on('click', function(){
+    $(document).find('footer').find('._bottom').toggleClass('_active_')
+    return false
+  })
+
   // Раскрытие меню
   $(document).find('#block_nav_fuller ._btn').on('click', function(){
     if ( $(document).find('#block_nav').hasClass('_full_') ) {

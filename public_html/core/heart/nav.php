@@ -65,6 +65,7 @@ class nav
         'description' => $oLang->get('HomePageDescription'),
         'url' => '/',
         'icon' => '<i class="fa-solid fa-house"></i>',
+        'menu_hide' => true,
       ),
 
       '/authorizations/' => array(

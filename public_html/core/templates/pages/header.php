@@ -73,11 +73,11 @@
     </div>
 
     <div class="block_nav_mobile">
-      <div class="nav_btn _logo">
+      <button class="nav_btn _logo">
         <?include 'core/templates/pages/logo.php';?>
-      </div>
+      </button>
 
-      <div class="nav_btn _main" id="block_nav_mobile_main">
+      <button class="nav_btn _main" id="block_nav_mobile_main">
         <div class="_icon">
           <div class="_old">
             <i class="fa-solid fa-bars"></i>
@@ -90,9 +90,9 @@
           </div>
           <div class="_new"></div>
         </div>
-      </div>
+      </button>
 
-      <div class="nav_btn _subs" id="block_nav_mobile_subs">
+      <button class="nav_btn _subs" id="block_nav_mobile_subs">
         <div class="_icon">
           <div class="_old">
             <i class="fa-solid fa-ellipsis"></i>
@@ -105,7 +105,7 @@
           </div>
           <div class="_new"></div>
         </div>
-      </div>
+      </button>
 
       <div class="nav_btn _user">
         <?php if (isset($_SESSION['user'])): ?>

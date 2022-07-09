@@ -28,17 +28,6 @@
       </p>
     </div>
 
-    <div class="_social block_social">
-      <a class="_item" href="https://t.me/u0life" target="_blank">
-        <i class="fa-brands fa-telegram"></i>
-      </a>
-      <a class="_item" href="https://www.instagram.com/u0life/" target="_blank">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-    </div>
-
-    <div class="_copy">
-      2021 - <?=date('Y')?> <a href="https://trywar.ru/" target="_blank">TrywaR [dev]</a> ©
-    </div>
+    <?include 'core/templates/elems/soc_block.php'?>
   </div>
 </div>

@@ -256,7 +256,12 @@ body {
     display: flex;
     justify-content: center; }
     .block_footer ._bottom ._params ._item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0.5rem; }
+  .block_footer ._bottom ._social {
+    padding: 0.5rem 0; }
   .block_footer ._bottom ._lang {
     opacity: 0.5; }
   .block_footer ._bottom ._theme {
@@ -283,8 +288,36 @@ body {
     z-index: 9997;
     transition: all 0.3s ease-in-out 0s; }
     .block_footer ._actions._active_ {
-      bottom: calc( 4rem + 1rem ); } }
-@media screen and (min-width: 1199px) {
+      bottom: calc( 4rem + 1rem ); }
+  .block_footer ._bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    z-index: 9996;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out 0s;
+    box-shadow: 0 0 0.2rem 0rem rgba(200, 200, 200, 0.1), 0 0 0.6rem 0.6rem rgba(200, 200, 200, 0.1), inset 0 0 0.1rem 0 rgba(250, 250, 250, 0.1); }
+    .block_footer ._bottom .block_social ._item {
+      opacity: 0.3; }
+    .block_footer ._bottom ._params ._item {
+      opacity: 0.8; }
+    .block_footer ._bottom ._copy {
+      opacity: 0.3; }
+    .block_footer ._bottom:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 0.5rem;
+      background: #dae8fb;
+      opacity: 0.98;
+      z-index: -1; }
+    .block_footer ._bottom._active_ {
+      bottom: 4rem; } }
+@media screen and (min-width: 1200px) {
   .block_footer ._actions {
     padding: 1rem; }
     .block_footer ._actions .btn-group {
@@ -511,6 +544,8 @@ body .block_nav_mobile_body_blocker {
       box-sizing: border-box;
       overflow: hidden;
       cursor: pointer;
+      background: none;
+      border: none;
       z-index: 1; }
       body .block_nav_mobile .nav_btn:before, body .block_nav_mobile .nav_btn:after {
         content: "";
@@ -657,6 +692,10 @@ body #fttm_modal {
   body.modal-open main,
   body.modal-open footer {
     filter: blur(0.1rem); } }
+select {
+  background: #ecf2fd;
+  color: black; }
+
 .input_checkbox,
 .block_input {
   margin: 0 0 1rem; }
@@ -1421,6 +1460,14 @@ body .block_date {
   flex-direction: row;
   justify-content: center;
   align-items: center; }
+  .block_swich .select {
+    display: flex;
+    background: none;
+    border: none;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    background: #ecf2fd; }
   .block_swich ._vals {
     position: relative;
     display: flex;

@@ -4,10 +4,8 @@ switch ($_REQUEST['form']) {
     $arrResult = [];
     $arrResult['theme'] = $_SESSION['theme'] = $_REQUEST['theme'];
     if ( isset($_SESSION['user']) ) {
-      $oUser = new user( $_SESSION['user']['id'] );
-      $oUser->arrAddFields['name'] = 'update';
-      $oUser->arrAddFields['theme'] = $arrResult['theme'];
-      $oUser->save();
+      $_SESSION['user']['theme'] = $arrResult['theme'];
+      db::query("UPDATE `users` SET `theme` = '" . $arrResult['theme'] . "' WHERE `id` = '" . $_SESSION['user']['id'] . "'");
     }
     notification::success($arrResult);
     break;
@@ -16,10 +14,8 @@ switch ($_REQUEST['form']) {
     $arrResult = [];
     $arrResult['lang'] = $_SESSION['lang'] = $_REQUEST['lang'];
     if ( isset($_SESSION['user']) ) {
-      $oUser = new user( $_SESSION['user']['id'] );
-      $oUser->arrAddFields['name'] = 'update';
-      $oUser->arrAddFields['lang'] = $arrResult['lang'];
-      $oUser->save();
+      $_SESSION['user']['theme'] = $arrResult['lang'];
+      db::query("UPDATE `users` SET `lang` = '" . $arrResult['lang'] . "' WHERE `id` = '" . $_SESSION['user']['id'] . "'");
     }
     notification::success($arrResult);
     break;

@@ -1,6 +1,6 @@
 <?
 session_start();
-$_SESSION['version'] = '5.3.86';
+$_SESSION['version'] = '5.3.895';
 
 include_once 'core/core.php'; # Основные настройки
 $olang = new lang(); // Подтягиваем языки
@@ -26,6 +26,8 @@ switch ($_SERVER['REQUEST_URI']) {
     $sIncludePathContent = $_SERVER['REDIRECT_URL'] != '' ? 'pages'.$_SERVER['REDIRECT_URL'].'index' : 'pages/welcome/index';
 
     // Проверки
+    if ( $_SESSION['user'] )
+    if ( ! $_SESSION['id'] ) unset( $_SESSION['user'] );
     $bUser = isset($_SESSION['user']) ? 1 : 0;
     $iUserRole = isset($_SESSION['user']) ? $_SESSION['user']['role_val'] : 0;
     $iAccessLevel = isset($arrNavCurrent['access']) ? $arrNavCurrent['access'] : -1;

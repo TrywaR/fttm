@@ -390,15 +390,15 @@ class lang
 
   function __construct()
   {
-    // Берём язык пользователя
-    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
-      $this->sUserLang = $_SESSION['user']['lang'];
+    // Указанные в сессии
+    if ( $_SESSION['lang'] ) {
+      $this->sUserLang = $_SESSION['lang'];
     }
     // Другое
     else {
-      // Указанные в сессии
-      if ( $_SESSION['lang'] ) {
-        $this->sUserLang = $_SESSION['lang'];
+      // Берём язык пользователя
+      if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
+        $this->sUserLang = $_SESSION['lang'] = $_SESSION['user']['lang'];
       }
       else {
         // Автоопределения от браузера
@@ -407,10 +407,10 @@ class lang
           $arrlangs = explode(',',$arrlang[0]);
           if ( count($arrlangs) ) {
             $slang = $arrlangs[1];
-            if ( $slang ) $this->sUserLang = $slang;
-            else $this->sUserLang = 'ens';
+            if ( $slang ) $this->sUserLang = $_SESSION['lang'] = $slang;
+            else $this->sUserLang = $_SESSION['lang'] = 'en';
           }
-        }  
+        }
       }
     }
 
