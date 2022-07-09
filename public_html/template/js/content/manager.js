@@ -69,7 +69,8 @@ function content_manager_init( oContentManagerButtonsId ) {
 
 			$(document).find(oContentManagerBlock + ' ' + oContentManagerItem + '.content_manager_select').each(function(){
 				var oElem = $(this)
-				oData.id = oElem.data().content_manager_item_id
+        if ( oElem.data().id ) oData.id = oElem.data().id
+				if ( oElem.data().content_manager_item_id ) oData.id = oElem.data().content_manager_item_id
 
 				$.when(
 				  content_download( oData, 'json' )
