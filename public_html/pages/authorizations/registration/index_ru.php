@@ -1,7 +1,7 @@
 <section class="row">
   <div class="mt-4 col-12 col-md-7 m-auto">
     <div class="form_block">
-      <form id="form_registration" class="form_registration">
+      <form id="form_registration" class="form_registration __form_event_default">
       <h2 class="_form_title sub_title">
         Регистрация
       </h2>

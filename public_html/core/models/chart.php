@@ -11,6 +11,8 @@ class chart extends model
   public static $sChartTypeSum = '';
   public static $sChartScaleX = '';
   public static $sChartScaleY = '';
+  public static $sChartScaleStackedX = '';
+  public static $sChartScaleStackedY = '';
   public static $sResult = '';
 
   public function hash() {
@@ -89,16 +91,26 @@ class chart extends model
               display: false
             },
           },
+          scales: {
+            x: {
+              <?if ( $this->sChartScaleX ) {?>
+                min: <?=$this->sChartScaleX?>,
+              <?}?>
+              <?if ( $this->sChartScaleStackedX ) {?>
+                stacked: true,
+              <?}?>
+            },
+            y: {
+              <?if ( $this->sChartScaleY ) {?>
+                min: <?=$this->sChartScaleY?>,
+              <?}?>
+              <?if ( $this->sChartScaleStackedY ) {?>
+                stacked: true,
+              <?}?>
+            }
+          }
         },
       })
-
-      <?if ( $this->sChartScaleY ) {?>
-        <?=$this->sHash?>.options.scales.y = <?=$this->sChartScaleY?>
-      <?}?>
-
-      <?if ( $this->sChartScaleX ) {?>
-        <?=$this->sHash?>.options.scales.x = <?=$this->sChartScaleX?>
-      <?}?>
 
       window.addEventListener('beforeprint', () => {
         <?=$this->sHash?>.resize(600, 600)
@@ -176,16 +188,26 @@ class chart extends model
               display: false
             }
           },
+          scales: {
+            x: {
+              <?if ( $this->sChartScaleX ) {?>
+                min: <?=$this->sChartScaleX?>,
+              <?}?>
+              <?if ( $this->sChartScaleStackedX ) {?>
+                stacked: true,
+              <?}?>
+            },
+            y: {
+              <?if ( $this->sChartScaleY ) {?>
+                min: <?=$this->sChartScaleY?>,
+              <?}?>
+              <?if ( $this->sChartScaleStackedY ) {?>
+                stacked: true,
+              <?}?>
+            }
+          }
         },
       })
-
-      <?if ( $this->sChartScaleY ) {?>
-        <?=$this->sHash?>_sum.options.scales.y = <?=$this->sChartScaleY?>
-      <?}?>
-
-      <?if ( $this->sChartScaleX ) {?>
-        <?=$this->sHash?>_sum.options.scales.x = <?=$this->sChartScaleX?>
-      <?}?>
 
       window.addEventListener('beforeprint', () => {
         <?=$this->sHash?>_sum.resize(600, 600)

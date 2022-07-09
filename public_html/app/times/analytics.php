@@ -84,12 +84,13 @@ switch ($_REQUEST['form']) {
     $oChart->arrDataset = $arrResults['data'];
     $oChart->arrCategories = $arrResults['categories'];
     if ( $_REQUEST['chart_type'] ) $oChart->sChartType = $_REQUEST['chart_type'];
-    if ( $_REQUEST['chart_type_sum'] ) $oChart->sChartTypeSum = $_REQUEST['chart_type_sum'];
     if ( $_REQUEST['sChartScaleX'] ) $oChart->sChartScaleX = $_REQUEST['sChartScaleX'];
     if ( $_REQUEST['sChartScaleY'] ) $oChart->sChartScaleY = $_REQUEST['sChartScaleY'];
+    if ( $_REQUEST['sChartScaleStackedX'] ) $oChart->sChartScaleStackedX = $_REQUEST['sChartScaleStackedX'];
+    if ( $_REQUEST['sChartScaleStackedY'] ) $oChart->sChartScaleStackedY = $_REQUEST['sChartScaleStackedY'];
 
     $arrResults['chart'] = $oChart->show();
-    $arrResults['chart_sum'] = $oChart->show_sum();
+    // $arrResults['chart_sum'] = $oChart->show_sum();
 
     notification::success($arrResults);
     break;
@@ -161,10 +162,15 @@ switch ($_REQUEST['form']) {
     $oChart = new chart();
     $oChart->arrDataset = $arrResults['data'];
     $oChart->arrCategories = $arrResults['categories'];
+    if ( $_REQUEST['chart_type'] ) $oChart->sChartType = $_REQUEST['chart_type'];
+    if ( $_REQUEST['sChartScaleX'] ) $oChart->sChartScaleX = $_REQUEST['sChartScaleX'];
+    if ( $_REQUEST['sChartScaleY'] ) $oChart->sChartScaleY = $_REQUEST['sChartScaleY'];
+    if ( $_REQUEST['sChartScaleStackedX'] ) $oChart->sChartScaleStackedX = $_REQUEST['sChartScaleStackedX'];
+    if ( $_REQUEST['sChartScaleStackedY'] ) $oChart->sChartScaleStackedY = $_REQUEST['sChartScaleStackedY'];
     // $oChart->sChartScaleY;
 
     $arrResults['chart'] = $oChart->show();
-    $arrResults['chart_sum'] = $oChart->show_sum();
+    // $arrResults['chart_sum'] = $oChart->show_sum();
 
     notification::success($arrResults);
     break;
@@ -235,12 +241,13 @@ switch ($_REQUEST['form']) {
     $oChart->arrDataset = $arrResults['data'];
     $oChart->arrCategories = $arrResults['categories'];
     if ( $_REQUEST['chart_type'] ) $oChart->sChartType = $_REQUEST['chart_type'];
-    if ( $_REQUEST['chart_type_sum'] ) $oChart->sChartTypeSum = $_REQUEST['chart_type_sum'];
     if ( $_REQUEST['sChartScaleX'] ) $oChart->sChartScaleX = $_REQUEST['sChartScaleX'];
     if ( $_REQUEST['sChartScaleY'] ) $oChart->sChartScaleY = $_REQUEST['sChartScaleY'];
+    if ( $_REQUEST['sChartScaleStackedX'] ) $oChart->sChartScaleStackedX = $_REQUEST['sChartScaleStackedX'];
+    if ( $_REQUEST['sChartScaleStackedY'] ) $oChart->sChartScaleStackedY = $_REQUEST['sChartScaleStackedY'];
 
     $arrResults['chart'] = $oChart->show();
-    $arrResults['chart_sum'] = $oChart->show_sum();
+    // $arrResults['chart_sum'] = $oChart->show_sum();
 
     notification::success($arrResults);
     break;

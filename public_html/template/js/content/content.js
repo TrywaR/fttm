@@ -1,60 +1,5 @@
 // События
 $(function(){
-  // Отправка данных с формы
-	// $(document).find('form:not(.__no_ajax)').on ('submit', function(){
-	// 	var
-	// 	oForm = $(this)
-	// 	oData = oForm.serializeArray()
-	//
-	// 	$.when(
-	// 		content_download( oData, 'json', true )
-	// 	).done( function( oData ){
-	// 		if ( ! oData.success ) return false
-	//
-	// 		// Если модель, то сохраняем в локали
-	// 		if ( oData.success.model ) {
-	// 			localStorage.setItem(oData.success.model, JSON.stringify(oData.success.data))
-	// 			// if ( localStorage.getItem('code') ) code = $.parseJSON( localStorage.getItem('code') )
-	// 		}
-	//
-	// 		// Если редирект
-	// 		var iLocationTime = 1000
-	// 		if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
-	// 		if ( oData.success.location )
-	// 			setTimeout(function(){
-	// 			  window.location.replace( oData.success.location )
-	// 			}, iLocationTime)
-	//
-	// 		// Если нужно перезагрузить страницу
-	// 		if ( oData.success.location_reload )
-	// 			setTimeout(function(){
-	// 				location.reload()
-	// 			}, iLocationTime)
-	//
-	// 		// Перезагружаем страницу если надо
-	// 		if( oForm.hasClass('reload_page') ) location.reload()
-	//
-	// 		// Добавляем в данные
-	// 		if ( oForm.hasClass('content_loader_form') )
-	// 			switch (oData.success.event) {
-	// 				case 'save':
-	// 				case 'reload':
-	// 					oForm.find('.form_reset').click()
-	// 					content_loader_update( oData.success.data )
-	// 					break;
-	// 				case 'add':
-	// 					oForm.find('.form_reset').click()
-	// 					content_loader_add( oData.success.data )
-	// 					break;
-	// 				case 'del':
-	// 					content_loader_del( oData.success.data )
-	// 					break;
-	// 			}
-	// 	})
-	//
-	// 	return false
-	// })
-
   // Сброс формы редактирования контента
   $(document).on('click', '.form_reset', function(){
 		var oForm = $(this).parents('form')
@@ -99,7 +44,7 @@ $(function(){
 						oElem.parents( oElem.data().elem ).remove()
 					}, 500)
 				}
-				else return fttm_alerts({'error':'Not have class delete :( attr data-elem'})
+				else return status({'error':'Not have class delete :( attr data-elem'})
 			}
 			else return false
 		}
@@ -150,45 +95,11 @@ $(function(){
 			return false
 		}
 
-		// HTML
-		// if ( oElem.data().form == 'html' ) {
-		// 	$.when(
-		// 		content_download( oData, 'json', false )
-		// 	).then( function( oData ){
-		// 		console.log( oData )
-		// 	} )
-		// 	return false
-		// }
-
 		$.when(
 		  content_download( oData, 'json' )
 		).then( function( oData ){
-			// fttm_alerts( oData )
 		})
 	})
-
-	// Ссылки
-	// $(document).on('click', 'a:not(.__no_ajax)', function(){
-	// 	console.log('click')
-	// 	// Параметры
-	// 	var
-	// 		oElem = $(this),
-	// 		sAnimateClass = oElem.data().animate_class ? oElem.data().animate_class : 'animate__zoomOut',
-	// 		oData = {
-	// 			'action' : $(this).data().action,
-	// 			'form' : $(this).data().form,
-	// 			'id' : $(this).data().id
-	// 		}
-	//
-	// 	$.when(
-	// 	  content_download( oElem.href, 'json' )
-	// 	).then( function( oData ){
-	// 		// fttm_alerts( oData )
-	// 		console.log( oData )
-	// 	})
-	//
-	// 	return false
-	// })
 })
 
 // Функции
@@ -221,20 +132,12 @@ function content_download( oData, oReturnType, sAppStatus ) {
        }
       }, false);
 
-      // // Download progress
-      // xhr.addEventListener("progress", function(evt){
-      // 		if (evt.lengthComputable) {
-      // 				var percentComplete = evt.loaded / evt.total;
-      // 				// Do something with download progress
-      // 		}
-      // }, false);
-
       return xhr;
 	 },
   }).fail(function( oData ){
-    if ( sAppStatus ) fttm_alerts( {'error': {'text': 'Connect error'}} )
+    if ( sAppStatus ) status( {'error': {'text': 'Connect error'}} )
   }).done(function( oData ){
-    if ( sAppStatus ) fttm_alerts( oData )
+    if ( sAppStatus ) status( oData )
 
 		var iLocationTime = 500
 		if ( oData.success && oData.success.location_time ) iLocationTime = oData.success.location_time
@@ -260,11 +163,5 @@ function content_download( oData, oReturnType, sAppStatus ) {
 				window.location.replace(oData.error.location)
 			}, iLocationTime)
   })
-
-	// xhr.upload.onprogress = function(evt){
-	//  percent = evt.loaded / evt.total;
-	//  width = Math.ceil(percent * 100);
-	//  bar.style.width = width + "%";
- // };
 }
 // content_download x

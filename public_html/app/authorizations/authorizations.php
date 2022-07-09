@@ -3,7 +3,7 @@ switch ($_REQUEST['form']) {
   case 'login': # Вход
     // Готовим результат вывода
     $arrResult = [
-      'text' => 'Error entering login or password!'
+      'text' => $oLang->get('ErrorLoginOrPassword')
     ];
     // Кодируем пасс
     $password = hash( 'ripemd128', $_REQUEST['password'] );
@@ -15,7 +15,7 @@ switch ($_REQUEST['form']) {
       $arrResult['data'] = $_SESSION['user'] = $arrUser;
       $_SESSION['theme'] = $_SESSION['user']['theme'];
       $_SESSION['lang'] = $_SESSION['user']['lang'];
-      $arrResult['text'] = 'Successful login!';
+      $arrResult['text'] = $oLang->get('SuccessfulLogin');
       $arrResult['location'] = '/';
       // Обновляем сессию
       $oSession = new session( 0, $_SESSION['session'] );
@@ -35,22 +35,23 @@ switch ($_REQUEST['form']) {
     // Отчищаем сессию
     session_destroy();
     // Возвращяем результат
-    $arrResult['text'] = 'Successful Exit!';
+    $arrResult['text'] = $oLang->get('SuccessfulExit');
+    $arrResult['location'] = '/';
     notification::success( $arrResult );
     break;
 
   case 'registration': # Регистрация
     // Если пароли не совпадают
-    if ( $_REQUEST['password'] != $_REQUEST['password_confirm'] ) notification::error('Passwords do not match.');
+    if ( $_REQUEST['password'] != $_REQUEST['password_confirm'] ) notification::error($oLang->get('PasswordsDoNotMatch'));
 
     // Проверка, используется ли такой Login
     $arrUser = db::query("SELECT * FROM `users` WHERE `login` = '". $_REQUEST['login'] ."'");
-    if ( is_array($arrUser) ) notification::error('This login is already taken.');
+    if ( is_array($arrUser) ) notification::error($olang->get('ThisloginIsAlreadyTaken'));
 
     // Проверка, используется ли такой Email
     if ( $_REQUEST['email'] ) {
       $arrUser = db::query("SELECT * FROM `users` WHERE `email` = '". $_REQUEST['email'] ."'");
-      if ( is_array($arrUser) ) notification::error('This email is already taken.');
+      if ( is_array($arrUser) ) notification::error($oLang->get('ThisEmailIsAlreadyTaken'));
     }
 
     // Регистрация
@@ -77,7 +78,7 @@ switch ($_REQUEST['form']) {
     $oUser->arrAddFields = $arrData;
 
     $arrResults = [];
-    $arrResults['text'] = 'Registration completed successfully! (:';
+    $arrResults['text'] = $oLang->get('RegistrationCompletedSuccessfully');
     $arrResults['location'] = '/authorizations/';
     $arrResults['location_time'] = 2000;
 
@@ -90,7 +91,7 @@ switch ($_REQUEST['form']) {
     $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
 
     if ( $oUser->add() ) notification::success($arrResults);
-    else notification::error('Something went wrong, oh, call the super programmers!');
+    else notification::error($oLang->get('SomethingWentWrongOhCallTheSuperProgrammers'));
     break;
 
   case 'password_recovery': # Восстановление пароля
@@ -116,26 +117,26 @@ switch ($_REQUEST['form']) {
       $mySql = "UPDATE `users` SET `password` = '" . $new_password_hash . "' WHERE `email` = '". $arrUser['email'] ."'";
       $arrUserUpdate = db::query($mySql);
       if ( ! isset($arrUserUpdate) )
-      notification::error('Error saving password.');
+      notification::error($oLang->get('ErrorSavingPassword'));
 
       // + Отправляем новый пароль пользователю на почту
       $mailNew = new mail();
       $mailNew->to      = $arrUser['email'];
-      $mailNew->subject = $mailNew->subject . 'Password recovery';
-      $mailNew->message .= 'Account password changed <strong>' . $arrUser['email'] . '</strong><br/>';
-      $mailNew->message .= 'New password: <strong>' . $new_password . '</strong><br/>';
+      $mailNew->subject = $mailNew->subject . $oLeng->get('PasswordRecovery');
+      $mailNew->message .= $oLang->get('AccountPasswordСhanged') . ' <strong>' . $arrUser['email'] . '</strong><br/>';
+      $mailNew->message .= $oLang->get('NewPassword') . ': <strong>' . $new_password . '</strong><br/>';
 
       $mailNew->send();
 
       $arrResults = [];
-      $arrResults['text'] = 'New password send to mail '. $arrUser['email'] .'!';
+      $arrResults['text'] = $oLang->get('NewPasswordSendToMail') . ' ' . $arrUser['email'] .'!';
       $arrResults['location'] = '/authorizations/';
       $arrResults['location_time'] = 2000;
       notification::success($arrResults);
     }
 
     // Пользователя нет
-    else notification::error('This email is not registered.');
+    else notification::error($oLang->get('ThisEmailIsNotRegistered'));
     break;
 
   # Delete account
@@ -143,7 +144,7 @@ switch ($_REQUEST['form']) {
     $oUser = new user( $_SESSION['user']['id'] );
     $oUser->del();
     $arrResults = [];
-    $arrResults['text'] = 'New password send to mail '. $arrUser['email'] .'!';
+    $arrResults['text'] = $oLang->get('YouAccountHasBeenDeleted');
     $arrResults['location'] = '/authorizations/';
     $arrResults['location_time'] = 2000;
     notification::success($arrResults);

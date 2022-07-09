@@ -114,6 +114,8 @@ $(function(){
 
     $(document).find('#block_nav ._subs').removeClass('_mobile_active_')
     $(document).find('#block_nav_mobile_subs').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo_content').removeClass('_active_')
 
     if ( $(this).hasClass('_active_') ) $('body').addClass('_mobile_nav_active_')
     else $('body').removeClass('_mobile_nav_active_')
@@ -126,15 +128,30 @@ $(function(){
 
     $(document).find('#block_nav ._main').removeClass('_mobile_active_')
     $(document).find('#block_nav_mobile_main').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo_content').removeClass('_active_')
 
     if ( $(this).hasClass('_active_') ) $('body').addClass('_mobile_nav_active_')
     else $('body').removeClass('_mobile_nav_active_')
   })
-  $(document).find('#block_nav ._main a, #block_nav ._subs a, #block_nav_mobile_body_blocker'). on('click', function(){
+  $(document).find('#block_nav_mobile_logo').on('click', function(){
+    $(this).toggleClass('_active_')
+
+    $(document).find('#block_nav ._subs').removeClass('_mobile_active_')
+    $(document).find('#block_nav ._main').removeClass('_mobile_active_')
+    $(document).find('#block_nav_mobile_main').removeClass('_active_')
+    $(document).find('#block_nav_mobile_subs').removeClass('_active_')
+
+    if ( $(this).hasClass('_active_') ) $('body').addClass('_mobile_nav_active_')
+    else $('body').removeClass('_mobile_nav_active_')
+  })
+  $(document).find('#block_nav ._main a, #block_nav ._subs a, #block_nav_mobile_body_blocker, #block_nav_mobile_logo_content a'). on('click', function(){
     $(document).find('#block_nav ._main').removeClass('_mobile_active_')
     $(document).find('#block_nav_mobile_main').removeClass('_active_')
     $(document).find('#block_nav ._subs').removeClass('_mobile_active_')
     $(document).find('#block_nav_mobile_subs').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo').removeClass('_active_')
+    $(document).find('#block_nav_mobile_logo_content').removeClass('_active_')
     $('body').removeClass('_mobile_nav_active_')
   })
 

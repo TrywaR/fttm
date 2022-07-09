@@ -106,6 +106,8 @@ $(function(){
 
 	$(document).find('#theme_switch ._val').on ('click', function(){
 		var oButton = $(this)
+		localStorage.setItem('theme', oButton.data().val)
+
 		$.when(
 			content_download( {
 				'action': 'sessions',
@@ -121,6 +123,8 @@ $(function(){
 	// lang_switch
 	$(document).find('#lang_switch ._vals').on ('change', function(){
 		var oButton = $(this)
+		localStorage.setItem('lang', oButton.val())
+
 		$.when(
 			content_download( {
 				'action': 'sessions',

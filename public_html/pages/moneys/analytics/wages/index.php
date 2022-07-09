@@ -40,7 +40,6 @@
         </div>
       </form>
 
-      <h2 class="sub_title"><?=$oLang->get('Week')?></h2>
       <div id="res_weeks" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -49,17 +48,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title">
+      <h2>
         <?=$oLang->get('Sum')?>
         <span id="res_weeks_sum_res" class="badge bg-primary">0</span>
       </h2>
-      <div id="res_weeks_sum" class="block_chart">
-        <div class="block_loading">
-          <div class="_icon">
-            <i class="fas fa-chart-area"></i>
-          </div>
-        </div>
-      </div>
 
       <script>
         $(document).find('.week_filter').on ('submit', function(){
@@ -79,7 +71,9 @@
               content_download( {
                 'action': 'moneys',
                 'form': 'analytics_week',
-                'chart_type_sum': 'bar',
+                'chart_type': 'bar',
+                'sChartScaleStackedX': true,
+                'sChartScaleStackedY': true,
                 'money_type': '2',
                 'week': iWeek,
               }, 'text', false )
@@ -89,7 +83,6 @@
 
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_weeks').html( oData.success.chart )
-                if ( oData.success.chart_sum ) $(document).find('#res_weeks_sum').html( oData.success.chart_sum )
                 if ( oData.success.sum ) animation_number_to($("#res_weeks_sum_res"),0,oData.success.sum)
 
                 bWeekShow = true
@@ -130,7 +123,6 @@
         </div>
       </form>
 
-      <h2 class="sub_title"><?=$oLang->get('Month')?></h2>
       <div id="res_month" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -139,17 +131,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title">
+      <h2>
         <?=$oLang->get('Sum')?>
         <span id="res_month_sum_res" class="badge bg-primary">0</span>
       </h2>
-      <div id="res_month_sum" class="block_chart">
-        <div class="block_loading">
-          <div class="_icon">
-            <i class="fas fa-chart-area"></i>
-          </div>
-        </div>
-      </div>
 
       <script>
         $(document).find('.month_filter').on ('submit', function(){
@@ -171,7 +156,9 @@
               content_download( {
                 'action': 'moneys',
                 'form': 'analytics_month',
-                'chart_type_sum': 'bar',
+                'chart_type': 'bar',
+                'sChartScaleStackedX': true,
+                'sChartScaleStackedY': true,
                 'money_type': '2',
                 'year': iYear,
                 'month': iMonth,
@@ -182,7 +169,6 @@
 
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_month').html( oData.success.chart )
-                if ( oData.success.chart_sum ) $(document).find('#res_month_sum').html( oData.success.chart_sum )
                 if ( oData.success.sum ) animation_number_to($("#res_month_sum_res"),0,oData.success.sum)
 
                 bMonthShow = true
@@ -215,7 +201,6 @@
         </div>
       </form>
 
-      <h2 class="sub_title"><?=$oLang->get('Year')?></h2>
       <div id="res_year" class="block_chart">
         <div class="block_loading">
           <div class="_icon">
@@ -224,17 +209,10 @@
         </div>
       </div>
 
-      <h2 class="sub_title">
+      <h2>
         <?=$oLang->get('Sum')?>
         <span id="res_year_sum_res" class="badge bg-primary">0</span>
       </h2>
-      <div id="res_year_sum" class="block_chart">
-        <div class="block_loading">
-          <div class="_icon">
-            <i class="fas fa-chart-area"></i>
-          </div>
-        </div>
-      </div>
 
       <script>
         $(document).find('.year_filter').on ('submit', function(){
@@ -253,8 +231,10 @@
             $.when(
               content_download( {
                 'action': 'moneys',
+                'chart_type': 'bar',
+                'sChartScaleStackedX': true,
+                'sChartScaleStackedY': true,
                 'form': 'analytics_year',
-                'chart_type_sum': 'bar',
                 'money_type': '2',
                 'year': iYear,
               }, 'text', false )
@@ -265,7 +245,6 @@
               // Отправляем данные а получаем график
               if ( oData.success ) {
                 if ( oData.success.chart ) $(document).find('#res_year').html( oData.success.chart )
-                if ( oData.success.chart_sum ) $(document).find('#res_year_sum').html( oData.success.chart_sum )
                 if ( oData.success.sum ) animation_number_to($("#res_year_sum_res"),0,oData.success.sum)
 
                 bYearShow = true

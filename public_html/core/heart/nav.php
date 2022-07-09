@@ -13,11 +13,11 @@ class nav
     $arrUrls = explode('/',$_SERVER['REDIRECT_URL']);
     $sCurrentUrl = '/';
 
-    if ( isset( $this->arrNavs[ $sCurrentUrl ] ) ) {
-      $arrNavItem = $this->arrNavs[ $sCurrentUrl ];
-      unset($arrNavItem['subs']);
-      $this->arrNavsPath[ $arrNavItem['url'] ] = $arrNavItem;
-    }
+    // if ( isset( $this->arrNavs[ $sCurrentUrl ] ) ) {
+    //   $arrNavItem = $this->arrNavs[ $sCurrentUrl ];
+    //   unset($arrNavItem['subs']);
+    //   $this->arrNavsPath[ $arrNavItem['url'] ] = $arrNavItem;
+    // }
 
     foreach ($arrUrls as $sUrl) {
       if ( ! $sUrl ) continue;
@@ -53,7 +53,21 @@ class nav
 
   // Получить nav
   public function get(){
-    return $this->arrNav;
+    $arrResult = [];
+
+    foreach ( $this->arrNav as $arrNav ) {
+      if ( isset($arrNav['menu_hide']) && $arrNav['menu_hide'] ) continue;
+
+      if ( isset($arrNav['access']) ) {
+        if ( $arrNav['access'] < 0 ) $arrResult[] = $arrNav;
+        else if ( isset($_SESSION['user']) && $_SESSION['user']['role'] >= $arrNav['access'] ) $arrResult[] = $arrNav;
+      }
+      else {
+        $arrResult[] = $arrNav;
+      }
+    }
+
+    return $arrResult;
   }
 
   function __construct()
@@ -65,7 +79,7 @@ class nav
         'description' => $oLang->get('HomePageDescription'),
         'url' => '/',
         'icon' => '<i class="fa-solid fa-house"></i>',
-        'menu_hide' => true,
+        'access' => -1,
       ),
 
       '/authorizations/' => array(
@@ -74,6 +88,7 @@ class nav
         'url' => '/authorizations/',
         'icon' => '<i class="fas fa-user-check"></i>',
         'menu_hide' => true,
+        'access' => -1,
         'subs' => [
           '/authorizations/registration/' => array(
             'name' => $oLang->get('Registration'),
@@ -81,6 +96,7 @@ class nav
             'url' => '/authorizations/registration/',
             'icon' => '<i class="fas fa-user-plus"></i>',
             'menu_hide' => true,
+            'access' => -1,
           ),
           '/authorizations/password_recovery/' => array(
             'name' => $oLang->get('PasswordRecovery'),
@@ -88,6 +104,7 @@ class nav
             'url' => '/authorizations/password_recovery/',
             'icon' => '<i class="fa-solid fa-user-gear"></i>',
             'menu_hide' => true,
+            'access' => -1,
           ),
         ]
       ),

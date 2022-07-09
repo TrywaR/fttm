@@ -4,10 +4,9 @@ $oLang = new lang();
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
-
     $sResultHtml .= '
       <div class="btn-group">
-        <a data-action="tasks" data-animate_class="animate__flipInY" data-elem=".task" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show">
+        <a data-action="tasks" data-animate_class="animate__flipInY" data-elem=".task" data-form="form" data-filter="true" href="javascript:;" class="btn btn-dark content_loader_show">
           <span class="_icon"><i class="fas fa-plus-circle"></i></span>
           <span class="_text">' . $oLang->get("Add") . '</span>
         </a>
@@ -84,9 +83,21 @@ switch ($_REQUEST['form']) {
 
     // Поля для добавления
     $oForm->arrFields = $oTask->fields();
+
+    // Сразу заполняем некоторые данне если переданны
+    if ( $_REQUEST['data'] ) {
+      foreach ($_REQUEST['data'] as $key => $value) {
+        if ( isset($oForm->arrFields[$key]) ) {
+          $oForm->arrFields[$key]['value'] = $value;
+          // $oForm->arrFields[$key]['type'] = 'hidden';
+        }
+      }
+    }
+
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
     $oForm->arrFields['action'] = ['value'=>'tasks','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
+    if ( $_REQUEST['data'] && $_REQUEST['data']['success_click'] ) $oForm->arrFields['success_click'] = ['value'=>$_REQUEST['data']['success_click'],'type'=>'hidden'];
     $oForm->arrFields['session'] = ['value'=>$_SESSION['session'],'type'=>'hidden'];
 
     // Настройки шаблона

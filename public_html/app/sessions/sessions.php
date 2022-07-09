@@ -14,7 +14,7 @@ switch ($_REQUEST['form']) {
     $arrResult = [];
     $arrResult['lang'] = $_SESSION['lang'] = $_REQUEST['lang'];
     if ( isset($_SESSION['user']) ) {
-      $_SESSION['user']['theme'] = $arrResult['lang'];
+      $_SESSION['user']['lang'] = $arrResult['lang'];
       db::query("UPDATE `users` SET `lang` = '" . $arrResult['lang'] . "' WHERE `id` = '" . $_SESSION['user']['id'] . "'");
     }
     notification::success($arrResult);
@@ -41,9 +41,11 @@ switch ($_REQUEST['form']) {
       if ( $arrSession['user_id'] ) {
         $oUser = new user( $arrSession['user_id'] );
         $arrUser = $oUser->get_user();
-        $arrResult['user'] = $_SESSION['user'] = $arrUser;
-        $_SESSION['theme'] = $_SESSION['user']['theme'];
-        $_SESSION['lang'] = $_SESSION['user']['lang'];
+        if ( $arrUser['id'] ) {
+          $arrResult['user'] = $_SESSION['user'] = $arrUser;
+          $_SESSION['theme'] = $_SESSION['user']['theme'];
+          $_SESSION['lang'] = $_SESSION['user']['lang'];
+        }
       }
       // Восстанавливаем сессиию
       $oSession->session = $arrSession['session'];

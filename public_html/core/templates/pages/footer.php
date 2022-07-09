@@ -5,7 +5,7 @@
   <div class="block_footer">
     <div id="footer_actions" class="_actions animate__animated"></div>
 
-    <div class="_bottom">
+    <div class="_bottom" id="block_nav_mobile_logo_content">
       <?include 'core/templates/elems/soc_block.php'?>
 
       <div class="_params">

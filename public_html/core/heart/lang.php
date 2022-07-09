@@ -30,6 +30,21 @@ class lang
 
   function ru(){
     $this->arrLang['ru'] = [
+      'ErrorLoginOrPassword' => 'Неправильный логин или пароль!',
+      'SuccessfulLogin' => 'Успешный вход!',
+      'SuccessfulExit' => 'Успешный выход!',
+      'PasswordsDoNotMatch' => 'Пароли не совпадают',
+      'ThisloginIsAlreadyTaken' => 'Такой логин уже используется.',
+      'ThisEmailIsAlreadyTaken' => 'Такая почта уже используется.',
+      'RegistrationCompletedSuccessfully' => 'Регистрация прошла успешно! (:',
+      'SomethingWentWrongOhCallTheSuperProgrammers' => 'Что-то пошло не так, о, зовите супер программистов!',
+      'ErrorSavingPassword' => 'Ошибка сохранения пароля',
+      'PasswordRecovery' => 'Восстановление пароля',
+      'AccountPasswordСhanged' => 'Пароль изменён',
+      'NewPasswordSendToMail' => 'Новый пароль отправлен на email',
+      'ThisEmailIsNotRegistered' => 'Такой email не зарегистрирован!',
+      'YouAccountHasBeenDeleted' => 'Ваш аккаунт успешно удалён!',
+
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
       'Categories' => 'Категории',
@@ -210,6 +225,21 @@ class lang
 
   function en(){
     $this->arrLang['en'] = [
+      'ErrorLoginOrPassword' => 'Error entering login or password!',
+      'SuccessfulLogin' => 'Successful login!',
+      'SuccessfulExit' => 'Successful Exit!',
+      'PasswordsDoNotMatch' => 'Passwords do not match.',
+      'ThisloginIsAlreadyTaken' => 'This login is already taken.',
+      'ThisEmailIsAlreadyTaken' => 'This email is already taken.',
+      'RegistrationCompletedSuccessfully' => 'Registration completed successfully! (:',
+      'SomethingWentWrongOhCallTheSuperProgrammers' => 'Something went wrong, oh, call the super programmers!',
+      'ErrorSavingPassword' => 'Error saving password.',
+      'PasswordRecovery' => 'Password recovery',
+      'AccountPasswordСhanged' => 'Account password changed',
+      'NewPasswordSendToMail' => 'New password send to mail',
+      'ThisEmailIsNotRegistered' => 'This email is not registered.',
+      'YouAccountHasBeenDeleted' => 'You account has been deleted!',
+
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',
       'Categories' => 'Categories',
@@ -398,7 +428,7 @@ class lang
     else {
       // Берём язык пользователя
       if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
-        $this->sUserLang = $_SESSION['lang'] = $_SESSION['user']['lang'];
+        // $this->sUserLang = $_SESSION['lang'] = $_SESSION['user']['lang'];
       }
       else {
         // Автоопределения от браузера

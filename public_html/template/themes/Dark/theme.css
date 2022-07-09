@@ -323,8 +323,7 @@ body {
     .block_footer ._actions .btn-group {
       display: flex; } }
 body._mobile_nav_active_ header .block_nav_header,
-body._mobile_nav_active_ main,
-body._mobile_nav_active_ footer {
+body._mobile_nav_active_ main {
   filter: blur(0.1rem); }
 body .block_nav_header {
   display: flex;
@@ -539,6 +538,7 @@ body .block_nav_mobile_body_blocker {
       flex-grow: 1;
       position: relative;
       display: flex;
+      color: white;
       width: 11.5rem;
       padding: 1rem;
       box-sizing: border-box;
@@ -695,6 +695,9 @@ body #fttm_modal {
 select {
   background: #222228;
   color: white; }
+  select option {
+    background: #222228;
+    color: white; }
 
 .input_checkbox,
 .block_input {
@@ -1160,6 +1163,8 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
     position: relative;
     display: flex;
     width: 100%;
+    font-size: 1.3em;
+    line-height: 1em;
     padding: 1rem;
     text-decoration: none;
     color: #7661db;
@@ -1716,7 +1721,7 @@ main {
   .content_filter_status._active_ {
     background: rgba(196, 53, 53, 0.1); }
 
-.content_manager_buttons {
+body .content_manager_buttons {
   position: relative;
   display: flex;
   width: 100%;
@@ -1726,14 +1731,17 @@ main {
   justify-content: flex-end;
   align-items: flex-start;
   z-index: 9999; }
-  .content_manager_buttons._hide_ {
+  body .content_manager_buttons._hide_ {
     display: none !important; }
-  .content_manager_buttons .btn {
-    margin-bottom: 0.2rem; }
-  .content_manager_buttons .content_manager_sum {
-    padding: 0.6rem 1rem;
-    font-size: 1.5em;
+  body .content_manager_buttons > * {
+    display: flex;
+    padding: 0.5rem 1rem;
+    font-size: 1.2em;
     line-height: 1rem;
+    margin-right: 0.5rem; }
+    body .content_manager_buttons > *:last-child {
+      margin-right: 0; }
+  body .content_manager_buttons .content_manager_sum {
     font-weight: 500;
     background: #7661db;
     border-radius: 0.5rem;
@@ -2448,7 +2456,7 @@ main {
 
 @media screen and (max-width: 1200px) {
   body main .welcome_container {
-    padding: 0 0 5rem 0 !important; }
+    padding: 0 0 4rem 0 !important; }
     body main .welcome_container ._section._title ._block {
       position: relative;
       z-index: 1; }

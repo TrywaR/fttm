@@ -1,7 +1,7 @@
 <section class="row">
   <div class="mt-4 col-12 col-md-7 m-auto">
     <div class="form_block">
-      <form id="form_password_recovery" class="form_password_recovery">
+      <form id="form_password_recovery" class="form_password_recovery __form_event_default">
       <h2 class="_form_title sub_title">
         Password recovery
       </h2>

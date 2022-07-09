@@ -12,6 +12,12 @@ $(function(){
     oForm = false,
     oElem = false
 
+  // Froms
+  $(document).find('form.__form_event_default').on ('submit', function(){
+    content_download( $(this).serializeArray(), 'json', true )
+    return false
+  })
+
   // switch скрытые блоки
   $(document).on('change', '.switch select', function(){
     $(this).parents('form').find('[class*=switch_' + $(this).attr('name') + ']').removeClass('_show_')

@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_8">5.3.8 u0life 3</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_8">5.3.82 u0life 3</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_7">5.3.7 u0life 2</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_6">5.3.6 u0life</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_5">5.3.5 Betclock 5</a>
@@ -61,8 +61,20 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
-            <h2 id="list-item-5_3_8">5.3.8 u0life 3</h2>
+            <h2 id="list-item-5_3_8">5.3.82 u0life 3</h2>
             <ol>
+              <li>
+                Исправлена ошибка стилей выподающих списков
+              </li>
+              <li>
+                Улучшены и объеденены графики для финансов, расходы и доходы, а так же для расходов по времени.
+              </li>
+              <li>
+                Данные из фильтров теперь автоматически попадают в формы добавления денег и задач
+              </li>
+              <li>
+                Локализация уведомлений с форм входа, регистрации, и восстановления пароля
+              </li>
               <li>
                 Добавлен функционал переключения тем оформления и языка быстрыми переключателями
               </li>

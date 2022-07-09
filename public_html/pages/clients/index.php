@@ -30,13 +30,7 @@
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#clients"
     data-content_loader_show_class="animate__bounceInRight _show_"
-    >
-    <div class="block_loading">
-      <div class="_icon">
-        <i class="fas fa-chart-area"></i>
-      </div>
-    </div>
-  </div>
+    ></div>
 
   <script>
     $(function(){

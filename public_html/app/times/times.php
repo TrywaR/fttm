@@ -72,6 +72,7 @@ switch ($_REQUEST['form']) {
         if ( isset($oForm->arrFields[$key]) ) {
           $oForm->arrFields[$key]['value'] = $value;
           // $oForm->arrFields[$key]['type'] = 'hidden';
+
         }
       }
     }
@@ -91,8 +92,8 @@ switch ($_REQUEST['form']) {
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
     $arrResults['data'] = $oTime->get_times();
-
     $arrResults['action'] = 'times';
+
     notification::send($arrResults);
     break;
 

@@ -2,7 +2,7 @@
   $oLang = new lang();
   ?>
   <!-- Nav -->
-  <header>
+  <header class="_full_">
     <div class="block_nav_header">
       <?include 'core/templates/pages/logo.php'?>
 
@@ -73,7 +73,7 @@
     </div>
 
     <div class="block_nav_mobile">
-      <button class="nav_btn _logo">
+      <button class="nav_btn _logo" id="block_nav_mobile_logo">
         <?include 'core/templates/pages/logo.php';?>
       </button>
 
