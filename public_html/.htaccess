@@ -1,7 +1,8 @@
 #CharsetDefault UTF-8
 #CharsetSourceEnc UTF-8
 Options -Indexes
-ErrorDocument 404 "/404.html"
+ErrorDocument 404 "/errors/404/"
+ErrorDocument 500 "/errors/500/"
 
 # Rewrite www.domain.com -> domain.com -- used with SEO Strict URLs plugin
 RewriteCond %{HTTP_HOST} .
