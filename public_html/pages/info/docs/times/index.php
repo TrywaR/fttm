@@ -19,6 +19,11 @@
           Graph by time period (week/month/year) for all the categories you specify (see Categories) and separately a graph of your time efficiency.
         </p>
       </div>
+      <div class="_link">
+        <a href="/times/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
   </div>
 </div>

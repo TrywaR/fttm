@@ -13,6 +13,9 @@ $arrClients = $oClient->get();
     </h1>
 
     <div class="_buttons btn-group">
+      <a class="btn" target="_blank" href="/info/docs/projects/">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
       <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
     </div>
   </div>

@@ -17,6 +17,11 @@
           Категории будут отображаться во временных и денежных графиках.
         </p>
       </div>
+      <div class="_link">
+        <a href="/categories/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
   </div>
 </div>

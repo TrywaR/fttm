@@ -23,6 +23,11 @@
           Then in the Money menu create a section where we want to add this expense item, select Netflix in the subscription schedule and this way your expense schedule will automatically account for monthly subscriptions.
         </p>
       </div>
+      <div class="_link">
+        <a href="/subscriptions/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
   </div>
 </div>

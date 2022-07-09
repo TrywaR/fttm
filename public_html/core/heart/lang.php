@@ -44,6 +44,7 @@ class lang
       'NewPasswordSendToMail' => 'Новый пароль отправлен на email',
       'ThisEmailIsNotRegistered' => 'Такой email не зарегистрирован!',
       'YouAccountHasBeenDeleted' => 'Ваш аккаунт успешно удалён!',
+      'Try' => 'Попробовать',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
@@ -239,6 +240,7 @@ class lang
       'NewPasswordSendToMail' => 'New password send to mail',
       'ThisEmailIsNotRegistered' => 'This email is not registered.',
       'YouAccountHasBeenDeleted' => 'You account has been deleted!',
+      'Try' => 'Try',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',

@@ -31,6 +31,11 @@
           </li>
         </ol>
       </div>
+      <div class="_link">
+        <a href="/projects/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
   </div>
 </div>

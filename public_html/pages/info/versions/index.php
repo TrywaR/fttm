@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_8">5.3.82 u0life 3</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_3_83">5.3.83 u0life 3</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_7">5.3.7 u0life 2</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_6">5.3.6 u0life</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_5">5.3.5 Betclock 5</a>
@@ -61,8 +61,23 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
-            <h2 id="list-item-5_3_8">5.3.82 u0life 3</h2>
+            <h2 id="list-item-5_3_83">5.3.83 u0life 3</h2>
             <ol>
+              <li>
+                Добавлен отступ снизу у списков, чтобы кнопка "Добвить" не наезжала на поседний элемент в списке
+              </li>
+              <li>
+                В мобильной версии подвал выводится при клике на логотип
+              </li>
+              <li>
+                В меню добавлен пунк меню для главной страницы
+              </li>
+              <li>
+                В светлой теме более насыщенный шрифт
+              </li>
+              <li>
+                Добавлена перелинкова между страницами и документацией
+              </li>
               <li>
                 Исправлена ошибка стилей выподающих списков
               </li>

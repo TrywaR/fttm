@@ -3,6 +3,12 @@
     <h1 class="sub_title _value">
       <?=$oLang->get('Categories')?>
     </h1>
+
+    <div class="_buttons btn-group">
+      <a class="btn" target="_blank" href="/info/docs/categories/">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
+    </div>
   </div>
 </div>
 

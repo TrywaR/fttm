@@ -15,6 +15,12 @@ $arrCategories = $oCategory->get_categories();
     <h1 class="sub_title _value">
       <?=$oLang->get('Subscriptions')?>
     </h1>
+
+    <div class="_buttons btn-group">
+      <a class="btn" target="_blank" href="/info/docs/subscriptions/">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
+    </div>
   </div>
 </div>
 

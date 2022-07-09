@@ -2715,7 +2715,7 @@ body .content_manager_buttons {
   padding: 1rem;
   margin-bottom: 2rem; }
 .block_docs ._doc {
-  padding: 2rem 1rem;
+  padding: 1rem;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.2rem 0rem rgba(30, 30, 30, 0.3), 0 0 0.6rem 0.6rem rgba(30, 30, 30, 0.3), inset 0 0 0.1rem 0 rgba(50, 50, 50, 0.3); }
@@ -2724,6 +2724,15 @@ body .content_manager_buttons {
     padding: 0 0 1rem; }
   .block_docs ._doc ._content {
     padding: 0 0.5rem; }
+  .block_docs ._doc ._link {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem; }
+    .block_docs ._doc ._link a {
+      font-size: 1.2em;
+      line-height: 1;
+      color: #7661db;
+      text-decoration: none; }
 .block_docs ._sub_menu {
   padding: 1rem; }
   .block_docs ._sub_menu ._item ._link {

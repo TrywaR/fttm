@@ -17,6 +17,11 @@
           Categories will be displayed in Time and Money charts.
         </p>
       </div>
+      <div class="_link">
+        <a href="/categories/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
   </div>
 </div>

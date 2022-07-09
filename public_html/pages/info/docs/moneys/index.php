@@ -30,6 +30,11 @@
           Enter the name of the account, choose the color your section will be displayed in, and choose a sorting number in the value you want the section to be displayed in (for example, if you choose a sorting value of 1, it will be displayed above the sorting value of 2 when you select the future card list). If everything is entered correctly, click Save, if not - Clear.
         </p>
       </div>
+      <div class="_link">
+        <a href="/moneys/data/cards/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
 
     <div class="_doc">
@@ -44,6 +49,11 @@
           Graph by time period (week/month/year) for all categories you set (see Categories) and separately graph by amount of expenses.
         </p>
       </div>
+      <div class="_link">
+        <a href="/moneys/analytics/costs/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
 
     <div class="_doc">
@@ -57,6 +67,11 @@
         <p>
           Graph by time period (week/month/year) for all the categories you specify (see Categories) and separately graph by amount of income.
         </p>
+      </div>
+      <div class="_link">
+        <a href="/moneys/analytics/wages/">
+          <?=$oLang->get('Try')?>
+        </a>
       </div>
     </div>
 

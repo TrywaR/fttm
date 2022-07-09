@@ -32,6 +32,9 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     </h1>
 
     <div class="_buttons btn-group">
+      <a class="btn" target="_blank" href="/info/docs/times/">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
       <?include 'core/templates/elems/filter_button.php'?>
     </div>
   </div>
