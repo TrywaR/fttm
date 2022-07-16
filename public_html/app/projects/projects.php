@@ -22,8 +22,8 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oProject->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oProject->limit = $_REQUEST['limit'];
 
-    $oProject->sort = 'sort';
-    $oProject->sortDir = 'ASC';
+    $oProject->sortname = 'sort';
+    $oProject->sortdir = 'ASC';
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     $oFilter = new filter();

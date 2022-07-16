@@ -76,12 +76,18 @@ $arrCategories = $oCategory->get_categories();
 
             <div class="_subs">
               <span class="_item _card">
-                <span class="_icon"><i class="fas fa-credit-card"></i></span>
-                <span class="_text">{{card_val.title}}</span>
+                <span class="_icon">
+                  <i class="fas fa-credit-card"></i>
+                </span>
+                <span class="_text">
+                  {{card_val.title}}
+                </span>
               </span>
 
               <span class="_item _paid">
-                <span class="_icon"><i class="fas fa-check"></i></span>
+                <span class="_icon">
+                  <i class="fas fa-check"></i>
+                </span>
                 <span class="_text">
                   <span class="_sum">
                     {{paid_sum}}

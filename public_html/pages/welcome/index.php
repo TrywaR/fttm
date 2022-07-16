@@ -10,9 +10,9 @@
       </div>
     </div>
     <div class="_bg">
-      <video autoplay muted loop id="myVideo">
+      <!-- <video autoplay muted loop id="myVideo">
         <source src="/template/videos/Background_08.mov" type="video/mp4">
-      </video>
+      </video> -->
     </div>
   </div>
 

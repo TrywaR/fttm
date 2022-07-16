@@ -129,8 +129,8 @@ class subscription extends model
 
     $oCard = new card();
     $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oCard->sort = 'sort';
-    $oCard->sortDir = 'ASC';
+    $oCard->sortname = 'sort';
+    $oCard->sortdir = 'ASC';
     $arrCards = $oCard->get();
     $arrCardsFilter = [];
     $arrCardsFilter[] = array('id'=>0,'name'=>'...');
@@ -138,10 +138,17 @@ class subscription extends model
     $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
 
     $oCategory = new category();
-    $oCategory->sort = 'sort';
-    $oCategory->sortDir = 'ASC';
+    $oCategory->sortname = 'sort';
+    $oCategory->sortdir = 'ASC';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . ' OR `user_id` = 0)';
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    if ( $this->category ) $arrCategories = $oCategory->ckeck_categories($this->category,$arrCategories);
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesFilter = [];
     foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
     $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category];

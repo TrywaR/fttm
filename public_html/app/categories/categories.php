@@ -17,22 +17,31 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'show': # Вывод элементов
+    if ( $_REQUEST['from'] ) return false;
+
+    // Берём все категории
     $oCategory = $_REQUEST['id'] ? new category( $_REQUEST['id'] ) : new category();
 
-    if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
-    if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
+    // if ( $_REQUEST['from'] ) $oCategory->from = $_REQUEST['from'];
+    // if ( $_REQUEST['limit'] ) $oCategory->limit = $_REQUEST['limit'];
 
-    $oCategory->sort = 'sort';
-    $oCategory->sortDir = 'ASC';
+    $oCategory->sortname = 'sort';
+    $oCategory->sortdir = 'ASC';
+    $oCategory->limit = 30;
     $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-
+    if ( $_REQUEST['only_active'] ) $oCategory->query .= ' AND `active` > 0';
+    // Конфиги пользователей
+    // SELECT * FROM `categories` LEFT JOIN  `categories_configs` ON `categories_configs`.`category_id` = `categories`.`id`
     $arrCategories = $oCategory->get_categories();
+
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
 
     notification::send($arrCategories);
     break;
 
   case 'form': # Форма добавления / редактирования
-
     // Параметры
     $arrResults = [];
     $oForm = new form();
@@ -40,12 +49,12 @@ switch ($_REQUEST['form']) {
     // Если редактировани
     if ( $_REQUEST['id'] ) {
       $arrResults['event'] = 'edit';
-      $oMoneysCategory = new category( $_REQUEST['id'] );
+      $oCategory = new category( $_REQUEST['id'] );
     }
     // Если добавление
     else {
       $arrResults['event'] = 'add';
-      $oMoneysCategory = new category();
+      $oCategory = new category();
       // Случайное имя для корректной работы
       $arrDefaultsNames = array(
         'Money for reflection',
@@ -53,15 +62,15 @@ switch ($_REQUEST['form']) {
         'Good name, good job',
       );
       // Создаем элемент
-      $oMoneysCategory->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
-      $oMoneysCategory->user_id = $_SESSION['user']['id'];
-      $oMoneysCategory->date = date('Y-m-d');
-      $oMoneysCategory->active = 1;
-      $oMoneysCategory->add();
+      $oCategory->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+      $oCategory->user_id = $_SESSION['user']['id'];
+      $oCategory->date = date('Y-m-d');
+      $oCategory->active = 1;
+      $oCategory->add();
     }
 
     // Поля для добавления
-    $oForm->arrFields = $oMoneysCategory->fields();
+    $oForm->arrFields = $oCategory->fields();
     $oForm->arrFields['form'] = ['value'=>'save','type'=>'hidden'];
     $oForm->arrFields['action'] = ['value'=>'categories','type'=>'hidden'];
     $oForm->arrFields['app'] = ['value'=>'app','type'=>'hidden'];
@@ -69,13 +78,13 @@ switch ($_REQUEST['form']) {
 
     // Настройки шаблона
     $oForm->arrTemplateParams['id'] = 'content_loader_save';
-    $oForm->arrTemplateParams['title'] = $olang->get('MoneysCategories');
+    $oForm->arrTemplateParams['title'] = $olang->get('Categories');
     $oForm->arrTemplateParams['button'] = 'Save';
     $sFormHtml = $oForm->show();
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oMoneysCategory->get_categories();
+    $arrResults['data'] = $oCategory->get_categories();
 
     $arrResults['action'] = 'categories';
     notification::send($arrResults);

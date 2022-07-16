@@ -9,17 +9,25 @@
   z-index: 4
 
   ._block_title
+    position: relative
     z-index: 3
     display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: center
     flex-wrap: wrap
     width: 100%
     height: 4rem
     padding: .5rem 1rem
     box-sizing: border-box
-    align-items: center
     background: $color_main_dark
     border-radius: $border_radius
     margin-bottom: 1rem
+
+    ._sub
+      position: absolute
+      top: .3rem
+      left: .5rem
 
     ._value
       width: 80%

@@ -311,7 +311,7 @@ $(function(){
           oData.data[key].push(val)
         }
         else {
-            oData.data[key] = val
+          oData.data[key] = val
         }
       })
     }

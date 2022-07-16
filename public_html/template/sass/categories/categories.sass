@@ -1,5 +1,18 @@
 // .category
 .category
+  position: relative
+  z-index: 1
+
+  &._active_show_false
+    filter: brightness(40%) contrast(.9)
+
+  &._active_show_true
+    // opacity: 1
+
+  &._custom_edit_show_true
+    ._edit_config
+      display: flex
+
   &._edit_show_true
     ._select
       display: flex
@@ -18,4 +31,28 @@
 
   ._del
     display: none
+
+  ._edit_config
+    display: none
+
+  ._category_background
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: -1
+    border-radius: $border_radius
+    background: linear-gradient(135deg, rgba(0,0,0,0), $color_main)
+    overflow: hidden
+
+    ._color
+      position: absolute
+      bottom: -100%
+      right: -10%
+      width: 20rem
+      height: 20rem
+      border-radius: 50%
+      opacity: .6
+      z-index: -2
 // .category x

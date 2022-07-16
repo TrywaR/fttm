@@ -148,7 +148,7 @@ class lang
       'PasswordRecovery' => 'Восстановление пароля',
       'Delete' => 'Удалить',
       'Transfer' => 'Перевод',
-      'Dashboard' => 'Панель упарвления',
+      'Dashboard' => 'Панель управления',
 
       'Day' => 'День',
       'ToDay' => 'Сегодня',
@@ -188,6 +188,9 @@ class lang
       'Saturday' => 'Суббота',
 
       'Transport' => 'Транспорт',
+      'Sport' => 'Спорт',
+      'Smoking' => 'Курение',
+      'Reading' => 'Чтение',
       'Sleeping' => 'Сон',
       'Sleep' => 'Сон',
       'Working' => 'Работа',
@@ -384,6 +387,9 @@ class lang
       'Saturday' => 'Saturday',
 
       'Transport' => 'Transport',
+      'Sport' => 'Sport',
+      'Smoking' => 'Smoking',
+      'Reading' => 'Reading',
       'Sleeping' => 'Sleeping',
       'Sleep' => 'Sleep',
       'Working' => 'Working',

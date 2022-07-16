@@ -84,11 +84,20 @@ $arrClients = $oClient->get();
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-xl-6">
-              <small>№{{sort}}</small>
-              <small>#{{id}}</small>
-              <h5 class="card-title">{{title}}</h5>
-              <p class="card-text">{{description}}</p>
+              <small>
+                №{{sort}}
+              </small>
+              <small>
+                #{{id}}
+              </small>
+              <h5 class="card-title">
+                {{title}}
+              </h5>
+              <p class="card-text">
+                {{description}}
+              </p>
             </div>
+
             <div class="col-12 col-xl-6 d-flex justify-content-end align-items-start">
               <div class="btn-group" role="group">
                 <a href="#" class="btn content_manager_switch switch_icons">
@@ -100,7 +109,7 @@ $arrClients = $oClient->get();
                   </div>
                 </a>
 
-                <a href="/projects/analytics?project_id={{id}}" class="btn">
+                <a href="/projects/analytics/?project_id={{id}}" class="btn">
                   <i class="fas fa-chart-area"></i>
                 </a>
 

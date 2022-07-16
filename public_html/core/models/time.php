@@ -14,7 +14,7 @@ class time extends model
   public static $task_id = '';
   public static $user_id = '';
   public static $time_really = '';
-  public static $date = '';
+  public $date = '';
   public $date_update = '';
   public static $category_id = '';
   public static $status = '';
@@ -87,11 +87,19 @@ class time extends model
 
     $oCategory = new category();
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    if ( $this->category ) $arrCategories = $oCategory->ckeck_categories($this->category,$arrCategories);
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesFilter = [];
-    $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
+    // $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
-    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category_id];
+    $iSelectCategory = $this->category ? $this->category : 1;
+    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$iSelectCategory];
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
@@ -103,8 +111,8 @@ class time extends model
     $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
 
     $oTask = new task();
-    $oTask->sort = 'sort';
-    $oTask->sortDir = 'ASC';
+    $oTask->sortname = 'sort';
+    $oTask->sortdir = 'ASC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
     $arrTasks = $oTask->get_tasks();

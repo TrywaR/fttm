@@ -19,7 +19,7 @@ switch ($_REQUEST['form']) {
     // Получаем категории
     $oCategory = new category();
     $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
+    $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get_categories();
     $arrCategoriesIds = [];
@@ -106,7 +106,7 @@ switch ($_REQUEST['form']) {
     // Получаем категории
     $oCategory = new category();
     $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
+    $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get_categories();
     $arrCategoriesIds = [];
@@ -184,7 +184,7 @@ switch ($_REQUEST['form']) {
     // Получаем категории
     $oCategory = new category();
     $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
+    $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get_categories();
     $arrCategoriesIds = [];

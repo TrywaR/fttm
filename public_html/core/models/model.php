@@ -18,44 +18,21 @@ class model
     // Параметры
     $id = $id ? $id : $this->id; // id элемента
     $arrResult = ''; // Результат
+
     // Общие параметры для запросов
     $mySqlSalt = '';
     $mySqlShowSalt = '';
-    // $mySqlSalt .= " ORDER BY  `sort` ASC";
 
     // Пагинация
-    // if ( $_REQUEST['from'] ) $this->from = $_REQUEST['from'];
-    // if ( $_REQUEST['limit'] ) $this->limit = $_REQUEST['limit'];
     $iLimit = $this->limit ? $this->limit : 0; // Пагинация, количество элементов
     $iFrom = $this->from ? $this->from : 0; // Пагинация, от
-
-    // Фильтрация
-    // if ( $_REQUEST['filter'] ) {
-    //   $arrFilters = [];
-    //   if ( $_REQUEST['filter'] == 'all' ) foreach ($_REQUEST as $key => $value) $arrFilters = array('name'=>$key,'value'=>$value);
-    //   else $arrFilters = $_REQUEST['filter'];
-    //
-    //   foreach ($arrFilters as $arrFilter) {
-    //     if ( $arrFilter['value'] ) {
-    //       switch ($arrFilter['name']) {
-    //         case 'date':
-    //         $this->query .= ' AND `' . $arrFilter['name'] . '` = "' . $arrFilter['value'] . ' 00:00:00"';
-    //         break;
-    //
-    //         default:
-    //         $this->query .= ' AND `' . $arrFilter['name'] . '` = ' . $arrFilter['value'];
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
 
     // Уникальаня выборка
     $sQuery = $this->query ? $this->query : '';
     // Сортировка
     // Сортировка mySql
-    $sSort = $this->sort ? $this->sort : '';
-    $sSortDir = $this->sortDir ? $this->sortDir : 'ASC';
+    $sSort = $this->sortname ? $this->sortname : '';
+    $sSortDir = $this->sortdir ? $this->sortdir : 'ASC';
     $sSortMulti = $this->sortMulti ? $this->sortMulti : '';
     // Сортировка php
     $sUSort = $this->usort ? $this->usort : '';

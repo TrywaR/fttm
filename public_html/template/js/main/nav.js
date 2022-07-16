@@ -51,7 +51,7 @@ $(function(){
           // Добавление
           if ( ! oElem.menu_hide ) $(document).find('#block_nav ._main').append( oElemHtml )
           // Вложенность
-          if ( oElem.subs && oElem.active ) {
+          if ( oElem.subs && parseInt( oElem.subs.length ) != 0 && oElem.active ) {
             $(document).find('#block_nav_mobile_subs').addClass('_showed_')
             $(document).find('#block_nav ._subs').addClass('_active_')
 

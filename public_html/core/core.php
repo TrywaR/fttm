@@ -11,6 +11,7 @@ include_once 'heart/filter.php'; # Фильтрация
 include_once 'heart/protect.php'; # Шифроватор
 include_once 'heart/location.php'; # Навигация
 include_once 'heart/page.php'; # Общая обработка страниц
+include_once 'heart/calendar.php'; # Календарь
 
 // Модели
 include_once 'models/model.php'; # Основной класс
@@ -22,6 +23,7 @@ include_once 'models/task.php'; # Задачи
 include_once 'models/money.php'; # Деньги
 include_once 'models/card.php'; # Карты для денег
 include_once 'models/category.php'; # Категории
+include_once 'models/category_config.php'; # Категории
 include_once 'models/subscription.php'; # Подписки
 include_once 'models/time.php'; # Время
 include_once 'models/chart.php'; # Графики

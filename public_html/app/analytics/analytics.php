@@ -12,7 +12,7 @@ switch ($_REQUEST['form']) {
     // Получаем категории
     $oCategory = new category();
     $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
+    $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get();
     $arrCategoriesIds = [];
@@ -57,7 +57,7 @@ switch ($_REQUEST['form']) {
 
     // За месяц ушло
     $oMoney = new money();
-    $oMoney->sort = 'date';
+    $oMoney->sortname = 'date';
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
@@ -68,7 +68,7 @@ switch ($_REQUEST['form']) {
 
     // За месяц пришло
     $oMoney = new money();
-    $oMoney->sort = 'date';
+    $oMoney->sortname = 'date';
     $dCurrentDate = date('Y-m');
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";

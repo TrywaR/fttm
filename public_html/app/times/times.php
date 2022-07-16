@@ -72,7 +72,6 @@ switch ($_REQUEST['form']) {
         if ( isset($oForm->arrFields[$key]) ) {
           $oForm->arrFields[$key]['value'] = $value;
           // $oForm->arrFields[$key]['type'] = 'hidden';
-
         }
       }
     }

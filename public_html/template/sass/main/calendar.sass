@@ -1,0 +1,110 @@
+.block_calendar
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  max-width: 100%
+  padding: 1rem
+  box-sizing: border-box
+  // box-sizing: content-box
+  border-radius: $border_radius
+  @include shadow_default
+  @include transition_default
+
+  .calendar-item
+    display: inline-block
+    vertical-align: top
+    margin: 0 16px 20px
+
+    table
+      border-collapse: collapse
+      width: 100%
+
+    th
+      padding: 6px 7px
+      text-align: center
+      color: #888
+      font-weight: normal
+
+    td
+      padding: 6px 5px
+      text-align: center
+      // border: 1px solid #ddd
+
+    tr
+      th
+        opacity: .5
+        &:nth-child(6), &:nth-child(7)
+          color: #e65a5a
+
+      td
+        &:nth-child(6), &:nth-child(7)
+          color: #e65a5a
+
+    .calendar-head
+      text-align: center
+      padding: .5rem
+      opacity: .5
+
+    .calendar-day
+      position: relative
+      z-index: 1
+      padding: .5rem
+
+      &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background: $color_main
+        border-radius: $border_radius
+        opacity: 0
+
+      &.last
+        color: #999 ! important
+
+      &.today
+        font-weight: bold
+
+      &.event
+        // background: $color_main
+        // border-radius: $border_radius
+        color: white ! important
+        position: relative
+        cursor: pointer
+
+        &:hover .calendar-popup
+          display: block
+
+        &._level_1
+          &:after
+            opacity: .2
+
+        &._level_2
+          &:after
+            opacity: .5
+
+    .calendar-popup
+      display: none
+      position: absolute
+      top: 40px
+      left: 0
+      min-width: 200px
+      padding: 15px
+      background: $color_main_dark_ultra
+      text-align: left
+      z-index: 100
+      // box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+      color: $color_text
+
+      &:before
+        content: ""
+        border: solid transparent
+        position: absolute
+        left: 8px
+        bottom: 100%
+        border-bottom-color: $color_main_dark_ultra
+        border-width: 9px
+        margin-left: 0

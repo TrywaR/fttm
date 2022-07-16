@@ -41,7 +41,7 @@ class nav
     }
   }
 
-  public function get_navs_subs( $arrNav = [] ){
+  public function get_navs_subs( $arrNav = [] ) {
     if ( count($arrNav['subs']) )
       foreach ($arrNav['subs'] as $arrItem) {
         $arrUnsetSubs = $arrItem;
@@ -58,6 +58,8 @@ class nav
     foreach ( $this->arrNav as $arrNav ) {
       if ( isset($arrNav['menu_hide']) && $arrNav['menu_hide'] ) continue;
 
+      $arrNav = $this->check_sub( $arrNav );
+
       if ( isset($arrNav['access']) ) {
         if ( $arrNav['access'] < 0 ) $arrResult[] = $arrNav;
         else if ( isset($_SESSION['user']) && $_SESSION['user']['role'] >= $arrNav['access'] ) $arrResult[] = $arrNav;
@@ -68,6 +70,20 @@ class nav
     }
 
     return $arrResult;
+  }
+
+  public function check_sub( $arrNav = [] ){
+    if ( count($arrNav['subs']) ) {
+      foreach ($arrNav['subs'] as $iIndex => $arrSub) {
+        if ( isset($arrSub['menu_hide']) && $arrSub['menu_hide'] ) {
+          if ( count($arrNav['subs']) ) unset($arrNav['subs'][$iIndex]);
+          else unset($arrNav['subs']);
+        }
+        // else check_sub($arrSub);
+      }
+    }
+
+    return $arrNav;
   }
 
   function __construct()
@@ -197,6 +213,16 @@ class nav
         'url' => '/categories/',
         'icon' => '<i class="fa-solid fa-list"></i>',
         'access' => 0,
+        'subs' => [
+          '/categories/analytics/' => array(
+            'name' => $oLang->get('Category'),
+            'description' => $oLang->get('Category'),
+            'url' => '/categories/analytics/',
+            'icon' => '<i class="fas fa-chart-area"></i>',
+            'access' => 0,
+            'menu_hide' => true,
+          ),
+        ],
       ),
 
       '/subscriptions/' => array(

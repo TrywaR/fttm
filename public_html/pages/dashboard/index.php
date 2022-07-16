@@ -11,7 +11,7 @@
     <div class="_section _filter">
       <div class="block_date">
         <div class="_group input-group">
-          <select name="year" class="_year form-select" id="dashboard_yaer">
+          <select name="year" class="_year form-select" id="dashboard_year">
             <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
               <option value="<?=$i?>"><?=$i?></option>
             <?}?>
@@ -123,28 +123,26 @@
               iMoneysDayCategoriesSum = 0
 
               if ( iDay == 1 && sForm == 'prev_day' ) {
-                date_update( oData.day, oData.month, oData.yaer )
-                dashboard_month( oData.month, oData.yaer )
-                subscriptions_month( oData.month, oData.yaer )
+                date_update( oData.day, oData.month, oData.year )
+                dashboard_month( oData.month, oData.year )
+                subscriptions_month( oData.month, oData.year )
               }
 
               iDay = oData.day
               iMonth = oData.month
-              iYear = oData.yaer
+              iYear = oData.year
 
               sResultHtml += '<div class="_liveliner_day">'
               sResultHtml += '<div class="_line_hours"><div class="_val">' + oData.times_sum + '</div><div class="_seporator">/</div><div class="_def">24</div></div>'
               if ( oData.moneys_sum ) sResultHtml += '<div class="_line_moneys"><div class="_val">' + oData.moneys_sum + '</div></div>'
               sResultHtml += '<div class="block_date _date">'
                 sResultHtml += '<select name="day" class="_day form-select" id="dashboard_day">'
-
-                var iDays = new Date(oData.year, oData.month, 0).getDate()
-                // if ( parseInt(iMonthCurrent) == oData.month && parseInt(iYearCurrent) == oData.year ) iDays = oData.day
-                for (var i = 1; i <= iDays; i++) {
-                  if ( oData.day == i ) sResultHtml += '<option selected="selected" value="' + i + '">' + i + '</option>'
-                  else sResultHtml += '<option value="' + i + '">' + i + '</option>'
-                }
-
+                  var iDays = new Date(oData.year, oData.month, 0).getDate()
+                  // if ( parseInt(iMonthCurrent) == oData.month && parseInt(iYearCurrent) == oData.year ) iDays = oData.day
+                  for (var i = 1; i <= iDays; i++) {
+                    if ( oData.day == i ) sResultHtml += '<option selected="selected" value="' + i + '">' + i + '</option>'
+                    else sResultHtml += '<option value="' + i + '">' + i + '</option>'
+                  }
                 sResultHtml += '</select>'
                 sResultHtml += '<button class="_button btn" id="liveliner_reload_day" data-day="' + oData.day + '" data-month="' + oData.month + '" data-year="' + oData.year + '" style="display:none;">'
                   sResultHtml += '<i class="fa-solid fa-rotate-right"></i>'
@@ -202,10 +200,10 @@
                         sResultHtml += '<div class="_background_times" style="background: ' + oCategory.color + '"></div>'
                       sResultHtml += '</div>'
                       sResultHtml += '<div class="_buttons">'
-                        sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-category_id="' + iCategoryId + '" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#liveliner_reload_day">'
+                        sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-category_id="' + iCategoryId + '" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#liveliner_reload_day">'
                           sResultHtml += '<span class="_icon"><i class="fa-solid fa-clock"></i></span>'
                         sResultHtml += '</a>'
-                        sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-category_id="' + iCategoryId + '" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#liveliner_reload_day">'
+                        sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-category_id="' + iCategoryId + '" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#liveliner_reload_day">'
                           sResultHtml += '<span class="_icon"><i class="fa-solid fa-wallet"></i></span>'
                         sResultHtml += '</a>'
                       sResultHtml += '</div>'
@@ -224,10 +222,10 @@
               sResultHtml += '</div>'
 
               sResultHtml += '<div class="_buttons">'
-                sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#liveliner_reload_day">'
+                sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#liveliner_reload_day">'
                   sResultHtml += '<span class="_icon"><i class="fa-solid fa-clock"></i></span>'
                 sResultHtml += '</a>'
-                sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#liveliner_reload_day">'
+                sResultHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-elem=".time" data-form="form" data-full="true" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#liveliner_reload_day">'
                   sResultHtml += '<span class="_icon"><i class="fa-solid fa-wallet"></i></span>'
                 sResultHtml += '</a>'
               sResultHtml += '</div>'
@@ -278,7 +276,7 @@
                       sSubscriptionsHtml += oElem.title
                     sSubscriptionsHtml += '</div>'
                     sSubscriptionsHtml += '<div class="_sub">'
-                      sSubscriptionsHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-subscription="' + oElem.id + '" data-price="' + oElem.price + '" data-category="' + oElem.category + '" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#dashboard_reload_subscriptions">'
+                      sSubscriptionsHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-subscription="' + oElem.id + '" data-price="' + oElem.price + '" data-category="' + oElem.category + '" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#dashboard_reload_subscriptions">'
                         sSubscriptionsHtml += '<span class="_icon"><i class="fa-solid fa-wallet"></i></span>'
                       sSubscriptionsHtml += '</a>'
                         if ( oElem.paid || oElem.paid_sum > 0 ) {
@@ -409,11 +407,11 @@
                         sTasksHtml += '</div>'
 
                         sTasksHtml += '<div class="_buttons">'
-                          sTasksHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-project_id="' + oElem.project.id + '" data-category_id="4" data-task_id="' + oElem.id + '" data-time="' + oElem.time + '" data-category="' + oElem.category + '" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#dashboard_reload_times">'
+                          sTasksHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="times" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-project_id="' + oElem.project.id + '" data-category_id="4" data-task_id="' + oElem.id + '" data-time="' + oElem.time + '" data-category="' + oElem.category + '" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#dashboard_reload_times">'
                             sTasksHtml += '<span class="_icon"><i class="fa-solid fa-clock"></i></span>'
                           sTasksHtml += '</a>'
 
-                          sTasksHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-project_id="' + oElem.project.id + '" data-category_id="4" data-task_id="' + oElem.id + '" data-price="' + oElem.price + '" data-category="' + oElem.category + '" date-date="' + iDay + '.' + iMonth + '.' + iYear + '" data-filter="true" data-success_click="#dashboard_reload_times">'
+                          sTasksHtml += '<a href="javascript:;" class="_button content_loader_show" data-action="moneys" data-animate_class="animate__flipInY" data-form="form" data-full="true" data-project_id="' + oElem.project.id + '" data-category_id="4" data-task_id="' + oElem.id + '" data-price="' + oElem.price + '" data-category="' + oElem.category + '" data-date="' + iYear + '-' + iMonth + '-' + iDay + '" data-filter="true" data-success_click="#dashboard_reload_times">'
                             sTasksHtml += '<span class="_icon"><i class="fa-solid fa-wallet"></i></span>'
                           sTasksHtml += '</a>'
                         sTasksHtml += '</div>'

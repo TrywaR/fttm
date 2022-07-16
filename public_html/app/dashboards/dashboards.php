@@ -5,14 +5,14 @@ function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
   // Получаем категории
   $oCategory = new category();
   $oCategory->limit = 0;
-  $oCategory->sort = 'sort';
+  $oCategory->sortname = 'sort';
   $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
   $arrCategories = $oCategory->get_categories();
   $arrCategoriesIds = [];
   foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
-  $arrResult['day'] = (int)$iDay;
-  $arrResult['month'] = (int)$iMonth;
+  $arrResult['day'] = sprintf("%02d", $iDay);
+  $arrResult['month'] = sprintf("%02d", $iMonth);
   $arrResult['year'] = (int)$iYear;
 
   // Собираем деньги
@@ -104,8 +104,8 @@ switch ($_REQUEST['form']) {
     $arrResults = [];
 
     $oCard = new card();
-    $oCard->sort = 'sort';
-    $oCard->sortDir = 'ASC';
+    $oCard->sortname = 'sort';
+    $oCard->sortdir = 'ASC';
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrResults['cards'] = $oCard->get_cards();
 
@@ -128,7 +128,7 @@ switch ($_REQUEST['form']) {
     // Получаем категории
     $oCategory = new category();
     $oCategory->limit = 0;
-    $oCategory->sort = 'sort';
+    $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCategories = $oCategory->get();
     $arrCategoriesIds = [];
@@ -157,7 +157,7 @@ switch ($_REQUEST['form']) {
 
     // За месяц ушло
     $oMoney = new money();
-    $oMoney->sort = 'date';
+    $oMoney->sortname = 'date';
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
@@ -168,7 +168,7 @@ switch ($_REQUEST['form']) {
 
     // За месяц пришло
     $oMoney = new money();
-    $oMoney->sort = 'date';
+    $oMoney->sortname = 'date';
     $dCurrentDate = date('Y-m');
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";

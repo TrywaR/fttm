@@ -28,6 +28,14 @@ switch ($_REQUEST['action']) {
     include_once 'categories/categories.php';
     break;
 
+  case 'categories_configs': # Категории
+    include_once 'categories/categories_configs.php';
+    break;
+
+  case 'categories_analytics': # Категории
+    include_once 'categories/analytics.php';
+    break;
+
   case 'projects': # Обработка проектов
     include_once 'projects/projects.php';
     break;

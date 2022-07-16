@@ -28,8 +28,8 @@ switch ($_REQUEST['form']) {
     $oCard = $_REQUEST['id'] ? new card( $_REQUEST['id'] ) : new card();
     if ( $_REQUEST['from'] ) $oCard->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCard->limit = $_REQUEST['limit'];
-    $oCard->sort = 'sort';
-    $oCard->sortDir = 'ASC';
+    $oCard->sortname = 'sort';
+    $oCard->sortdir = 'ASC';
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCards = $oCard->get_cards();
 
@@ -91,8 +91,8 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oCard->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCard->limit = $_REQUEST['limit'];
 
-    $oCard->sort = 'sort';
-    $oCard->sortDir = 'ASC';
+    $oCard->sortname = 'sort';
+    $oCard->sortdir = 'ASC';
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 
     $arrCard = $oCard->get_cards();

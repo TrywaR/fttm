@@ -68,8 +68,8 @@ switch ($_REQUEST['form']) {
     $oClient = $_REQUEST['id'] ? new client( $_REQUEST['id'] ) : new client();
     if ( $_REQUEST['from'] ) $oClient->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oClient->limit = $_REQUEST['limit'];
-    $oClient->sort = 'sort';
-    $oClient->sortDir = 'DESC';
+    $oClient->sortname = 'sort';
+    $oClient->sortdir = 'DESC';
     $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrClients = $oClient->get();
     notification::send($arrClients);

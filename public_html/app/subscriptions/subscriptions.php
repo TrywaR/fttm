@@ -48,8 +48,8 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oSubscription->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oSubscription->limit = $_REQUEST['limit'];
 
-    $oSubscription->sort = 'sort';
-    $oSubscription->sortDir = 'ASC';
+    $oSubscription->sortname = 'sort';
+    $oSubscription->sortdir = 'ASC';
     $oSubscription->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     $arrSubscriptions = $oSubscription->get_subscriptions();
