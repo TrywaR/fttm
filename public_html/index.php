@@ -4,6 +4,7 @@ $_SESSION['version'] = '5.3.83';
 
 include_once 'core/core.php'; # Основные настройки
 $olang = new lang(); // Подтягиваем языки
+$oLock = new lock(); // Подтягиваем уровни доступов
 
 // Если запросы на обработку данных
 if ( $_REQUEST['app'] ) {

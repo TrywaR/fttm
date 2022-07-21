@@ -62,8 +62,14 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
-            <h2 id="list-item-5_3_83">5.3.83 u0life 3</h2>
+            <h2 id="list-item-5_3_84">5.3.84 u0life 3</h2>
             <ol>
+              <li>
+                На странице категорий добавлены стили для календаря на год
+              </li>
+              <li>
+                Добавлена система ограничения доступа к отдельному функционалу в зависимости от роли пользователя
+              </li>
               <li>
                 Добавлены стили для неактивных категорий, теперь они скрываются в списках при добавлении или редактировании времени или денег, а так же подписок
               </li>

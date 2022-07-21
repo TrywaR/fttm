@@ -7,14 +7,16 @@
   padding: 1rem
   box-sizing: border-box
   // box-sizing: content-box
-  border-radius: $border_radius
-  @include shadow_default
   @include transition_default
 
   .calendar-item
     display: inline-block
     vertical-align: top
     margin: 0 16px 20px
+    padding: 1rem
+    box-sizing: border-box
+    border-radius: $border_radius
+    @include shadow_default
 
     table
       border-collapse: collapse
@@ -54,12 +56,13 @@
       &:after
         content: ''
         position: absolute
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
+        top: .2rem
+        left: .2rem
+        right: .2rem
+        bottom: .2rem
         background: $color_main
         border-radius: $border_radius
+        z-index: -1
         opacity: 0
 
       &.last
@@ -74,9 +77,14 @@
         color: white ! important
         position: relative
         cursor: pointer
+        font-weight: 500
 
         &:hover .calendar-popup
           display: block
+
+        &._level_0
+          &:after
+            opacity: 0
 
         &._level_1
           &:after
@@ -85,6 +93,10 @@
         &._level_2
           &:after
             opacity: .5
+
+        &._level_3
+          &:after
+            opacity: 1
 
     .calendar-popup
       display: none

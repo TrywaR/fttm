@@ -3,7 +3,7 @@
     <div class="_block">
       <div class="_content">
         <h1 class="text-center">
-          Your <span>0</span> life
+          u<span>0</span> life
         </h1>
         <p>This is a simulator that can digitize your life, helping you manage your time and finances more efficiently.</p>
         <p>Leave your exact mark in the history of mankind and look at your life from the side</p>

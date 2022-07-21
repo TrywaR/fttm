@@ -12,6 +12,7 @@ include_once 'heart/protect.php'; # Шифроватор
 include_once 'heart/location.php'; # Навигация
 include_once 'heart/page.php'; # Общая обработка страниц
 include_once 'heart/calendar.php'; # Календарь
+include_once 'heart/lock.php'; # Уровни доступа
 
 // Модели
 include_once 'models/model.php'; # Основной класс

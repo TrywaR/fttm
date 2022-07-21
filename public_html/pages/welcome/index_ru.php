@@ -3,7 +3,7 @@
     <div class="_block">
       <div class="_content">
         <h1 class="text-center">
-          Your <span>0</span> life
+          u<span>0</span> life
         </h1>
         <p>
           Это симулятор, способный оцифровать жизнь, помогающий более эффективно распоряжаться своим временем и финансами

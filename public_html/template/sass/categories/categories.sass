@@ -1,3 +1,125 @@
+// block_category
+.block_category
+  display: flex
+  flex-wrap: wrap
+  padding: .5rem
+  box-sizing: border-box
+
+  ._analytics
+    flex-grow: 1
+
+    ._linear
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      box-sizing: border-box
+      border-radius: $border_radius
+      overflow: hidden
+
+      ._line,
+      ._vals
+        display: flex
+
+        ._1,
+        ._2,
+        ._3
+          position: relative
+          display: flex
+          padding: .5rem
+          box-sizing: border-box
+          width: 5rem
+          color: white
+          z-index: 1
+
+          &:after
+            content: ''
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            background: $color_main
+            z-index: -1
+
+        ._1
+          &:after
+            opacity: .2
+        ._2
+          &:after
+            opacity: .5
+        ._3
+          &:after
+            opacity: 1
+
+      ._line
+        border-radius: $border_radius $border_radius 0 0
+        overflow: hidden
+
+      ._vals
+        border-radius: 0 0 $border_radius $border_radius
+        overflow: hidden
+        font-size: .8em
+        opacity: .8
+        line-height: 1
+
+    ._params
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      padding: 1rem 0
+      box-sizing: border-box
+
+      ._param
+        display: flex
+        box-sizing: border-box
+
+        ._name
+          display: flex
+          width: 6rem
+          overflow: hidden
+          opacity: .5
+
+        ._val
+          display: flex
+          justify-content: flex-end
+          width: 6rem
+          font-weight: 500
+
+  ._calendars
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: .5rem
+    box-sizing: border-box
+
+    &.__year
+      min-width: 100%
+      font-size: .8em
+      line-height: 1
+
+      .calendar-wrp
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        align-items: stretch
+
+      .block_calendar
+        padding: 0
+
+      .calendar-item
+        margin: 0
+
+@media screen and (max-width:1200px)
+  body
+    main
+      .block_category
+        flex-direction: column
+
+
 // .category
 .category
   position: relative

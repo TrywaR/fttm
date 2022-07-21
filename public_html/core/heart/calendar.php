@@ -10,19 +10,21 @@ class calendar
 	 */
 	public static function  getMonth($month, $year, $events = array())
 	{
+		$oLang = new lang();
+
 		$months = array(
-			1  => 'Январь',
-			2  => 'Февраль',
-			3  => 'Март',
-			4  => 'Апрель',
-			5  => 'Май',
-			6  => 'Июнь',
-			7  => 'Июль',
-			8  => 'Август',
-			9  => 'Сентябрь',
-			10 => 'Октябрь',
-			11 => 'Ноябрь',
-			12 => 'Декабрь'
+			1  => $oLang->get('January'),
+			2  => $oLang->get('February'),
+			3  => $oLang->get('March'),
+			4  => $oLang->get('April'),
+			5  => $oLang->get('May'),
+			6  => $oLang->get('June'),
+			7  => $oLang->get('July'),
+			8  => $oLang->get('August'),
+			9  => $oLang->get('September'),
+			10 => $oLang->get('October'),
+			11 => $oLang->get('November'),
+			12 =>$oLang->get('December'),
 		);
 
 		$month = intval($month);
@@ -31,13 +33,13 @@ class calendar
 			<div class="calendar-head">' . $months[$month] . ' ' . $year . '</div>
 			<table>
 				<tr>
-					<th>Пн</th>
-					<th>Вт</th>
-					<th>Ср</th>
-					<th>Чт</th>
-					<th>Пт</th>
-					<th>Сб</th>
-					<th>Вс</th>
+					<th>' . $oLang->get('Mo') . '</th>
+					<th>' . $oLang->get('Tu') . '</th>
+					<th>' . $oLang->get('We') . '</th>
+					<th>' . $oLang->get('Th') . '</th>
+					<th>' . $oLang->get('Fr') . '</th>
+					<th>' . $oLang->get('Sa') . '</th>
+					<th>' . $oLang->get('Su') . '</th>
 				</tr>';
 
 		$day_week = date('N', mktime(0, 0, 0, $month, 1, $year));
