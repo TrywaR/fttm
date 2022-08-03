@@ -29,7 +29,7 @@
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#clients"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
     ></div>
 
   <script>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="block_template">
-  <div class="client _elem progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <div class="client _elem progress_block" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="card">
       <div class="card-body">
         <div class="row">

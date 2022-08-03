@@ -65,7 +65,7 @@ $arrClients = $oClient->get();
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#projects"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
   ></div>
 
   <script>
@@ -79,7 +79,7 @@ $arrClients = $oClient->get();
 </div>
 
 <div class="block_template">
-    <div class="project _elem progress_block animate__animated" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="project _elem progress_block" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="card">
         <div class="card-body">
           <div class="row">

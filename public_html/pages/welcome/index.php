@@ -2,9 +2,7 @@
   <div class="_section _title">
     <div class="_block">
       <div class="_content">
-        <h1 class="text-center">
-          u<span>0</span> life
-        </h1>
+        <?include 'core/templates/elems/logo.php'?>
         <p>This is a simulator that can digitize your life, helping you manage your time and finances more efficiently.</p>
         <p>Leave your exact mark in the history of mankind and look at your life from the side</p>
       </div>
@@ -74,6 +72,18 @@
             <p>A unique tool of our service is a combination of time and money analysis, which allows you to calculate the value of your time in money. </p>
             <p>For example: How much your working hour costs, both in general and on individual projects. This will allow you to adjust the cost of your services, taking into account the financial and time costs of your work. </p>
             <p>Such data helps to assess the picture of the work done in an unbiased manner, that can serve as a justification for increasing the cost of your services in the labor market.</p>
+         </div>
+       </div>
+   </div>
+
+   <div class="_section _info">
+     <div class="_block">
+       <div class="_icon">
+         <i class="fa-solid fa-circle-info"></i>
+       </div>
+         <div class="_content">
+           <h2 class="_block_title">Info</h2>
+            <p>Do you have any questions? <a href="/info/">Details</a></p>
          </div>
        </div>
    </div>

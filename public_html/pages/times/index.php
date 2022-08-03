@@ -112,7 +112,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#times"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
   ></ol>
   <script>
     $(function(){
@@ -126,7 +126,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] =
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem time progress_block animate__animated _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item _elem time progress_block _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold">
           <small class="_date">{{date}}</small>

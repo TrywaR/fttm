@@ -35,7 +35,7 @@
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#categories"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
     >
   </ul>
   <script>

@@ -84,7 +84,7 @@ $arrProjects = $oProject->get();
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#tasks"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
   ></div>
 
   <script>
@@ -98,7 +98,7 @@ $arrProjects = $oProject->get();
 </section>
 
 <section class="block_template">
-  <div class="task _elem progress_block animate__animated _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <div class="task _elem progress_block _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="card w-100">
       <div class="card-header position-relative">
         <div class="row">

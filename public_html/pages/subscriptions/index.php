@@ -47,7 +47,7 @@ $arrCategories = $oCategory->get_categories();
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#subscriptions"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
     >
   </ol>
   <script>
@@ -60,7 +60,7 @@ $arrCategories = $oCategory->get_categories();
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem d-flex subscription progress_block animate__animated _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item _elem d-flex subscription progress_block _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100 row">
         <span class="col-12 col-md-6 mb-2">
           <span class="d-flex flex-column">

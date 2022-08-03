@@ -11,7 +11,7 @@ class project extends model
   public static $sort = '';
   public static $active = '';
   public static $client_id = '';
-  public static $user_Id = '';
+  public static $user_id = '';
 
   function get_project( $arrProject = [] ) {
     if ( ! $arrProject['id'] ) $arrProject = $this->get();
@@ -67,7 +67,7 @@ class project extends model
       $this->sort = $arrProject['sort'];
       $this->active = $arrProject['active'];
       $this->client_id = $arrProject['client_id'];
-      $this->user_Id = $arrProject['user_Id'];
+      $this->user_id = $arrProject['user_id'];
     }
   }
 }

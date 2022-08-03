@@ -149,6 +149,15 @@ class nav
         'url' => '/dashboard/',
         'icon' => '<i class="fa-solid fa-grip"></i>',
         'access' => 0,
+        'subs' => [
+          '/dashboard/analytics/days/' => array(
+            'name' => $oLang->get('Days'),
+            'description' => $oLang->get('Days'),
+            'url' => '/dashboard/analytics/days/',
+            'icon' => '<i class="fa-solid fa-calendar-day"></i>',
+            'menu_hide' => false,
+          ),
+        ]
       ),
 
       '/moneys/' => array(
@@ -263,6 +272,13 @@ class nav
             'icon' => '<i class="fas fa-code-branch"></i>',
             'menu_hide' => false,
           ),
+          '/info/buy/' => array(
+            'name' => $oLang->get('Donate'),
+            'description' => $oLang->get('Donate'),
+            'url' => '/info/buy/',
+            'icon' => '<i class="fas fa-donate"></i>',
+            'menu_hide' => false,
+          ),
           '/info/contacts/' => array(
             'name' => $oLang->get('Contacts'),
             'description' => $oLang->get('Contacts'),
@@ -275,13 +291,6 @@ class nav
             'description' => $oLang->get('Analytics'),
             'url' => '/info/analytics/',
             'icon' => '<i class="fas fa-chart-line"></i>',
-            'menu_hide' => false,
-          ),
-          '/info/buy/' => array(
-            'name' => $oLang->get('Donate'),
-            'description' => $oLang->get('Donate'),
-            'url' => '/info/buy/',
-            'icon' => '<i class="fas fa-donate"></i>',
             'menu_hide' => false,
           ),
           '/info/docs/' => array(

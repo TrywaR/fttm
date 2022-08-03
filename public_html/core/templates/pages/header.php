@@ -4,7 +4,7 @@
   <!-- Nav -->
   <header class="_full_">
     <div class="block_nav_header">
-      <?include 'core/templates/pages/logo.php'?>
+      <?include 'core/templates/elems/logo.php'?>
 
       <?php if (isset($_SESSION['user'])): ?>
         <div class="block_nav_fuller" id="block_nav_fuller">
@@ -74,7 +74,7 @@
 
     <div class="block_nav_mobile">
       <button class="nav_btn _logo" id="block_nav_mobile_logo">
-        <?include 'core/templates/pages/logo.php';?>
+        <?include 'core/templates/elems/logo.php';?>
       </button>
 
       <button class="nav_btn _main" id="block_nav_mobile_main">

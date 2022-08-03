@@ -155,7 +155,7 @@ $arrTypes = [
     <?php endif; ?>
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#moneys"
-    data-content_loader_show_class="animate__bounceInRight _show_"
+    data-content_loader_show_class="_show_"
   ></ol>
   <script>
     $(function(){
@@ -168,7 +168,7 @@ $arrTypes = [
 </div>
 
 <div class="block_template">
-  <li class="list-group-item money _elem progress_block animate__animated _type_{{type}}_ _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}} _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <li class="list-group-item money _elem progress_block _type_{{type}}_ _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}} _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="ms-2 me-auto">
       <div class="fw-bold mb-1 d-flex">
         <span class="_date">

@@ -21,7 +21,14 @@ switch ($_REQUEST['form']) {
     $oCategory->limit = 0;
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
+
     $arrCategoriesIds = [];
     foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
@@ -96,7 +103,13 @@ switch ($_REQUEST['form']) {
     $oCategory->limit = 0;
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesIds = [];
     foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
@@ -161,7 +174,13 @@ switch ($_REQUEST['form']) {
     $oCategory->limit = 0;
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesIds = [];
     foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
@@ -221,7 +240,13 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= " AND `type` = 0";
+    $oCategory->query .= ' AND `active` > 0';
     $arrCategories = $oCategory->get_categories();
+    // Берём конфики костомных категорий пользователя
+    $oCategoryConf = new category_config();
+    $arrCategories = $oCategoryConf->update_categories($arrCategories);
+    // Вычищаем не активные
+    $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesIds = [];
     foreach ($arrCategories as $arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
 
